@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/scheduleList"
+            android:icon="@drawable/ic_schedule"
+            android:title="@string/schedule" />
+        <item
+            android:id="@+id/listClientFragment"
+            android:icon="@drawable/ic_clients"
+            android:title="@string/clients" />
+        <item
+            android:id="@+id/listServiceFragment"
+            android:icon="@drawable/ic_services"
+            android:title="@string/services" />
+        <item
+            android:id="@+id/listReleaseFragment"
+            android:icon="@drawable/ic_releases"
+            android:title="@string/releases" />
+    </group>
+</menu>

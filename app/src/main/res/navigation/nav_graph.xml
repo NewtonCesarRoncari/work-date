@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listClientFragment">
+
+    <fragment
+        android:id="@+id/listClientFragment"
+        android:name="com.example.workdate.views.fragment.ListClientFragment"
+        android:label="Client List"
+        tools:layout="@layout/fragment_list_client" />
+</navigation>

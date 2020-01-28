@@ -1,4 +1,4 @@
-package com.example.workdate.views
+package com.example.workdate.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

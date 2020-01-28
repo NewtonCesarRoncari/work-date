@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/client_list"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/client_list_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_item_client" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/new_client"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/client_list"
-        android:layout_alignBottom="@+id/client_list"
+        android:layout_alignEnd="@+id/client_list_rv"
+        android:layout_alignBottom="@+id/client_list_rv"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="17dp"
         android:src="@drawable/ic_add"

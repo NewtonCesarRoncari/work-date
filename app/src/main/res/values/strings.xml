@@ -6,4 +6,7 @@
     <string name="clients">Clients</string>
     <string name="services">Services</string>
     <string name="releases">Releases</string>
+    <string name="icon_service">service</string>
+    <string name="servico">service description</string>
+    <string name="value">0,00</string>
 </resources>

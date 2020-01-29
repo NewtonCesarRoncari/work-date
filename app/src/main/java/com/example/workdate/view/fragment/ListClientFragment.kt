@@ -27,7 +27,7 @@ class ListClientFragment : Fragment() {
                 "Rua Sebastião Alves de Oliveira, 293"
             ), Client(
                 "",
-                "Newton Cesar",
+                "Newton Cesar ",
                 "(37) 9 9123-5555",
                 "Rua Sebastião Alves de Oliveira, 293"
             ), Client(

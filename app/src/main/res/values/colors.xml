@@ -5,4 +5,5 @@
     <color name="colorAccent">#6746c3</color>
     <color name="colorDayAgendamento">#39694B</color>
     <color name="colorTextButtonDate">#0C1630</color>
+    <color name="colorGreyRipple">#5787899B</color>
 </resources>

@@ -9,6 +9,7 @@ import com.example.workdate.R
 import com.example.workdate.model.Service
 import com.example.workdate.view.recyclerview.adapter.ServiceAdapter
 import kotlinx.android.synthetic.main.fragment_list_service.*
+import java.math.BigDecimal
 
 class ListServiceFragment : Fragment() {
 
@@ -22,10 +23,10 @@ class ListServiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val services = listOf(
-            Service("", "A new job", "programming"),
-            Service("", "A new job", "programming"),
-            Service("", "A new job", "programming"),
-            Service("", "A new job", "programming")
+            Service(name = "A new job", description = "programming", value = BigDecimal(250.0)),
+            Service(name = "A new job", description = "programming", value = BigDecimal(150.0)),
+            Service(name = "A new job", description = "programming", value = BigDecimal(200.0)),
+            Service(name = "A new job", description = "programming", value = BigDecimal(500.0))
         )
 
         initServiceAdapter(services)

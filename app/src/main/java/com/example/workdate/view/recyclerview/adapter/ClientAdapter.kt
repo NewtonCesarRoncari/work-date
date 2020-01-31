@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workdate.R
+import com.example.workdate.extension.limit
 import com.example.workdate.model.Client
 import kotlinx.android.synthetic.main.list_item_client.view.*
 
@@ -28,10 +29,11 @@ class ClientAdapter(
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val limitForName = 26
         private val clientName: TextView = itemView.list_item_client_name
 
         fun bind(client: Client) {
-            clientName.text = client.name
+            clientName.text = client.name.limit(limitForName)
         }
 
     }

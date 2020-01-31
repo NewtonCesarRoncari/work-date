@@ -21,20 +21,17 @@ class ListClientFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val clients = listOf(
             Client(
-                "",
-                "Newton Cesar",
-                "(37) 9 9123-5555",
-                "Rua Sebastião Alves de Oliveira, 293"
+                name = "Name Example",
+                tel = "(37) 9 9123-5555",
+                adress = "Rua Sebastião Alves de Oliveira, 293"
             ), Client(
-                "",
-                "Newton Cesar ",
-                "(37) 9 9123-5555",
-                "Rua Sebastião Alves de Oliveira, 293"
+                name = "Newton Cesar ",
+                tel = "(37) 9 9123-5555",
+                adress = "Rua Sebastião Alves de Oliveira, 293"
             ), Client(
-                "",
-                "Newton Cesar",
-                "(37) 9 9123-5555",
-                "Rua Sebastião Alves de Oliveira, 293"
+                name = "Newton Cesar",
+                tel = "(37) 9 9123-5555",
+                adress = "Rua Sebastião Alves de Oliveira, 293"
             )
         )
 

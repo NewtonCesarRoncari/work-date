@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workdate.R
+import com.example.workdate.extension.formatForBrazilianCoin
+import com.example.workdate.extension.limit
 import com.example.workdate.model.Service
 import kotlinx.android.synthetic.main.list_item_service.view.*
 
@@ -28,10 +30,13 @@ class ServiceAdapter(
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val limiteDescription = 26
         private val serviceDescription: TextView = itemView.list_item_service_description
+        private val serviceValue: TextView = itemView.list_item_service_value
 
         fun bind(service: Service) {
-            serviceDescription.text = service.description
+            serviceDescription.text = service.description.limit(limiteDescription)
+            serviceValue.text = service.value.formatForBrazilianCoin()
         }
 
     }

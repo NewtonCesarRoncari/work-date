@@ -38,7 +38,11 @@ class ListServiceFragment : Fragment() {
             )
 
             AlertDialog.Builder(context)
-                .setTitle(R.string.title_form_new_service).setView(viewCreated).show()
+                .setTitle(R.string.title_form_new_service)
+                .setPositiveButton(R.string.positive_button_name, null)
+                .setNegativeButton(R.string.negative_button_name, null)
+                .setView(viewCreated)
+                .show()
         }
         initServiceAdapter(services)
     }

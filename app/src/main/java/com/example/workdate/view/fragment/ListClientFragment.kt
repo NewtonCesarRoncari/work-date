@@ -44,7 +44,11 @@ class ListClientFragment : Fragment() {
                 )
 
             AlertDialog.Builder(context)
-                .setTitle(R.string.title_form_new_client).setView(viewCreated).show()
+                .setTitle(R.string.title_form_new_client)
+                .setView(viewCreated)
+                .setPositiveButton(R.string.positive_button_name, null)
+                .setNegativeButton(R.string.negative_button_name, null)
+                .show()
         }
         initClientAdapter(clients)
     }

@@ -1,5 +1,6 @@
 package com.example.workdate.view.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,17 @@ class ListClientFragment : Fragment() {
                 adress = "Rua Sebastião Alves de Oliveira, 293"
             )
         )
+        new_client.setOnClickListener {
+            val viewCreated = LayoutInflater.from(context)
+                .inflate(
+                    R.layout.client_formulary,
+                    getView() as ViewGroup,
+                    false
+                )
 
+            AlertDialog.Builder(context)
+                .setTitle(R.string.title_form_new_client).setView(viewCreated).show()
+        }
         initClientAdapter(clients)
     }
 

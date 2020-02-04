@@ -1,5 +1,6 @@
 package com.example.workdate.view.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,16 @@ class ListServiceFragment : Fragment() {
             Service(name = "A new job", description = "programming", value = BigDecimal(500.0))
         )
 
+        new_service.setOnClickListener {
+            val viewCreated = LayoutInflater.from(context).inflate(
+                R.layout.service_formulary,
+                getView() as ViewGroup,
+                false
+            )
+
+            AlertDialog.Builder(context)
+                .setTitle(R.string.title_form_new_service).setView(viewCreated).show()
+        }
         initServiceAdapter(services)
     }
 

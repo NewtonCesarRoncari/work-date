@@ -30,12 +30,12 @@ class ServiceAdapter(
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val limiteDescription = 26
+        private val limitForDescription = 26
         private val serviceDescription: TextView = itemView.list_item_service_description
         private val serviceValue: TextView = itemView.list_item_service_value
 
         fun bind(service: Service) {
-            serviceDescription.text = service.description.limit(limiteDescription)
+            serviceDescription.text = service.description.limit(limitForDescription)
             serviceValue.text = service.value.formatForBrazilianCoin()
         }
 

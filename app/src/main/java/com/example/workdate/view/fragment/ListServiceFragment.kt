@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import com.example.workdate.R
 import com.example.workdate.model.Service
 import com.example.workdate.view.recyclerview.adapter.ServiceAdapter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_service.*
+import kotlinx.android.synthetic.main.service_formulary.view.*
 import java.math.BigDecimal
 
 class ListServiceFragment : Fragment() {
@@ -39,7 +41,26 @@ class ListServiceFragment : Fragment() {
 
             AlertDialog.Builder(context)
                 .setTitle(R.string.title_form_new_service)
-                .setPositiveButton(R.string.positive_button_name, null)
+                .setPositiveButton(R.string.positive_button_name) { dialog, which ->
+                    val serviceDescription =
+                        viewCreated.service_formulary_description.text.toString().trim()
+                    val serviceStringValue =
+                        viewCreated.service_formulary_value.text.toString().trim()
+
+                    val serviceValue = try {
+                        BigDecimal(serviceStringValue)
+                    } catch (e: NumberFormatException) {
+                        BigDecimal.ZERO
+                    }
+
+                    val service = Service(
+                        name = serviceDescription,
+                        description = "programming",
+                        value = serviceValue
+                    )
+                    Snackbar.make(view, "${service.name} Salvo com sucesso", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
                 .setNegativeButton(R.string.negative_button_name, null)
                 .setView(viewCreated)
                 .show()

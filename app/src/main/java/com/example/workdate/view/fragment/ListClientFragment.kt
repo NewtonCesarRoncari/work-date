@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.workdate.R
 import com.example.workdate.model.Client
 import com.example.workdate.view.recyclerview.adapter.ClientAdapter
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.client_formulary.view.*
 import kotlinx.android.synthetic.main.fragment_list_client.*
 
 class ListClientFragment : Fragment() {
@@ -23,16 +25,16 @@ class ListClientFragment : Fragment() {
         val clients = listOf(
             Client(
                 name = "Name Example",
-                tel = "(37) 9 9123-5555",
-                adress = "Rua Sebastião Alves de Oliveira, 293"
+                phone = "(37) 9 9123-5555",
+                address = "Rua Sebastião Alves de Oliveira, 293"
             ), Client(
                 name = "Newton Cesar ",
-                tel = "(37) 9 9123-5555",
-                adress = "Rua Sebastião Alves de Oliveira, 293"
+                phone = "(37) 9 9123-5555",
+                address = "Rua Sebastião Alves de Oliveira, 293"
             ), Client(
                 name = "Newton Cesar",
-                tel = "(37) 9 9123-5555",
-                adress = "Rua Sebastião Alves de Oliveira, 293"
+                phone = "(37) 9 9123-5555",
+                address = "Rua Sebastião Alves de Oliveira, 293"
             )
         )
         new_client.setOnClickListener {
@@ -46,7 +48,16 @@ class ListClientFragment : Fragment() {
             AlertDialog.Builder(context)
                 .setTitle(R.string.title_form_new_client)
                 .setView(viewCreated)
-                .setPositiveButton(R.string.positive_button_name, null)
+                .setPositiveButton(R.string.positive_button_name) { dialog, which ->
+                    val clientName = viewCreated.client_formulary_name.text.toString().trim()
+                    val clientAddress = viewCreated.client_formulary_address.text.toString().trim()
+                    val clientPhone = viewCreated.client_formulary_phone.text.toString().trim()
+
+                    val client =
+                        Client(name = clientName, address = clientAddress, phone = clientPhone)
+                    Snackbar.make(view, "${client.name} Salvo com sucesso", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
                 .setNegativeButton(R.string.negative_button_name, null)
                 .show()
         }

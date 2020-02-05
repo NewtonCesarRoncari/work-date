@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/clientNameTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/client_formulary_endereco"
+            android:id="@+id/client_formulary_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/adress" />
@@ -74,7 +74,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/client_formulary_telefone"
+            android:id="@+id/client_formulary_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/phone"

@@ -15,5 +15,6 @@
     <string name="title_form_new_service">New Service</string>
     <string name="description">description</string>
     <string name="positive_button_name">SAVE</string>
-    <string name="negative_button_name">CANCEL</string>
+    <string name="negative_button_name">Cancel</string>
+    <string name="saved">saved</string>
 </resources>

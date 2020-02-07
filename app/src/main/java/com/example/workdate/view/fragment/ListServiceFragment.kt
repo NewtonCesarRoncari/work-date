@@ -1,6 +1,5 @@
 package com.example.workdate.view.fragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.workdate.R
 import com.example.workdate.model.Service
+import com.example.workdate.view.dialog.ServiceDialogListener
+import com.example.workdate.view.dialog.ServiceFormDialog
 import com.example.workdate.view.recyclerview.adapter.ServiceAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_service.*
-import kotlinx.android.synthetic.main.service_formulary.view.*
 import java.math.BigDecimal
 
 class ListServiceFragment : Fragment() {
@@ -33,39 +33,23 @@ class ListServiceFragment : Fragment() {
         )
 
         new_service.setOnClickListener {
-            val viewCreated = LayoutInflater.from(context).inflate(
-                R.layout.service_formulary,
-                getView() as ViewGroup,
-                false
-            )
+            val serviceFormDialog =
+                context?.let { context -> ServiceFormDialog(getView() as ViewGroup, context) }
+            serviceFormDialog!!.initServiceFormDialog(object : ServiceDialogListener {
 
-            AlertDialog.Builder(context)
-                .setTitle(R.string.title_form_new_service)
-                .setPositiveButton(R.string.positive_button_name) { dialog, which ->
-                    val serviceDescription =
-                        viewCreated.service_formulary_description.text.toString().trim()
-                    val serviceStringValue =
-                        viewCreated.service_formulary_value.text.toString().trim()
-
-                    val serviceValue = try {
-                        BigDecimal(serviceStringValue)
-                    } catch (e: NumberFormatException) {
-                        BigDecimal.ZERO
-                    }
-
-                    val service = Service(
-                        name = serviceDescription,
-                        description = "programming",
-                        value = serviceValue
-                    )
-                    Snackbar.make(view, "${service.name} Salvo com sucesso", Snackbar.LENGTH_SHORT)
-                        .show()
+                override fun listener(service: Service) {
+                    showSnackBar(service)
                 }
-                .setNegativeButton(R.string.negative_button_name, null)
-                .setView(viewCreated)
-                .show()
+            }
+            )
         }
         initServiceAdapter(services)
+    }
+
+    private fun showSnackBar(service: Service) {
+        view?.let { view ->
+            Snackbar.make(view, "${service.name} saved", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun initServiceAdapter(services: List<Service>) {

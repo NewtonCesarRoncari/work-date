@@ -1,6 +1,5 @@
 package com.example.workdate.view.fragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.workdate.R
 import com.example.workdate.model.Client
+import com.example.workdate.view.dialog.ClientDialogListener
+import com.example.workdate.view.dialog.ClientFormDialog
 import com.example.workdate.view.recyclerview.adapter.ClientAdapter
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.client_formulary.view.*
 import kotlinx.android.synthetic.main.fragment_list_client.*
 
 class ListClientFragment : Fragment() {
@@ -38,28 +38,14 @@ class ListClientFragment : Fragment() {
             )
         )
         new_client.setOnClickListener {
-            val viewCreated = LayoutInflater.from(context)
-                .inflate(
-                    R.layout.client_formulary,
-                    getView() as ViewGroup,
-                    false
-                )
+            val clientFormDialog =
+                context?.let { context -> ClientFormDialog(getView() as ViewGroup, context) }
+            clientFormDialog!!.initClientFormDialog(object : ClientDialogListener {
 
-            AlertDialog.Builder(context)
-                .setTitle(R.string.title_form_new_client)
-                .setView(viewCreated)
-                .setPositiveButton(R.string.positive_button_name) { dialog, which ->
-                    val clientName = viewCreated.client_formulary_name.text.toString().trim()
-                    val clientAddress = viewCreated.client_formulary_address.text.toString().trim()
-                    val clientPhone = viewCreated.client_formulary_phone.text.toString().trim()
-
-                    val client =
-                        Client(name = clientName, address = clientAddress, phone = clientPhone)
-                    Snackbar.make(view, "${client.name} Salvo com sucesso", Snackbar.LENGTH_SHORT)
-                        .show()
+                override fun listener(client: Client) {
+                    showSnackBar(client)
                 }
-                .setNegativeButton(R.string.negative_button_name, null)
-                .show()
+            })
         }
         initClientAdapter(clients)
     }
@@ -69,5 +55,9 @@ class ListClientFragment : Fragment() {
         client_list_rv.adapter = adapter
     }
 
-
+    private fun showSnackBar(client: Client) {
+        view?.let { view ->
+            Snackbar.make(view, "${client.name} saved", Snackbar.LENGTH_SHORT).show()
+        }
+    }
 }

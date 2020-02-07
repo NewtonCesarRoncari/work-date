@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.list_item_client.view.*
 
 class ClientAdapter(
     private val context: Context,
-    private val clients: List<Client>
+    private val clients: List<Client>,
+    var onItemClickListener: (client: Client) -> Unit = {}
 ) : RecyclerView.Adapter<ClientAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -27,13 +28,23 @@ class ClientAdapter(
         holder.bind(clients[position])
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private lateinit var client: Client
         private val limitForName = 26
         private val clientName: TextView = itemView.list_item_client_name
 
         fun bind(client: Client) {
+            this.client = client
             clientName.text = client.name.limit(limitForName)
+        }
+
+        init {
+            itemView.setOnClickListener {
+                if (::client.isInitialized) {
+                    onItemClickListener(client)
+                }
+            }
         }
 
     }

@@ -16,6 +16,8 @@ class ServiceFormDialog(
 ) {
 
     private val viewCreated = initView()
+    private val fieldDescription = viewCreated.service_formulary_description
+    private val fieldValue = viewCreated.service_formulary_value
 
     fun initServiceFormDialog(
         listener: ServiceDialogListener
@@ -29,11 +31,9 @@ class ServiceFormDialog(
         AlertDialog.Builder(context)
             .setTitle(R.string.title_form_new_service)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
-                val serviceDescription =
-                    viewCreated.service_formulary_description.text.toString().trim()
-                val serviceStringValue =
-                    viewCreated.service_formulary_value.text.toString().trim()
 
+                val serviceDescription = fieldDescription.text.toString().trim()
+                val serviceStringValue = fieldValue.text.toString().trim()
                 val serviceValue = tryParseBigDecimal(serviceStringValue)
 
                 val service = Service(

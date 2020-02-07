@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.list_item_service.view.*
 
 class ServiceAdapter(
     private val context: Context,
-    private val services: List<Service>
+    private val services: List<Service>,
+    private val onItemClickListener: (service: Service) -> Unit = {}
 ) : RecyclerView.Adapter<ServiceAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -28,15 +29,25 @@ class ServiceAdapter(
         holder.bind(services[position])
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private lateinit var service: Service
         private val limitForDescription = 26
         private val serviceDescription: TextView = itemView.list_item_service_description
         private val serviceValue: TextView = itemView.list_item_service_value
 
         fun bind(service: Service) {
+            this.service = service
             serviceDescription.text = service.description.limit(limitForDescription)
             serviceValue.text = service.value.formatForBrazilianCoin()
+        }
+
+        init {
+            itemView.setOnClickListener {
+                if (::service.isInitialized) {
+                    onItemClickListener(service)
+                }
+            }
         }
 
     }

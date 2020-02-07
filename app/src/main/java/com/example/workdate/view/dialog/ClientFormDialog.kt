@@ -15,6 +15,9 @@ class ClientFormDialog(
 ) {
 
     private val viewCreated = initView()
+    private val fieldName = viewCreated.client_formulary_name
+    private val fieldAddress = viewCreated.client_formulary_address
+    private val fieldPhone = viewCreated.client_formulary_phone
 
     fun initClientFormDialog(listener: ClientDialogListener) {
         inflateForm(listener)
@@ -25,9 +28,9 @@ class ClientFormDialog(
             .setTitle(R.string.title_form_new_client)
             .setView(viewCreated)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
-                val clientName = viewCreated.client_formulary_name.text.toString().trim()
-                val clientAddress = viewCreated.client_formulary_address.text.toString().trim()
-                val clientPhone = viewCreated.client_formulary_phone.text.toString().trim()
+                val clientName = fieldName.text.toString().trim()
+                val clientAddress = fieldAddress.text.toString().trim()
+                val clientPhone = fieldPhone.text.toString().trim()
 
                 val client =
                     Client(name = clientName, address = clientAddress, phone = clientPhone)

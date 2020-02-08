@@ -1,5 +1,6 @@
 package com.example.workdate.view.dialog
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,26 +12,33 @@ import com.example.workdate.model.Service
 import kotlinx.android.synthetic.main.service_formulary.view.*
 import java.math.BigDecimal
 
-class ServiceFormDialog(
+class ServiceFormUpdateDialog(
     private val viewGroup: ViewGroup,
     private val context: Context
 ) {
 
     private val viewCreated = initView()
+    private val fieldID = viewCreated.formulary_service_id
     private val fieldDescription = viewCreated.service_formulary_description
     private val fieldValue = viewCreated.service_formulary_value
 
-    fun initServiceFormDialog(
-        listener: ServiceDialogListener
-    ) {
+    fun initServiceFormDialog(service: Service, listener: ServiceDialogListener) {
+        loadDataDialog(service)
         inflateForm(listener)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun loadDataDialog(service: Service) {
+        fieldID.text = service.id
+        fieldDescription.setText(service.description)
+        fieldValue.setText(service.value.toString())
     }
 
     private fun inflateForm(
         listener: ServiceDialogListener
     ) {
         AlertDialog.Builder(context)
-            .setTitle(R.string.title_form_new_service)
+            .setTitle(R.string.title_form_update_service)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
                 val serviceDescription = fieldDescription.text.toString().trim()
                 val serviceStringValue = fieldValue.text.toString().trim()
@@ -63,4 +71,8 @@ class ServiceFormDialog(
             false
         )
     }
+}
+
+interface ServiceDialogUpdateListener {
+    fun listener(service: Service)
 }

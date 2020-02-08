@@ -8,7 +8,7 @@
     <string name="releases">Releases</string>
     <string name="icon_service">service</string>
     <string name="servico">service description</string>
-    <string name="value">0,00</string>
+    <string name="value">value</string>
     <string name="adress">address</string>
     <string name="phone">phone</string>
     <string name="title_form_new_client">New Client</string>
@@ -17,4 +17,6 @@
     <string name="positive_button_name">SAVE</string>
     <string name="negative_button_name">Cancel</string>
     <string name="saved">saved</string>
+    <string name="title_form_update_client">Update Client</string>
+    <string name="title_form_update_service">Update Service</string>
 </resources>

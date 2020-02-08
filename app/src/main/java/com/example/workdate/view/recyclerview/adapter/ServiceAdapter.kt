@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.list_item_service.view.*
 class ServiceAdapter(
     private val context: Context,
     private val services: List<Service>,
-    private val onItemClickListener: (service: Service) -> Unit = {}
+    var onItemClickListener: (service: Service) -> Unit = {}
 ) : RecyclerView.Adapter<ServiceAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

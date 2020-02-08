@@ -10,23 +10,32 @@ import com.example.workdate.delegate.ClientDialogListener
 import com.example.workdate.model.Client
 import kotlinx.android.synthetic.main.client_formulary.view.*
 
-class ClientFormDialog(
+class ClientFormUpdateDialog(
     private val viewGroup: ViewGroup,
     private val context: Context
 ) {
 
     private val viewCreated = initView()
+    private val fieldID = viewCreated.formulary_client_id
     private val fieldName = viewCreated.client_formulary_name
     private val fieldAddress = viewCreated.client_formulary_address
     private val fieldPhone = viewCreated.client_formulary_phone
 
-    fun initClientFormDialog(listener: ClientDialogListener) {
+    fun initClientFormDialog(client: Client, listener: ClientDialogListener) {
+        loadDataDialog(client)
         inflateForm(listener)
+    }
+
+    private fun loadDataDialog(client: Client) {
+        fieldID.text = client.id
+        fieldName.setText(client.name)
+        fieldAddress.setText(client.address)
+        fieldPhone.setText(client.phone)
     }
 
     private fun inflateForm(listener: ClientDialogListener) {
         AlertDialog.Builder(context)
-            .setTitle(R.string.title_form_new_client)
+            .setTitle(R.string.title_form_update_client)
             .setView(viewCreated)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
                 val clientName = fieldName.text.toString().trim()

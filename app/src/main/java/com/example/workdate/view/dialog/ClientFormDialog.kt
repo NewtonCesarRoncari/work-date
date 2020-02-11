@@ -8,25 +8,22 @@ import android.view.ViewGroup
 import com.example.workdate.R
 import com.example.workdate.delegate.ClientDialogListener
 import com.example.workdate.model.Client
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.client_formulary.view.*
 
-class ClientFormDialog(
-    private val viewGroup: ViewGroup,
-    private val context: Context
+abstract class ClientFormDialog(
+    private val context: Context,
+    private val viewGroup: ViewGroup
 ) {
+    protected val viewCreated = initView()
+    protected val fieldName: TextInputEditText = viewCreated.client_formulary_name
+    protected val fieldAddress: TextInputEditText = viewCreated.client_formulary_address
+    protected val fieldPhone: TextInputEditText = viewCreated.client_formulary_phone
+    protected abstract val titleDialog: String
 
-    private val viewCreated = initView()
-    private val fieldName = viewCreated.client_formulary_name
-    private val fieldAddress = viewCreated.client_formulary_address
-    private val fieldPhone = viewCreated.client_formulary_phone
-
-    fun initClientFormDialog(listener: ClientDialogListener) {
-        inflateForm(listener)
-    }
-
-    private fun inflateForm(listener: ClientDialogListener) {
+    protected fun inflateForm(listener: ClientDialogListener) {
         AlertDialog.Builder(context)
-            .setTitle(R.string.title_form_new_client)
+            .setTitle(titleDialog)
             .setView(viewCreated)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
                 val clientName = fieldName.text.toString().trim()

@@ -23,12 +23,12 @@ class ServiceFormUpdateDialog(
     private val fieldValue = viewCreated.service_formulary_value
 
     fun initServiceFormDialog(service: Service, listener: ServiceDialogListener) {
-        loadDataDialog(service)
+        loadFieldDataDialog(service)
         inflateForm(listener)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun loadDataDialog(service: Service) {
+    private fun loadFieldDataDialog(service: Service) {
         fieldID.text = service.id
         fieldDescription.setText(service.description)
         fieldValue.setText(service.value.toString())
@@ -71,8 +71,4 @@ class ServiceFormUpdateDialog(
             false
         )
     }
-}
-
-interface ServiceDialogUpdateListener {
-    fun listener(service: Service)
 }

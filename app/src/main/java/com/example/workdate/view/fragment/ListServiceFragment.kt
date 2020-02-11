@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.workdate.R
 import com.example.workdate.delegate.ServiceDialogListener
 import com.example.workdate.model.Service
-import com.example.workdate.view.dialog.ServiceFormDialog
+import com.example.workdate.view.dialog.ServiceFormInsertDialog
 import com.example.workdate.view.dialog.ServiceFormUpdateDialog
 import com.example.workdate.view.recyclerview.adapter.ServiceAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -49,7 +49,7 @@ class ListServiceFragment : Fragment() {
 
     private fun callInsertDialog() {
         context?.let { context ->
-            ServiceFormDialog(view as ViewGroup, context)
+            ServiceFormInsertDialog(view as ViewGroup, context)
                 .initServiceFormDialog(object : ServiceDialogListener {
 
                     override fun listener(service: Service) {

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.workdate.R
 import com.example.workdate.delegate.ClientDialogListener
 import com.example.workdate.model.Client
-import com.example.workdate.view.dialog.ClientFormDialog
+import com.example.workdate.view.dialog.ClientFormInsertDialog
 import com.example.workdate.view.dialog.ClientFormUpdateDialog
 import com.example.workdate.view.recyclerview.adapter.ClientAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -45,7 +45,7 @@ class ListClientFragment : Fragment() {
     }
 
     private fun initClientAdapter(clients: List<Client>) {
-        val adapter = context?.let { context -> ClientAdapter(context, clients) }
+        val adapter = context?.let { ClientAdapter(it, clients) }
         client_list_rv.adapter = adapter
         adapter!!.onItemClickListener = { client ->
             callUpdateDialog(client)
@@ -54,7 +54,7 @@ class ListClientFragment : Fragment() {
 
     private fun callInsertDialog() {
         context?.let { context ->
-            ClientFormDialog(view as ViewGroup, context)
+            ClientFormInsertDialog(view as ViewGroup, context)
                 .initClientFormDialog(object : ClientDialogListener {
 
                     override fun listener(client: Client) {

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.workdate.R
-import com.example.workdate.delegate.ServiceDialogListener
 import com.example.workdate.model.Service
 import com.example.workdate.view.dialog.ServiceFormInsertDialog
 import com.example.workdate.view.dialog.ServiceFormUpdateDialog
@@ -50,24 +49,18 @@ class ListServiceFragment : Fragment() {
     private fun callInsertDialog() {
         context?.let { context ->
             ServiceFormInsertDialog(view as ViewGroup, context)
-                .initServiceFormDialog(object : ServiceDialogListener {
-
-                    override fun listener(service: Service) {
-                        showSnackBar(service)
-                    }
-                })
+                .initServiceFormDialog { serviceReturned ->
+                    showSnackBar(serviceReturned)
+                }
         }
     }
 
     private fun callUpdateDialog(service: Service) {
         context?.let { context ->
             ServiceFormUpdateDialog(view as ViewGroup, context)
-                .initServiceFormDialog(service, object : ServiceDialogListener {
-
-                    override fun listener(service: Service) {
-                        showSnackBar(service)
-                    }
-                })
+                .initServiceFormDialog(service) { serviceReturned ->
+                    showSnackBar(serviceReturned)
+                }
         }
     }
 

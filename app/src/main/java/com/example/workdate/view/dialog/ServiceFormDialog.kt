@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.workdate.R
-import com.example.workdate.delegate.ServiceDialogListener
 import com.example.workdate.model.Service
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.service_formulary.view.*
@@ -22,7 +21,7 @@ abstract class ServiceFormDialog(
     protected abstract val titleDialog: String
 
     protected fun inflateForm(
-        listener: ServiceDialogListener
+        dialogClickListener: (service: Service) -> Unit
     ) {
         AlertDialog.Builder(context)
             .setTitle(titleDialog)
@@ -36,7 +35,7 @@ abstract class ServiceFormDialog(
                     value = serviceValue
                 )
 
-                listener.listener(service)
+                dialogClickListener(service)
             }
             .setNegativeButton(R.string.negative_button_name, null)
             .setView(viewCreated)

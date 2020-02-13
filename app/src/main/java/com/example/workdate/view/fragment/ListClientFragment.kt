@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.workdate.R
-import com.example.workdate.delegate.ClientDialogListener
 import com.example.workdate.model.Client
 import com.example.workdate.view.dialog.ClientFormInsertDialog
 import com.example.workdate.view.dialog.ClientFormUpdateDialog
@@ -45,7 +44,7 @@ class ListClientFragment : Fragment() {
     }
 
     private fun initClientAdapter(clients: List<Client>) {
-        val adapter = context?.let { ClientAdapter(it, clients) }
+        val adapter = context?.let { context -> ClientAdapter(context, clients) }
         client_list_rv.adapter = adapter
         adapter!!.onItemClickListener = { client ->
             callUpdateDialog(client)
@@ -55,24 +54,18 @@ class ListClientFragment : Fragment() {
     private fun callInsertDialog() {
         context?.let { context ->
             ClientFormInsertDialog(view as ViewGroup, context)
-                .initClientFormDialog(object : ClientDialogListener {
-
-                    override fun listener(client: Client) {
-                        showSnackBar(client)
-                    }
-                })
+                .initClientFormDialog { clientReturned ->
+                    showSnackBar(clientReturned)
+                }
         }
     }
 
     private fun callUpdateDialog(client: Client) {
         context?.let { context ->
             ClientFormUpdateDialog(view as ViewGroup, context)
-                .initClientFormDialog(client, object : ClientDialogListener {
-
-                    override fun listener(client: Client) {
-                        showSnackBar(client)
-                    }
-                })
+                .initClientFormDialog(client) { clientReturned ->
+                    showSnackBar(clientReturned)
+                }
         }
     }
 

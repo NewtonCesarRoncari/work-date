@@ -2,7 +2,6 @@ package com.example.workdate.view.dialog
 
 import android.content.Context
 import android.view.ViewGroup
-import com.example.workdate.delegate.ServiceDialogListener
 
 class ServiceFormInsertDialog(
     viewGroup: ViewGroup,
@@ -12,7 +11,7 @@ class ServiceFormInsertDialog(
     override val titleDialog: String
         get() = "New Service"
 
-    fun initServiceFormDialog(listener: ServiceDialogListener) {
-        super.inflateForm(listener)
+    fun initServiceFormDialog(dialogClickListener: (service: com.example.workdate.model.Service) -> Unit) {
+        super.inflateForm(dialogClickListener)
     }
 }

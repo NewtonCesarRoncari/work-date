@@ -2,7 +2,7 @@ package com.example.workdate.view.dialog
 
 import android.content.Context
 import android.view.ViewGroup
-import com.example.workdate.delegate.ClientDialogListener
+import com.example.workdate.model.Client
 
 class ClientFormInsertDialog(
     viewGroup: ViewGroup,
@@ -12,8 +12,8 @@ class ClientFormInsertDialog(
     override val titleDialog: String
         get() = "New Client"
 
-    fun initClientFormDialog(listener: ClientDialogListener) {
-        super.inflateForm(listener)
+    fun initClientFormDialog(dialogClickListener: (client: Client) -> Unit) {
+        super.inflateForm(dialogClickListener)
     }
 
 }

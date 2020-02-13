@@ -2,7 +2,6 @@ package com.example.workdate.view.dialog
 
 import android.content.Context
 import android.view.ViewGroup
-import com.example.workdate.delegate.ClientDialogListener
 import com.example.workdate.model.Client
 import kotlinx.android.synthetic.main.client_formulary.view.*
 
@@ -15,9 +14,9 @@ class ClientFormUpdateDialog(
     override val titleDialog: String
         get() = "Update Client"
 
-    fun initClientFormDialog(client: Client, listener: ClientDialogListener) {
+    fun initClientFormDialog(client: Client, dialogClickListener: (client: Client) -> Unit) {
         loadFieldDataDialog(client)
-        super.inflateForm(listener)
+        super.inflateForm(dialogClickListener)
     }
 
     private fun loadFieldDataDialog(client: Client) {

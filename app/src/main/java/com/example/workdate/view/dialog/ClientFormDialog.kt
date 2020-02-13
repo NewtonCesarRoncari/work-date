@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.workdate.R
-import com.example.workdate.delegate.ClientDialogListener
 import com.example.workdate.model.Client
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.client_formulary.view.*
@@ -21,7 +20,7 @@ abstract class ClientFormDialog(
     protected val fieldPhone: TextInputEditText = viewCreated.client_formulary_phone
     protected abstract val titleDialog: String
 
-    protected fun inflateForm(listener: ClientDialogListener) {
+    protected fun inflateForm(dialogClickListener: (client: Client) -> Unit) {
         AlertDialog.Builder(context)
             .setTitle(titleDialog)
             .setView(viewCreated)
@@ -36,7 +35,7 @@ abstract class ClientFormDialog(
                     phone = clientPhone
                 )
 
-                listener.listener(client)
+                dialogClickListener(client)
             }
             .setNegativeButton(R.string.negative_button_name, null)
             .show()

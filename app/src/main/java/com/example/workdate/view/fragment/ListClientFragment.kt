@@ -22,7 +22,7 @@ class ListClientFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val clients = listOf(
+        val clients = mutableListOf(
             Client(
                 name = "Name Example",
                 phone = "37991235555",
@@ -43,12 +43,13 @@ class ListClientFragment : Fragment() {
         initClientAdapter(clients)
     }
 
-    private fun initClientAdapter(clients: List<Client>) {
+    private fun initClientAdapter(clients: MutableList<Client>) {
         val adapter = context?.let { context -> ClientAdapter(context, clients) }
         client_list_rv.adapter = adapter
         adapter!!.onItemClickListener = { client ->
             callUpdateDialog(client)
         }
+
     }
 
     private fun callInsertDialog() {

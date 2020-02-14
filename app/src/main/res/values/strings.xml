@@ -19,4 +19,6 @@
     <string name="saved">saved</string>
     <string name="title_form_update_client">Update Client</string>
     <string name="title_form_update_service">Update Service</string>
+    <string name="remove_client">REMOVE CLIENT</string>
+    <string name="remove_service">REMOVE SERVICE</string>
 </resources>

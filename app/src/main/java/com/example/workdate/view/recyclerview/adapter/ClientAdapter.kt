@@ -1,9 +1,8 @@
 package com.example.workdate.view.recyclerview.adapter
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.ContextMenu.ContextMenuInfo
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workdate.R
@@ -13,7 +12,7 @@ import kotlinx.android.synthetic.main.list_item_client.view.*
 
 class ClientAdapter(
     private val context: Context,
-    private val clients: List<Client>,
+    private val clients: MutableList<Client>,
     var onItemClickListener: (client: Client) -> Unit = {}
 ) : RecyclerView.Adapter<ClientAdapter.MyViewHolder>() {
 
@@ -26,6 +25,11 @@ class ClientAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(clients[position])
+    }
+
+    fun remove(position: Int) {
+        clients.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,6 +48,20 @@ class ClientAdapter(
                 if (::client.isInitialized) {
                     onItemClickListener(client)
                 }
+            }
+            initContextMenu(itemView)
+        }
+
+        private fun initContextMenu(itemView: View) {
+            itemView.setOnCreateContextMenuListener { menu: ContextMenu,
+                                                      _: View?,
+                                                      _: ContextMenuInfo? ->
+                MenuInflater(context).inflate(R.menu.list_client_context_menu, menu)
+                menu.findItem(R.id.menu_list_client_remove)
+                    .setOnMenuItemClickListener {
+                        remove(adapterPosition)
+                        true
+                    }
             }
         }
 

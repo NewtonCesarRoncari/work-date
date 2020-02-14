@@ -1,9 +1,7 @@
 package com.example.workdate.view.recyclerview.adapter
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workdate.R
@@ -14,7 +12,7 @@ import kotlinx.android.synthetic.main.list_item_service.view.*
 
 class ServiceAdapter(
     private val context: Context,
-    private val services: List<Service>,
+    private val services: MutableList<Service>,
     var onItemClickListener: (service: Service) -> Unit = {}
 ) : RecyclerView.Adapter<ServiceAdapter.MyViewHolder>() {
 
@@ -27,6 +25,11 @@ class ServiceAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(services[position])
+    }
+
+    fun remove(position: Int) {
+        services.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -47,6 +50,20 @@ class ServiceAdapter(
                 if (::service.isInitialized) {
                     onItemClickListener(service)
                 }
+            }
+            initContextMenu(itemView)
+        }
+
+        private fun initContextMenu(itemView: View) {
+            itemView.setOnCreateContextMenuListener { menu: ContextMenu,
+                                                      _: View?,
+                                                      _: ContextMenu.ContextMenuInfo? ->
+                MenuInflater(context).inflate(R.menu.list_service_context_menu, menu)
+                menu.findItem(R.id.menu_list_service_remove)
+                    .setOnMenuItemClickListener {
+                        remove(adapterPosition)
+                        true
+                    }
             }
         }
 

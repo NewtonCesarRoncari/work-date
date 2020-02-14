@@ -24,7 +24,7 @@ class ListServiceFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_list_service, container, false)
     }
 
-    private fun initServiceAdapter(services: List<Service>) {
+    private fun initServiceAdapter(services: MutableList<Service>) {
         val adapter = context?.let { context -> ServiceAdapter(context, services) }
         service_list_rv.adapter = adapter
         adapter!!.onItemClickListener = { service ->
@@ -33,7 +33,7 @@ class ListServiceFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val services = listOf(
+        val services = mutableListOf(
             Service(description = "programming", value = BigDecimal(250.0)),
             Service(description = "programming", value = BigDecimal(150.0)),
             Service(description = "programming", value = BigDecimal(200.0)),

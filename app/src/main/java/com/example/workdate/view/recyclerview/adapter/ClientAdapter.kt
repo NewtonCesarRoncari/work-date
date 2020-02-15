@@ -3,7 +3,6 @@ package com.example.workdate.view.recyclerview.adapter
 import android.content.Context
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.workdate.R
 import com.example.workdate.extension.limit
@@ -35,12 +34,14 @@ class ClientAdapter(
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private lateinit var client: Client
-        private val limitForName = 26
-        private val clientName: TextView = itemView.list_item_client_name
+        private val limitForChar = 26
+        private val clientName = itemView.list_item_client_name
+        private val clientAddress = itemView.list_item_client_address
 
         fun bind(client: Client) {
             this.client = client
-            clientName.text = client.name.limit(limitForName)
+            clientName.text = client.name.limit(limitForChar)
+            clientAddress.text = client.address.limit(limitForChar)
         }
 
         init {

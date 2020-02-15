@@ -6,4 +6,5 @@
     <color name="colorDayAgendamento">#39694B</color>
     <color name="colorTextButtonDate">#0C1630</color>
     <color name="colorGreyRipple">#5787899B</color>
+    <color name="coloBlackAbsolute">#000000</color>
 </resources>

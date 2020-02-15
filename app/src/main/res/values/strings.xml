@@ -21,4 +21,6 @@
     <string name="title_form_update_service">Update Service</string>
     <string name="remove_client">REMOVE CLIENT</string>
     <string name="remove_service">REMOVE SERVICE</string>
+    <string name="address">address</string>
+    <string name="address_icon">Address Icon</string>
 </resources>

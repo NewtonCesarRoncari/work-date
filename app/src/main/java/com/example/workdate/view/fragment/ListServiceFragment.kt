@@ -13,6 +13,7 @@ import com.example.workdate.view.recyclerview.adapter.ServiceAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_service.*
 import java.math.BigDecimal
+import java.util.*
 
 class ListServiceFragment : Fragment() {
 
@@ -34,10 +35,26 @@ class ListServiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val services = mutableListOf(
-            Service(description = "programming", value = BigDecimal(250.0)),
-            Service(description = "programming", value = BigDecimal(150.0)),
-            Service(description = "programming", value = BigDecimal(200.0)),
-            Service(description = "programming", value = BigDecimal(500.0))
+            Service(
+                id = UUID.randomUUID().toString(),
+                description = "programming",
+                value = BigDecimal(250.0)
+            ),
+            Service(
+                id = UUID.randomUUID().toString(),
+                description = "programming",
+                value = BigDecimal(150.0)
+            ),
+            Service(
+                id = UUID.randomUUID().toString(),
+                description = "programming",
+                value = BigDecimal(200.0)
+            ),
+            Service(
+                id = UUID.randomUUID().toString(),
+                description = "programming",
+                value = BigDecimal(500.0)
+            )
         )
 
         new_service.setOnClickListener {

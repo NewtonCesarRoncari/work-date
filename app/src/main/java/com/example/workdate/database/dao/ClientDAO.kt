@@ -16,6 +16,6 @@ interface ClientDAO {
     @Delete
     fun remove(client: Client)
 
-    @Query("SELECT * FROM Client")
+    @Query("SELECT * FROM Client ORDER BY client.name")
     fun listAll(): LiveData<MutableList<Client>>
 }

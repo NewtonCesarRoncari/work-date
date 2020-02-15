@@ -1,6 +1,7 @@
 package com.example.workdate.view.dialog
 
 import android.content.Context
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.example.workdate.model.Client
 import kotlinx.android.synthetic.main.client_formulary.view.*
@@ -21,6 +22,7 @@ class ClientFormUpdateDialog(
 
     private fun loadFieldDataDialog(client: Client) {
         fieldID.text = client.id
+        fieldID.visibility = VISIBLE
         fieldName.setText(client.name)
         fieldAddress.setText(client.address)
         fieldPhone.setText(client.phone)

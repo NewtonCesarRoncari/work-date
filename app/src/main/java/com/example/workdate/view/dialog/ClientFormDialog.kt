@@ -9,6 +9,7 @@ import com.example.workdate.R
 import com.example.workdate.model.Client
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.client_formulary.view.*
+import java.util.*
 
 abstract class ClientFormDialog(
     private val context: Context,
@@ -30,6 +31,7 @@ abstract class ClientFormDialog(
                 val clientPhone = fieldPhone.text.toString().trim()
 
                 val client = Client(
+                    id = UUID.randomUUID().toString(),
                     name = clientName,
                     address = clientAddress,
                     phone = clientPhone

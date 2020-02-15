@@ -10,6 +10,7 @@ import com.example.workdate.model.Service
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.service_formulary.view.*
 import java.math.BigDecimal
+import java.util.*
 
 abstract class ServiceFormDialog(
     private val context: Context,
@@ -31,6 +32,7 @@ abstract class ServiceFormDialog(
                 val serviceValue = tryParseBigDecimal(serviceStringValue)
 
                 val service = Service(
+                    id = UUID.randomUUID().toString(),
                     description = serviceDescription,
                     value = serviceValue
                 )

@@ -5,18 +5,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.workdate.R
+import com.example.workdate.extension.returnUUID
 import com.example.workdate.model.Service
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.service_formulary.view.*
 import java.math.BigDecimal
-import java.util.*
 
 abstract class ServiceFormDialog(
     private val context: Context,
     private val viewGroup: ViewGroup?
 ) {
-    protected val viewCreated = initView()
+    private val viewCreated = initView()
+    protected val fieldID: TextView = viewCreated.service_formulary_id
     protected val fieldDescription: TextInputEditText = viewCreated.service_formulary_description
     protected val fieldValue: TextInputEditText = viewCreated.service_formulary_value
     protected abstract val titleDialog: String
@@ -32,7 +34,7 @@ abstract class ServiceFormDialog(
                 val serviceValue = tryParseBigDecimal(serviceStringValue)
 
                 val service = Service(
-                    id = UUID.randomUUID().toString(),
+                    id = fieldID.text.toString().returnUUID(),
                     description = serviceDescription,
                     value = serviceValue
                 )

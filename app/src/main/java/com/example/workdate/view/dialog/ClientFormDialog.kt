@@ -5,17 +5,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.workdate.R
+import com.example.workdate.extension.returnUUID
 import com.example.workdate.model.Client
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.client_formulary.view.*
-import java.util.*
 
 abstract class ClientFormDialog(
     private val context: Context,
     private val viewGroup: ViewGroup
 ) {
-    protected val viewCreated = initView()
+    private val viewCreated = initView()
+    protected val fieldID: TextView = viewCreated.client_formulary_id
     protected val fieldName: TextInputEditText = viewCreated.client_formulary_name
     protected val fieldAddress: TextInputEditText = viewCreated.client_formulary_address
     protected val fieldPhone: TextInputEditText = viewCreated.client_formulary_phone
@@ -31,7 +33,7 @@ abstract class ClientFormDialog(
                 val clientPhone = fieldPhone.text.toString().trim()
 
                 val client = Client(
-                    id = UUID.randomUUID().toString(),
+                    id = fieldID.text.toString().returnUUID(),
                     name = clientName,
                     address = clientAddress,
                     phone = clientPhone

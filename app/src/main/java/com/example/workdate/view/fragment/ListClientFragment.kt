@@ -57,6 +57,7 @@ class ListClientFragment : Fragment() {
         context?.let { context ->
             ClientFormUpdateDialog(view as ViewGroup, context)
                 .initClientFormDialog(client) { clientReturned ->
+                    viewModel.update(clientReturned)
                     showSnackBar(clientReturned)
                 }
         }

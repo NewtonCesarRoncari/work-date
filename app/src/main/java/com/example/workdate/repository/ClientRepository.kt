@@ -19,7 +19,11 @@ class ClientRepository(private val dao: ClientDAO) {
         }
     }
 
-    fun update(client: Client) = dao.update(client)
+    fun update(client: Client) {
+        scope.launch {
+            dao.update(client)
+        }
+    }
 
     fun remove(client: Client) = dao.remove(client)
 

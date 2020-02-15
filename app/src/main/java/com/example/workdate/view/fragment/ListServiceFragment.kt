@@ -10,12 +10,14 @@ import com.example.workdate.model.Service
 import com.example.workdate.view.dialog.ServiceFormInsertDialog
 import com.example.workdate.view.dialog.ServiceFormUpdateDialog
 import com.example.workdate.view.recyclerview.adapter.ServiceAdapter
+import com.example.workdate.view.viewmodel.ServiceViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_service.*
-import java.math.BigDecimal
-import java.util.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListServiceFragment : Fragment() {
+
+    private val viewModel: ServiceViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,39 +36,19 @@ class ListServiceFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val services = mutableListOf(
-            Service(
-                id = UUID.randomUUID().toString(),
-                description = "programming",
-                value = BigDecimal(250.0)
-            ),
-            Service(
-                id = UUID.randomUUID().toString(),
-                description = "programming",
-                value = BigDecimal(150.0)
-            ),
-            Service(
-                id = UUID.randomUUID().toString(),
-                description = "programming",
-                value = BigDecimal(200.0)
-            ),
-            Service(
-                id = UUID.randomUUID().toString(),
-                description = "programming",
-                value = BigDecimal(500.0)
-            )
-        )
-
         new_service.setOnClickListener {
             callInsertDialog()
         }
-        initServiceAdapter(services)
+        viewModel.listAll().observe(viewLifecycleOwner, androidx.lifecycle.Observer { listService ->
+            initServiceAdapter(listService)
+        })
     }
 
     private fun callInsertDialog() {
         context?.let { context ->
             ServiceFormInsertDialog(view as ViewGroup, context)
                 .initServiceFormDialog { serviceReturned ->
+                    viewModel.insert(serviceReturned)
                     showSnackBar(serviceReturned)
                 }
         }
@@ -76,6 +58,7 @@ class ListServiceFragment : Fragment() {
         context?.let { context ->
             ServiceFormUpdateDialog(view as ViewGroup, context)
                 .initServiceFormDialog(service) { serviceReturned ->
+                    viewModel.update(serviceReturned)
                     showSnackBar(serviceReturned)
                 }
         }

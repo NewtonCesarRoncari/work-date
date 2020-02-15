@@ -41,7 +41,6 @@ class ListClientFragment : Fragment() {
         adapter!!.onItemClickListener = { client ->
             callUpdateDialog(client)
         }
-
     }
 
     private fun callInsertDialog() {

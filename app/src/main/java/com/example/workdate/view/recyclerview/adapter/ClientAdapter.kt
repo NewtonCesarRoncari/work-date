@@ -37,11 +37,15 @@ class ClientAdapter(
         private val limitForChar = 26
         private val clientName = itemView.list_item_client_name
         private val clientAddress = itemView.list_item_client_address
+        private val clientPhone = itemView.list_item_client_phone
+        private val clientFirstChar = itemView.list_item_client_first_char
 
         fun bind(client: Client) {
             this.client = client
             clientName.text = client.name.limit(limitForChar)
             clientAddress.text = client.address.limit(limitForChar)
+            clientPhone.text = client.phone
+            clientFirstChar.text = client.name[0].toString()
         }
 
         init {

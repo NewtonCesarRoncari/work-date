@@ -23,4 +23,6 @@
     <string name="remove_service">REMOVE SERVICE</string>
     <string name="address">address</string>
     <string name="address_icon">Address Icon</string>
+    <string name="phone_icon">Phone Icon</string>
+    <string name="n">N</string>
 </resources>

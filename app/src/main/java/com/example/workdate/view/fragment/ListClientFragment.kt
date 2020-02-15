@@ -5,15 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.workdate.R
 import com.example.workdate.model.Client
 import com.example.workdate.view.dialog.ClientFormInsertDialog
 import com.example.workdate.view.dialog.ClientFormUpdateDialog
 import com.example.workdate.view.recyclerview.adapter.ClientAdapter
+import com.example.workdate.view.viewmodel.ClientViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_client.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListClientFragment : Fragment() {
+
+    private val viewModel: ClientViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -22,25 +27,12 @@ class ListClientFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val clients = mutableListOf(
-            Client(
-                name = "Name Example",
-                phone = "37991235555",
-                address = "Rua Sebastião Alves de Oliveira, 293"
-            ), Client(
-                name = "Newton Cesar ",
-                phone = "37991235555",
-                address = "Rua Sebastião Alves de Oliveira, 293"
-            ), Client(
-                name = "Newton Cesar",
-                phone = "37991235555",
-                address = "Rua Sebastião Alves de Oliveira, 293"
-            )
-        )
         new_client.setOnClickListener {
             callInsertDialog()
         }
-        initClientAdapter(clients)
+        viewModel.listAll().observe(viewLifecycleOwner, Observer { clientList ->
+            initClientAdapter(clientList)
+        })
     }
 
     private fun initClientAdapter(clients: MutableList<Client>) {
@@ -56,6 +48,7 @@ class ListClientFragment : Fragment() {
         context?.let { context ->
             ClientFormInsertDialog(view as ViewGroup, context)
                 .initClientFormDialog { clientReturned ->
+                    viewModel.insert(clientReturned)
                     showSnackBar(clientReturned)
                 }
         }

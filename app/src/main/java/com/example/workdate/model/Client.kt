@@ -1,6 +1,11 @@
 package com.example.workdate.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 class Client(
+    @PrimaryKey(autoGenerate = false)
     val id: String = "Undefined",
     val name: String,
     val phone: String,

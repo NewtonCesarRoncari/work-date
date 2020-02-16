@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/listClientFragment"
-        android:name="com.example.workdate.view.fragment.ListClientFragment"
+        android:name="com.br.workdate.view.fragment.ListClientFragment"
         android:label="Client List"
         tools:layout="@layout/fragment_list_client" />
     <fragment
         android:id="@+id/listServiceFragment"
-        android:name="com.example.workdate.view.fragment.ListServiceFragment"
+        android:name="com.br.workdate.view.fragment.ListServiceFragment"
         android:label="Service List"
         tools:layout="@layout/fragment_list_service" />
 </navigation>

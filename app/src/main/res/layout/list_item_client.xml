@@ -64,14 +64,15 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="24dp"
-            android:layout_height="19dp"
+            android:layout_width="19dp"
+            android:layout_height="16dp"
             android:contentDescription="@string/phone_icon"
             android:src="@drawable/ic_client_phone"
             app:layout_constraintBottom_toBottomOf="@+id/list_item_client_phone"
             app:layout_constraintEnd_toStartOf="@+id/list_item_client_phone"
             app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
-            app:layout_constraintTop_toTopOf="@+id/list_item_client_phone" />
+            app:layout_constraintTop_toTopOf="@+id/list_item_client_phone"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/list_item_client_phone"
@@ -87,14 +88,15 @@
             app:layout_constraintTop_toBottomOf="@+id/list_item_client_name" />
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="19dp"
+            android:layout_width="20dp"
+            android:layout_height="17dp"
             android:contentDescription="@string/address_icon"
             android:src="@drawable/ic_client_address"
             app:layout_constraintBottom_toBottomOf="@+id/list_item_client_address"
             app:layout_constraintEnd_toStartOf="@+id/list_item_client_address"
             app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
-            app:layout_constraintTop_toTopOf="@+id/list_item_client_address" />
+            app:layout_constraintTop_toTopOf="@+id/list_item_client_address"
+            app:layout_constraintVertical_bias="0.76" />
 
         <TextView
             android:id="@+id/list_item_client_address"

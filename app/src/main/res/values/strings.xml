@@ -25,4 +25,6 @@
     <string name="address_icon">Address Icon</string>
     <string name="phone_icon">Phone Icon</string>
     <string name="n">N</string>
+    <string name="icon_service_value">Icon Service Value</string>
+    <string name="d">D</string>
 </resources>

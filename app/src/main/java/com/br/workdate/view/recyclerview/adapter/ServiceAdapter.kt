@@ -39,11 +39,13 @@ class ServiceAdapter(
         private val limitForDescription = 26
         private val serviceDescription: TextView = itemView.list_item_service_description
         private val serviceValue: TextView = itemView.list_item_service_value
+        private val serviceFirstChar: TextView = itemView.list_item_service_first_char
 
         fun bind(service: Service) {
             this.service = service
             serviceDescription.text = service.description.limit(limitForDescription)
             serviceValue.text = service.value.formatForBrazilianCoin()
+            serviceFirstChar.text = service.description[0].toString()
         }
 
         init {

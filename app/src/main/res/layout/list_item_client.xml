@@ -23,7 +23,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="16dp"
-            android:background="@drawable/circle_item"
+            android:background="@drawable/circle_item_client"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

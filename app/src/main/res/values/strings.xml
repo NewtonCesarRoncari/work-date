@@ -27,4 +27,8 @@
     <string name="n">N</string>
     <string name="icon_service_value">Icon Service Value</string>
     <string name="d">D</string>
+    <string name="clock">clock</string>
+    <string name="hour">Hour</string>
+    <string name="client">client</string>
+    <string name="service">service</string>
 </resources>

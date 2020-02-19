@@ -1,10 +1,8 @@
 package com.br.workdate.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
+import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.PrimaryKey
+import androidx.room.ForeignKey.RESTRICT
 import java.math.BigDecimal
 import java.util.*
 
@@ -14,30 +12,31 @@ import java.util.*
         parentColumns = ["id"],
         childColumns = ["client_id"],
         onUpdate = CASCADE,
-        onDelete = CASCADE
+        onDelete = RESTRICT
     ),
         ForeignKey(
             entity = Service::class,
             parentColumns = ["id"],
             childColumns = ["service_id"],
             onUpdate = CASCADE,
-            onDelete = CASCADE
+            onDelete = RESTRICT
         )],
-    ignoredColumns = ["service", "client"]
+    indices = [
+        Index("service_id"),
+        Index("client_id")
+    ]
 )
 class Schedule(
     @PrimaryKey(autoGenerate = false)
-    private val id: String,
-    private val date: Date,
-    private val hour: Date,
-    private val value: BigDecimal,
-    private val canceled: Boolean,
-    private val finished: Boolean,
-    private val observation: String,
+    val id: String,
+    val date: Date,
+    val hour: Date,
+    val value: BigDecimal,
+    val canceled: Boolean,
+    val finished: Boolean,
+    val observation: String,
     @ColumnInfo(name = "service_id")
-    private val serviceId: String,
+    val serviceId: String,
     @ColumnInfo(name = "client_id")
-    private val clientId: String,
-    private val service: Service,
-    private val client: Client
+    val clientId: String
 )

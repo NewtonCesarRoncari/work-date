@@ -15,4 +15,9 @@
         android:name="com.br.workdate.view.fragment.ListServiceFragment"
         android:label="Service List"
         tools:layout="@layout/fragment_list_service" />
+    <fragment
+        android:id="@+id/listScheduleFragment"
+        android:name="com.br.workdate.view.fragment.ListScheduleFragment"
+        android:label="Schedule List"
+        tools:layout="@layout/fragment_list_schedule" />
 </navigation>

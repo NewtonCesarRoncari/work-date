@@ -31,4 +31,13 @@
     <string name="hour">Hour</string>
     <string name="client">client</string>
     <string name="service">service</string>
+    <string name="choose_client">Choose client</string>
+    <string name="schedule_detail">Schedule detail</string>
+    <string name="date">Date</string>
+    <string name="icon_calendar">Icon Calendar</string>
+    <string name="observations">Observations</string>
+    <string name="chooose_service">Chooose Service</string>
+    <string name="canceled">Canceled</string>
+    <string name="icon_money">Icon Money</string>
+    <string name="finished">Finished</string>
 </resources>

@@ -29,4 +29,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/list_item_schedule" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_schedule"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/schedule_list_rv"
+        android:layout_alignBottom="@+id/schedule_list_rv"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="17dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

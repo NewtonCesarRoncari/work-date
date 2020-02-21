@@ -40,4 +40,6 @@
     <string name="canceled">Canceled</string>
     <string name="icon_money">Icon Money</string>
     <string name="finished">Finished</string>
+    <string name="date_format">00/00/0000</string>
+    <string name="hour_format">00:00</string>
 </resources>

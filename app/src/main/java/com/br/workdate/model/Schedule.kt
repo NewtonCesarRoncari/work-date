@@ -3,6 +3,7 @@ package com.br.workdate.model
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.ForeignKey.RESTRICT
+import java.io.Serializable
 import java.math.BigDecimal
 import java.util.*
 
@@ -39,4 +40,4 @@ class Schedule(
     val serviceId: String,
     @ColumnInfo(name = "client_id")
     val clientId: String
-)
+) : Serializable

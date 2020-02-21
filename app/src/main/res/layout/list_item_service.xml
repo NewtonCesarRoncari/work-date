@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:text="@string/d"
+            android:textAllCaps="true"
             android:textColor="#ffffff"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/list_item_service_icon"

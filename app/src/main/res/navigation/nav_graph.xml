@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/listClientFragment">
+    app:startDestination="@id/listScheduleFragment">
 
     <fragment
         android:id="@+id/listClientFragment"
@@ -19,10 +19,20 @@
         android:id="@+id/listScheduleFragment"
         android:name="com.br.workdate.view.fragment.ListScheduleFragment"
         android:label="Schedule List"
-        tools:layout="@layout/fragment_list_schedule" />
+        tools:layout="@layout/fragment_list_schedule">
+        <action
+            android:id="@+id/action_listScheduleFragment_to_formScheduleFragment"
+            app:destination="@id/formScheduleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/formScheduleFragment"
         android:name="com.br.workdate.view.fragment.FormScheduleFragment"
         android:label="Schedule Form"
-        tools:layout="@layout/fragment_form_schedule" />
+        tools:layout="@layout/fragment_form_schedule">
+        <argument
+            android:name="schedule"
+            android:defaultValue="@null"
+            app:argType="com.br.workdate.model.Schedule"
+            app:nullable="true" />
+    </fragment>
 </navigation>

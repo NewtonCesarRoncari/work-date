@@ -11,6 +11,7 @@ import com.br.workdate.repository.ServiceRepository
 import com.br.workdate.view.viewmodel.ClientViewModel
 import com.br.workdate.view.viewmodel.ScheduleViewModel
 import com.br.workdate.view.viewmodel.ServiceViewModel
+import com.br.workdate.view.viewmodel.StateAppComponentsViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -42,4 +43,5 @@ val viewModelModule = module {
     viewModel<ClientViewModel> { ClientViewModel(repository = get()) }
     viewModel<ServiceViewModel> { ServiceViewModel(repository = get()) }
     viewModel<ScheduleViewModel> { ScheduleViewModel(repository = get()) }
+    viewModel<StateAppComponentsViewModel> { StateAppComponentsViewModel() }
 }

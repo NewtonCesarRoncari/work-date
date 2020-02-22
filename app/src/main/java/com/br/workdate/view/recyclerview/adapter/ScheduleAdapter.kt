@@ -65,10 +65,10 @@ class ScheduleAdapter(
                     onItemClickListener(schedule)
                 }
             }
-            initContexMenu(itemView, onItemLongClickListener)
+            initContextMenu(itemView, onItemLongClickListener)
         }
 
-        private fun initContexMenu(
+        private fun initContextMenu(
             itemView: View,
             onItemLongClickListener: (schedule: Schedule) -> Unit
         ) {

@@ -43,7 +43,9 @@ class ClientAdapter(
 
         fun bind(client: Client) {
             this.client = client
-            clientFirstChar.text = client.name[0].toString()
+            if (client.name.isNotEmpty()) {
+                clientFirstChar.text = client.name[0].toString()
+            }
             clientName.text = client.name.limit(limitForChar)
             clientAddress.text = client.address.limit(limitForChar)
             clientPhone.text = client.phone

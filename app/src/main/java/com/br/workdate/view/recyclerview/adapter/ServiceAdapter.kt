@@ -43,9 +43,11 @@ class ServiceAdapter(
 
         fun bind(service: Service) {
             this.service = service
+            if (service.description.isNotEmpty()) {
+                serviceFirstChar.text = service.description[0].toString()
+            }
             serviceDescription.text = service.description.limit(limitForDescription)
             serviceValue.text = service.value.formatForBrazilianCoin()
-            serviceFirstChar.text = service.description[0].toString()
         }
 
         init {

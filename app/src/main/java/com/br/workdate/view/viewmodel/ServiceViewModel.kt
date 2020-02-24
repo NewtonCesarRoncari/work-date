@@ -14,8 +14,4 @@ class ServiceViewModel(private val repository: ServiceRepository) : ViewModel() 
     fun remove(service: Service) = repository.remove(service)
 
     fun listAll(): LiveData<MutableList<Service>> = repository.listAll()
-
-    fun returnForId(id: String): LiveData<Service> {
-        return repository.returnForId(id)
-    }
 }

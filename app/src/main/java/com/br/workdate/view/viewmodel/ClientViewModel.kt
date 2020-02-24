@@ -14,9 +14,4 @@ class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
     fun remove(client: Client) = repository.remove(client)
 
     fun listAll(): LiveData<MutableList<Client>> = repository.listAll()
-
-    fun returnForId(id: String): LiveData<Client> {
-        return repository.returnForId(id)
-    }
-
 }

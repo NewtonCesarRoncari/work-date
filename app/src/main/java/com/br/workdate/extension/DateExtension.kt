@@ -5,7 +5,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @SuppressLint("SimpleDateFormat")
-fun Date.parseFormatHour(): String {
+fun Date.formatForBrazilianDate(): String {
+    val formatHour = SimpleDateFormat("dd/MM/yyyy")
+    return formatHour.format(this)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun Date.formatForBrazilianHour(): String {
     val formatHour = SimpleDateFormat("HH:mm")
     return formatHour.format(this)
 }

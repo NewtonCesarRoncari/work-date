@@ -32,8 +32,4 @@ class ServiceRepository(private val dao: ServiceDAO) {
     }
 
     fun listAll(): LiveData<MutableList<Service>> = dao.listAll()
-
-    fun returnForId(id: String): LiveData<Service> {
-        return dao.returnForId(id)
-    }
 }

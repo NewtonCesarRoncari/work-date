@@ -43,7 +43,6 @@ class FormScheduleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         client?.let { tryLoadClientFields(it) }
         service?.let { tryLoadServiceFields(it) }
 

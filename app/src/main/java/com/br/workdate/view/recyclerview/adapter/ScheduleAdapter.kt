@@ -73,8 +73,8 @@ class ScheduleAdapter(
             onItemLongClickListener: (schedule: Schedule) -> Unit
         ) {
             itemView.setOnCreateContextMenuListener { menu, _, _ ->
-                MenuInflater(context).inflate(R.menu.list_schedule_context_menu, menu)
-                menu.findItem(R.id.menu_list_schedule_remove)
+                MenuInflater(context).inflate(R.menu.base_context_menu, menu)
+                menu.findItem(R.id.remove)
                     .setOnMenuItemClickListener {
                         onItemLongClickListener(schedules[adapterPosition])
                         remove(adapterPosition)

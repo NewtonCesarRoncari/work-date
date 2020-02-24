@@ -1,11 +1,10 @@
 package com.br.workdate.view.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.br.workdate.R
@@ -19,6 +18,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 abstract class BaseListClientFragment : Fragment() {
 
+    private lateinit var adapter: ClientAdapter
     protected val viewModel: ClientViewModel by viewModel()
 
     override fun onCreateView(
@@ -37,12 +37,35 @@ abstract class BaseListClientFragment : Fragment() {
             ifEmptyPlayAnimation(clientList)
             initClientAdapter(clientList)
         })
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.base_search_menu, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (::adapter.isInitialized) {
+                    adapter.filter.filter(newText)
+                }
+                return false
+            }
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initClientAdapter(clients: MutableList<Client>) {
-        val adapter = context?.let { context -> ClientAdapter(context, clients) }
+        adapter = context?.let { context -> ClientAdapter(context, clients) }!!
         client_list_rv.adapter = adapter
-        adapter!!.onItemClickListener = { client ->
+        adapter.onItemClickListener = { client ->
             doInItemClickListener(client)
         }
         adapter.onItemLongClickListener = { client ->

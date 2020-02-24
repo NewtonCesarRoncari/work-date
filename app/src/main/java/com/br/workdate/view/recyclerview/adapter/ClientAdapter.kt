@@ -3,18 +3,58 @@ package com.br.workdate.view.recyclerview.adapter
 import android.content.Context
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
 import com.br.workdate.extension.limit
 import com.br.workdate.model.Client
 import kotlinx.android.synthetic.main.list_item_client.view.*
+import java.util.*
 
 class ClientAdapter(
     private val context: Context,
-    private val clients: MutableList<Client>,
+    private var clients: MutableList<Client>,
     var onItemClickListener: (client: Client) -> Unit = {},
     var onItemLongClickListener: (client: Client) -> Unit = {}
-) : RecyclerView.Adapter<ClientAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<ClientAdapter.MyViewHolder>(), Filterable {
+
+    private val clientListFull = clients.toList()
+
+    //regionFilter
+    private val filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val filteredList: MutableList<Client> = mutableListOf()
+
+            if (constraint.isNullOrEmpty()) {
+                filteredList.addAll(clientListFull)
+            } else {
+                val filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim()
+
+                for (client in clientListFull) {
+                    if (client.name.toLowerCase(Locale.getDefault()).contains(filterPattern)) {
+                        filteredList.add(client)
+                    }
+                }
+            }
+
+            val results = FilterResults()
+            results.values = filteredList
+            results.count = filteredList.size
+
+            return results
+        }
+
+        override fun publishResults(constraint: CharSequence, results: FilterResults) {
+            clients = (results.values as List<*>).filterIsInstance<Client>() as MutableList<Client>
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return filter
+    }
+    //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_client, parent, false)
@@ -67,8 +107,8 @@ class ClientAdapter(
             itemView.setOnCreateContextMenuListener { menu: ContextMenu,
                                                       _: View?,
                                                       _: ContextMenuInfo? ->
-                MenuInflater(context).inflate(R.menu.list_client_context_menu, menu)
-                menu.findItem(R.id.menu_list_client_remove)
+                MenuInflater(context).inflate(R.menu.base_context_menu, menu)
+                menu.findItem(R.id.remove)
                     .setOnMenuItemClickListener {
                         onItemLongClickListener(clients[adapterPosition])
                         remove(adapterPosition)

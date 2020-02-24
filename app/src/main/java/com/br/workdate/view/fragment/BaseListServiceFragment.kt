@@ -1,11 +1,10 @@
 package com.br.workdate.view.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
 import com.br.workdate.model.Service
@@ -18,6 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 abstract class BaseListServiceFragment : Fragment() {
 
+    private lateinit var adapter: ServiceAdapter
     protected val viewModel: ServiceViewModel by viewModel()
 
     override fun onCreateView(
@@ -39,12 +39,35 @@ abstract class BaseListServiceFragment : Fragment() {
             ifEmptyPlayAnimation(serviceList)
             initServiceAdapter(serviceList)
         })
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.base_search_menu, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (::adapter.isInitialized) {
+                    adapter.filter.filter(newText)
+                }
+                return false
+            }
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initServiceAdapter(services: MutableList<Service>) {
-        val adapter = context?.let { context -> ServiceAdapter(context, services) }
+        adapter = context?.let { context -> ServiceAdapter(context, services) }!!
         service_list_rv.adapter = adapter
-        adapter!!.onItemClickListener = { service ->
+        adapter.onItemClickListener = { service ->
             doInItemClickListener(service)
         }
         adapter.onItemLongClickListener = { service ->
@@ -85,6 +108,7 @@ abstract class BaseListServiceFragment : Fragment() {
             Snackbar.make(view, "${service.description} " + msg, Snackbar.LENGTH_SHORT).show()
         }
     }
+
     abstract fun doInItemClickListener(service: Service)
 
 }

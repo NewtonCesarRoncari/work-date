@@ -49,6 +49,6 @@
     <fragment
         android:id="@+id/searchListServiceFragment"
         android:name="com.br.workdate.view.fragment.SearchListServiceFragment"
-        android:label="SearchListServiceFragment"
+        android:label="Choose Service"
         tools:layout="@layout/fragment_list_service" />
 </navigation>

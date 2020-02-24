@@ -62,12 +62,12 @@
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/phone_icon"
                 android:src="@drawable/ic_client_phone"
-                app:layout_constraintBottom_toBottomOf="@+id/form_client_phone"
-                app:layout_constraintEnd_toStartOf="@+id/form_client_phone"
-                app:layout_constraintTop_toTopOf="@+id/form_client_phone" />
+                app:layout_constraintBottom_toBottomOf="@+id/form_schedule_client_phone"
+                app:layout_constraintEnd_toStartOf="@+id/form_schedule_client_phone"
+                app:layout_constraintTop_toTopOf="@+id/form_schedule_client_phone" />
 
             <TextView
-                android:id="@+id/form_client_phone"
+                android:id="@+id/form_schedule_client_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -137,12 +137,12 @@
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/icon_money"
                 android:src="@drawable/ic_releases"
-                app:layout_constraintBottom_toBottomOf="@+id/form_service_value"
-                app:layout_constraintEnd_toStartOf="@+id/form_service_value"
-                app:layout_constraintTop_toTopOf="@+id/form_service_value" />
+                app:layout_constraintBottom_toBottomOf="@+id/form_schedule_service_value"
+                app:layout_constraintEnd_toStartOf="@+id/form_schedule_service_value"
+                app:layout_constraintTop_toTopOf="@+id/form_schedule_service_value" />
 
             <TextView
-                android:id="@+id/form_service_value"
+                android:id="@+id/form_schedule_service_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"

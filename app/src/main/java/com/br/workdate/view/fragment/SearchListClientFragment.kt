@@ -1,19 +1,20 @@
 package com.br.workdate.view.fragment
 
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.navArgs
 import com.br.workdate.model.Client
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SearchListClientFragment : BaseListClientFragment() {
 
-    override fun implementIfWannaHideFab(fab: FloatingActionButton) {
-        fab.hide()
+    private val navController by lazy { NavHostFragment.findNavController(this) }
+    private val arguments by navArgs<SearchListClientFragmentArgs>()
+    private val service by lazy {
+        arguments.service
     }
-
-    override fun doInFabClickListener() {}
 
     override fun doInItemClickListener(client: Client) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val direction = SearchListClientFragmentDirections
+            .actionSearchListClientFragmentToFormScheduleFragment(client, service)
+        navController.navigate(direction)
     }
-
-    override fun doInItemLongClickListener(client: Client) {}
 }

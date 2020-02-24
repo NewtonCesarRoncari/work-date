@@ -18,4 +18,7 @@ interface ClientDAO {
 
     @Query("SELECT * FROM Client ORDER BY client.name")
     fun listAll(): LiveData<MutableList<Client>>
+
+    @Query("SELECT * FROM Client WHERE client.id = :id")
+    fun returnForId(id: String): LiveData<Client>
 }

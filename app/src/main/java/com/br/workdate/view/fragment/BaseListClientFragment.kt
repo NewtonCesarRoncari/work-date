@@ -10,9 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.br.workdate.R
 import com.br.workdate.model.Client
+import com.br.workdate.view.dialog.ClientFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ClientAdapter
 import com.br.workdate.view.viewmodel.ClientViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_client.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -29,10 +30,8 @@ abstract class BaseListClientFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         client_list_animation.setAnimation("anim/client_empty.json")
 
-        implementIfWannaHideFab(new_client)
-
         new_client.setOnClickListener {
-            doInFabClickListener()
+            callInsertDialog()
         }
         viewModel.listAll().observe(viewLifecycleOwner, Observer { clientList ->
             ifEmptyPlayAnimation(clientList)
@@ -47,7 +46,8 @@ abstract class BaseListClientFragment : Fragment() {
             doInItemClickListener(client)
         }
         adapter.onItemLongClickListener = { client ->
-            doInItemLongClickListener(client)
+            viewModel.remove(client)
+            showSnackBar(client, "removed")
         }
     }
 
@@ -68,8 +68,20 @@ abstract class BaseListClientFragment : Fragment() {
         }
     }
 
-    abstract fun implementIfWannaHideFab(fab: FloatingActionButton)
-    abstract fun doInFabClickListener()
+    private fun callInsertDialog() {
+        context?.let { context ->
+            ClientFormInsertDialog(view as ViewGroup, context)
+                .initClientFormDialog { clientReturned ->
+                    viewModel.insert(clientReturned)
+                    showSnackBar(clientReturned, "saved")
+                }
+        }
+    }
+
+    protected fun showSnackBar(client: Client, msg: String) {
+        view?.let { view ->
+            Snackbar.make(view, "${client.name} " + msg, Snackbar.LENGTH_SHORT).show()
+        }
+    }
     abstract fun doInItemClickListener(client: Client)
-    abstract fun doInItemLongClickListener(client: Client)
 }

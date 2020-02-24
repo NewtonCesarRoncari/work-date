@@ -32,4 +32,8 @@ class ClientRepository(private val dao: ClientDAO) {
     }
 
     fun listAll(): LiveData<MutableList<Client>> = dao.listAll()
+
+    fun returnForId(id: String): LiveData<Client> {
+        return dao.returnForId(id)
+    }
 }

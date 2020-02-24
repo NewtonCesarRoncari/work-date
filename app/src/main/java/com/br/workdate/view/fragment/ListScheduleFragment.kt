@@ -42,7 +42,7 @@ class ListScheduleFragment : Fragment() {
 
     private fun goToFormScheduleFragment() {
         val direction = ListScheduleFragmentDirections
-            .actionListScheduleFragmentToFormScheduleFragment()
+            .actionListScheduleFragmentToFormScheduleFragment(null, null)
         navController.navigate(direction)
     }
 }

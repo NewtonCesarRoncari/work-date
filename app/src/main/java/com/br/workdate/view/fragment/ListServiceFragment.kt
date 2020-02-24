@@ -9,7 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class ListServiceFragment : BaseListServiceFragment() {
 
-    override fun implementIfWannaHideFab(newService: FloatingActionButton) {}
+    override fun implementIfWannaHideFab(fab: FloatingActionButton) {}
 
     override fun doInFabClickListener() = callInsertDialog()
 

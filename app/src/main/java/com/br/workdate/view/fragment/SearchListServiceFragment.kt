@@ -5,8 +5,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SearchListServiceFragment : BaseListServiceFragment() {
 
-    override fun implementIfWannaHideFab(newService: FloatingActionButton) {
-        newService.hide()
+    override fun implementIfWannaHideFab(fab: FloatingActionButton) {
+        fab.hide()
     }
 
     override fun doInFabClickListener() {}

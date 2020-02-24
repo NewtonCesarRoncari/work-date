@@ -30,11 +30,11 @@ abstract class BaseListServiceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         service_list_animation.setAnimation("anim/client_empty.json")
 
+        implementIfWannaHideFab(new_service)
+
         new_service.setOnClickListener {
             doInFabClickListener()
         }
-
-        implementIfWannaHideFab(new_service)
 
         viewModel.listAll().observe(viewLifecycleOwner, androidx.lifecycle.Observer { serviceList ->
             ifEmptyPlayAnimation(serviceList)
@@ -70,7 +70,7 @@ abstract class BaseListServiceFragment : Fragment() {
         }
     }
 
-    abstract fun implementIfWannaHideFab(newService: FloatingActionButton)
+    abstract fun implementIfWannaHideFab(fab: FloatingActionButton)
     abstract fun doInFabClickListener()
     abstract fun doInItemClickListener(service: Service)
     abstract fun doInItemLongClickListener(service: Service)

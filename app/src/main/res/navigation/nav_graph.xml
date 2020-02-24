@@ -34,5 +34,21 @@
             android:defaultValue="@null"
             app:argType="com.br.workdate.model.Schedule"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_formScheduleFragment_to_searchListClientFragment"
+            app:destination="@id/searchListClientFragment" />
+        <action
+            android:id="@+id/action_formScheduleFragment_to_searchListServiceFragment"
+            app:destination="@id/searchListServiceFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchListClientFragment"
+        android:name="com.br.workdate.view.fragment.SearchListClientFragment"
+        android:label="Choose Client"
+        tools:layout="@layout/fragment_list_client" />
+    <fragment
+        android:id="@+id/searchListServiceFragment"
+        android:name="com.br.workdate.view.fragment.SearchListServiceFragment"
+        android:label="SearchListServiceFragment"
+        tools:layout="@layout/fragment_list_service" />
 </navigation>

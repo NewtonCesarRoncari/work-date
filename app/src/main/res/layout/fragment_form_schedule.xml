@@ -39,6 +39,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
+                android:id="@+id/form_schedule_client_btn"
                 android:layout_width="0dp"
                 android:layout_height="21dp"
                 android:layout_marginStart="24dp"
@@ -61,12 +62,12 @@
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/phone_icon"
                 android:src="@drawable/ic_client_phone"
-                app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                app:layout_constraintEnd_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/textView5" />
+                app:layout_constraintBottom_toBottomOf="@+id/form_client_phone"
+                app:layout_constraintEnd_toStartOf="@+id/form_client_phone"
+                app:layout_constraintTop_toTopOf="@+id/form_client_phone" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/form_client_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -114,7 +115,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/form_schedule_service_btn"
                 android:layout_width="0dp"
                 android:layout_height="21dp"
                 android:layout_marginStart="8dp"
@@ -136,12 +137,12 @@
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/icon_money"
                 android:src="@drawable/ic_releases"
-                app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                app:layout_constraintEnd_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
+                app:layout_constraintBottom_toBottomOf="@+id/form_service_value"
+                app:layout_constraintEnd_toStartOf="@+id/form_service_value"
+                app:layout_constraintTop_toTopOf="@+id/form_service_value" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/form_service_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -176,7 +177,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:background="#319CCEF3"
+        android:background="#2A465561"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -238,7 +239,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextObs"
+            android:id="@+id/form_schedule_obs"
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:hint="@string/observations"
@@ -246,7 +247,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/textView7"
+        android:id="@+id/form_schedule_date_btn"
         android:layout_width="71dp"
         android:layout_height="22dp"
         android:layout_marginEnd="16dp"
@@ -261,7 +262,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/textView8"
+        android:id="@+id/form_schedule_hour_btn"
         android:layout_width="71dp"
         android:layout_height="22dp"
         android:layout_marginEnd="16dp"
@@ -276,7 +277,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <Switch
-        android:id="@+id/switch4"
+        android:id="@+id/form_schedule_finished_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -285,7 +286,7 @@
         app:layout_constraintTop_toBottomOf="@+id/obsScheduleTextInputLayout" />
 
     <Switch
-        android:id="@+id/switch6"
+        android:id="@+id/form_schedule_canceled_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -299,9 +300,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="@string/finished"
-        app:layout_constraintBottom_toBottomOf="@+id/switch4"
-        app:layout_constraintEnd_toStartOf="@+id/switch4"
-        app:layout_constraintTop_toTopOf="@+id/switch4" />
+        app:layout_constraintBottom_toBottomOf="@+id/form_schedule_finished_switch"
+        app:layout_constraintEnd_toStartOf="@+id/form_schedule_finished_switch"
+        app:layout_constraintTop_toTopOf="@+id/form_schedule_finished_switch" />
 
     <TextView
         android:id="@+id/textView11"
@@ -309,30 +310,30 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/canceled"
-        app:layout_constraintBottom_toBottomOf="@+id/switch6"
+        app:layout_constraintBottom_toBottomOf="@+id/form_schedule_canceled_switch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/switch6" />
+        app:layout_constraintTop_toTopOf="@+id/form_schedule_canceled_switch" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/form_schedule_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="@string/date_format"
         android:textColor="#39694B"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintEnd_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        app:layout_constraintBottom_toBottomOf="@+id/form_schedule_date_btn"
+        app:layout_constraintEnd_toStartOf="@+id/form_schedule_date_btn"
+        app:layout_constraintTop_toTopOf="@+id/form_schedule_date_btn" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/form_schedule_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="@string/hour_format"
         android:textColor="#39694B"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        app:layout_constraintBottom_toBottomOf="@+id/form_schedule_hour_btn"
+        app:layout_constraintEnd_toStartOf="@+id/form_schedule_hour_btn"
+        app:layout_constraintTop_toTopOf="@+id/form_schedule_hour_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

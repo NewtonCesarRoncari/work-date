@@ -13,6 +13,7 @@ import com.br.workdate.extension.limit
 import com.br.workdate.model.Client
 import com.br.workdate.model.DatePickerHelper
 import com.br.workdate.model.Service
+import com.br.workdate.model.TimePickerHelper
 import com.br.workdate.view.viewmodel.StateAppComponentsViewModel
 import com.br.workdate.view.viewmodel.VisualComponents
 import kotlinx.android.synthetic.main.fragment_form_schedule.*
@@ -62,6 +63,17 @@ class FormScheduleFragment : Fragment() {
             )
             activity?.supportFragmentManager?.let { fragmentManager ->
                 datePicker.show(fragmentManager, "time picker")
+            }
+        }
+
+        form_schedule_hour_btn.setOnClickListener {
+            val timePicker = TimePickerHelper(
+                onTimeSet = { currentHourString ->
+                    form_schedule_hour.text = currentHourString
+                }
+            )
+            activity?.supportFragmentManager?.let { fragmentManager ->
+                timePicker.show(fragmentManager, "time picker")
             }
         }
     }

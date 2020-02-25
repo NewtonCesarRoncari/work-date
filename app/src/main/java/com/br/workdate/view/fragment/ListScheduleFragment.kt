@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.br.workdate.R
+import com.br.workdate.view.recyclerview.adapter.ScheduleAdapter
 import com.br.workdate.view.viewmodel.StateAppComponentsViewModel
 import com.br.workdate.view.viewmodel.VisualComponents
 import kotlinx.android.synthetic.main.fragment_list_schedule.*
@@ -16,6 +17,7 @@ class ListScheduleFragment : Fragment() {
 
     private val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
+    private lateinit var adapter: ScheduleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

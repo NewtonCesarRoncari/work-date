@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#1E7F81DD">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -339,6 +339,23 @@
             app:layout_constraintBottom_toBottomOf="@+id/form_schedule_hour_btn"
             app:layout_constraintEnd_toStartOf="@+id/form_schedule_hour_btn"
             app:layout_constraintTop_toTopOf="@+id/form_schedule_hour_btn" />
+
+        <Button
+            android:id="@+id/form_schedule_save_btn"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/buttonshape_form_schedule_save"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/save"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/obsScheduleTextInputLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

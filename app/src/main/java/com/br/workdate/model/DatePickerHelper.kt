@@ -4,11 +4,11 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import com.br.workdate.extension.formatForBrazilianDate
+import java.util.*
 import java.util.Calendar.*
 
 class DatePickerHelper(
-    var onDataSet: (currentDateFormat: String) -> Unit
+    var onDataSet: (currentDate: Date) -> Unit
 ) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -23,7 +23,7 @@ class DatePickerHelper(
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     val calendarInstance = getInstance()
                     calendarInstance.set(year, month, dayOfMonth)
-                    onDataSet(calendarInstance.time.formatForBrazilianDate())
+                    onDataSet(calendarInstance.time)
                 },
                 year,
                 month,

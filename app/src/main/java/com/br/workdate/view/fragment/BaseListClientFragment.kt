@@ -50,7 +50,6 @@ abstract class BaseListClientFragment : Fragment() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
                 if (::adapter.isInitialized) {
                     adapter.filter.filter(newText)
@@ -58,7 +57,6 @@ abstract class BaseListClientFragment : Fragment() {
                 return false
             }
         })
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 

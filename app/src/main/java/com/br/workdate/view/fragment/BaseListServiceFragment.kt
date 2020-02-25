@@ -34,7 +34,6 @@ abstract class BaseListServiceFragment : Fragment() {
         new_service.setOnClickListener {
             callInsertDialog()
         }
-
         viewModel.listAll().observe(viewLifecycleOwner, androidx.lifecycle.Observer { serviceList ->
             ifEmptyPlayAnimation(serviceList)
             initServiceAdapter(serviceList)
@@ -52,7 +51,6 @@ abstract class BaseListServiceFragment : Fragment() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
                 if (::adapter.isInitialized) {
                     adapter.filter.filter(newText)
@@ -60,7 +58,6 @@ abstract class BaseListServiceFragment : Fragment() {
                 return false
             }
         })
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -108,7 +105,5 @@ abstract class BaseListServiceFragment : Fragment() {
             Snackbar.make(view, "${service.description} " + msg, Snackbar.LENGTH_SHORT).show()
         }
     }
-
     abstract fun doInItemClickListener(service: Service)
-
 }

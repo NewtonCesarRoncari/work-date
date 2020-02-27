@@ -2,12 +2,13 @@ package com.br.workdate.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.br.workdate.model.Schedule
 
 @Dao
 interface ScheduleDAO {
 
-    @Insert
+    @Insert(onConflict = REPLACE)
     fun insert(schedule: Schedule)
 
     @Update

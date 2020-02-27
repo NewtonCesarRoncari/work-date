@@ -28,7 +28,7 @@ abstract class BaseListClientFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        client_list_animation.setAnimation("anim/client_empty.json")
+        client_list_animation.setAnimation("anim/list_empty.json")
 
         new_client.setOnClickListener {
             callInsertDialog()

@@ -76,10 +76,10 @@ class ClientAdapter(
 
         private lateinit var client: Client
         private val limitForChar = 26
-        private val clientName = itemView.list_item_client_name
-        private val clientAddress = itemView.list_item_client_address
-        private val clientPhone = itemView.list_item_client_phone
-        private val clientFirstChar = itemView.list_item_client_first_char
+        private val clientName by lazy { itemView.list_item_client_name }
+        private val clientAddress by lazy { itemView.list_item_client_address }
+        private val clientPhone by lazy { itemView.list_item_client_phone }
+        private val clientFirstChar by lazy { itemView.list_item_client_first_char }
 
         fun bind(client: Client) {
             this.client = client

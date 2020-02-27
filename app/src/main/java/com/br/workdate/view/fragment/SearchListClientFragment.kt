@@ -14,7 +14,7 @@ class SearchListClientFragment : BaseListClientFragment() {
 
     override fun doInItemClickListener(client: Client) {
         val direction = SearchListClientFragmentDirections
-            .actionSearchListClientFragmentToFormScheduleFragment(client, service)
+            .actionSearchListClientFragmentToFormScheduleFragment(client, service, null)
         navController.navigate(direction)
     }
 }

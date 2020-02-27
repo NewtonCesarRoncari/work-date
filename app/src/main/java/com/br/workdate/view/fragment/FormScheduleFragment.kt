@@ -13,9 +13,7 @@ import com.br.workdate.extension.formatForBrazilianDate
 import com.br.workdate.extension.formatForBrazilianHour
 import com.br.workdate.extension.limit
 import com.br.workdate.model.*
-import com.br.workdate.view.viewmodel.ScheduleViewModel
-import com.br.workdate.view.viewmodel.StateAppComponentsViewModel
-import com.br.workdate.view.viewmodel.VisualComponents
+import com.br.workdate.view.viewmodel.*
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_form_schedule.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -26,6 +24,8 @@ class FormScheduleFragment : Fragment() {
 
     private val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private val viewModel: ScheduleViewModel by viewModel()
+    private val clientViewModel: ClientViewModel by viewModel()
+    private val serviceViewModel: ServiceViewModel by viewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private val arguments by navArgs<FormScheduleFragmentArgs>()
     private lateinit var date: Date
@@ -35,6 +35,9 @@ class FormScheduleFragment : Fragment() {
     }
     private val service by lazy {
         arguments.service
+    }
+    private val schedule by lazy {
+        arguments.schedule
     }
 
     override fun onCreateView(
@@ -51,6 +54,7 @@ class FormScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         client?.let { tryLoadClientFields(it) }
         service?.let { tryLoadServiceFields(it) }
+        schedule?.let { tryLoadScheduleFields(it) }
 
         form_schedule_client_btn.setOnClickListener {
             goToSearchClientFragment()
@@ -101,6 +105,7 @@ class FormScheduleFragment : Fragment() {
             } else {
                 showSnackBar("Empty fields")
             }
+            navController.popBackStack()
         }
     }
 
@@ -113,6 +118,29 @@ class FormScheduleFragment : Fragment() {
     private fun allIsInitialized() =
         client != null && service != null && ::date.isInitialized && ::hour.isInitialized
 
+    private fun tryLoadScheduleFields(schedule: Schedule) {
+        lateinit var client: Client
+        lateinit var service: Service
+        clientViewModel.returnForId(schedule.clientId).observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { clientReturned ->
+                client = clientReturned
+                tryLoadClientFields(client)
+            }
+        )
+        serviceViewModel.returnForId(schedule.serviceId).observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer { serviceReturned ->
+                service = serviceReturned
+                tryLoadServiceFields(service)
+            }
+        )
+        form_schedule_date.text = schedule.date.formatForBrazilianDate()
+        form_schedule_hour.text = schedule.hour.formatForBrazilianHour()
+        form_schedule_obs.setText(schedule.observation)
+        form_schedule_canceled_switch.isChecked = schedule.canceled
+        form_schedule_finished_switch.isChecked = schedule.finished
+    }
 
     private fun tryLoadClientFields(client: Client) {
         form_schedule_client_btn.text = client.name.limit(maxCharacters = 24)

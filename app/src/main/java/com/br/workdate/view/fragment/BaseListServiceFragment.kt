@@ -29,7 +29,7 @@ abstract class BaseListServiceFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        service_list_animation.setAnimation("anim/client_empty.json")
+        service_list_animation.setAnimation("anim/list_empty.json")
 
         new_service.setOnClickListener {
             callInsertDialog()

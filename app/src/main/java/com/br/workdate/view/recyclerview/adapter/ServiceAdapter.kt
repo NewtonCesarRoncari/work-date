@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.*
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
 import com.br.workdate.extension.formatForBrazilianCoin
@@ -78,9 +77,9 @@ class ServiceAdapter(
 
         private lateinit var service: Service
         private val limitForDescription = 26
-        private val serviceDescription: TextView = itemView.list_item_service_description
-        private val serviceValue: TextView = itemView.list_item_service_value
-        private val serviceFirstChar: TextView = itemView.list_item_service_first_char
+        private val serviceDescription by lazy { itemView.list_item_service_description }
+        private val serviceValue by lazy { itemView.list_item_service_value }
+        private val serviceFirstChar by lazy { itemView.list_item_service_first_char }
 
         fun bind(service: Service) {
             this.service = service

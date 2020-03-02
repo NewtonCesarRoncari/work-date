@@ -88,25 +88,29 @@ class FormScheduleFragment : Fragment() {
 
         form_schedule_save_btn.setOnClickListener {
             if (allIsInitialized()) {
-                viewModel.insert(
-                    Schedule(
-                        UUID.randomUUID().toString(),
-                        date,
-                        hour,
-                        service!!.value,
-                        form_schedule_canceled_switch.isChecked,
-                        form_schedule_finished_switch.isChecked,
-                        form_schedule_obs.text.toString(),
-                        service!!.id,
-                        client!!.id
-                    )
-                )
+                makeAndSaveSchedule()
                 showSnackBar("Schedule saved")
+                navController.popBackStack()
             } else {
                 showSnackBar("Empty fields")
             }
-            navController.popBackStack()
         }
+    }
+
+    private fun makeAndSaveSchedule() {
+        viewModel.insert(
+            Schedule(
+                UUID.randomUUID().toString(),
+                date,
+                hour,
+                service!!.value,
+                form_schedule_canceled_switch.isChecked,
+                form_schedule_finished_switch.isChecked,
+                form_schedule_obs.text.toString(),
+                service!!.id,
+                client!!.id
+            )
+        )
     }
 
     private fun showSnackBar(msg: String) {

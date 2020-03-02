@@ -76,7 +76,7 @@ class ListScheduleFragment : Fragment() {
             goToFormScheduleFragment(schedule)
         }
         adapter.onItemLongClickListener = { schedule ->
-            viewModel.update(schedule)
+            viewModel.remove(schedule)
         }
     }
 

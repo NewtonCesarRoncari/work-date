@@ -5,6 +5,7 @@ import com.br.workdate.di.daoModule
 import com.br.workdate.di.databaseModule
 import com.br.workdate.di.repositoryModule
 import com.br.workdate.di.viewModelModule
+import com.br.workdate.extension.TypefaceUtil
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -23,5 +24,7 @@ class App : Application() {
                 )
             )
         }
+        val typefaceUtil = TypefaceUtil()
+        typefaceUtil.overridefonts(this, "SERIF", "fonts/OpenSans-Semibold.ttf")
     }
 }

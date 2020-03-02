@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_form_schedule.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.math.BigDecimal
 import java.util.*
 
 class FormScheduleFragment : Fragment() {
@@ -30,6 +31,9 @@ class FormScheduleFragment : Fragment() {
     private val arguments by navArgs<FormScheduleFragmentArgs>()
     private lateinit var date: Date
     private lateinit var hour: Date
+    private lateinit var value: BigDecimal
+    private lateinit var clientId: String
+    private lateinit var serviceId: String
     private val client by lazy {
         arguments.client
     }
@@ -87,13 +91,37 @@ class FormScheduleFragment : Fragment() {
         }
 
         form_schedule_save_btn.setOnClickListener {
-            if (allIsInitialized()) {
-                makeAndSaveSchedule()
-                showSnackBar("Schedule saved")
+            if (scheduleIsInitialized()) {
+                makeAndUpdateSchedule()
                 navController.popBackStack()
+                showSnackBar("Schedule updated")
             } else {
-                showSnackBar("Empty fields")
+                if (allIsInitialized()) {
+                    makeAndSaveSchedule()
+                    navController.popBackStack()
+                    showSnackBar("Schedule saved")
+                } else {
+                    showSnackBar("Empty fields")
+                }
             }
+        }
+    }
+
+    private fun makeAndUpdateSchedule() {
+        schedule?.let { schedule1 ->
+            viewModel.update(
+                Schedule(
+                    schedule1.id,
+                    date,
+                    hour,
+                    value,
+                    form_schedule_canceled_switch.isChecked,
+                    form_schedule_finished_switch.isChecked,
+                    form_schedule_obs.text.toString(),
+                    serviceId,
+                    clientId
+                )
+            )
         }
     }
 
@@ -122,23 +150,23 @@ class FormScheduleFragment : Fragment() {
     private fun allIsInitialized() =
         client != null && service != null && ::date.isInitialized && ::hour.isInitialized
 
+    private fun scheduleIsInitialized() = schedule != null
+
     private fun tryLoadScheduleFields(schedule: Schedule) {
-        lateinit var client: Client
-        lateinit var service: Service
         clientViewModel.returnForId(schedule.clientId).observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { clientReturned ->
-                client = clientReturned
-                tryLoadClientFields(client)
+                tryLoadClientFields(clientReturned)
             }
         )
         serviceViewModel.returnForId(schedule.serviceId).observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer { serviceReturned ->
-                service = serviceReturned
-                tryLoadServiceFields(service)
+                tryLoadServiceFields(serviceReturned)
             }
         )
+        date = schedule.date
+        hour = schedule.hour
         form_schedule_date.text = schedule.date.formatForBrazilianDate()
         form_schedule_hour.text = schedule.hour.formatForBrazilianHour()
         form_schedule_obs.setText(schedule.observation)
@@ -147,11 +175,14 @@ class FormScheduleFragment : Fragment() {
     }
 
     private fun tryLoadClientFields(client: Client) {
+        clientId = client.id
         form_schedule_client_btn.text = client.name.limit(maxCharacters = 24)
         form_schedule_client_phone.text = client.phone
     }
 
     private fun tryLoadServiceFields(service: Service) {
+        serviceId = service.id
+        value = service.value
         form_schedule_service_btn.text = service.description.limit(maxCharacters = 21)
         form_schedule_service_value.text = service.value.formatForBrazilianCoin()
     }

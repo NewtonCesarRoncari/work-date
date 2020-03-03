@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/item_schedule_id"
             app:layout_constraintTop_toBottomOf="@+id/item_schedule_id"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.060000002" />
 
         <TextView
             android:id="@+id/item_schedule_hour"
@@ -49,7 +49,7 @@
             android:layout_marginStart="20dp"
             android:text="@string/hour"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/item_schedule_clock"
             app:layout_constraintStart_toEndOf="@+id/item_schedule_clock"
             app:layout_constraintTop_toTopOf="@+id/item_schedule_clock"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="@string/value"
             android:textColor="@android:color/holo_green_dark"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/item_schedule_clock"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.575"
@@ -78,7 +78,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/item_schedule_client"
             app:layout_constraintEnd_toStartOf="@+id/item_schedule_client"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_schedule_client" />
+            app:layout_constraintTop_toTopOf="@+id/item_schedule_client"
+            app:layout_constraintVertical_bias="0.90999997" />
 
         <TextView
             android:id="@+id/item_schedule_client"
@@ -90,18 +91,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_schedule_clock"
-            app:layout_constraintVertical_bias="0.19999999" />
+            app:layout_constraintVertical_bias="0.22" />
 
         <ImageView
             android:layout_width="22dp"
             android:layout_height="20dp"
-            android:layout_marginTop="3dp"
             android:contentDescription="@string/icon_service"
             android:src="@drawable/ic_work"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/item_schedule_service"
             app:layout_constraintEnd_toStartOf="@+id/item_schedule_service"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_schedule_service" />
+            app:layout_constraintTop_toTopOf="@+id/item_schedule_service"
+            app:layout_constraintVertical_bias="0.89" />
 
         <TextView
             android:id="@+id/item_schedule_service"
@@ -113,7 +114,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/item_schedule_client"
             app:layout_constraintTop_toBottomOf="@+id/item_schedule_client"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.25" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -117,7 +117,7 @@ class FormScheduleFragment : Fragment() {
                     value,
                     form_schedule_canceled_switch.isChecked,
                     form_schedule_finished_switch.isChecked,
-                    form_schedule_obs.text.toString(),
+                    form_schedule_obs.text.toString().trim(),
                     serviceId,
                     clientId
                 )
@@ -134,7 +134,7 @@ class FormScheduleFragment : Fragment() {
                 service!!.value,
                 form_schedule_canceled_switch.isChecked,
                 form_schedule_finished_switch.isChecked,
-                form_schedule_obs.text.toString(),
+                form_schedule_obs.text.toString().trim(),
                 service!!.id,
                 client!!.id
             )

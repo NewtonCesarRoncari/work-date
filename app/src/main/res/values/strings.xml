@@ -46,4 +46,9 @@
     <string name="search">Search</string>
     <string name="remove">REMOVE</string>
     <string name="save">Save</string>
+    <string name="resume">Resume</string>
+    <string name="revenue">Revenue</string>
+    <string name="expense">Expense</string>
+    <string name="total">Total</string>
+    <string name="zero_value">$ 0,00</string>
 </resources>

@@ -18,7 +18,6 @@ class StateAppComponentsViewModel : ViewModel() {
             field = value
             _components.value = value
         }
-
 }
 
 class VisualComponents(

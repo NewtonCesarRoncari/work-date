@@ -87,4 +87,9 @@
             app:argType="com.br.workdate.model.Client"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/listReleaseFragment"
+        android:name="com.br.workdate.view.fragment.ListReleaseFragment"
+        android:label="@string/releases"
+        tools:layout="@layout/fragment_list_release" />
 </navigation>

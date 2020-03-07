@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
 import com.br.workdate.extension.formatForBrazilianCoin
-import com.br.workdate.extension.formatForBrazilianDate
+import com.br.workdate.extension.formatForBrazilianHour
 import com.br.workdate.model.Schedule
 import kotlinx.android.synthetic.main.list_item_schedule.view.*
 
@@ -51,7 +51,7 @@ class ScheduleAdapter(
         fun bind(schedule: Schedule) {
             this.schedule = schedule
             scheduleId.text = schedule.id
-            hour.text = schedule.hour.formatForBrazilianDate()
+            hour.text = schedule.hour.formatForBrazilianHour()
             value.text = schedule.value.formatForBrazilianCoin()
             loadFieldClientName(schedule.clientId, scheduleClient)
             loadFieldServiceDescription(schedule.serviceId, scheduleService)

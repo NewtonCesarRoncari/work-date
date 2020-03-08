@@ -13,17 +13,17 @@ import com.br.workdate.extension.formatForBrazilianDate
 import com.br.workdate.extension.formatForBrazilianHour
 import com.br.workdate.extension.limit
 import com.br.workdate.model.*
-import com.br.workdate.view.viewmodel.ClientViewModel
-import com.br.workdate.view.viewmodel.ScheduleViewModel
-import com.br.workdate.view.viewmodel.ServiceViewModel
+import com.br.workdate.view.viewmodel.*
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_form_schedule.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.math.BigDecimal
 import java.util.*
 
 class FormScheduleFragment : Fragment() {
 
+    private val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private val viewModel: ScheduleViewModel by viewModel()
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
@@ -49,7 +49,9 @@ class FormScheduleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_form_schedule, container, false)
+        val view = inflater.inflate(R.layout.fragment_form_schedule, container, false)
+        appComponentsViewModel.havCoponent = VisualComponents(false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,14 +59,11 @@ class FormScheduleFragment : Fragment() {
         service?.let { tryLoadServiceFields(it) }
         schedule?.let { tryLoadScheduleFields(it) }
 
-        form_schedule_service_btn.setOnClickListener {
-            goToSearchServiceFragment()
-        }
         form_schedule_date_btn.setOnClickListener {
             val datePicker = DatePickerHelper(
                 onDataSet = { currentDate ->
                     date = currentDate
-                    form_schedule_date.text = currentDate.formatForBrazilianDate()
+                    form_schedule_date_btn.text = currentDate.formatForBrazilianDate()
                 }
             )
             activity?.supportFragmentManager?.let { fragmentManager ->
@@ -76,7 +75,7 @@ class FormScheduleFragment : Fragment() {
             val timePicker = TimePickerHelper(
                 onTimeSet = { currentHour ->
                     hour = currentHour
-                    form_schedule_hour.text = currentHour.formatForBrazilianHour()
+                    form_schedule_hour_btn.text = currentHour.formatForBrazilianHour()
                 }
             )
             activity?.supportFragmentManager?.let { fragmentManager ->
@@ -92,7 +91,7 @@ class FormScheduleFragment : Fragment() {
             } else {
                 if (allIsInitialized()) {
                     makeAndSaveSchedule()
-                    navController.popBackStack()
+                    navController.popBackStack(R.id.listScheduleFragment, true)
                     showSnackBar("Schedule saved")
                 } else {
                     showSnackBar("Empty fields")
@@ -161,8 +160,8 @@ class FormScheduleFragment : Fragment() {
         )
         date = schedule.date
         hour = schedule.hour
-        form_schedule_date.text = schedule.date.formatForBrazilianDate()
-        form_schedule_hour.text = schedule.hour.formatForBrazilianHour()
+        form_schedule_date_btn.text = schedule.date.formatForBrazilianDate()
+        form_schedule_hour_btn.text = schedule.hour.formatForBrazilianHour()
         form_schedule_obs.setText(schedule.observation)
         form_schedule_canceled_switch.isChecked = schedule.canceled
         form_schedule_finished_switch.isChecked = schedule.finished
@@ -170,21 +169,16 @@ class FormScheduleFragment : Fragment() {
 
     private fun tryLoadClientFields(client: Client) {
         clientId = client.id
-        form_schedule_client_btn.text = client.name.limit(maxCharacters = 24)
+        form_schedule_client_first_char.text = client.name[0].toString()
+        form_schedule_client_name.text = client.name.limit(maxCharacters = 24)
         form_schedule_client_phone.text = client.phone
     }
 
     private fun tryLoadServiceFields(service: Service) {
         serviceId = service.id
         value = service.value
-        form_schedule_service_btn.text = service.description.limit(maxCharacters = 21)
+        form_schedule_service_description.text = service.description.limit(maxCharacters = 28)
         form_schedule_service_value.text = service.value.formatForBrazilianCoin()
-    }
-
-    private fun goToSearchServiceFragment() {
-        val direction = FormScheduleFragmentDirections
-            .actionFormScheduleFragmentToSearchListServiceFragment(schedule = this.schedule)
-        navController.navigate(direction)
     }
 
 }

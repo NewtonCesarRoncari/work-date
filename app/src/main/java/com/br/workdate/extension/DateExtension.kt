@@ -6,7 +6,7 @@ import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 fun Date.formatForBrazilianDate(): String {
-    val formatHour = SimpleDateFormat("dd/MM/yyyy")
+    val formatHour = SimpleDateFormat("dd/MM")
     return formatHour.format(this)
 }
 

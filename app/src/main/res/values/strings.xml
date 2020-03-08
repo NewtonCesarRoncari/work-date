@@ -40,7 +40,7 @@
     <string name="canceled">Canceled</string>
     <string name="icon_money">Icon Money</string>
     <string name="finished">Finished</string>
-    <string name="date_format">00/00/0000</string>
+    <string name="date_format">00/00</string>
     <string name="hour_format">00:00</string>
     <string name="remove_schedule">Remove Schedule</string>
     <string name="search">Search</string>
@@ -51,4 +51,5 @@
     <string name="expense">Expense</string>
     <string name="total">Total</string>
     <string name="zero_value">$ 0,00</string>
+    <string name="c">c</string>
 </resources>

@@ -30,18 +30,16 @@
     <fragment
         android:id="@+id/formScheduleFragment"
         android:name="com.br.workdate.view.fragment.FormScheduleFragment"
-        android:label="Schedule Form"
+        android:label="Schedule"
         tools:layout="@layout/fragment_form_schedule">
         <argument
             android:name="client"
-            app:argType="com.br.workdate.model.Client"
             android:defaultValue="@null"
+            app:argType="com.br.workdate.model.Client"
             app:nullable="true" />
         <action
             android:id="@+id/action_formScheduleFragment_to_searchListServiceFragment"
-            app:destination="@id/searchListServiceFragment"
-            app:popUpTo="@+id/formScheduleFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/searchListServiceFragment" />
         <argument
             android:name="service"
             android:defaultValue="@null"
@@ -69,9 +67,7 @@
         tools:layout="@layout/fragment_list_service">
         <action
             android:id="@+id/action_searchListServiceFragment_to_formScheduleFragment"
-            app:destination="@id/formScheduleFragment"
-            app:popUpTo="@+id/searchListServiceFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/formScheduleFragment" />
         <argument
             android:name="schedule"
             android:defaultValue="@null"

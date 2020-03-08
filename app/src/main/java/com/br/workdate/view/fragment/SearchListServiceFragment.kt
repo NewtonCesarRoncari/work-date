@@ -11,10 +11,13 @@ class SearchListServiceFragment : BaseListServiceFragment() {
     private val client by lazy {
         arguments.client
     }
+    private val schedule by lazy {
+        arguments.schedule
+    }
 
     override fun doInItemClickListener(service: Service) {
         val direction = SearchListServiceFragmentDirections
-            .actionSearchListServiceFragmentToFormScheduleFragment(client, service, null)
+            .actionSearchListServiceFragmentToFormScheduleFragment(client, service, schedule)
         navController.navigate(direction)
     }
 }

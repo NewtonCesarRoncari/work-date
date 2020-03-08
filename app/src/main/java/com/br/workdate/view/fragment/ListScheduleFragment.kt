@@ -39,7 +39,7 @@ class ListScheduleFragment : Fragment() {
         schedule_list_animation.setAnimation("anim/list_empty.json")
 
         new_schedule.setOnClickListener {
-            goToFormScheduleFragment()
+            goToSearchClientFragment()
         }
         viewModel.listAll().observe(viewLifecycleOwner, Observer { scheduleList ->
             ifEmptyPlayAnimation(scheduleList)
@@ -86,9 +86,9 @@ class ListScheduleFragment : Fragment() {
         navController.navigate(direction)
     }
 
-    private fun goToFormScheduleFragment() {
+    private fun goToSearchClientFragment() {
         val direction = ListScheduleFragmentDirections
-            .actionListScheduleFragmentToFormScheduleFragment(null, null, null)
+            .actionListScheduleFragmentToSearchListClientFragment()
         navController.navigate(direction)
     }
 

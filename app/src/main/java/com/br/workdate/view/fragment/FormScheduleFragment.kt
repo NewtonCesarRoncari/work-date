@@ -13,17 +13,17 @@ import com.br.workdate.extension.formatForBrazilianDate
 import com.br.workdate.extension.formatForBrazilianHour
 import com.br.workdate.extension.limit
 import com.br.workdate.model.*
-import com.br.workdate.view.viewmodel.*
+import com.br.workdate.view.viewmodel.ClientViewModel
+import com.br.workdate.view.viewmodel.ScheduleViewModel
+import com.br.workdate.view.viewmodel.ServiceViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_form_schedule.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.math.BigDecimal
 import java.util.*
 
 class FormScheduleFragment : Fragment() {
 
-    private val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private val viewModel: ScheduleViewModel by viewModel()
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
@@ -49,10 +49,7 @@ class FormScheduleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_form_schedule, container, false)
-
-        appComponentsViewModel.havCoponent = VisualComponents(false)
-        return view
+        return inflater.inflate(R.layout.fragment_form_schedule, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,9 +57,6 @@ class FormScheduleFragment : Fragment() {
         service?.let { tryLoadServiceFields(it) }
         schedule?.let { tryLoadScheduleFields(it) }
 
-        form_schedule_client_btn.setOnClickListener {
-            goToSearchClientFragment()
-        }
         form_schedule_service_btn.setOnClickListener {
             goToSearchServiceFragment()
         }
@@ -187,15 +181,9 @@ class FormScheduleFragment : Fragment() {
         form_schedule_service_value.text = service.value.formatForBrazilianCoin()
     }
 
-    private fun goToSearchClientFragment() {
-        val direction = FormScheduleFragmentDirections
-            .actionFormScheduleFragmentToSearchListClientFragment(service)
-        navController.navigate(direction)
-    }
-
     private fun goToSearchServiceFragment() {
         val direction = FormScheduleFragmentDirections
-            .actionFormScheduleFragmentToSearchListServiceFragment(client)
+            .actionFormScheduleFragmentToSearchListServiceFragment(schedule = this.schedule)
         navController.navigate(direction)
     }
 

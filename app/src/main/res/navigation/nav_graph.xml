@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_listScheduleFragment_to_formScheduleFragment"
             app:destination="@id/formScheduleFragment" />
+        <action
+            android:id="@+id/action_listScheduleFragment_to_searchListClientFragment"
+            app:destination="@id/searchListClientFragment" />
     </fragment>
     <fragment
         android:id="@+id/formScheduleFragment"
@@ -34,11 +37,6 @@
             app:argType="com.br.workdate.model.Client"
             android:defaultValue="@null"
             app:nullable="true" />
-        <action
-            android:id="@+id/action_formScheduleFragment_to_searchListClientFragment"
-            app:destination="@id/searchListClientFragment"
-            app:popUpTo="@+id/formScheduleFragment"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_formScheduleFragment_to_searchListServiceFragment"
             app:destination="@id/searchListServiceFragment"
@@ -61,15 +59,8 @@
         android:label="Choose Client"
         tools:layout="@layout/fragment_list_client">
         <action
-            android:id="@+id/action_searchListClientFragment_to_formScheduleFragment"
-            app:destination="@id/formScheduleFragment"
-            app:popUpTo="@+id/searchListClientFragment"
-            app:popUpToInclusive="true" />
-        <argument
-            android:name="service"
-            android:defaultValue="@null"
-            app:argType="com.br.workdate.model.Service"
-            app:nullable="true" />
+            android:id="@+id/action_searchListClientFragment_to_searchListServiceFragment"
+            app:destination="@id/searchListServiceFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchListServiceFragment"
@@ -82,9 +73,14 @@
             app:popUpTo="@+id/searchListServiceFragment"
             app:popUpToInclusive="true" />
         <argument
-            android:name="client"
+            android:name="schedule"
             android:defaultValue="@null"
+            app:argType="com.br.workdate.model.Schedule"
+            app:nullable="true" />
+        <argument
+            android:name="client"
             app:argType="com.br.workdate.model.Client"
+            android:defaultValue="@null"
             app:nullable="true" />
     </fragment>
     <fragment

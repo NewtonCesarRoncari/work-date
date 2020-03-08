@@ -12,12 +12,15 @@ import com.br.workdate.model.Client
 import com.br.workdate.view.dialog.ClientFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ClientAdapter
 import com.br.workdate.view.viewmodel.ClientViewModel
+import com.br.workdate.view.viewmodel.StateAppComponentsViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_client.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 abstract class BaseListClientFragment : Fragment() {
 
+    protected val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private lateinit var adapter: ClientAdapter
     protected val viewModel: ClientViewModel by viewModel()
 
@@ -29,6 +32,7 @@ abstract class BaseListClientFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         client_list_animation.setAnimation("anim/list_empty.json")
+        doInOnCreateView()
 
         new_client.setOnClickListener {
             callInsertDialog()
@@ -43,13 +47,14 @@ abstract class BaseListClientFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.base_search_menu, menu)
 
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
+        val searchItem by lazy { menu.findItem(R.id.action_search) }
+        val searchView by lazy { searchItem.actionView as SearchView }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 if (::adapter.isInitialized) {
                     adapter.filter.filter(newText)
@@ -104,5 +109,7 @@ abstract class BaseListClientFragment : Fragment() {
             Snackbar.make(view, "${client.name} " + msg, Snackbar.LENGTH_SHORT).show()
         }
     }
+
     abstract fun doInItemClickListener(client: Client)
+    abstract fun doInOnCreateView()
 }

@@ -41,7 +41,6 @@ class ScheduleAdapter(
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private lateinit var schedule: Schedule
-        private val scheduleId by lazy { itemView.item_schedule_id }
         private val hour by lazy { itemView.item_schedule_hour }
         private val value by lazy { itemView.item_schedule_value }
         private val scheduleClient by lazy { itemView.item_schedule_client }
@@ -50,7 +49,6 @@ class ScheduleAdapter(
 
         fun bind(schedule: Schedule) {
             this.schedule = schedule
-            scheduleId.text = schedule.id
             hour.text = schedule.hour.formatForBrazilianHour()
             value.text = schedule.value.formatForBrazilianCoin()
             loadFieldClientName(schedule.clientId, scheduleClient)

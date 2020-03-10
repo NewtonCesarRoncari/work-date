@@ -57,7 +57,7 @@ class ListScheduleFragment : Fragment() {
                                         fieldClientName: TextView ->
                     clientViewModel.getNameForId(clientId)
                         .observe(viewLifecycleOwner, Observer { clientName ->
-                            fieldClientName.text = clientName.limit(24)
+                            fieldClientName.text = clientName.limit(28)
                         })
                 },
                 loadFieldServiceDescription = { serviceId: String,
@@ -65,11 +65,9 @@ class ListScheduleFragment : Fragment() {
                     serviceViewModel.returnDescriptionForId(serviceId).observe(
                         viewLifecycleOwner,
                         Observer { serviceDescription ->
-                            fieldServiceDescription.text = serviceDescription.limit(24)
-                        }
-                    )
-                }
-            )
+                            fieldServiceDescription.text = serviceDescription.limit(28)
+                        })
+                })
         }!!
         schedule_list_rv.adapter = adapter
         adapter.onItemClickListener = { schedule ->
@@ -82,7 +80,7 @@ class ListScheduleFragment : Fragment() {
 
     private fun goToFormScheduleFragment(schedule: Schedule) {
         val direction = ListScheduleFragmentDirections
-            .actionListScheduleFragmentToFormScheduleFragment(null, null, schedule)
+            .actionListScheduleFragmentToFormScheduleFragment(schedule = schedule)
         navController.navigate(direction)
     }
 

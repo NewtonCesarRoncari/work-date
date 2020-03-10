@@ -16,6 +16,10 @@ class SearchListServiceFragment : BaseListServiceFragment() {
     }
 
     override fun doInItemClickListener(service: Service) {
+        val schedule = this.schedule
+
+        schedule?.let { schedule.serviceId = service.id }
+
         val direction = SearchListServiceFragmentDirections
             .actionSearchListServiceFragmentToFormScheduleFragment(client, service, schedule)
         navController.navigate(direction)

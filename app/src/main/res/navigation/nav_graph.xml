@@ -39,7 +39,8 @@
             app:nullable="true" />
         <action
             android:id="@+id/action_formScheduleFragment_to_searchListServiceFragment"
-            app:destination="@id/searchListServiceFragment" />
+            app:destination="@id/searchListServiceFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="service"
             android:defaultValue="@null"

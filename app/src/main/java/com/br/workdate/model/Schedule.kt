@@ -37,7 +37,7 @@ class Schedule(
     val finished: Boolean,
     val observation: String,
     @ColumnInfo(name = "service_id")
-    val serviceId: String,
+    var serviceId: String,
     @ColumnInfo(name = "client_id")
     val clientId: String
 ) : Serializable

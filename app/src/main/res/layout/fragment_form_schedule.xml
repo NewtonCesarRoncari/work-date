@@ -68,6 +68,7 @@
             android:clickable="true"
             android:focusable="true"
             app:cardCornerRadius="10dp"
+            android:foreground="@drawable/custom_ripple"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_schedule_client_phone">

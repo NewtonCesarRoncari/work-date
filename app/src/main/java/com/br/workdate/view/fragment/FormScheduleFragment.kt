@@ -59,6 +59,15 @@ class FormScheduleFragment : Fragment() {
         service?.let { tryLoadServiceFields(it) }
         schedule?.let { tryLoadScheduleFields(it) }
 
+        form_schedule_service_cardView.setOnClickListener {
+            val direction = FormScheduleFragmentDirections
+                .actionFormScheduleFragmentToSearchListServiceFragment(
+                    schedule?.id?.let { id ->
+                        makeSchedule(id)
+                    })
+            navController.navigate(direction)
+        }
+
         form_schedule_date_btn.setOnClickListener {
             val datePicker = DatePickerHelper(
                 onDataSet = { currentDate ->
@@ -86,12 +95,12 @@ class FormScheduleFragment : Fragment() {
         form_schedule_save_btn.setOnClickListener {
             if (scheduleIsInitialized()) {
                 makeAndUpdateSchedule()
-                navController.popBackStack()
+                navController.popBackStack(R.id.listScheduleFragment, false)
                 showSnackBar("Schedule updated")
             } else {
                 if (allIsInitialized()) {
                     makeAndSaveSchedule()
-                    navController.popBackStack(R.id.listScheduleFragment, true)
+                    navController.popBackStack(R.id.listScheduleFragment, false)
                     showSnackBar("Schedule saved")
                 } else {
                     showSnackBar("Empty fields")
@@ -103,19 +112,23 @@ class FormScheduleFragment : Fragment() {
     private fun makeAndUpdateSchedule() {
         schedule?.let { schedule1 ->
             viewModel.update(
-                Schedule(
-                    schedule1.id,
-                    date,
-                    hour,
-                    value,
-                    form_schedule_canceled_switch.isChecked,
-                    form_schedule_finished_switch.isChecked,
-                    form_schedule_obs.text.toString().trim(),
-                    serviceId,
-                    clientId
-                )
+                makeSchedule(schedule1.id)
             )
         }
+    }
+
+    private fun makeSchedule(id: String): Schedule {
+        return Schedule(
+            id,
+            date,
+            hour,
+            value,
+            form_schedule_canceled_switch.isChecked,
+            form_schedule_finished_switch.isChecked,
+            form_schedule_obs.text.toString().trim(),
+            serviceId,
+            clientId
+        )
     }
 
     private fun makeAndSaveSchedule() {

@@ -27,6 +27,7 @@ class FormScheduleFragment : Fragment() {
     private val viewModel: ScheduleViewModel by viewModel()
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
+    private val releaseViewModel: ReleaseViewModel by viewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private val arguments by navArgs<FormScheduleFragmentArgs>()
     private lateinit var date: Date
@@ -99,7 +100,7 @@ class FormScheduleFragment : Fragment() {
                 showSnackBar("Schedule updated")
             } else {
                 if (allIsInitialized()) {
-                    makeAndSaveSchedule()
+                    makeAndSaveRelease(makeAndSaveSchedule())
                     navController.popBackStack(R.id.listScheduleFragment, false)
                     showSnackBar("Schedule saved")
                 } else {
@@ -110,9 +111,9 @@ class FormScheduleFragment : Fragment() {
     }
 
     private fun makeAndUpdateSchedule() {
-        schedule?.let { schedule1 ->
+        schedule?.let { schedule ->
             viewModel.update(
-                makeSchedule(schedule1.id)
+                makeSchedule(schedule.id)
             )
         }
     }
@@ -131,18 +132,35 @@ class FormScheduleFragment : Fragment() {
         )
     }
 
-    private fun makeAndSaveSchedule() {
+    private fun makeAndSaveSchedule(): Schedule {
+        val schedule = Schedule(
+            UUID.randomUUID().toString(),
+            date,
+            hour,
+            service!!.value,
+            form_schedule_canceled_switch.isChecked,
+            form_schedule_finished_switch.isChecked,
+            form_schedule_obs.text.toString().trim(),
+            service!!.id,
+            client!!.id
+        )
         viewModel.insert(
-            Schedule(
+            schedule
+        )
+        return schedule
+    }
+
+    private fun makeAndSaveRelease(schedule: Schedule) {
+        releaseViewModel.insert(
+            Release(
                 UUID.randomUUID().toString(),
-                date,
-                hour,
-                service!!.value,
-                form_schedule_canceled_switch.isChecked,
-                form_schedule_finished_switch.isChecked,
-                form_schedule_obs.text.toString().trim(),
-                service!!.id,
-                client!!.id
+                form_schedule_client_name.text.toString(),
+                form_schedule_service_description.text.toString(),
+                schedule.value,
+                schedule.date,
+                schedule.hour,
+                Type.REVENUE,
+                schedule.id
             )
         )
     }

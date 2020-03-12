@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.br.workdate.database.converter.Converters
 import com.br.workdate.database.dao.ClientDAO
+import com.br.workdate.database.dao.ReleaseDAO
 import com.br.workdate.database.dao.ScheduleDAO
 import com.br.workdate.database.dao.ServiceDAO
 import com.br.workdate.model.Client
@@ -20,5 +21,6 @@ import com.br.workdate.model.Service
 abstract class ConnectionDatabase : RoomDatabase() {
     abstract fun clientDao(): ClientDAO
     abstract fun serviceDao(): ServiceDAO
+    abstract fun releaseDao(): ReleaseDAO
     abstract fun scheduleDao(): ScheduleDAO
 }

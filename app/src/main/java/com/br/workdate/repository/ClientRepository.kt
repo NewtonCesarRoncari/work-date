@@ -1,7 +1,6 @@
 package com.br.workdate.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.br.workdate.database.dao.ClientDAO
 import com.br.workdate.model.Client
 import kotlinx.coroutines.CoroutineScope
@@ -13,8 +12,6 @@ class ClientRepository(private val dao: ClientDAO) {
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-    val clientReturned = MutableLiveData<Client>().apply { postValue(null) }
-    val nameClientReturned = MutableLiveData<String>().apply { postValue("") }
 
     fun insert(client: Client) {
         scope.launch {

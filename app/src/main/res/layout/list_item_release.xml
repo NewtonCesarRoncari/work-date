@@ -5,26 +5,26 @@
     android:layout_height="70dp">
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/release_client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="11dp"
         android:text="@string/client"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/release_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/service"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintStart_toStartOf="@+id/release_client"
+        app:layout_constraintTop_toBottomOf="@+id/release_client" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/release_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -32,26 +32,38 @@
         android:textColor="@android:color/holo_green_dark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView13" />
+        app:layout_constraintTop_toTopOf="@+id/release_client" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/release_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/hour_format"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintEnd_toEndOf="@+id/release_value"
+        app:layout_constraintTop_toBottomOf="@+id/release_value" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/date_format"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintEnd_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        app:layout_constraintBottom_toBottomOf="@+id/release_hour"
+        app:layout_constraintEnd_toStartOf="@+id/release_hour"
+        app:layout_constraintTop_toTopOf="@+id/release_hour" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="#2A465561"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

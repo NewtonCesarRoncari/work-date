@@ -57,7 +57,11 @@ class ClientAdapter(
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.list_item_client, parent, false)
+        val view = LayoutInflater.from(context).inflate(
+            R.layout.list_item_client,
+            parent,
+            false
+        )
         return MyViewHolder(view)
     }
 

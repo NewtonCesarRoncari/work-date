@@ -1,6 +1,7 @@
 package com.br.workdate.database.converter
 
 import androidx.room.TypeConverter
+import com.br.workdate.model.Type
 import java.math.BigDecimal
 import java.util.*
 
@@ -24,5 +25,23 @@ class Converters {
     @TypeConverter
     fun dateToTimestamp(date: Date?): Long? {
         return date?.time
+    }
+
+    @TypeConverter
+    fun typeForLong(type: Type): Int? {
+        return if (type == Type.REVENUE) {
+            1
+        } else {
+            0
+        }
+    }
+
+    @TypeConverter
+    fun longForType(int: Int): Type? {
+        return if (int == 1) {
+            Type.REVENUE
+        } else {
+            Type.EXPENSE
+        }
     }
 }

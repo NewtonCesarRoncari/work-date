@@ -3,6 +3,7 @@ package com.br.workdate.repository
 import androidx.lifecycle.LiveData
 import com.br.workdate.database.dao.ReleaseDAO
 import com.br.workdate.model.Release
+import com.br.workdate.model.Type
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,5 +26,5 @@ class ReleaseRepository(private val dao: ReleaseDAO) {
         }
     }
 
-    fun listAll(): LiveData<List<Release>> = dao.listAll()
+    fun listAll(type: Type): LiveData<MutableList<Release>> = dao.listAll(type)
 }

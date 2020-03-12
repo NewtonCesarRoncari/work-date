@@ -9,12 +9,13 @@ import com.br.workdate.database.dao.ReleaseDAO
 import com.br.workdate.database.dao.ScheduleDAO
 import com.br.workdate.database.dao.ServiceDAO
 import com.br.workdate.model.Client
+import com.br.workdate.model.Release
 import com.br.workdate.model.Schedule
 import com.br.workdate.model.Service
 
 @Database(
     version = 1,
-    entities = [Client::class, Service::class, Schedule::class],
+    entities = [Client::class, Service::class, Schedule::class, Release::class],
     exportSchema = false
 )
 @TypeConverters(Converters::class)

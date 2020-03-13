@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.br.workdate.model.Release
-import com.br.workdate.model.Type
+import com.br.workdate.model.Situation
 
 @Dao
 interface ReleaseDAO {
@@ -17,6 +17,6 @@ interface ReleaseDAO {
     @Update
     fun update(release: Release)
 
-    @Query("SELECT * FROM `Release` WHERE type = :type")
-    fun listAll(type: Type): LiveData<MutableList<Release>>
+    @Query("SELECT * FROM `Release` WHERE situation = :situation")
+    fun listAll(situation: Situation): LiveData<MutableList<Release>>
 }

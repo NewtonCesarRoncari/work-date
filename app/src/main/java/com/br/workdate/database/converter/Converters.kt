@@ -1,7 +1,7 @@
 package com.br.workdate.database.converter
 
 import androidx.room.TypeConverter
-import com.br.workdate.model.Type
+import com.br.workdate.model.Situation
 import java.math.BigDecimal
 import java.util.*
 
@@ -28,8 +28,8 @@ class Converters {
     }
 
     @TypeConverter
-    fun typeForLong(type: Type): Int? {
-        return if (type == Type.REVENUE) {
+    fun typeForLong(situation: Situation): Int? {
+        return if (situation == Situation.OPEN) {
             1
         } else {
             0
@@ -37,11 +37,11 @@ class Converters {
     }
 
     @TypeConverter
-    fun longForType(int: Int): Type? {
+    fun longForType(int: Int): Situation? {
         return if (int == 1) {
-            Type.REVENUE
+            Situation.OPEN
         } else {
-            Type.EXPENSE
+            Situation.PAID
         }
     }
 }

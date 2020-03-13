@@ -159,7 +159,7 @@ class FormScheduleFragment : Fragment() {
                 schedule.value,
                 schedule.date,
                 schedule.hour,
-                Type.REVENUE,
+                viewModel.checkFinished(schedule.finished),
                 schedule.id
             )
         )

@@ -25,7 +25,7 @@ class Release(
     val value: BigDecimal,
     val date: Date,
     val hour: Date,
-    val type: Type,
+    val situation: Situation,
     @ColumnInfo(name = "schedule_id")
     val scheduleId: String
 ) : Serializable

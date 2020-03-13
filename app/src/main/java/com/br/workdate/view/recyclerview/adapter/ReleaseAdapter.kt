@@ -9,6 +9,7 @@ import com.br.workdate.R
 import com.br.workdate.extension.formatForBrazilianCoin
 import com.br.workdate.extension.formatForBrazilianDate
 import com.br.workdate.extension.formatForBrazilianHour
+import com.br.workdate.extension.limit
 import com.br.workdate.model.Release
 import kotlinx.android.synthetic.main.list_item_release.view.*
 
@@ -41,8 +42,8 @@ class ReleaseAdapter(
         private val hour by lazy { itemView.release_hour }
 
         fun bind(release: Release) {
-            client.text = release.clientName
-            service.text = release.serviceDescription
+            client.text = release.clientName.limit(24)
+            service.text = release.serviceDescription.limit(24)
             value.text = release.value.formatForBrazilianCoin()
             date.text = release.date.formatForBrazilianDate()
             hour.text = release.hour.formatForBrazilianHour()

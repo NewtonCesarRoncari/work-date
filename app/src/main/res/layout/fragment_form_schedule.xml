@@ -117,7 +117,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/form_schedule_cardView"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_marginStart="24dp"
@@ -229,18 +229,18 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            app:layout_constraintTop_toBottomOf="@+id/form_schedule_cardView" />
 
         <Switch
             android:id="@+id/form_schedule_canceled_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@+id/textView19"
+            app:layout_constraintStart_toEndOf="@+id/form_schedule_text_canceled_switch"
             app:layout_constraintTop_toTopOf="@+id/form_schedule_finished_switch" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/form_schedule_text_finished_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -250,7 +250,7 @@
             app:layout_constraintTop_toTopOf="@+id/form_schedule_finished_switch" />
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/form_schedule_text_canceled_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

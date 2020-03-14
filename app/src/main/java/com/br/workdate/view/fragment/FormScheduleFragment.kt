@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.br.workdate.R
-import com.br.workdate.extension.formatForBrazilianCoin
-import com.br.workdate.extension.formatForBrazilianDate
-import com.br.workdate.extension.formatForBrazilianHour
-import com.br.workdate.extension.limit
+import com.br.workdate.extension.*
 import com.br.workdate.model.*
 import com.br.workdate.view.viewmodel.*
 import com.google.android.material.snackbar.Snackbar
@@ -28,22 +26,27 @@ class FormScheduleFragment : Fragment() {
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
     private val releaseViewModel: ReleaseViewModel by viewModel()
+    private val textCanceled by lazy { form_schedule_text_canceled_switch }
+    private val canceled by lazy { form_schedule_canceled_switch }
+    private val textFinished by lazy { form_schedule_text_finished_switch }
+    private val finished by lazy { form_schedule_finished_switch }
+    private val saveBtn by lazy { form_schedule_save_btn }
+    private val serviceCard by lazy { form_schedule_service_cardView }
+    private val scheduleCard by lazy { form_schedule_cardView }
+    private val icon by lazy { form_schedule_client_icon }
+    private val char by lazy { form_schedule_client_first_char }
+    private val clientName by lazy { form_schedule_client_name }
+    private val clientPhone by lazy { form_schedule_client_phone }
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private val arguments by navArgs<FormScheduleFragmentArgs>()
+    private var value = BigDecimal.ZERO
     private lateinit var date: Date
     private lateinit var hour: Date
-    private lateinit var value: BigDecimal
     private lateinit var clientId: String
     private lateinit var serviceId: String
-    private val client by lazy {
-        arguments.client
-    }
-    private val service by lazy {
-        arguments.service
-    }
-    private val schedule by lazy {
-        arguments.schedule
-    }
+    private val client by lazy { arguments.client }
+    private val service by lazy { arguments.service }
+    private val schedule by lazy { arguments.schedule }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,38 +63,11 @@ class FormScheduleFragment : Fragment() {
         service?.let { tryLoadServiceFields(it) }
         schedule?.let { tryLoadScheduleFields(it) }
 
-        form_schedule_service_cardView.setOnClickListener {
-            val direction = FormScheduleFragmentDirections
-                .actionFormScheduleFragmentToSearchListServiceFragment(
-                    schedule?.id?.let { id ->
-                        makeSchedule(id)
-                    })
-            navController.navigate(direction)
-        }
+        startAnimations()
 
-        form_schedule_date_btn.setOnClickListener {
-            val datePicker = DatePickerHelper(
-                onDataSet = { currentDate ->
-                    date = currentDate
-                    form_schedule_date_btn.text = currentDate.formatForBrazilianDate()
-                }
-            )
-            activity?.supportFragmentManager?.let { fragmentManager ->
-                datePicker.show(fragmentManager, "time picker")
-            }
-        }
-
-        form_schedule_hour_btn.setOnClickListener {
-            val timePicker = TimePickerHelper(
-                onTimeSet = { currentHour ->
-                    hour = currentHour
-                    form_schedule_hour_btn.text = currentHour.formatForBrazilianHour()
-                }
-            )
-            activity?.supportFragmentManager?.let { fragmentManager ->
-                timePicker.show(fragmentManager, "time picker")
-            }
-        }
+        form_schedule_service_cardView.setOnClickListener { goToSearchListServiceFragment() }
+        form_schedule_date_btn.setOnClickListener { initDateDialog() }
+        form_schedule_hour_btn.setOnClickListener { initTimeDialog() }
 
         form_schedule_save_btn.setOnClickListener {
             if (scheduleIsInitialized()) {
@@ -100,7 +76,7 @@ class FormScheduleFragment : Fragment() {
                 showSnackBar("Schedule updated")
             } else {
                 if (allIsInitialized()) {
-                    makeAndSaveRelease(makeAndSaveSchedule())
+                    makeAndSaveReleaseBy(makeAndSaveSchedule())
                     navController.popBackStack(R.id.listScheduleFragment, false)
                     showSnackBar("Schedule saved")
                 } else {
@@ -109,72 +85,6 @@ class FormScheduleFragment : Fragment() {
             }
         }
     }
-
-    private fun makeAndUpdateSchedule() {
-        schedule?.let { schedule ->
-            viewModel.update(
-                makeSchedule(schedule.id)
-            )
-        }
-    }
-
-    private fun makeSchedule(id: String): Schedule {
-        return Schedule(
-            id,
-            date,
-            hour,
-            value,
-            form_schedule_canceled_switch.isChecked,
-            form_schedule_finished_switch.isChecked,
-            form_schedule_obs.text.toString().trim(),
-            serviceId,
-            clientId
-        )
-    }
-
-    private fun makeAndSaveSchedule(): Schedule {
-        val schedule = Schedule(
-            UUID.randomUUID().toString(),
-            date,
-            hour,
-            service!!.value,
-            form_schedule_canceled_switch.isChecked,
-            form_schedule_finished_switch.isChecked,
-            form_schedule_obs.text.toString().trim(),
-            service!!.id,
-            client!!.id
-        )
-        viewModel.insert(
-            schedule
-        )
-        return schedule
-    }
-
-    private fun makeAndSaveRelease(schedule: Schedule) {
-        releaseViewModel.insert(
-            Release(
-                UUID.randomUUID().toString(),
-                form_schedule_client_name.text.toString(),
-                form_schedule_service_description.text.toString(),
-                schedule.value,
-                schedule.date,
-                schedule.hour,
-                viewModel.checkFinished(schedule.finished),
-                schedule.id
-            )
-        )
-    }
-
-    private fun showSnackBar(msg: String) {
-        view?.let { view ->
-            Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun allIsInitialized() =
-        client != null && service != null && ::date.isInitialized && ::hour.isInitialized
-
-    private fun scheduleIsInitialized() = schedule != null
 
     private fun tryLoadScheduleFields(schedule: Schedule) {
         clientViewModel.returnForId(schedule.clientId).observe(
@@ -194,15 +104,15 @@ class FormScheduleFragment : Fragment() {
         form_schedule_date_btn.text = schedule.date.formatForBrazilianDate()
         form_schedule_hour_btn.text = schedule.hour.formatForBrazilianHour()
         form_schedule_obs.setText(schedule.observation)
-        form_schedule_canceled_switch.isChecked = schedule.canceled
-        form_schedule_finished_switch.isChecked = schedule.finished
+        canceled.isChecked = schedule.canceled
+        finished.isChecked = schedule.finished
     }
 
     private fun tryLoadClientFields(client: Client) {
         clientId = client.id
-        form_schedule_client_first_char.text = client.name[0].toString()
-        form_schedule_client_name.text = client.name.limit(maxCharacters = 24)
-        form_schedule_client_phone.text = client.phone
+        char.text = client.name[0].toString()
+        clientName.text = client.name.limit(maxCharacters = 24)
+        clientPhone.text = client.phone
     }
 
     private fun tryLoadServiceFields(service: Service) {
@@ -211,5 +121,126 @@ class FormScheduleFragment : Fragment() {
         form_schedule_service_description.text = service.description.limit(maxCharacters = 28)
         form_schedule_service_value.text = service.value.formatForBrazilianCoin()
     }
+
+    private fun startAnimations() {
+        initBttANimation()
+        initStbAnimation()
+        initBttAnimation()
+    }
+
+    private fun initTimeDialog() {
+        val timePicker = TimePickerHelper(
+            onTimeSet = { currentHour ->
+                hour = currentHour
+                form_schedule_hour_btn.text = currentHour.formatForBrazilianHour()
+            }
+        )
+        activity?.supportFragmentManager?.let { fragmentManager ->
+            timePicker.show(fragmentManager, "time picker")
+        }
+    }
+
+    private fun goToSearchListServiceFragment() {
+        val direction = FormScheduleFragmentDirections
+            .actionFormScheduleFragmentToSearchListServiceFragment(
+                schedule?.id?.let { id ->
+                    makeSchedule(id)
+                })
+        navController.navigate(direction)
+    }
+
+    private fun initDateDialog() {
+        val datePicker = DatePickerHelper(
+            onDataSet = { currentDate ->
+                date = currentDate
+                form_schedule_date_btn.text = currentDate.formatForBrazilianDate()
+            }
+        )
+        activity?.supportFragmentManager?.let { fragmentManager ->
+            datePicker.show(fragmentManager, "time picker")
+        }
+    }
+
+    private fun initBttAnimation() {
+        val btt by lazy { AnimationUtils.loadAnimation(context, R.anim.btt) }
+        val btt2 by lazy { AnimationUtils.loadAnimation(context, R.anim.btt2) }
+        val btt3 by lazy { AnimationUtils.loadAnimation(context, R.anim.btt3) }
+
+        textCanceled.startAnimation(btt)
+        canceled.startAnimation(btt)
+        textFinished.startAnimation(btt2)
+        finished.startAnimation(btt2)
+        saveBtn.startAnimation(btt3)
+    }
+
+    private fun initStbAnimation() {
+        val stb by lazy { AnimationUtils.loadAnimation(context, R.anim.stb) }
+
+        serviceCard.startAnimation(stb)
+        scheduleCard.startAnimation(stb)
+    }
+
+    private fun initBttANimation() {
+        val ttb by lazy { AnimationUtils.loadAnimation(context, R.anim.ttb) }
+
+        icon.startAnimation(ttb)
+        char.startAnimation(ttb)
+        clientName.startAnimation(ttb)
+        clientPhone.startAnimation(ttb)
+    }
+
+    private fun makeAndSaveSchedule(): Schedule {
+        val schedule = makeSchedule()
+        viewModel.insert(schedule)
+        return schedule
+    }
+
+    private fun makeAndUpdateSchedule() {
+        schedule?.let { schedule ->
+            viewModel.update(makeSchedule(schedule.id))
+        }
+    }
+
+    private fun makeSchedule(id: String = ""): Schedule {
+        return Schedule(
+            id.returnUUID(),
+            date,
+            hour,
+            value,
+            canceled.isChecked,
+            finished.isChecked,
+            form_schedule_obs.text.toString().trim(),
+            serviceId,
+            clientId
+        )
+    }
+
+    private fun makeAndSaveReleaseBy(schedule: Schedule) {
+        releaseViewModel.insert(makeRelease(schedule))
+    }
+
+    private fun makeRelease(schedule: Schedule): Release {
+        return Release(
+            UUID.randomUUID().toString(),
+            form_schedule_client_name.text.toString(),
+            form_schedule_service_description.text.toString(),
+            schedule.value,
+            schedule.date,
+            schedule.hour,
+            viewModel.checkFinished(schedule.finished),
+            schedule.id
+        )
+    }
+
+    private fun showSnackBar(msg: String) {
+        view?.let { view ->
+            Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun allIsInitialized() =
+        client != null && service != null && ::date.isInitialized && ::hour.isInitialized
+
+    private fun scheduleIsInitialized() = schedule != null
 
 }

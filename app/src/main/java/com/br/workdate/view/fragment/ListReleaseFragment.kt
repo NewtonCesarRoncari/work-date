@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
@@ -27,6 +28,10 @@ class ListReleaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val ttb = AnimationUtils.loadAnimation(context, R.anim.ttb)
+        val cardView = resume_cardView
+        cardView.startAnimation(ttb)
 
         initResume()
         initTabLayout(view)

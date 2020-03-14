@@ -1,6 +1,5 @@
 package com.br.workdate.repository
 
-import androidx.lifecycle.LiveData
 import com.br.workdate.database.dao.ServiceDAO
 import com.br.workdate.model.Service
 import kotlinx.coroutines.CoroutineScope
@@ -31,13 +30,9 @@ class ServiceRepository(private val dao: ServiceDAO) {
         }
     }
 
-    fun listAll(): LiveData<MutableList<Service>> = dao.listAll()
+    fun listAll() = dao.listAll()
 
-    fun returnDescriptionForId(id: String): LiveData<String> {
-        return dao.returnDescriptionForId(id)
-    }
+    fun returnDescriptionForId(id: String) = dao.returnDescriptionForId(id)
 
-    fun returnForId(id: String): LiveData<Service> {
-        return dao.returnForId(id)
-    }
+    fun returnForId(id: String) = dao.returnForId(id)
 }

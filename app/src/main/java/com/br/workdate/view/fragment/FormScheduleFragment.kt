@@ -71,8 +71,8 @@ class FormScheduleFragment : Fragment() {
 
         form_schedule_save_btn.setOnClickListener {
             if (scheduleIsInitialized()) {
-                makeAndUpdateSchedule()
-                navController.popBackStack(R.id.listScheduleFragment, false)
+                updateSchedule()
+                updateRelease()
                 showSnackBar("Schedule updated")
             } else {
                 if (allIsInitialized()) {
@@ -195,7 +195,17 @@ class FormScheduleFragment : Fragment() {
         return schedule
     }
 
-    private fun makeAndUpdateSchedule() {
+    private fun updateRelease() {
+        schedule?.id?.let { scheduleId ->
+            releaseViewModel.findReleaseIdByScheduleId(scheduleId)
+                .observe(viewLifecycleOwner, androidx.lifecycle.Observer { releaseId ->
+                    releaseViewModel.update(makeRelease(makeSchedule(scheduleId), releaseId))
+                    navController.popBackStack(R.id.listScheduleFragment, false)
+                })
+        }
+    }
+
+    private fun updateSchedule() {
         schedule?.let { schedule ->
             viewModel.update(makeSchedule(schedule.id))
         }
@@ -219,9 +229,9 @@ class FormScheduleFragment : Fragment() {
         releaseViewModel.insert(makeRelease(schedule))
     }
 
-    private fun makeRelease(schedule: Schedule): Release {
+    private fun makeRelease(schedule: Schedule, id: String = ""): Release {
         return Release(
-            UUID.randomUUID().toString(),
+            id.returnUUID(),
             form_schedule_client_name.text.toString(),
             form_schedule_service_description.text.toString(),
             schedule.value,

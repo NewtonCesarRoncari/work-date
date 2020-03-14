@@ -12,9 +12,8 @@ class ResumeViewModel(private val releases: MutableList<Release>) {
 
     val total get() = totalOpen.plus(totalPaid)
 
-    private fun sumBy(situation: Situation): BigDecimal {
-        return BigDecimal(releases
+    private fun sumBy(situation: Situation) = BigDecimal(
+        releases
             .filter { release -> release.situation == situation }
             .sumByDouble { release -> release.value.toDouble() })
-    }
 }

@@ -22,4 +22,7 @@ interface ReleaseDAO {
 
     @Query("SELECT * FROM `Release`")
     fun listAll(): LiveData<MutableList<Release>>
+
+    @Query("SELECT id FROM `Release` WHERE schedule_id = :scheduleId")
+    fun findReleaseIdByScheduleId(scheduleId: String): LiveData<String>
 }

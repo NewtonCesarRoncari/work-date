@@ -1,6 +1,5 @@
 package com.br.workdate.repository
 
-import androidx.lifecycle.LiveData
 import com.br.workdate.database.dao.ScheduleDAO
 import com.br.workdate.model.Schedule
 import kotlinx.coroutines.CoroutineScope
@@ -31,5 +30,5 @@ class ScheduleRepository(private val dao: ScheduleDAO) {
         }
     }
 
-    fun listAll(): LiveData<MutableList<Schedule>> = dao.listAll()
+    fun listAll() = dao.listAll()
 }

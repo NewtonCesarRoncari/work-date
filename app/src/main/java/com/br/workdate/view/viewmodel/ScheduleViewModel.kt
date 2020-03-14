@@ -1,6 +1,5 @@
 package com.br.workdate.view.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.br.workdate.model.Schedule
 import com.br.workdate.model.Situation
@@ -14,13 +13,11 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
 
     fun remove(schedule: Schedule) = repository.remove(schedule)
 
-    fun listAll(): LiveData<MutableList<Schedule>> = repository.listAll()
+    fun listAll() = repository.listAll()
 
-    fun checkFinished(finished: Boolean): Situation {
-        return if (finished) {
-            Situation.PAID
-        } else {
-            Situation.OPEN
-        }
+    fun checkFinished(finished: Boolean) = if (finished) {
+        Situation.PAID
+    } else {
+        Situation.OPEN
     }
 }

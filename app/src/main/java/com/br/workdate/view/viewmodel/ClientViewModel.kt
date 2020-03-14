@@ -1,6 +1,5 @@
 package com.br.workdate.view.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.br.workdate.model.Client
 import com.br.workdate.repository.ClientRepository
@@ -13,9 +12,9 @@ class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
 
     fun remove(client: Client) = repository.remove(client)
 
-    fun listAll(): LiveData<MutableList<Client>> = repository.listAll()
+    fun listAll() = repository.listAll()
 
-    fun getNameForId(id: String): LiveData<String> = repository.getNameForId(id)
+    fun getNameForId(id: String) = repository.getNameForId(id)
 
-    fun returnForId(id: String): LiveData<Client> = repository.returnForId(id)
+    fun returnForId(id: String) = repository.returnForId(id)
 }

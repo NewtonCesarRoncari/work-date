@@ -31,7 +31,7 @@ class ClientRepository(private val dao: ClientDAO) {
         }
     }
 
-    fun listAll(): LiveData<MutableList<Client>> = dao.listAll()
+    fun listAll() = dao.listAll()
 
     fun getNameForId(id: String): LiveData<String> {
         return dao.returnNameForId(id)

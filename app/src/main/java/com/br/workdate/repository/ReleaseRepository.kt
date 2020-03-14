@@ -1,6 +1,5 @@
 package com.br.workdate.repository
 
-import androidx.lifecycle.LiveData
 import com.br.workdate.database.dao.ReleaseDAO
 import com.br.workdate.model.Release
 import com.br.workdate.model.Situation
@@ -26,7 +25,9 @@ class ReleaseRepository(private val dao: ReleaseDAO) {
         }
     }
 
-    fun listAll(situation: Situation): LiveData<MutableList<Release>> = dao.listAll(situation)
+    fun listAll(situation: Situation) = dao.listAll(situation)
 
-    fun listAll(): LiveData<MutableList<Release>> = dao.listAll()
+    fun listAll() = dao.listAll()
+
+    fun findReleaseIdByScheduleId(scheduleId: String) = dao.findReleaseIdByScheduleId(scheduleId)
 }

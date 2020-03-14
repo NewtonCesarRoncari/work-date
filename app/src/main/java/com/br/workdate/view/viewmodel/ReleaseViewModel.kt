@@ -14,4 +14,6 @@ class ReleaseViewModel(private val repository: ReleaseRepository) : ViewModel() 
 
     fun listAll(situation: Situation): LiveData<MutableList<Release>> =
         repository.listAll(situation)
+
+    fun listAll(): LiveData<MutableList<Release>> = repository.listAll()
 }

@@ -27,4 +27,6 @@ class ReleaseRepository(private val dao: ReleaseDAO) {
     }
 
     fun listAll(situation: Situation): LiveData<MutableList<Release>> = dao.listAll(situation)
+
+    fun listAll(): LiveData<MutableList<Release>> = dao.listAll()
 }

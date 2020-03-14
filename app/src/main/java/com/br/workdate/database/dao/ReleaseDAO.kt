@@ -19,4 +19,7 @@ interface ReleaseDAO {
 
     @Query("SELECT * FROM `Release` WHERE situation = :situation")
     fun listAll(situation: Situation): LiveData<MutableList<Release>>
+
+    @Query("SELECT * FROM `Release`")
+    fun listAll(): LiveData<MutableList<Release>>
 }

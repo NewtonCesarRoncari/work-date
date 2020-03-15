@@ -31,7 +31,7 @@ class ListScheduleFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_list_schedule, container, false)
 
-        appComponentsViewModel.havCoponent = VisualComponents(true)
+        appComponentsViewModel.havComponent = VisualComponents(true)
         return view
     }
 

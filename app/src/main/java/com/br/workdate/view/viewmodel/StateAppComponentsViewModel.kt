@@ -10,10 +10,10 @@ class StateAppComponentsViewModel : ViewModel() {
 
     private var _components: MutableLiveData<VisualComponents> =
         MutableLiveData<VisualComponents>().also {
-            it.value = havCoponent
+            it.value = havComponent
         }
 
-    var havCoponent: VisualComponents = VisualComponents()
+    var havComponent: VisualComponents = VisualComponents()
         set(value) {
             field = value
             _components.value = value

@@ -9,7 +9,7 @@ class SearchListClientFragment : BaseListClientFragment() {
     private val navController by lazy { NavHostFragment.findNavController(this) }
 
     override fun doInOnCreateView() {
-        super.appComponentsViewModel.havCoponent = VisualComponents(false)
+        super.appComponentsViewModel.havComponent = VisualComponents(false)
     }
 
     override fun doInItemClickListener(client: Client) {

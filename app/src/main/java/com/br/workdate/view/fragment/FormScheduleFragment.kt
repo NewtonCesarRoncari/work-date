@@ -54,7 +54,7 @@ class FormScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_form_schedule, container, false)
-        appComponentsViewModel.havCoponent = VisualComponents(false)
+        appComponentsViewModel.havComponent = VisualComponents(false)
         return view
     }
 

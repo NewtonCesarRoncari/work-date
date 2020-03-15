@@ -19,9 +19,9 @@ interface ServiceDAO {
     @Query("SELECT * FROM Service ORDER BY service.description")
     fun listAll(): LiveData<MutableList<Service>>
 
-    @Query("SELECT description FROM Service WHERE service.id = :id")
+    @Query("SELECT description FROM Service WHERE service.id = :id LIMIT 1")
     fun returnDescriptionForId(id: String): LiveData<String>
 
-    @Query("SELECT * FROM Service WHERE service.id = :id")
+    @Query("SELECT * FROM Service WHERE service.id = :id LIMIT 1")
     fun returnForId(id: String): LiveData<Service>
 }

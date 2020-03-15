@@ -1,19 +1,15 @@
 package com.br.workdate.view.viewmodel
 
 import com.br.workdate.model.Release
-import com.br.workdate.model.Situation
-import java.math.BigDecimal
+import com.br.workdate.model.Resume
 
-class ResumeViewModel(private val releases: MutableList<Release>) {
+class ResumeViewModel(releases: MutableList<Release>) {
 
-    val totalOpen get() = sumBy(Situation.OPEN)
+    private val resume = Resume(releases)
 
-    val totalPaid get() = sumBy(Situation.PAID)
+    val totalOpen get() = resume.totalOpen
 
-    val total get() = totalOpen.plus(totalPaid)
+    val totalPaid get() = resume.totalPaid
 
-    private fun sumBy(situation: Situation) = BigDecimal(
-        releases
-            .filter { release -> release.situation == situation }
-            .sumByDouble { release -> release.value.toDouble() })
+    val total get() = resume.total
 }

@@ -25,6 +25,6 @@ class App : Application() {
             )
         }
         val typefaceUtil = TypefaceUtil()
-        typefaceUtil.overridefonts(this, "SERIF", "fonts/OpenSans-Semibold.ttf")
+        typefaceUtil.overrideFonts(this, "SERIF", "fonts/OpenSans-Semibold.ttf")
     }
 }

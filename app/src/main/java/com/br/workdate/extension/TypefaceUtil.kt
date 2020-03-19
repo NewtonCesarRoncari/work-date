@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Typeface
 
 class TypefaceUtil {
-    fun overridefonts(
+    fun overrideFonts(
         context: Context,
         defaultFontToOverride: String,
         customFontFileNameInAssets: String

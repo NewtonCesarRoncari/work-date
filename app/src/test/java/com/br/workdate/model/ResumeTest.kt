@@ -1,5 +1,6 @@
 package com.br.workdate.model
 
+import com.br.workdate.exception.NegativeValueException
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.math.BigDecimal
@@ -75,5 +76,23 @@ class ResumeTest {
     @Test
     fun getTotal() {
         assertEquals(BigDecimal("24.4"), resume.total)
+    }
+
+    @Test(expected = NegativeValueException::class)
+    fun negative() {
+        val releases = mutableListOf(
+            Release(
+                "",
+                "client",
+                "service",
+                BigDecimal("-10"),
+                Calendar.getInstance().time,
+                Calendar.getInstance().time,
+                Situation.OPEN,
+                ""
+            )
+        )
+        val resume = Resume(releases)
+        resume.total
     }
 }

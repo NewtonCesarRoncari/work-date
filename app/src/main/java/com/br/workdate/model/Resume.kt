@@ -13,10 +13,10 @@ class Resume(private val releases: MutableList<Release>) {
     val total get() = totalOpen.plus(totalPaid)
 
     private fun sumBy(situation: Situation): BigDecimal {
-        val sumValue = releases.filter { release -> release.situation == situation }
-            .sumByBigDecimal { release -> release.value }
-
-        if (sumValue < BigDecimal.ZERO) throw NegativeValueException()
-        return sumValue
+        return releases.filter { release -> release.situation == situation }
+            .sumByBigDecimal { release ->
+                if (release.value < BigDecimal.ZERO) throw NegativeValueException()
+                release.value
+            }
     }
 }

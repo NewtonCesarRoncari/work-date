@@ -60,27 +60,62 @@ class ResumeTest {
             ""
         )
     )
-
-    private val resume = Resume(releases)
+    private val releasesForException = mutableListOf(
+        Release(
+            "",
+            "client",
+            "service",
+            BigDecimal("-10"),
+            Calendar.getInstance().time,
+            Calendar.getInstance().time,
+            Situation.OPEN,
+            ""
+        ),
+        Release(
+            "",
+            "client",
+            "service",
+            BigDecimal("-10"),
+            Calendar.getInstance().time,
+            Calendar.getInstance().time,
+            Situation.PAID,
+            ""
+        )
+    )
 
     @Test
     fun getTotalOpen() {
-        assertEquals(BigDecimal("9.4"), resume.totalOpen)
+        assertEquals(BigDecimal("9.4"), Resume(releases).totalOpen)
     }
 
     @Test
     fun getTotalPaid() {
-        assertEquals(BigDecimal("15"), resume.totalPaid)
+        assertEquals(BigDecimal("15"), Resume(releases).totalPaid)
     }
 
     @Test
     fun getTotal() {
-        assertEquals(BigDecimal("24.4"), resume.total)
+        assertEquals(BigDecimal("24.4"), Resume(releases).total)
     }
 
     @Test(expected = NegativeValueException::class)
-    fun negative() {
-        val releases = mutableListOf(
+    fun returnExceptionWhenNegativeValueInTotal() {
+        Resume(releasesForException).total
+    }
+
+    @Test(expected = NegativeValueException::class)
+    fun returnExceptionWhenNegativeValueInTotalOpen() {
+        Resume(releasesForException).totalOpen
+    }
+
+    @Test(expected = NegativeValueException::class)
+    fun returnExceptionWhenNegativeValueInTotalPaid() {
+        Resume(releasesForException).totalPaid
+    }
+
+    @Test(expected = NegativeValueException::class)
+    fun returnExceptionWhenHaveReleaseWithNegativeValue() {
+        releases.add(
             Release(
                 "",
                 "client",
@@ -88,11 +123,10 @@ class ResumeTest {
                 BigDecimal("-10"),
                 Calendar.getInstance().time,
                 Calendar.getInstance().time,
-                Situation.OPEN,
+                Situation.PAID,
                 ""
             )
         )
-        val resume = Resume(releases)
-        resume.total
+        Resume(releases).total
     }
 }

@@ -1,7 +1,9 @@
 package com.br.workdate.model
 
 import com.br.workdate.exception.NegativeValueException
+import org.hamcrest.number.BigDecimalCloseTo.closeTo
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertThat
 import org.junit.Test
 import java.math.BigDecimal
 import java.util.*
@@ -85,17 +87,26 @@ class ResumeTest {
 
     @Test
     fun getTotalOpen() {
-        assertEquals(BigDecimal("9.4"), Resume(releases).totalOpen)
+        assertThat(
+            Resume(releases).totalOpen,
+            closeTo(BigDecimal("9.4"), BigDecimal.ZERO)
+        )
     }
 
     @Test
     fun getTotalPaid() {
-        assertEquals(BigDecimal("15"), Resume(releases).totalPaid)
+        assertThat(
+            Resume(releases).totalPaid,
+            closeTo(BigDecimal("15"), BigDecimal.ZERO)
+        )
     }
 
     @Test
     fun getTotal() {
-        assertEquals(BigDecimal("24.4"), Resume(releases).total)
+        assertThat(
+            Resume(releases).total,
+            closeTo(BigDecimal("24.4"), BigDecimal.ZERO)
+        )
     }
 
     @Test(expected = NegativeValueException::class)
@@ -128,5 +139,10 @@ class ResumeTest {
             )
         )
         Resume(releases).total
+    }
+
+    @Test
+    fun returnSizeOfReleases() {
+        assertEquals(5, releases.size)
     }
 }

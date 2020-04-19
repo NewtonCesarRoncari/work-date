@@ -72,8 +72,13 @@ class ClientAdapter(
     }
 
     fun remove(position: Int) {
+        checkHavePositionInList(position)
         clients.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    private fun checkHavePositionInList(position: Int) {
+        if (position < 0 || position > clients.size) throw IndexOutOfBoundsException()
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

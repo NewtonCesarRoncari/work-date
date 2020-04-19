@@ -25,7 +25,7 @@ class ClientAdapterTest {
     )
 
     @Test
-    fun returnSizeOfAdapterWhenNoHaveClients() {
+    fun returnSizeOfAdapterWhenHaveTwoClients() {
         assertEquals(2, adapter.itemCount)
     }
 
@@ -39,5 +39,10 @@ class ClientAdapterTest {
         verify(adapter).notifyItemRemoved(1)
 
         assertEquals(sizeAfterRemoved, adapter.itemCount)
+    }
+
+    @Test(expected = IndexOutOfBoundsException::class)
+    fun returnExceptionWhenItemNotHaveInList() {
+        adapter.remove(3)
     }
 }

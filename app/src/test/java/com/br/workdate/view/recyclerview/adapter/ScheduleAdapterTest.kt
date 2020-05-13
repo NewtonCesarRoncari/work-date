@@ -46,6 +46,7 @@ class ScheduleAdapterTest() {
         loadFieldServiceDescription = { _, _ -> }
     )
 
+
     @Test
     fun returnSizeOfAdapterWhenHaveTwoClients() {
         assertEquals(2, adapter.itemCount)

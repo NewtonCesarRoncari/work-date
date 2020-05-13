@@ -32,21 +32,13 @@ class Converters {
 
     @TypeConverter
     fun typeForLong(situation: Situation): Int? {
-        return if (situation == OPEN) {
-            0
-        } else {
-            1
-        }
+        return if (situation == OPEN) 0 else 1
     }
 
     @TypeConverter
     fun longForType(int: Int): Situation? {
         checkIfHaveSituationForExp(int)
-        return if (int == 0) {
-            OPEN
-        } else {
-            PAID
-        }
+        return if (int == 0) OPEN else PAID
     }
 
     private fun checkIfHaveSituationForExp(int: Int) {

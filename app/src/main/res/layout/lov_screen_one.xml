@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Não posso te fazer se enxergar pelos meus olhos, não importa o quanto eu queira, por isso a minha tentativa vai ser fazer você se enxergar a partir da minha mente, por meio de algo que eu sei, que é escrever (por mais que você saiba bem mais e seja melhor do que eu) e programar"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lov_screen_one_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/lov_screen_one_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
+
+    <Button
+        android:id="@+id/lov_screen_one_btn"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/buttonshape_form_schedule_save"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Aperte Aqui"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/form_schedule_finished_switch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

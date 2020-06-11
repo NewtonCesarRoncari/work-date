@@ -76,9 +76,14 @@ class FormScheduleFragment : Fragment() {
                 showSnackBar("Schedule updated")
             } else {
                 if (allIsInitialized()) {
-                    makeAndSaveReleaseBy(makeAndSaveSchedule())
-                    navController.popBackStack(R.id.listScheduleFragment, false)
-                    showSnackBar("Schedule saved")
+                    if (canceledAndFinishedIsTrue()) {
+                        goToLovOneFragment()
+                        showSnackBar("Surpresa")
+                    } else {
+                        makeAndSaveReleaseBy(makeAndSaveSchedule())
+                        navController.popBackStack(R.id.listScheduleFragment, false)
+                        showSnackBar("Schedule saved")
+                    }
                 } else {
                     showSnackBar("Empty fields")
                 }
@@ -146,6 +151,12 @@ class FormScheduleFragment : Fragment() {
                 schedule?.id?.let { id ->
                     makeSchedule(id)
                 })
+        navController.navigate(direction)
+    }
+
+    private fun goToLovOneFragment() {
+        val direction = FormScheduleFragmentDirections
+            .actionFormScheduleFragmentToLovOneFragment()
         navController.navigate(direction)
     }
 
@@ -253,4 +264,5 @@ class FormScheduleFragment : Fragment() {
 
     private fun scheduleIsInitialized() = schedule != null
 
+    private fun canceledAndFinishedIsTrue() = canceled.isChecked && finished.isChecked
 }

@@ -51,6 +51,9 @@
             android:defaultValue="@null"
             app:argType="com.br.workdate.model.Schedule"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_formScheduleFragment_to_lovOneFragment"
+            app:destination="@id/lovOneFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchListClientFragment"
@@ -85,4 +88,63 @@
         android:name="com.br.workdate.view.fragment.ListReleaseFragment"
         android:label="@string/releases"
         tools:layout="@layout/fragment_list_release" />
+    <fragment
+        android:id="@+id/lovOneFragment"
+        android:name="com.br.workdate.view.fragment.LovOneFragment"
+        android:label="Mandinha"
+        tools:layout="@layout/lov_screen_one">
+        <action
+            android:id="@+id/action_lovOneFragment_to_lovTwoFragment"
+            app:destination="@id/lovTwoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lovTwoFragment"
+        android:name="com.br.workdate.view.fragment.LovTwoFragment"
+        android:label="E por falar em voce..."
+        tools:layout="@layout/lov_screen_two">
+        <action
+            android:id="@+id/action_lovTwoFragment_to_lovThreeFragment"
+            app:destination="@id/lovThreeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lovThreeFragment"
+        android:name="com.br.workdate.view.fragment.LovThreeFragment"
+        android:label="Continuando em voce"
+        tools:layout="@layout/lov_screen_three">
+        <action
+            android:id="@+id/action_lovThreeFragment_to_lovFourFragment"
+            app:destination="@id/lovFourFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lovFourFragment"
+        android:name="com.br.workdate.view.fragment.LovFourFragment"
+        android:label="Nossos gostos"
+        tools:layout="@layout/lov_screen_four">
+        <action
+            android:id="@+id/action_lovFourFragment_to_lovFiveFragment"
+            app:destination="@id/lovFiveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lovFiveFragment"
+        android:name="com.br.workdate.view.fragment.LovFiveFragment"
+        android:label="Pode acreditar"
+        tools:layout="@layout/lov_screen_five">
+        <action
+            android:id="@+id/action_lovFiveFragment_to_lovSixFragment"
+            app:destination="@id/lovSixFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lovSixFragment"
+        android:name="com.br.workdate.view.fragment.LovSixFragment"
+        android:label="E entao..."
+        tools:layout="@layout/lov_screen_six">
+        <action
+            android:id="@+id/action_lovSixFragment_to_lovFragment"
+            app:destination="@id/lovFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lovFragment"
+        android:name="com.br.workdate.view.fragment.LovFragment"
+        android:label="..."
+        tools:layout="@layout/lov_screen" />
 </navigation>

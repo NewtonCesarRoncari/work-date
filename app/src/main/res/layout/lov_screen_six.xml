@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Amanda Alves Reis"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:text="Namora comigo?"
+        android:textAlignment="center"
+        android:textColor="@color/coloBlackAbsolute"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+    </TextView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lov_screen_six_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/lov_screen_six_btn_yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:lottie_loop="false" />
+
+    <Button
+        android:id="@+id/lov_screen_six_btn_yes"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/buttonshape_form_schedule_save"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Sim"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@id/lov_screen_six_btn_yes_yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/lov_screen_six_btn_yes_yes"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/buttonshape_form_schedule_save"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Muito Sim"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

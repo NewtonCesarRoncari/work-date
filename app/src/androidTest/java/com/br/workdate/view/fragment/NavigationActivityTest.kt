@@ -11,7 +11,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @LargeTest
-class ListClientScreenTest {
+class NavigationActivityTest {
 
     @get:Rule
     val activity = ActivityTestRule(NavigationActivity::class.java)
@@ -27,4 +27,11 @@ class ListClientScreenTest {
         onView(withId(R.id.bottom_nav))
             .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun testFrameNavigation() {
+        onView(withId(R.id.frame_navigation))
+            .check(matches(isDisplayed()))
+    }
+
 }

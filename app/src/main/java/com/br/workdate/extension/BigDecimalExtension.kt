@@ -12,7 +12,7 @@ fun BigDecimal.formatForBrazilianCoin(): String {
 }
 
 fun <T> Iterable<T>.sumByBigDecimal(selector: (T) -> BigDecimal): BigDecimal {
-    var sum: BigDecimal = BigDecimal.ZERO
+    var sum = BigDecimal.ZERO
     for (element in this) {
         sum += selector(element)
     }

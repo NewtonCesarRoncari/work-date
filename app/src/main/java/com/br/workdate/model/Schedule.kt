@@ -8,13 +8,14 @@ import java.math.BigDecimal
 import java.util.*
 
 @Entity(
-    foreignKeys = [ForeignKey(
-        entity = Client::class,
-        parentColumns = ["id"],
-        childColumns = ["client_id"],
-        onUpdate = CASCADE,
-        onDelete = RESTRICT
-    ),
+    foreignKeys = [
+        ForeignKey(
+            entity = Client::class,
+            parentColumns = ["id"],
+            childColumns = ["client_id"],
+            onUpdate = CASCADE,
+            onDelete = RESTRICT
+        ),
         ForeignKey(
             entity = Service::class,
             parentColumns = ["id"],

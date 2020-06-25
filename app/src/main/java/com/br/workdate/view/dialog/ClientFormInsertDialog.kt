@@ -15,5 +15,4 @@ class ClientFormInsertDialog(
     fun initClientFormDialog(dialogClickListener: (client: Client) -> Unit) {
         super.inflateForm(dialogClickListener)
     }
-
 }

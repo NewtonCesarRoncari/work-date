@@ -2,7 +2,6 @@ package com.br.workdate.model
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import androidx.room.ForeignKey.RESTRICT
 import java.io.Serializable
 import java.math.BigDecimal
 import java.util.*
@@ -13,7 +12,7 @@ import java.util.*
         parentColumns = ["id"],
         childColumns = ["schedule_id"],
         onUpdate = CASCADE,
-        onDelete = RESTRICT
+        onDelete = CASCADE
     )],
     indices = [Index("schedule_id")]
 )

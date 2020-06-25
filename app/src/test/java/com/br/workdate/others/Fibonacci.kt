@@ -1,4 +1,4 @@
-package com.br.workdate
+package com.br.workdate.others
 
 import org.junit.Test
 
@@ -26,5 +26,4 @@ class Fibonacci {
             println("${fib(i)}")
         }
     }
-
 }

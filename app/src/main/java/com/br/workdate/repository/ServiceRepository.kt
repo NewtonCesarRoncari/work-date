@@ -1,5 +1,7 @@
 package com.br.workdate.repository
 
+import android.database.sqlite.SQLiteConstraintException
+import android.util.Log
 import com.br.workdate.database.dao.ServiceDAO
 import com.br.workdate.model.Service
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +28,11 @@ class ServiceRepository(private val dao: ServiceDAO) {
 
     fun remove(service: Service) {
         scope.launch {
-            dao.remove(service)
+            try {
+                dao.remove(service)
+            } catch (e: SQLiteConstraintException) {
+                Log.e("remove", e.message!!)
+            }
         }
     }
 

@@ -1,5 +1,7 @@
 package com.br.workdate.repository
 
+import android.database.sqlite.SQLiteConstraintException
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.br.workdate.database.dao.ClientDAO
 import com.br.workdate.model.Client
@@ -27,7 +29,11 @@ class ClientRepository(private val dao: ClientDAO) {
 
     fun remove(client: Client) {
         scope.launch {
-            dao.remove(client)
+            try {
+                dao.remove(client)
+            } catch (e: SQLiteConstraintException) {
+                Log.e("remove", e.message!!)
+            }
         }
     }
 

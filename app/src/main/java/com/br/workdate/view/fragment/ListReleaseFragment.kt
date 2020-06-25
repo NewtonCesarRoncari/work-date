@@ -47,7 +47,7 @@ class ListReleaseFragment : Fragment() {
     }
 
     private fun initTabLayout(view: View) {
-        val tabsAdapter = TabsAdapter(activity!!.supportFragmentManager)
+        val tabsAdapter = TabsAdapter(requireActivity().supportFragmentManager)
         val viewPager by lazy {
             view.findViewById<ViewPager>(R.id.fragment_release_viewpager)
         }

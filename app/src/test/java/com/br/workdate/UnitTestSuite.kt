@@ -22,4 +22,4 @@ import org.junit.runners.Suite
     ScheduleAdapterTest::class,
     ServiceAdapterTest::class
 )
-class TestSuite
+class UnitTestSuite

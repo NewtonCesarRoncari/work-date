@@ -65,11 +65,11 @@ class FormScheduleFragment : Fragment() {
 
         startAnimations()
 
-        form_schedule_service_cardView.setOnClickListener { goToSearchListServiceFragment() }
+        serviceCard.setOnClickListener { goToSearchListServiceFragment() }
         form_schedule_date_btn.setOnClickListener { initDateDialog() }
         form_schedule_hour_btn.setOnClickListener { initTimeDialog() }
 
-        form_schedule_save_btn.setOnClickListener {
+        saveBtn.setOnClickListener {
             if (scheduleIsInitialized()) {
                 updateSchedule()
                 updateRelease()
@@ -123,7 +123,7 @@ class FormScheduleFragment : Fragment() {
     }
 
     private fun startAnimations() {
-        initBttANimation()
+        initTtbAnimation()
         initStbAnimation()
         initBttAnimation()
     }
@@ -180,7 +180,7 @@ class FormScheduleFragment : Fragment() {
         scheduleCard.startAnimation(stb)
     }
 
-    private fun initBttANimation() {
+    private fun initTtbAnimation() {
         val ttb by lazy { AnimationUtils.loadAnimation(context, R.anim.ttb) }
 
         icon.startAnimation(ttb)

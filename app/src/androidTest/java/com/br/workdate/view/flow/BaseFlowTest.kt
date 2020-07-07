@@ -3,8 +3,8 @@ package com.br.workdate.view.flow
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.br.workdate.R
 import org.hamcrest.Description
@@ -27,7 +27,7 @@ abstract class BaseFlowTest {
                 isDescendantOfA(withId(R.id.bottom_nav)),
                 isDisplayed()
             )
-        ).perform(ViewActions.click())
+        ).perform(click())
     }
 
     protected fun checkBarTitle(barTitle: String) {
@@ -38,7 +38,7 @@ abstract class BaseFlowTest {
                 isDescendantOfA(withId(R.id.action_bar))
             )
         )
-            .check(ViewAssertions.matches(withText(barTitle)))
+            .check(matches(withText(barTitle)))
     }
 
     protected fun clickFabNew(idBottom: Int) {
@@ -48,7 +48,7 @@ abstract class BaseFlowTest {
                 isDescendantOfA(withId(R.id.frame_navigation)),
                 isDisplayed()
             )
-        ).perform(ViewActions.click())
+        ).perform(click())
     }
 
     protected fun clickSaveDialog() {
@@ -63,7 +63,7 @@ abstract class BaseFlowTest {
                     3
                 )
             )
-        ).perform(ViewActions.scrollTo(), ViewActions.click())
+        ).perform(scrollTo(), click())
     }
 
     protected fun insertDataInFieldWithParent(idField: Int, idFieldParent: Int, data: String) {
@@ -79,7 +79,7 @@ abstract class BaseFlowTest {
                 ),
                 isDisplayed()
             )
-        ).perform(ViewActions.replaceText(data), ViewActions.closeSoftKeyboard())
+        ).perform(typeText(data), closeSoftKeyboard())
     }
 
     private fun childAtPosition(

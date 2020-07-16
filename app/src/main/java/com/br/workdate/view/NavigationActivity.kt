@@ -1,7 +1,8 @@
 package com.br.workdate.view
 
 import android.os.Bundle
-import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -34,9 +35,9 @@ class NavigationActivity : AppCompatActivity() {
             it?.also { havComponent ->
                 run {
                     if (havComponent.bottomNavigation) {
-                        bottom_nav.visibility = View.VISIBLE
+                        bottom_nav.visibility = VISIBLE
                     } else {
-                        bottom_nav.visibility = View.GONE
+                        bottom_nav.visibility = GONE
                     }
                 }
             }

@@ -1,9 +1,7 @@
 package com.br.workdate.view.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,6 +33,13 @@ class ListReleaseFragment : Fragment() {
 
         initResume()
         initTabLayout(view)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.base_filter_menu, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initResume() {

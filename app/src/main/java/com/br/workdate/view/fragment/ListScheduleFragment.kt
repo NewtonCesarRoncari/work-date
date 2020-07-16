@@ -1,9 +1,7 @@
 package com.br.workdate.view.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -46,6 +44,12 @@ class ListScheduleFragment : Fragment() {
             initAdapter(scheduleList)
         })
         setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.base_filter_menu, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initAdapter(scheduleList: MutableList<Schedule>) {

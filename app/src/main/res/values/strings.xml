@@ -55,4 +55,6 @@
     <string name="paid">Paid</string>
     <string name="open">Open</string>
     <string name="filter">Filter</string>
+    <string name="choose_filters">Choose Filters</string>
+    <string name="test">test</string>
 </resources>

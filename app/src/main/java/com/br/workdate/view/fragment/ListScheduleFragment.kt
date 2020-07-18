@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.br.workdate.R
 import com.br.workdate.extension.limit
 import com.br.workdate.model.Schedule
+import com.br.workdate.view.dialog.FilterDialog
 import com.br.workdate.view.recyclerview.adapter.ScheduleAdapter
 import com.br.workdate.view.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_list_schedule.*
@@ -48,8 +49,14 @@ class ListScheduleFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.base_filter_menu, menu)
-
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_filter) {
+            showFilterDialog()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initAdapter(scheduleList: MutableList<Schedule>) {
@@ -92,6 +99,10 @@ class ListScheduleFragment : Fragment() {
         val direction = ListScheduleFragmentDirections
             .actionListScheduleFragmentToSearchListClientFragment()
         navController.navigate(direction)
+    }
+
+    private fun showFilterDialog() {
+        context?.let { context -> FilterDialog(context) }?.showFilterDialog()
     }
 
     private fun ifEmptyPlayAnimation(mutableList: MutableList<Schedule>) {

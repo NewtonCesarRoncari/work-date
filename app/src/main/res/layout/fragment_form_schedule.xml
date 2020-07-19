@@ -119,7 +119,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/form_schedule_cardView"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="155dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
@@ -161,11 +161,11 @@
 
                 <Button
                     android:id="@+id/form_schedule_date_btn"
-                    android:layout_width="60dp"
-                    android:layout_height="22dp"
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/buttonshape_form_schedule_date_hour"
                     android:text="@string/date_format"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView11"
                     app:layout_constraintStart_toStartOf="@+id/textView11"
@@ -185,11 +185,11 @@
 
                 <Button
                     android:id="@+id/form_schedule_hour_btn"
-                    android:layout_width="60dp"
-                    android:layout_height="22dp"
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/buttonshape_form_schedule_date_hour"
                     android:text="@string/hour_format"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView18"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
@@ -213,7 +213,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/form_schedule_obs"
                         android:layout_width="match_parent"
-                        android:layout_height="47dp"
+                        android:layout_height="42dp"
                         android:hint="@string/observations"
                         android:textSize="13sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -262,7 +262,7 @@
         <Button
             android:id="@+id/form_schedule_save_btn"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="45dp"
             android:layout_marginStart="64dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="64dp"

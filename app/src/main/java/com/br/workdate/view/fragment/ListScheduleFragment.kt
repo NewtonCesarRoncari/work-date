@@ -102,7 +102,14 @@ class ListScheduleFragment : Fragment() {
     }
 
     private fun showFilterDialog() {
-        context?.let { context -> FilterDialog(context) }?.showFilterDialog()
+        context?.let { context ->
+            activity?.let { activity ->
+                FilterDialog(
+                    context,
+                    activity
+                ).showFilterDialog()
+            }
+        }
     }
 
     private fun ifEmptyPlayAnimation(mutableList: MutableList<Schedule>) {

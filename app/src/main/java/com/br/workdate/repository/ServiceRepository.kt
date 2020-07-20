@@ -1,7 +1,6 @@
 package com.br.workdate.repository
 
 import android.database.sqlite.SQLiteConstraintException
-import android.util.Log
 import com.br.workdate.database.dao.ServiceDAO
 import com.br.workdate.model.Service
 import kotlinx.coroutines.CoroutineScope
@@ -13,6 +12,7 @@ class ServiceRepository(private val dao: ServiceDAO) {
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
+
 
     fun insert(service: Service) {
         scope.launch {
@@ -26,12 +26,22 @@ class ServiceRepository(private val dao: ServiceDAO) {
         }
     }
 
-    fun remove(service: Service) {
+    fun remove(
+        service: Service,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) {
         scope.launch {
+            var failure = false
             try {
                 dao.remove(service)
             } catch (e: SQLiteConstraintException) {
-                Log.e("remove", e.message!!)
+                failure = true
+                inFailureCase()
+            } finally {
+                if (!failure) {
+                    inSuccessCase()
+                }
             }
         }
     }

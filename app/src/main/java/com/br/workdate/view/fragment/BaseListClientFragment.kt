@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.br.workdate.R
 import com.br.workdate.model.Client
+import com.br.workdate.view.dialog.BaseDialog
 import com.br.workdate.view.dialog.ClientFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ClientAdapter
 import com.br.workdate.view.viewmodel.ClientViewModel
@@ -72,8 +73,17 @@ abstract class BaseListClientFragment : Fragment() {
             doInItemClickListener(client)
         }
         adapter.onItemLongClickListener = { client ->
-            viewModel.remove(client)
-            showSnackBar(client, "removed")
+            viewModel.remove(client,
+                inFailureCase = {
+                    activity?.runOnUiThread {
+                        val baseDialog = BaseDialog(requireContext())
+                        baseDialog.showErrorRemoveDialog()
+                    }
+                }, inSuccessCase = {
+                    activity?.runOnUiThread {
+                        showSnackBar(client, "removed")
+                    }
+                })
         }
     }
 

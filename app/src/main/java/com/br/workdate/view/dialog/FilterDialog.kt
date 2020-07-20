@@ -20,10 +20,12 @@ class FilterDialog(
     private val view = Dialog(context)
 
     fun showFilterDialog() {
-        view.setContentView(R.layout.dialog_filter)
-        view.window?.attributes!!.gravity = Gravity.BOTTOM
-        view.window?.setBackgroundDrawable(ColorDrawable(TRANSPARENT))
-        view.show()
+        with(view) {
+            setContentView(R.layout.dialog_filter)
+            window?.attributes!!.gravity = Gravity.BOTTOM
+            window?.setBackgroundDrawable(ColorDrawable(TRANSPARENT))
+            show()
+        }
 
         val items = listOf(
             "Test1",
@@ -42,16 +44,18 @@ class FilterDialog(
             "Aula de Francês"
         )
         val adapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, items)
-        view.autoCompleteTextView_client_edit.setAdapter(adapter)
-        view.autoCompleteTextView_service_edit.setAdapter(adapter)
+        with(view) {
+            autoCompleteTextView_client_edit.setAdapter(adapter)
+            autoCompleteTextView_service_edit.setAdapter(adapter)
 
-        view.dialog_filter_from_date_btn.setOnClickListener {
-            initDateDialog(view.dialog_filter_from_date_btn)
-        }
-        view.dialog_filter_to_date_btn.setOnClickListener {
-            initDateDialog(view.dialog_filter_to_date_btn)
-        }
+            dialog_filter_from_date_btn.setOnClickListener {
+                initDateDialog(view.dialog_filter_from_date_btn)
+            }
 
+            dialog_filter_to_date_btn.setOnClickListener {
+                initDateDialog(view.dialog_filter_to_date_btn)
+            }
+        }
     }
 
     private fun initDateDialog(button: Button) {

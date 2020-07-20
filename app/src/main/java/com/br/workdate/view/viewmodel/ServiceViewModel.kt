@@ -10,7 +10,8 @@ class ServiceViewModel(private val repository: ServiceRepository) : ViewModel() 
 
     fun update(service: Service) = repository.update(service)
 
-    fun remove(service: Service) = repository.remove(service)
+    fun remove(service: Service, inFailureCase: () -> Unit, inSuccessCase: () -> Unit) =
+        repository.remove(service, inFailureCase, inSuccessCase)
 
     fun listAll() = repository.listAll()
 

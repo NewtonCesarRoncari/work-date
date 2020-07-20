@@ -8,6 +8,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
 import com.br.workdate.model.Service
+import com.br.workdate.view.dialog.BaseDialog
 import com.br.workdate.view.dialog.ServiceFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ServiceAdapter
 import com.br.workdate.view.viewmodel.ServiceViewModel
@@ -51,6 +52,7 @@ abstract class BaseListServiceFragment : Fragment() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 if (::adapter.isInitialized) {
                     adapter.filter.filter(newText)
@@ -68,8 +70,17 @@ abstract class BaseListServiceFragment : Fragment() {
             doInItemClickListener(service)
         }
         adapter.onItemLongClickListener = { service ->
-            viewModel.remove(service)
-            showSnackBar(service, "removed")
+            viewModel.remove(service,
+                inFailureCase = {
+                    activity?.runOnUiThread {
+                        val baseDialog = BaseDialog(requireContext())
+                        baseDialog.showErrorRemoveDialog()
+                    }
+                }, inSuccessCase = {
+                    activity?.runOnUiThread {
+                        showSnackBar(service, "removed")
+                    }
+                })
         }
     }
 
@@ -105,5 +116,6 @@ abstract class BaseListServiceFragment : Fragment() {
             Snackbar.make(view, "${service.description} " + msg, Snackbar.LENGTH_SHORT).show()
         }
     }
+
     abstract fun doInItemClickListener(service: Service)
 }

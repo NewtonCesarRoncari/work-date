@@ -10,7 +10,11 @@ class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
 
     fun update(client: Client) = repository.update(client)
 
-    fun remove(client: Client) = repository.remove(client)
+    fun remove(
+        client: Client,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) = repository.remove(client, inFailureCase, inSuccessCase)
 
     fun listAll() = repository.listAll()
 

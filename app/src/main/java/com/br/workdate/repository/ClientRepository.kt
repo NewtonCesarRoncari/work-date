@@ -1,7 +1,6 @@
 package com.br.workdate.repository
 
 import android.database.sqlite.SQLiteConstraintException
-import androidx.lifecycle.LiveData
 import com.br.workdate.database.dao.ClientDAO
 import com.br.workdate.model.Client
 import kotlinx.coroutines.CoroutineScope
@@ -14,17 +13,10 @@ class ClientRepository(private val dao: ClientDAO) {
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
-    fun insert(client: Client) {
-        scope.launch {
-            dao.insert(client)
-        }
-    }
+    fun insert(client: Client) = scope.launch { dao.insert(client) }
 
-    fun update(client: Client) {
-        scope.launch {
-            dao.update(client)
-        }
-    }
+    fun update(client: Client) = scope.launch { dao.update(client) }
+
 
     fun remove(
         client: Client,
@@ -48,11 +40,7 @@ class ClientRepository(private val dao: ClientDAO) {
 
     fun listAll() = dao.listAll()
 
-    fun getNameForId(id: String): LiveData<String> {
-        return dao.returnNameForId(id)
-    }
+    fun getNameForId(id: String) = dao.returnNameForId(id)
 
-    fun returnForId(id: String): LiveData<Client> {
-        return dao.returnForId(id)
-    }
+    fun returnForId(id: String) = dao.returnForId(id)
 }

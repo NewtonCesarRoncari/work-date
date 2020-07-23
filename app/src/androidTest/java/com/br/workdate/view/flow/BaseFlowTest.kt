@@ -54,16 +54,9 @@ abstract class BaseFlowTest {
     protected fun clickSaveDialog() {
         Espresso.onView(
             Matchers.allOf(
-                withId(android.R.id.button1), withText("SAVE"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(Matchers.`is`("android.widget.ScrollView")),
-                        0
-                    ),
-                    3
-                )
+                withId(android.R.id.button1), withText("SAVE")
             )
-        ).perform(scrollTo(), click())
+        ).perform(click())
     }
 
     protected fun insertDataInFieldWithParent(idField: Int, idFieldParent: Int, data: String) {

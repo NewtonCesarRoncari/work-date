@@ -3,11 +3,14 @@ package com.br.workdate.view.fragment
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.br.workdate.R
+import com.br.workdate.view.dialog.FilterDialog
 import com.br.workdate.view.tabs.adapter.TabsAdapter
+import com.br.workdate.view.viewmodel.FilterViewModel
 import com.br.workdate.view.viewmodel.ReleaseViewModel
 import kotlinx.android.synthetic.main.fragment_list_release.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -24,6 +27,8 @@ class ListReleaseFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_list_release, container, false)
     }
 
+    private val filterViewModel: FilterViewModel by viewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,8 +43,14 @@ class ListReleaseFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.base_filter_menu, menu)
-
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_filter) {
+            initFilterDialog()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initResume() {
@@ -59,5 +70,39 @@ class ListReleaseFragment : Fragment() {
 
         viewPager.adapter = tabsAdapter
         fragment_release_tabLayout.setupWithViewPager(viewPager)
+    }
+
+    private fun initFilterDialog() {
+        context?.let { context ->
+            activity?.let { activity ->
+                FilterDialog(
+                    context,
+                    activity,
+                    "release",
+                    loadClientNames = { clientAutoComplete ->
+                        filterViewModel.returnAllClientNames()
+                            .observe(viewLifecycleOwner, Observer { names ->
+                                val clientAdapter = ArrayAdapter(
+                                    context,
+                                    R.layout.support_simple_spinner_dropdown_item,
+                                    names
+                                )
+                                clientAutoComplete.setAdapter(clientAdapter)
+                            })
+                    },
+                    loadServiceDescriptions = { serviceAutoComplete ->
+                        filterViewModel.returnAllServicesDescriptions()
+                            .observe(viewLifecycleOwner, Observer { descriptions ->
+                                val serviceAdapter = ArrayAdapter(
+                                    context,
+                                    R.layout.support_simple_spinner_dropdown_item,
+                                    descriptions
+                                )
+                                serviceAutoComplete.setAdapter(serviceAdapter)
+                            })
+                    }
+                ).showFilterDialog()
+            }
+        }
     }
 }

@@ -22,6 +22,9 @@ interface ClientDAO {
     @Query("SELECT name FROM Client WHERE client.id = :id LIMIT 1")
     fun returnNameForId(id: String): LiveData<String>
 
+    @Query("SELECT name FROM Client")
+    fun returnAllClientNames(): LiveData<List<String>>
+
     @Query("SELECT * FROM Client WHERE client.id = :id LIMIT 1")
     fun returnForId(id: String): LiveData<Client>
 }

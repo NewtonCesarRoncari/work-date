@@ -6,10 +6,7 @@ import com.br.workdate.database.dao.ClientDAO
 import com.br.workdate.database.dao.ReleaseDAO
 import com.br.workdate.database.dao.ScheduleDAO
 import com.br.workdate.database.dao.ServiceDAO
-import com.br.workdate.repository.ClientRepository
-import com.br.workdate.repository.ReleaseRepository
-import com.br.workdate.repository.ScheduleRepository
-import com.br.workdate.repository.ServiceRepository
+import com.br.workdate.repository.*
 import com.br.workdate.view.viewmodel.*
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -38,6 +35,7 @@ val repositoryModule = module {
     single<ServiceRepository> { ServiceRepository(dao = get()) }
     single<ReleaseRepository> { ReleaseRepository(dao = get()) }
     single<ScheduleRepository> { ScheduleRepository(dao = get()) }
+    single<FilterRepository> { FilterRepository(clientDAO = get(), serviceDAO = get()) }
 }
 
 val viewModelModule = module {
@@ -46,4 +44,5 @@ val viewModelModule = module {
     viewModel<ScheduleViewModel> { ScheduleViewModel(repository = get()) }
     viewModel<ReleaseViewModel> { ReleaseViewModel(repository = get()) }
     viewModel<StateAppComponentsViewModel> { StateAppComponentsViewModel() }
+    viewModel<FilterViewModel> { FilterViewModel(repository = get()) }
 }

@@ -2,6 +2,7 @@ package com.br.workdate.view.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +23,7 @@ class ListScheduleFragment : Fragment() {
     private val viewModel: ScheduleViewModel by viewModel()
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
+    private val filterViewModel: FilterViewModel by viewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private lateinit var adapter: ScheduleAdapter
 
@@ -54,7 +56,7 @@ class ListScheduleFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_filter) {
-            showFilterDialog()
+            initFilterDialog()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -101,12 +103,36 @@ class ListScheduleFragment : Fragment() {
         navController.navigate(direction)
     }
 
-    private fun showFilterDialog() {
+
+    private fun initFilterDialog() {
         context?.let { context ->
             activity?.let { activity ->
                 FilterDialog(
                     context,
-                    activity
+                    activity,
+                    "schedule",
+                    loadClientNames = { clientAutoComplete ->
+                        filterViewModel.returnAllClientNames()
+                            .observe(viewLifecycleOwner, Observer { names ->
+                                val clientAdapter = ArrayAdapter(
+                                    context,
+                                    R.layout.support_simple_spinner_dropdown_item,
+                                    names
+                                )
+                                clientAutoComplete.setAdapter(clientAdapter)
+                            })
+                    },
+                    loadServiceDescriptions = { serviceAutoComplete ->
+                        filterViewModel.returnAllServicesDescriptions()
+                            .observe(viewLifecycleOwner, Observer { descriptions ->
+                                val serviceAdapter = ArrayAdapter(
+                                    context,
+                                    R.layout.support_simple_spinner_dropdown_item,
+                                    descriptions
+                                )
+                                serviceAutoComplete.setAdapter(serviceAdapter)
+                            })
+                    }
                 ).showFilterDialog()
             }
         }

@@ -119,7 +119,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/form_schedule_cardView"
             android:layout_width="0dp"
-            android:layout_height="155dp"
+            android:layout_height="165dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
@@ -199,13 +199,12 @@
                     android:id="@+id/obsScheduleTextInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="52dp"
+                    android:layout_height="60dp"
                     android:layout_margin="10dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:inputType="textMultiLine"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.473"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/form_schedule_date_btn"
                     app:layout_constraintVertical_bias="0.0">
@@ -213,7 +212,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/form_schedule_obs"
                         android:layout_width="match_parent"
-                        android:layout_height="42dp"
+                        android:layout_height="50dp"
                         android:hint="@string/observations"
                         android:textSize="13sp" />
                 </com.google.android.material.textfield.TextInputLayout>

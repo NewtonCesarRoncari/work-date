@@ -34,6 +34,14 @@ class OpenReleaseFragment : Fragment() {
             ifEmptyPlayAnimation(releases)
             initAdapter(releases)
         })
+
+        viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, Observer { releases ->
+            if (releases != null) {
+                releases.filter { release -> release.situation == Situation.OPEN }
+                ifEmptyPlayAnimation(releases)
+                initAdapter(releases)
+            }
+        })
     }
 
     private fun initAdapter(releases: MutableList<Release>) {

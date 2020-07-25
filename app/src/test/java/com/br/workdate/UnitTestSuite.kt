@@ -3,7 +3,7 @@ package com.br.workdate
 import com.br.workdate.database.converter.ConvertersTest
 import com.br.workdate.extension.BigDecimalExtensionTest
 import com.br.workdate.extension.StringExtensionTest
-import com.br.workdate.model.ReleaseFilterTest
+import com.br.workdate.model.QueryCreatorFilterTest
 import com.br.workdate.model.ResumeTest
 import com.br.workdate.view.recyclerview.adapter.ClientAdapterTest
 import com.br.workdate.view.recyclerview.adapter.ScheduleAdapterTest
@@ -16,7 +16,7 @@ import org.junit.runners.Suite
     ConvertersTest::class,
     BigDecimalExtensionTest::class,
     StringExtensionTest::class,
-    ReleaseFilterTest::class,
+    QueryCreatorFilterTest::class,
     ResumeTest::class,
     ClientAdapterTest::class,
     ScheduleAdapterTest::class,

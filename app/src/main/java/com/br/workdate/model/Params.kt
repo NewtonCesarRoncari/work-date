@@ -8,12 +8,11 @@ import androidx.annotation.StringDef
     AnnotationTarget.EXPRESSION
 )
 @Retention(AnnotationRetention.SOURCE)
-@StringDef(CLIENT_NAME, SERVICE_DESCRIPTION, VALUE, DATE, HOUR, SITUATION)
+@StringDef(CLIENT_NAME, SERVICE_DESCRIPTION, FROM_DATE, TO_DATE, SITUATION)
 annotation class Params
 
 const val CLIENT_NAME = "clientName"
 const val SERVICE_DESCRIPTION = "serviceDescription"
-const val VALUE = "value"
-const val DATE = "date"
-const val HOUR = "hour"
+const val FROM_DATE = "from_date"
+const val TO_DATE = "to_date"
 const val SITUATION = "situation"

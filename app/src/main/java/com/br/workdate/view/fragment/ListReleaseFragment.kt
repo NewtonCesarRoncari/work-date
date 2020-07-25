@@ -18,6 +18,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ListReleaseFragment : Fragment() {
 
     private val viewModel: ReleaseViewModel by viewModel()
+    private val filterViewModel: FilterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,8 +28,6 @@ class ListReleaseFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_list_release, container, false)
     }
 
-    private val filterViewModel: FilterViewModel by viewModel()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,6 +36,7 @@ class ListReleaseFragment : Fragment() {
         cardView.startAnimation(ttb)
 
         initResume()
+        initResumeInFilter()
         initTabLayout(view)
         setHasOptionsMenu(true)
     }
@@ -59,6 +59,16 @@ class ListReleaseFragment : Fragment() {
         viewModel.listAll().observe(viewLifecycleOwner, Observer { releases ->
             resume = view?.let { view -> ResumeView(view, releases) }!!
             resume.update()
+        })
+    }
+
+    private fun initResumeInFilter() {
+        lateinit var resume: ResumeView
+        viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, Observer { releases ->
+            if (releases != null) {
+                resume = view?.let { view -> ResumeView(view, releases) }!!
+                resume.update()
+            }
         })
     }
 
@@ -100,6 +110,9 @@ class ListReleaseFragment : Fragment() {
                                 )
                                 serviceAutoComplete.setAdapter(serviceAdapter)
                             })
+                    },
+                    returnQuery = { query ->
+                        viewModel.findReleaseFilter(query)
                     }
                 ).showFilterDialog()
             }

@@ -1,10 +1,8 @@
 package com.br.workdate.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.br.workdate.model.Release
 import com.br.workdate.model.Situation
 
@@ -25,4 +23,7 @@ interface ReleaseDAO {
 
     @Query("SELECT id FROM `Release` WHERE schedule_id = :scheduleId LIMIT 1")
     fun findReleaseIdByScheduleId(scheduleId: String): LiveData<String>
+
+    @RawQuery(observedEntities = [Release::class])
+    fun findReleaseFilter(query: SupportSQLiteQuery): MutableList<Release>
 }

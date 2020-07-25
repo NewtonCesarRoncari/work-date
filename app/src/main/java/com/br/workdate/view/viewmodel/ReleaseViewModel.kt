@@ -1,5 +1,6 @@
 package com.br.workdate.view.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.br.workdate.model.Release
 import com.br.workdate.model.Situation
@@ -17,4 +18,8 @@ class ReleaseViewModel(private val repository: ReleaseRepository) : ViewModel() 
 
     fun findReleaseIdByScheduleId(scheduleId: String) =
         repository.findReleaseIdByScheduleId(scheduleId)
+
+    fun findReleaseFilter(query: String) = repository.findReleaseFilter(query)
+
+    fun checkReleasesReturned(): LiveData<MutableList<Release>>? = repository.releasesReturned
 }

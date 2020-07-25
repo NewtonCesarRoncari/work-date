@@ -1,10 +1,10 @@
 package com.br.workdate.model
 
-class ReleaseFilter() {
+class QueryCreatorFilter() {
 
     fun returnByParams(params: HashMap<String, String>): String {
 
-        var sql = "SELECT * FROM SCHEDULE"
+        var sql = "SELECT * FROM RELEASE"
 
         if (params.isNotEmpty()) {
             sql += " WHERE "
@@ -15,14 +15,11 @@ class ReleaseFilter() {
         if (params.containsKey(@Params SERVICE_DESCRIPTION)) {
             sql += "${@Params SERVICE_DESCRIPTION} = ${params[@Params SERVICE_DESCRIPTION]} AND "
         }
-        if (params.containsKey(@Params VALUE)) {
-            sql += "${@Params VALUE} = ${params[@Params VALUE]} AND "
+        if (params.containsKey(@Params FROM_DATE)) {
+            sql += "date >= ${params[@Params FROM_DATE]} AND "
         }
-        if (params.containsKey(@Params DATE)) {
-            sql += "${@Params DATE} = ${params[@Params DATE]} AND "
-        }
-        if (params.containsKey(@Params HOUR)) {
-            sql += "${@Params HOUR} = ${params[@Params HOUR]} AND "
+        if (params.containsKey(@Params TO_DATE)) {
+            sql += "date <= ${params[@Params TO_DATE]} AND "
         }
         if (params.containsKey(@Params SITUATION)) {
             sql += "${@Params SITUATION} = ${params[@Params SITUATION]} AND "

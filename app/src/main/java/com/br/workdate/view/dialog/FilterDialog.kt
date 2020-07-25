@@ -10,7 +10,6 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import androidx.fragment.app.FragmentActivity
 import com.br.workdate.R
-import com.br.workdate.extension.booleanDatabase
 import com.br.workdate.extension.formatForBrazilianDate
 import com.br.workdate.extension.impalementSingleQuotes
 import com.br.workdate.model.*
@@ -27,6 +26,7 @@ class FilterDialog(
     private val view = Dialog(context)
     private var fromDate: Long = 0
     private var toDate: Long = 0
+    private var chip = ""
 
     private fun alterComponentsByTag(tag: String) {
         if (tag == "schedule") {
@@ -50,6 +50,16 @@ class FilterDialog(
         loadClientNames(view.autoCompleteTextView_client_edit)
         loadServiceDescriptions(view.autoCompleteTextView_service_edit)
 
+        view.chip_one.setOnClickListener {
+            view.chip_two.isChecked = false
+            this.chip = "0"
+        }
+
+        view.chip_two.setOnClickListener {
+            view.chip_one.isChecked = false
+            this.chip = "1"
+        }
+
         view.dialog_filter_from_date_btn.setOnClickListener {
             initDateDialogFromDate(view.dialog_filter_from_date_btn)
         }
@@ -61,12 +71,17 @@ class FilterDialog(
         view.dialog_filter_save_btn.setOnClickListener {
             val queryCreatorFilter = QueryCreatorFilter()
             val query = queryCreatorFilter.returnByParams(loadAndReturnParams())
-            fromDate = 0
-            toDate = 0
+            clearVariables()
             returnQuery(query)
             view.dismiss()
             Log.i("query", query)
         }
+    }
+
+    private fun clearVariables() {
+        fromDate = 0
+        toDate = 0
+        chip = ""
     }
 
     private fun initDateDialogFromDate(button: Button) {
@@ -111,8 +126,9 @@ class FilterDialog(
         if (toDate.toString().trim() != "0") {
             params[@Params TO_DATE] = toDate.toString().trim().impalementSingleQuotes()
         }
-        params[@Params SITUATION] =
-            view.chip_one.isChecked.toString().booleanDatabase().trim().impalementSingleQuotes()
+        if (chip.trim().isNotEmpty()) {
+            params[@Params SITUATION] = chip
+        }
         return params
     }
 }

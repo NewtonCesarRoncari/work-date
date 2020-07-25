@@ -88,7 +88,7 @@ class ListReleaseFragment : Fragment() {
                 FilterDialog(
                     context,
                     activity,
-                    "release",
+                    "RELEASE",
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
                             .observe(viewLifecycleOwner, Observer { names ->

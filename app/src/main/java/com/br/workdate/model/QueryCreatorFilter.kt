@@ -2,9 +2,9 @@ package com.br.workdate.model
 
 class QueryCreatorFilter() {
 
-    fun returnByParams(params: HashMap<String, String>): String {
+    fun returnByParams(params: HashMap<String, String>, table: String): String {
 
-        var sql = "SELECT * FROM RELEASE"
+        var sql = "SELECT * FROM $table"
 
         if (params.isNotEmpty()) {
             sql += " WHERE "
@@ -23,6 +23,12 @@ class QueryCreatorFilter() {
         }
         if (params.containsKey(@Params SITUATION)) {
             sql += "${@Params SITUATION} = ${params[@Params SITUATION]} AND "
+        }
+        if (params.containsKey(@Params FINISHED)) {
+            sql += "${@Params FINISHED} = ${params[@Params FINISHED]} AND "
+        }
+        if (params.containsKey(@Params CANCELED)) {
+            sql += "${@Params CANCELED} = ${params[@Params CANCELED]} AND "
         }
         return removeLastAnd(sql, params)
     }

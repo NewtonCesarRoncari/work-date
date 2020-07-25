@@ -31,6 +31,8 @@ import java.util.*
 class Schedule(
     @PrimaryKey(autoGenerate = false)
     val id: String,
+    val clientName: String,
+    val serviceDescription: String,
     val date: Date,
     val hour: Date,
     val value: BigDecimal,

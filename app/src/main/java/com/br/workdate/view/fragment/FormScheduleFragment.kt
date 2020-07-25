@@ -44,6 +44,8 @@ class FormScheduleFragment : Fragment() {
     private lateinit var hour: Date
     private lateinit var clientId: String
     private lateinit var serviceId: String
+    private lateinit var clientNameText: String
+    private lateinit var serviceDescription: String
     private val client by lazy { arguments.client }
     private val service by lazy { arguments.service }
     private val schedule by lazy { arguments.schedule }
@@ -110,6 +112,7 @@ class FormScheduleFragment : Fragment() {
 
     private fun tryLoadClientFields(client: Client) {
         clientId = client.id
+        clientNameText = client.name
         char.text = client.name[0].toString()
         clientName.text = client.name.limit(maxCharacters = 24)
         clientPhone.text = client.phone
@@ -117,6 +120,7 @@ class FormScheduleFragment : Fragment() {
 
     private fun tryLoadServiceFields(service: Service) {
         serviceId = service.id
+        serviceDescription = service.description
         value = service.value
         form_schedule_service_description.text = service.description.limit(maxCharacters = 28)
         form_schedule_service_value.text = service.value.formatForBrazilianCoin()
@@ -214,6 +218,8 @@ class FormScheduleFragment : Fragment() {
     private fun makeSchedule(id: String = ""): Schedule {
         return Schedule(
             id.returnUUID(),
+            clientNameText,
+            serviceDescription,
             date,
             hour,
             value,

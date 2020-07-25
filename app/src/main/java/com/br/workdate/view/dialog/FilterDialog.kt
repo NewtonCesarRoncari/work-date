@@ -26,13 +26,16 @@ class FilterDialog(
     private val view = Dialog(context)
     private var fromDate: Long = 0
     private var toDate: Long = 0
-    private var chip = ""
+    private var releaseChip = ""
+    private var scheduleChipOne = ""
+    private var scheduleChipTwo = ""
 
     private fun alterComponentsByTag(tag: String) {
-        if (tag == "schedule") {
+        if (tag == "SCHEDULE") {
             view.chip_one.setText(R.string.canceled)
             view.chip_two.setText(R.string.finished)
-        } else {
+        }
+        if (tag == "RELEASE") {
             view.chip_one.setText(R.string.open)
             view.chip_two.setText(R.string.paid)
         }
@@ -51,13 +54,31 @@ class FilterDialog(
         loadServiceDescriptions(view.autoCompleteTextView_service_edit)
 
         view.chip_one.setOnClickListener {
-            view.chip_two.isChecked = false
-            this.chip = "0"
+            if (tag == "RELEASE") {
+                view.chip_two.isChecked = false
+                this.releaseChip = "0"
+            }
+            if (tag == "SCHEDULE") {
+                if (view.chip_one.isChecked) {
+                    this.scheduleChipOne = "1"
+                } else {
+                    this.scheduleChipOne = "0"
+                }
+            }
         }
 
         view.chip_two.setOnClickListener {
-            view.chip_one.isChecked = false
-            this.chip = "1"
+            if (tag == "RELEASE") {
+                view.chip_one.isChecked = false
+                this.releaseChip = "1"
+            }
+            if (tag == "SCHEDULE") {
+                if (view.chip_two.isChecked) {
+                    this.scheduleChipTwo = "1"
+                } else {
+                    this.scheduleChipTwo = "0"
+                }
+            }
         }
 
         view.dialog_filter_from_date_btn.setOnClickListener {
@@ -70,7 +91,7 @@ class FilterDialog(
 
         view.dialog_filter_save_btn.setOnClickListener {
             val queryCreatorFilter = QueryCreatorFilter()
-            val query = queryCreatorFilter.returnByParams(loadAndReturnParams())
+            val query = queryCreatorFilter.returnByParams(loadAndReturnParams(), tag)
             clearVariables()
             returnQuery(query)
             view.dismiss()
@@ -81,7 +102,9 @@ class FilterDialog(
     private fun clearVariables() {
         fromDate = 0
         toDate = 0
-        chip = ""
+        releaseChip = ""
+        scheduleChipOne = ""
+        scheduleChipTwo = ""
     }
 
     private fun initDateDialogFromDate(button: Button) {
@@ -126,8 +149,22 @@ class FilterDialog(
         if (toDate.toString().trim() != "0") {
             params[@Params TO_DATE] = toDate.toString().trim().impalementSingleQuotes()
         }
-        if (chip.trim().isNotEmpty()) {
-            params[@Params SITUATION] = chip
+        if (tag == "RELEASE") {
+            if (view.chip_one.isChecked && view.chip_two.isChecked) {
+                if (releaseChip.trim().isNotEmpty()) {
+                    params[@Params SITUATION] = releaseChip
+                }
+            }
+        }
+        if (tag == "SCHEDULE") {
+            if (scheduleChipOne != "0" && scheduleChipOne != "0") {
+                if (scheduleChipOne.trim().isNotEmpty()) {
+                    params[@Params CANCELED] = scheduleChipOne
+                }
+                if (scheduleChipTwo.trim().isNotEmpty()) {
+                    params[@Params FINISHED] = scheduleChipTwo
+                }
+            }
         }
         return params
     }

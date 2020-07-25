@@ -16,17 +16,9 @@ class ReleaseRepository(private val dao: ReleaseDAO) {
     private val scope = CoroutineScope(Dispatchers.IO + job)
     var releasesReturned = MutableLiveData<MutableList<Release>>().apply { postValue(null) }
 
-    fun insert(release: Release) {
-        scope.launch {
-            dao.insert(release)
-        }
-    }
+    fun insert(release: Release) = scope.launch { dao.insert(release) }
 
-    fun update(release: Release) {
-        scope.launch {
-            dao.update(release)
-        }
-    }
+    fun update(release: Release) = scope.launch { dao.update(release) }
 
     fun listAll(situation: Situation) = dao.listAll(situation)
 

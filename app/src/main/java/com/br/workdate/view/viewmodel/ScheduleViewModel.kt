@@ -20,4 +20,6 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
     } else {
         Situation.OPEN
     }
+
+    fun findScheduleFilter(query: String) = repository.findScheduleFilter(query)
 }

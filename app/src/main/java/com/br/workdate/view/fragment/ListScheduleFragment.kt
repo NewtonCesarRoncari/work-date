@@ -110,7 +110,7 @@ class ListScheduleFragment : Fragment() {
                 FilterDialog(
                     context,
                     activity,
-                    "schedule",
+                    "SCHEDULE",
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
                             .observe(viewLifecycleOwner, Observer { names ->
@@ -131,6 +131,13 @@ class ListScheduleFragment : Fragment() {
                                     descriptions
                                 )
                                 serviceAutoComplete.setAdapter(serviceAdapter)
+                            })
+                    },
+                    returnQuery = { query ->
+                        viewModel.findScheduleFilter(query)
+                            .observe(viewLifecycleOwner, Observer { scheduleList ->
+                                ifEmptyPlayAnimation(scheduleList)
+                                initAdapter(scheduleList)
                             })
                     }
                 ).showFilterDialog()

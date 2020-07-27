@@ -14,6 +14,8 @@ import com.br.workdate.extension.formatForBrazilianDate
 import com.br.workdate.extension.impalementSingleQuotes
 import com.br.workdate.model.*
 import kotlinx.android.synthetic.main.dialog_filter.*
+import java.util.*
+import java.util.Calendar.getInstance
 
 class FilterDialog(
     context: Context,
@@ -110,6 +112,8 @@ class FilterDialog(
     private fun initDateDialogFromDate(button: Button) {
         val datePicker = DatePickerHelper(
             onDataSet = { currentDate ->
+                Log.i("date", currentDate.toString())
+                Log.i("date", currentDate.time.toString())
                 fromDate = currentDate.time
                 button.text = currentDate.formatForBrazilianDate()
             }
@@ -122,13 +126,20 @@ class FilterDialog(
     private fun initDateDialogToDate(button: Button) {
         val datePicker = DatePickerHelper(
             onDataSet = { currentDate ->
-                toDate = currentDate.time
+                toDate = addOneDay(currentDate)
                 button.text = currentDate.formatForBrazilianDate()
             }
         )
         activity.supportFragmentManager.let { fragmentManager ->
             datePicker.show(fragmentManager, "time picker")
         }
+    }
+
+    private fun addOneDay(currentDate: Date): Long {
+        val cal = getInstance()
+        cal.time = currentDate
+        cal.add(Calendar.DATE, 1)
+        return cal.time.time
     }
 
     private fun loadAndReturnParams(): HashMap<String, String> {

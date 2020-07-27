@@ -22,7 +22,7 @@ class DatePickerHelper(
                 context,
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     val calendarInstance = getInstance()
-                    calendarInstance.set(year, month, dayOfMonth)
+                    calendarInstance.set(year, month, dayOfMonth, 0, 0, 0)
                     onDataSet(calendarInstance.time)
                 },
                 year,

@@ -110,7 +110,7 @@ class ListScheduleFragment : Fragment() {
                 FilterDialog(
                     context,
                     activity,
-                    "SCHEDULE",
+                    FilterOfSchedule(),
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
                             .observe(viewLifecycleOwner, Observer { names ->

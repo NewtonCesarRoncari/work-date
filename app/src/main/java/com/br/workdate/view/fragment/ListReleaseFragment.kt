@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import com.br.workdate.R
 import com.br.workdate.view.dialog.FilterDialog
 import com.br.workdate.view.tabs.adapter.TabsAdapter
+import com.br.workdate.view.viewmodel.FilterOfRelease
 import com.br.workdate.view.viewmodel.FilterViewModel
 import com.br.workdate.view.viewmodel.ReleaseViewModel
 import kotlinx.android.synthetic.main.fragment_list_release.*
@@ -88,7 +89,7 @@ class ListReleaseFragment : Fragment() {
                 FilterDialog(
                     context,
                     activity,
-                    "RELEASE",
+                    FilterOfRelease(),
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
                             .observe(viewLifecycleOwner, Observer { names ->

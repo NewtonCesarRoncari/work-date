@@ -12,14 +12,6 @@ fun String.limit(maxCharacters: Int): String {
     return this
 }
 
-fun String.booleanDatabase(): String {
-    return if (this == "TRUE") "1" else "0"
-}
-
 fun String.returnUUID(): String {
     return if (this.isEmpty()) UUID.randomUUID().toString() else this
-}
-
-fun String.impalementSingleQuotes(): String {
-    return "'$this'"
 }

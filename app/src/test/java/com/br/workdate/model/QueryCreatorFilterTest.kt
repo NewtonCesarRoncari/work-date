@@ -11,8 +11,8 @@ class QueryCreatorFilterTest {
     fun returnSQLByParamsWhenNoHaveParams() {
         val params = hashMapOf<String, String>()
         assertEquals(
-            "SELECT * FROM SCHEDULE",
-            queryCreatorFilterTest.returnByParams(params)
+            "SELECT * FROM SCHEDULE ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
         )
     }
 
@@ -20,8 +20,8 @@ class QueryCreatorFilterTest {
     fun returnSQLByParamsWhenHaveNameClientParam() {
         val params = hashMapOf(@Params CLIENT_NAME to "test")
         assertEquals(
-            "SELECT * FROM SCHEDULE WHERE clientName = test",
-            queryCreatorFilterTest.returnByParams(params)
+            "SELECT * FROM SCHEDULE WHERE clientName = 'test' ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
         )
     }
 
@@ -29,8 +29,8 @@ class QueryCreatorFilterTest {
     fun returnSQLByParamsWhenHaveServiceDescriptionParam() {
         val params = hashMapOf(@Params SERVICE_DESCRIPTION to "serviceTest")
         assertEquals(
-            "SELECT * FROM SCHEDULE WHERE serviceDescription = serviceTest",
-            queryCreatorFilterTest.returnByParams(params)
+            "SELECT * FROM SCHEDULE WHERE serviceDescription = 'serviceTest' ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
         )
     }
 
@@ -41,9 +41,9 @@ class QueryCreatorFilterTest {
             @Params SERVICE_DESCRIPTION to "serviceTest"
         )
         assertEquals(
-            "SELECT * FROM SCHEDULE WHERE clientName " +
-                    "= test AND serviceDescription = serviceTest",
-            queryCreatorFilterTest.returnByParams(params)
+            "SELECT * FROM SCHEDULE WHERE clientName = 'test' AND" +
+                    " serviceDescription = 'serviceTest' ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
         )
     }
 
@@ -54,66 +54,54 @@ class QueryCreatorFilterTest {
             @Params CLIENT_NAME to "test"
         )
         assertEquals(
-            "SELECT * FROM SCHEDULE WHERE clientName " +
-                    "= test AND serviceDescription = serviceTest",
-            queryCreatorFilterTest.returnByParams(params)
+            "SELECT * FROM SCHEDULE WHERE clientName = 'test' AND" +
+                    " serviceDescription = 'serviceTest' ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
         )
     }
 
     @Test
-    fun returnSQLByParamsWhenHaveNameClientAndServiceDescriptionAndValueParam() {
+    fun returnSQLByParamsWhenHaveNameClientAndServiceDescriptionAndCanceledParam() {
         val params = hashMapOf(
             @Params CLIENT_NAME to "test",
-            @Params SERVICE_DESCRIPTION to "serviceTest"
-        )
-        assertEquals(
-            "SELECT * FROM SCHEDULE WHERE clientName " +
-                    "= test AND serviceDescription = serviceTest AND value = 10",
-            queryCreatorFilterTest.returnByParams(params)
-        )
-    }
-
-    @Test
-    fun returnSQLByParamsWhenHaveServiceDescriptionAndNameClientAndValueParam() {
-        val params = hashMapOf(
             @Params SERVICE_DESCRIPTION to "serviceTest",
-            @Params CLIENT_NAME to "test"
+            @Params CANCELED to "1"
         )
         assertEquals(
-            "SELECT * FROM SCHEDULE WHERE clientName " +
-                    "= test AND serviceDescription = serviceTest AND value = 10",
-            queryCreatorFilterTest.returnByParams(params)
+            "SELECT * FROM SCHEDULE WHERE canceled = '1' AND" +
+                    " serviceDescription = 'serviceTest' AND" +
+                    " clientName = 'test' ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
         )
     }
 
     @Test
-    fun returnSQLByParamsWhenHaveValueAndServiceDescriptionAndNameClientParam() {
-        val params = hashMapOf(
-            @Params SERVICE_DESCRIPTION to "serviceTest",
-            @Params CLIENT_NAME to "test"
-        )
-        assertEquals(
-            "SELECT * FROM SCHEDULE WHERE clientName " +
-                    "= test AND serviceDescription = serviceTest AND value = 10",
-            queryCreatorFilterTest.returnByParams(params)
-        )
-    }
-
-    @Test
-    fun returnSQLByParamsWhenHaveAllParams() {
+    fun returnSQLByParamsWhenHaveServiceDescriptionAndNameClientAndNoCanceledParam() {
         val params = hashMapOf(
             @Params SERVICE_DESCRIPTION to "serviceTest",
             @Params CLIENT_NAME to "test",
-            @Params SITUATION to "1"
+            @Params CANCELED to "0"
         )
         assertEquals(
-            "SELECT * FROM SCHEDULE WHERE clientName = test AND" +
-                    " serviceDescription = serviceTest AND" +
-                    " value = 10 AND" +
-                    " date = 18/10/2020 AND" +
-                    " hour = 22:30 AND" +
-                    " situation = 1",
-            queryCreatorFilterTest.returnByParams(params)
+            "SELECT * FROM SCHEDULE WHERE canceled = '0' AND" +
+                    " serviceDescription = 'serviceTest' AND" +
+                    " clientName = 'test' ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
+        )
+    }
+
+    @Test
+    fun returnSQLByParamsWhenHaveFinishedAndServiceDescriptionAndNameClientParam() {
+        val params = hashMapOf(
+            @Params SERVICE_DESCRIPTION to "serviceTest",
+            @Params CLIENT_NAME to "test",
+            @Params FINISHED to "1"
+        )
+        assertEquals(
+            "SELECT * FROM SCHEDULE WHERE serviceDescription = 'serviceTest' AND" +
+                    " finished = '1' AND" +
+                    " clientName = 'test' ORDER BY date, hour",
+            queryCreatorFilterTest.returnByParams(params, "SCHEDULE")
         )
     }
 }

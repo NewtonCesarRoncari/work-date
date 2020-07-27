@@ -4,7 +4,7 @@
         <item
             android:id="@+id/listScheduleFragment"
             android:icon="@drawable/ic_schedule"
-            android:title="@string/schedule" />
+            android:title="@string/schedules" />
         <item
             android:id="@+id/listClientFragment"
             android:icon="@drawable/ic_clients"

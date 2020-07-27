@@ -78,7 +78,7 @@ class ListScheduleFragment : Fragment() {
                     serviceViewModel.returnDescriptionForId(serviceId).observe(
                         viewLifecycleOwner,
                         Observer { serviceDescription ->
-                            fieldServiceDescription.text = serviceDescription.limit(28)
+                            fieldServiceDescription.text = serviceDescription.limit(17)
                         })
                 })
         }!!

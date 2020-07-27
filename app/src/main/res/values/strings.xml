@@ -59,4 +59,5 @@
     <string name="test">test</string>
     <string name="from">From</string>
     <string name="to">To</string>
+    <string name="schedules">Schedules</string>
 </resources>

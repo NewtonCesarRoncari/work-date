@@ -15,10 +15,10 @@ interface ReleaseDAO {
     @Update
     fun update(release: Release)
 
-    @Query("SELECT * FROM `Release` WHERE situation = :situation")
+    @Query("SELECT * FROM `Release` WHERE situation = :situation ORDER BY date, hour")
     fun listAll(situation: Situation): LiveData<MutableList<Release>>
 
-    @Query("SELECT * FROM `Release`")
+    @Query("SELECT * FROM `Release` ORDER BY date, hour")
     fun listAll(): LiveData<MutableList<Release>>
 
     @Query("SELECT id FROM `Release` WHERE schedule_id = :scheduleId LIMIT 1")

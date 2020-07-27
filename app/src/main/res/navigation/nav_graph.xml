@@ -8,17 +8,17 @@
     <fragment
         android:id="@+id/listClientFragment"
         android:name="com.br.workdate.view.fragment.ListClientFragment"
-        android:label="Client List"
+        android:label="@string/clients"
         tools:layout="@layout/fragment_list_client" />
     <fragment
         android:id="@+id/listServiceFragment"
         android:name="com.br.workdate.view.fragment.ListServiceFragment"
-        android:label="Service List"
+        android:label="@string/services"
         tools:layout="@layout/fragment_list_service" />
     <fragment
         android:id="@+id/listScheduleFragment"
         android:name="com.br.workdate.view.fragment.ListScheduleFragment"
-        android:label="Schedule List"
+        android:label="@string/schedules"
         tools:layout="@layout/fragment_list_schedule">
         <action
             android:id="@+id/action_listScheduleFragment_to_formScheduleFragment"

@@ -24,7 +24,6 @@ class FilterDialog(
     var loadServiceDescriptions: (serviceAutoComplete: AutoCompleteTextView) -> Unit = {},
     var returnQuery: (query: String) -> Unit = {}
 ) {
-    private val tag = filterOf.tag()
     private val view = Dialog(context)
     private var fromDate: Long = 0
     private var toDate: Long = 0
@@ -68,7 +67,7 @@ class FilterDialog(
             dialog_filter_save_btn.setOnClickListener {
                 val queryCreatorFilter = QueryCreatorFilter()
                 val params = returnParams()
-                val query = queryCreatorFilter.returnByParams(params, tag)
+                val query = queryCreatorFilter.returnByParams(params, filterOf.tag)
                 clearVariables()
                 returnQuery(query)
                 view.dismiss()

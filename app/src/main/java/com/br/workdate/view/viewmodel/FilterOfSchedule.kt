@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.dialog_filter.*
 
 class FilterOfSchedule : FilterOf {
 
-    override fun tag() = "SCHEDULE"
+    override val tag get() = "SCHEDULE"
 
     override fun alterComponentsByTag(view: Dialog) {
         view.chip_one.setText(R.string.canceled)

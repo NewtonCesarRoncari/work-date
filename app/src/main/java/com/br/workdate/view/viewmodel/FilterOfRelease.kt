@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.dialog_filter.*
 
 class FilterOfRelease : FilterOf {
 
-    override fun tag() = "RELEASE"
+    override val tag get() = "RELEASE"
 
     override fun alterComponentsByTag(view: Dialog) {
         view.chip_one.setText(R.string.open)

@@ -4,7 +4,7 @@ import android.app.Dialog
 
 interface FilterOf {
 
-    fun tag(): String
+    val tag: String
     fun alterComponentsByTag(view: Dialog)
     fun chipOneSetOnClickListener(view: Dialog): String
     fun chipTwoSetOnClickListener(view: Dialog): String

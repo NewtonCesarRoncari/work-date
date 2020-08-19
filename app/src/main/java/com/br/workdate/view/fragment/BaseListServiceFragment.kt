@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
 import com.br.workdate.model.Service
@@ -45,10 +46,10 @@ abstract class BaseListServiceFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.base_search_menu, menu)
 
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
+        val searchItem by lazy { menu.findItem(R.id.action_search) }
+        val searchView by lazy { searchItem.actionView as SearchView }
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }

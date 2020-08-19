@@ -28,9 +28,17 @@ class ServiceRepository(private val dao: ServiceDAO) {
         }
     }
 
-    fun update(service: Service) {
+    fun update(
+        service: Service,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) {
         scope.launch {
-            dao.update(service)
+            tryRequisition(
+                requisition = { dao.update(service) },
+                inFailureCase = inFailureCase,
+                inSuccessCase = inSuccessCase
+            )
         }
     }
 

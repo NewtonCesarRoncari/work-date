@@ -12,7 +12,11 @@ class ServiceViewModel(private val repository: ServiceRepository) : ViewModel() 
         inSuccessCase: () -> Unit
     ) = repository.insert(service, inFailureCase, inSuccessCase)
 
-    fun update(service: Service) = repository.update(service)
+    fun update(
+        service: Service,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) = repository.update(service, inFailureCase, inSuccessCase)
 
     fun remove(
         service: Service,

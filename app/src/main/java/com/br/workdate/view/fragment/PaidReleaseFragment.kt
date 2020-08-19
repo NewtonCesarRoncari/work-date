@@ -38,7 +38,9 @@ class PaidReleaseFragment : Fragment() {
             if (releases != null) {
                 releases.filter { release -> release.situation == Situation.PAID }
                 ifEmptyPlayAnimation(releases)
-                initAdapter(releases)
+                initAdapter(releases.filter { release ->
+                    release.situation == Situation.PAID
+                } as MutableList<Release>)
             }
         })
     }

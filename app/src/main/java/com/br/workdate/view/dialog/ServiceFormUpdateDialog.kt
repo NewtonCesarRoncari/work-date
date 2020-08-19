@@ -11,7 +11,8 @@ class ServiceFormUpdateDialog(
     context: Context
 ) : ServiceFormDialog(context, viewGroup) {
 
-    override val titleDialog = "Update Service"
+    override val titleDialog: String
+        get() = "Update Service"
 
     fun initServiceFormDialog(service: Service, dialogClickListener: (service: Service) -> Unit) {
         loadFieldDataDialog(service)
@@ -20,8 +21,9 @@ class ServiceFormUpdateDialog(
 
     @SuppressLint("SetTextI18n")
     private fun loadFieldDataDialog(service: Service) {
-        fieldID.text = service.id
         fieldID.visibility = VISIBLE
+        fieldDescription.isFocusable = false
+        fieldID.text = service.id
         fieldDescription.setText(service.description)
         fieldValue.setText(service.value.toString())
     }

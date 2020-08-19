@@ -6,9 +6,17 @@ import com.br.workdate.repository.ClientRepository
 
 class ClientViewModel(private val repository: ClientRepository) : ViewModel() {
 
-    fun insert(client: Client) = repository.insert(client)
+    fun insert(
+        client: Client,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) = repository.insert(client, inFailureCase, inSuccessCase)
 
-    fun update(client: Client) = repository.update(client)
+    fun update(
+        client: Client,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) = repository.update(client, inFailureCase, inSuccessCase)
 
     fun remove(
         client: Client,

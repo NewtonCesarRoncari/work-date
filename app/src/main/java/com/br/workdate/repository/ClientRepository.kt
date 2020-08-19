@@ -13,10 +13,29 @@ class ClientRepository(private val dao: ClientDAO) {
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
-    fun insert(client: Client) = scope.launch { dao.insert(client) }
+    fun insert(
+        client: Client,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) = scope.launch {
+        tryRequisition(
+            requisition = { dao.insert(client) },
+            inFailureCase = inFailureCase,
+            inSuccessCase = inSuccessCase
+        )
+    }
 
-    fun update(client: Client) = scope.launch { dao.update(client) }
-
+    fun update(
+        client: Client,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) = scope.launch {
+        tryRequisition(
+            requisition = { dao.update(client) },
+            inFailureCase = inFailureCase,
+            inSuccessCase = inSuccessCase
+        )
+    }
 
     fun remove(
         client: Client,
@@ -24,17 +43,11 @@ class ClientRepository(private val dao: ClientDAO) {
         inSuccessCase: () -> Unit
     ) {
         scope.launch {
-            var failure = false
-            try {
-                dao.remove(client)
-            } catch (e: SQLiteConstraintException) {
-                failure = true
-                inFailureCase()
-            } finally {
-                if (!failure) {
-                    inSuccessCase()
-                }
-            }
+            tryRequisition(
+                requisition = { dao.remove(client) },
+                inFailureCase = inFailureCase,
+                inSuccessCase = inSuccessCase
+            )
         }
     }
 
@@ -43,4 +56,22 @@ class ClientRepository(private val dao: ClientDAO) {
     fun getNameForId(id: String) = dao.returnNameForId(id)
 
     fun returnForId(id: String) = dao.returnForId(id)
+
+    private fun tryRequisition(
+        requisition: () -> Unit,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) {
+        var failure = false
+        try {
+            requisition()
+        } catch (e: SQLiteConstraintException) {
+            failure = true
+            inFailureCase()
+        } finally {
+            if (!failure) {
+                inSuccessCase()
+            }
+        }
+    }
 }

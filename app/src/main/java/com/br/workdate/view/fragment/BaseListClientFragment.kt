@@ -77,7 +77,7 @@ abstract class BaseListClientFragment : Fragment() {
                 inFailureCase = {
                     activity?.runOnUiThread {
                         val baseDialog = BaseDialog(requireContext())
-                        baseDialog.showErrorRemoveDialog()
+                        baseDialog.showErrorRemoveDialog("this record is linked to a schedule")
                     }
                 }, inSuccessCase = {
                     activity?.runOnUiThread {
@@ -108,8 +108,17 @@ abstract class BaseListClientFragment : Fragment() {
         context?.let { context ->
             ClientFormInsertDialog(view as ViewGroup, context)
                 .initClientFormDialog { clientReturned ->
-                    viewModel.insert(clientReturned)
-                    showSnackBar(clientReturned, "saved")
+                    viewModel.insert(clientReturned,
+                        inFailureCase = {
+                            activity?.runOnUiThread {
+                                val baseDialog = BaseDialog(requireContext())
+                                baseDialog.showErrorRemoveDialog("this client name already exists")
+                            }
+                        }, inSuccessCase = {
+                            activity?.runOnUiThread {
+                                showSnackBar(clientReturned, "saved")
+                            }
+                        })
                 }
         }
     }

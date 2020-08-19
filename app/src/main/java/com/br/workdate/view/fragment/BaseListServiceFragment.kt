@@ -74,7 +74,7 @@ abstract class BaseListServiceFragment : Fragment() {
                 inFailureCase = {
                     activity?.runOnUiThread {
                         val baseDialog = BaseDialog(requireContext())
-                        baseDialog.showErrorRemoveDialog()
+                        baseDialog.showErrorRemoveDialog("this record is linked to a schedule")
                     }
                 }, inSuccessCase = {
                     activity?.runOnUiThread {
@@ -105,8 +105,17 @@ abstract class BaseListServiceFragment : Fragment() {
         context?.let { context ->
             ServiceFormInsertDialog(view as ViewGroup, context)
                 .initServiceFormDialog { serviceReturned ->
-                    viewModel.insert(serviceReturned)
-                    showSnackBar(serviceReturned, "saved")
+                    viewModel.insert(serviceReturned,
+                        inFailureCase = {
+                            activity?.runOnUiThread {
+                                val baseDialog = BaseDialog(requireContext())
+                                baseDialog.showErrorRemoveDialog("this service description already exists")
+                            }
+                        }, inSuccessCase = {
+                            activity?.runOnUiThread {
+                                showSnackBar(serviceReturned, "saved")
+                            }
+                        })
                 }
         }
     }

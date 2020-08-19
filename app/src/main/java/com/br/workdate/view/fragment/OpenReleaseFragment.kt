@@ -37,9 +37,10 @@ class OpenReleaseFragment : Fragment() {
 
         viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, Observer { releases ->
             if (releases != null) {
-                releases.filter { release -> release.situation == Situation.OPEN }
                 ifEmptyPlayAnimation(releases)
-                initAdapter(releases)
+                initAdapter(releases.filter { release ->
+                    release.situation == Situation.OPEN
+                } as MutableList<Release>)
             }
         })
     }

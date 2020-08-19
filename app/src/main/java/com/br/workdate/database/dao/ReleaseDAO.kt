@@ -2,6 +2,7 @@ package com.br.workdate.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.br.workdate.model.Release
 import com.br.workdate.model.Situation
@@ -9,7 +10,7 @@ import com.br.workdate.model.Situation
 @Dao
 interface ReleaseDAO {
 
-    @Insert
+    @Insert(onConflict = REPLACE)
     fun insert(release: Release)
 
     @Update

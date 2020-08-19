@@ -14,9 +14,17 @@ class ServiceRepository(private val dao: ServiceDAO) {
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
 
-    fun insert(service: Service) {
+    fun insert(
+        service: Service,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) {
         scope.launch {
-            dao.insert(service)
+            tryRequisition(
+                requisition = { dao.insert(service) },
+                inFailureCase = inFailureCase,
+                inSuccessCase = inSuccessCase
+            )
         }
     }
 
@@ -32,17 +40,11 @@ class ServiceRepository(private val dao: ServiceDAO) {
         inSuccessCase: () -> Unit
     ) {
         scope.launch {
-            var failure = false
-            try {
-                dao.remove(service)
-            } catch (e: SQLiteConstraintException) {
-                failure = true
-                inFailureCase()
-            } finally {
-                if (!failure) {
-                    inSuccessCase()
-                }
-            }
+            tryRequisition(
+                requisition = { dao.remove(service) },
+                inFailureCase = inFailureCase,
+                inSuccessCase = inSuccessCase
+            )
         }
     }
 
@@ -51,4 +53,22 @@ class ServiceRepository(private val dao: ServiceDAO) {
     fun returnDescriptionForId(id: String) = dao.returnDescriptionForId(id)
 
     fun returnForId(id: String) = dao.returnForId(id)
+
+    private fun tryRequisition(
+        requisition: () -> Unit,
+        inFailureCase: () -> Unit,
+        inSuccessCase: () -> Unit
+    ) {
+        var failure = false
+        try {
+            requisition()
+        } catch (e: SQLiteConstraintException) {
+            failure = true
+            inFailureCase()
+        } finally {
+            if (!failure) {
+                inSuccessCase()
+            }
+        }
+    }
 }

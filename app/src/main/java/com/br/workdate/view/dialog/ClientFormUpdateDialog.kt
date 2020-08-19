@@ -19,8 +19,9 @@ class ClientFormUpdateDialog(
     }
 
     private fun loadFieldDataDialog(client: Client) {
-        fieldID.text = client.id
         fieldID.visibility = VISIBLE
+        fieldName.isFocusable = false
+        fieldID.text = client.id
         fieldName.setText(client.name)
         fieldAddress.setText(client.address)
         fieldPhone.setText(client.phone)

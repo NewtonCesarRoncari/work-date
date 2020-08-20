@@ -100,7 +100,6 @@ class FilterDialog(
             onDataSet = { currentDate ->
                 if (fromOrTo == "from") fromDate = currentDate.time
                 if (fromOrTo == "to") toDate = currentDate.time
-                fromDate = currentDate.time
                 button.text = currentDate.formatForBrazilianDate()
             }
         )

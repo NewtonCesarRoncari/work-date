@@ -11,10 +11,10 @@ class QueryCreatorFilter() {
             params.forEach { map ->
 
                 if (map.key == @Params FROM_DATE) {
-                    query += "date >= '${map.key}' AND "
+                    query += "date >= '${map.value}' AND "
                 }
                 if (map.key == @Params TO_DATE) {
-                    query += "date <= '${map.key}' AND "
+                    query += "date <= '${map.value}' AND "
                 }
 
                 if (map.key != @Params FROM_DATE && map.key != @Params TO_DATE) {

@@ -221,7 +221,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/form_schedule_finished_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -230,7 +230,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_schedule_cardView" />
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/form_schedule_canceled_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -36,19 +36,20 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    //noinspection GradleDependency --
     implementation 'com.google.android.material:material:1.1.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
     testImplementation 'org.mockito:mockito-core:2.18.3'
 
-    debugImplementation("androidx.fragment:fragment-testing:1.3.0-alpha06")
-    debugImplementation("androidx.fragment:fragment-ktx:1.3.0-alpha06")
+    debugImplementation("androidx.fragment:fragment-testing:1.3.0-alpha08")
+    debugImplementation("androidx.fragment:fragment-ktx:1.3.0-alpha08")
     debugImplementation("androidx.test:core:1.2.0")
 
-    androidTestImplementation 'com.21buttons:fragment-test-rule:1.0.0'
+    androidTestImplementation 'com.21buttons:fragment-test-rule:2.0.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
@@ -60,14 +61,14 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Lottie
-    def lottie_version = "3.1.0"
+    def lottie_version = '3.4.1'
     implementation "com.airbnb.android:lottie:$lottie_version"
 
     // ViewModel and LiveData
     def lifecycle_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha05"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha07"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //Koin
@@ -76,19 +77,19 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$koin_version"
 
     //Glide
-    def glide_version = "4.10.0"
+    def glide_version = '4.11.0'
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     //Retrofit
-    def retrofit_version = "2.6.0"
+    def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
     //Jackson
     implementation "com.squareup.retrofit2:converter-jackson:$retrofit_version"
 
     //Logging-Interceptor
-    implementation "com.squareup.okhttp3:logging-interceptor:4.0.1"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
 
     //Room
     def room_version = "2.2.5"
@@ -98,7 +99,7 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
     //Coroutines
-    def coroutines_version = "1.1.1"
+    def coroutines_version = "1.3.7"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }

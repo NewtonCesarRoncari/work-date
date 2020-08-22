@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/formScheduleFragment"
         android:name="com.br.workdate.view.fragment.FormScheduleFragment"
-        android:label="Schedule"
+        android:label="@string/schedule"
         tools:layout="@layout/fragment_form_schedule">
         <argument
             android:name="client"
@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/searchListClientFragment"
         android:name="com.br.workdate.view.fragment.SearchListClientFragment"
-        android:label="Choose Client"
+        android:label="@string/choose_client"
         tools:layout="@layout/fragment_list_client">
         <action
             android:id="@+id/action_searchListClientFragment_to_searchListServiceFragment"
@@ -64,7 +64,7 @@
     <fragment
         android:id="@+id/searchListServiceFragment"
         android:name="com.br.workdate.view.fragment.SearchListServiceFragment"
-        android:label="Choose Service"
+        android:label="@string/choose_service"
         tools:layout="@layout/fragment_list_service">
         <action
             android:id="@+id/action_searchListServiceFragment_to_formScheduleFragment"
@@ -76,8 +76,8 @@
             app:nullable="true" />
         <argument
             android:name="client"
-            app:argType="com.br.workdate.model.Client"
             android:defaultValue="@null"
+            app:argType="com.br.workdate.model.Client"
             app:nullable="true" />
     </fragment>
     <fragment

@@ -1,6 +1,7 @@
 package com.br.workdate.view.fragment
 
 import android.view.ViewGroup
+import com.br.workdate.R
 import com.br.workdate.model.Client
 import com.br.workdate.view.dialog.BaseDialog
 import com.br.workdate.view.dialog.ClientFormUpdateDialog
@@ -18,11 +19,11 @@ class ListClientFragment : BaseListClientFragment() {
                         inFailureCase = {
                             activity?.runOnUiThread {
                                 val baseDialog = BaseDialog(requireContext())
-                                baseDialog.showErrorRemoveDialog("this client name already exists")
+                                baseDialog.showErrorRemoveDialog(getString(R.string.message_client_name_already_exists))
                             }
                         }, inSuccessCase = {
                             activity?.runOnUiThread {
-                                showSnackBar(clientReturned, "updated")
+                                showSnackBar(clientReturned, getString(R.string.updated))
                             }
                         })
                 }

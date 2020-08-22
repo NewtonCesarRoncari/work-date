@@ -1,6 +1,7 @@
 package com.br.workdate.view.fragment
 
 import android.view.ViewGroup
+import com.br.workdate.R
 import com.br.workdate.model.Service
 import com.br.workdate.view.dialog.BaseDialog
 import com.br.workdate.view.dialog.ServiceFormUpdateDialog
@@ -17,11 +18,11 @@ class ListServiceFragment : BaseListServiceFragment() {
                         inFailureCase = {
                             activity?.runOnUiThread {
                                 val baseDialog = BaseDialog(requireContext())
-                                baseDialog.showErrorRemoveDialog("this service description already exists")
+                                baseDialog.showErrorRemoveDialog(getString(R.string.message_service_description_already_exists))
                             }
                         }, inSuccessCase = {
                             activity?.runOnUiThread {
-                                showSnackBar(serviceReturned, "updated")
+                                showSnackBar(serviceReturned, getString(R.string.updated))
                             }
                         })
                 }

@@ -5,7 +5,6 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.br.workdate.R
 import com.br.workdate.view.dialog.FilterDialog
@@ -57,7 +56,7 @@ class ListReleaseFragment : Fragment() {
     private fun initResume() {
         lateinit var resume: ResumeView
         val view = activity?.window?.decorView
-        viewModel.listAll().observe(viewLifecycleOwner, Observer { releases ->
+        viewModel.listAll().observe(viewLifecycleOwner, { releases ->
             resume = view?.let { view -> ResumeView(view, releases) }!!
             resume.update()
         })
@@ -65,7 +64,7 @@ class ListReleaseFragment : Fragment() {
 
     private fun initResumeInFilter() {
         lateinit var resume: ResumeView
-        viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, Observer { releases ->
+        viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, { releases ->
             if (releases != null) {
                 resume = view?.let { view -> ResumeView(view, releases) }!!
                 resume.update()
@@ -74,7 +73,7 @@ class ListReleaseFragment : Fragment() {
     }
 
     private fun initTabLayout(view: View) {
-        val tabsAdapter = TabsAdapter(requireActivity().supportFragmentManager)
+        val tabsAdapter = context?.let { TabsAdapter(requireActivity().supportFragmentManager, it) }
         val viewPager by lazy {
             view.findViewById<ViewPager>(R.id.fragment_release_viewpager)
         }
@@ -92,7 +91,7 @@ class ListReleaseFragment : Fragment() {
                     FilterOfRelease(),
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
-                            .observe(viewLifecycleOwner, Observer { names ->
+                            .observe(viewLifecycleOwner, { names ->
                                 val clientAdapter = ArrayAdapter(
                                     context,
                                     R.layout.support_simple_spinner_dropdown_item,
@@ -103,7 +102,7 @@ class ListReleaseFragment : Fragment() {
                     },
                     loadServiceDescriptions = { serviceAutoComplete ->
                         filterViewModel.returnAllServicesDescriptions()
-                            .observe(viewLifecycleOwner, Observer { descriptions ->
+                            .observe(viewLifecycleOwner, { descriptions ->
                                 val serviceAdapter = ArrayAdapter(
                                     context,
                                     R.layout.support_simple_spinner_dropdown_item,

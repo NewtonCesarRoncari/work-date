@@ -36,7 +36,7 @@ abstract class BaseListServiceFragment : Fragment() {
         new_service.setOnClickListener {
             callInsertDialog()
         }
-        viewModel.listAll().observe(viewLifecycleOwner, androidx.lifecycle.Observer { serviceList ->
+        viewModel.listAll().observe(viewLifecycleOwner, { serviceList ->
             ifEmptyPlayAnimation(serviceList)
             initServiceAdapter(serviceList)
         })
@@ -75,11 +75,11 @@ abstract class BaseListServiceFragment : Fragment() {
                 inFailureCase = {
                     activity?.runOnUiThread {
                         val baseDialog = BaseDialog(requireContext())
-                        baseDialog.showErrorRemoveDialog("this record is linked to a schedule")
+                        baseDialog.showErrorRemoveDialog(getString(R.string.message_linked_schedule))
                     }
                 }, inSuccessCase = {
                     activity?.runOnUiThread {
-                        showSnackBar(service, "removed")
+                        showSnackBar(service, getString(R.string.removed))
                     }
                 })
         }
@@ -110,11 +110,11 @@ abstract class BaseListServiceFragment : Fragment() {
                         inFailureCase = {
                             activity?.runOnUiThread {
                                 val baseDialog = BaseDialog(requireContext())
-                                baseDialog.showErrorRemoveDialog("this service description already exists")
+                                baseDialog.showErrorRemoveDialog(getString(R.string.message_service_description_already_exists))
                             }
                         }, inSuccessCase = {
                             activity?.runOnUiThread {
-                                showSnackBar(serviceReturned, "saved")
+                                showSnackBar(serviceReturned, getString(R.string.saved))
                             }
                         })
                 }

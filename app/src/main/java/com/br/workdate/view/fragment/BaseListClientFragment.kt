@@ -7,7 +7,6 @@ import android.view.View.VISIBLE
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.br.workdate.R
 import com.br.workdate.model.Client
 import com.br.workdate.view.dialog.BaseDialog
@@ -39,7 +38,7 @@ abstract class BaseListClientFragment : Fragment() {
         new_client.setOnClickListener {
             callInsertDialog()
         }
-        viewModel.listAll().observe(viewLifecycleOwner, Observer { clientList ->
+        viewModel.listAll().observe(viewLifecycleOwner, { clientList ->
             ifEmptyPlayAnimation(clientList)
             initClientAdapter(clientList)
         })
@@ -78,11 +77,11 @@ abstract class BaseListClientFragment : Fragment() {
                 inFailureCase = {
                     activity?.runOnUiThread {
                         val baseDialog = BaseDialog(requireContext())
-                        baseDialog.showErrorRemoveDialog("this record is linked to a schedule")
+                        baseDialog.showErrorRemoveDialog(getString(R.string.message_linked_schedule))
                     }
                 }, inSuccessCase = {
                     activity?.runOnUiThread {
-                        showSnackBar(client, "removed")
+                        showSnackBar(client, getString(R.string.removed))
                     }
                 })
         }
@@ -113,11 +112,11 @@ abstract class BaseListClientFragment : Fragment() {
                         inFailureCase = {
                             activity?.runOnUiThread {
                                 val baseDialog = BaseDialog(requireContext())
-                                baseDialog.showErrorRemoveDialog("this client name already exists")
+                                baseDialog.showErrorRemoveDialog(getString(R.string.message_client_name_already_exists))
                             }
                         }, inSuccessCase = {
                             activity?.runOnUiThread {
-                                showSnackBar(clientReturned, "saved")
+                                showSnackBar(clientReturned, getString(R.string.saved))
                             }
                         })
                 }

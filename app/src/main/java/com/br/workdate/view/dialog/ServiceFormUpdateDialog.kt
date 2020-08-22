@@ -4,15 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import com.br.workdate.R
 import com.br.workdate.model.Service
 
 class ServiceFormUpdateDialog(
     viewGroup: ViewGroup,
-    context: Context
+    private val context: Context
 ) : ServiceFormDialog(context, viewGroup) {
 
     override val titleDialog: String
-        get() = "Update Service"
+        get() = context.getString(R.string.title_form_update_service)
 
     fun initServiceFormDialog(service: Service, dialogClickListener: (service: Service) -> Unit) {
         loadFieldDataDialog(service)

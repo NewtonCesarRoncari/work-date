@@ -50,10 +50,10 @@
         app:layout_constraintTop_toBottomOf="@id/clientNameTextInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/client_formulary_address"
+            android:id="@+id/client_form_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/adress" />
+            android:hint="@string/address" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

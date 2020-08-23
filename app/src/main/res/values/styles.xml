@@ -9,4 +9,8 @@
         <item name="android:typeface">serif</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/background_app_splash_screen</item>
+    </style>
+
 </resources>

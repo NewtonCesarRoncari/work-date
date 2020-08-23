@@ -1,0 +1,74 @@
+<svg height="2080" preserveAspectRatio="xMidYMid" viewBox="0 0 2080 2080" width="2080"
+    xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .cls-1 {
+            fill: #311b92;
+            stroke-width: 35px;
+            }
+
+            .cls-1, .cls-5 {
+            stroke: #fff;
+            }
+
+            .cls-2, .cls-3 {
+            font-size: 73.658px;
+            }
+
+            .cls-3, .cls-4, .cls-5 {
+            fill: #fff;
+            }
+
+            .cls-3 {
+            text-anchor: middle;
+            font-family: "OpenSans-ExtraBold";
+            font-weight: bold;
+            }
+
+            .cls-4 {
+            stroke: #1d1055;
+            stroke-width: 9px;
+            fill-rule: evenodd;
+            }
+
+            .cls-4, .cls-5 {
+            stroke-linecap: round;
+            stroke-linejoin: bevel;
+            }
+
+            .cls-5 {
+            stroke-width: 8px;
+            }
+        </style>
+    </defs>
+    <g>
+        <ellipse class="cls-1" cx="1052.5" cy="1051.455" rx="888.5" ry="888.455" />
+        <text class="cls-2" transform="matrix(1.0309, 0.9994, -0.9997, 1.0305, 322, 946)">
+            <tspan class="cls-3" x="0">workdate</tspan>
+        </text>
+        <g>
+            <path class="cls-4"
+                d="M1033.719,234.781 L1071.281,234.781 L1071.281,339.937 L1033.719,339.937 L1033.719,234.781 Z" />
+            <path class="cls-4"
+                d="M256.469,1042.562 L361.656,1042.562 L361.656,1080.125 L256.469,1080.125 L256.469,1042.562 Z" />
+            <path class="cls-4"
+                d="M1033.719,1758.781 L1071.281,1758.781 L1071.281,1863.969 L1033.719,1863.969 L1033.719,1758.781 Z" />
+            <path class="cls-4"
+                d="M1742.312,1032.687 L1847.531,1032.687 L1847.531,1070.281 L1742.312,1070.281 L1742.312,1032.687 Z" />
+        </g>
+        <g>
+            <circle class="cls-5" cx="1290.72" cy="1775.36" r="17" />
+            <circle class="cls-5" cx="1507.485" cy="1661.72" r="16.985" />
+            <circle class="cls-5" cx="1662.61" cy="1491.78" r="17.02" />
+            <circle class="cls-5" cx="1759.295" cy="1272.97" r="17.015" />
+            <circle class="cls-5" cx="342.313" cy="842.75" r="17" />
+            <circle class="cls-5" cx="449.203" cy="622.469" r="17.016" />
+            <circle class="cls-5" cx="614.344" cy="462.031" r="17" />
+            <circle class="cls-5" cx="830.219" cy="358.5" r="17" />
+            <circle class="cls-5" cx="1287.69" cy="364.235" r="17" />
+            <circle class="cls-5" cx="1506.88" cy="473.469" r="17" />
+            <circle class="cls-5" cx="1665.575" cy="640.281" r="17.015" />
+            <circle class="cls-5" cx="1766.81" cy="857.188" r="17" />
+        </g>
+    </g>
+</svg>

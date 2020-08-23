@@ -5,7 +5,6 @@ import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.br.workdate.R
 import com.br.workdate.extension.limit
@@ -42,7 +41,7 @@ class ListScheduleFragment : Fragment() {
         new_schedule.setOnClickListener {
             goToSearchClientFragment()
         }
-        viewModel.listAll().observe(viewLifecycleOwner, Observer { scheduleList ->
+        viewModel.listAll().observe(viewLifecycleOwner, { scheduleList ->
             ifEmptyPlayAnimation(scheduleList)
             initAdapter(scheduleList)
         })
@@ -69,15 +68,14 @@ class ListScheduleFragment : Fragment() {
                 loadFieldClientName = { clientId: String,
                                         fieldClientName: TextView ->
                     clientViewModel.getNameForId(clientId)
-                        .observe(viewLifecycleOwner, Observer { clientName ->
+                        .observe(viewLifecycleOwner, { clientName ->
                             fieldClientName.text = clientName.limit(28)
                         })
                 },
                 loadFieldServiceDescription = { serviceId: String,
                                                 fieldServiceDescription: TextView ->
                     serviceViewModel.returnDescriptionForId(serviceId).observe(
-                        viewLifecycleOwner,
-                        Observer { serviceDescription ->
+                        viewLifecycleOwner, { serviceDescription ->
                             fieldServiceDescription.text = serviceDescription.limit(17)
                         })
                 })
@@ -113,7 +111,7 @@ class ListScheduleFragment : Fragment() {
                     FilterOfSchedule(),
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
-                            .observe(viewLifecycleOwner, Observer { names ->
+                            .observe(viewLifecycleOwner, { names ->
                                 val clientAdapter = ArrayAdapter(
                                     context,
                                     R.layout.support_simple_spinner_dropdown_item,
@@ -124,7 +122,7 @@ class ListScheduleFragment : Fragment() {
                     },
                     loadServiceDescriptions = { serviceAutoComplete ->
                         filterViewModel.returnAllServicesDescriptions()
-                            .observe(viewLifecycleOwner, Observer { descriptions ->
+                            .observe(viewLifecycleOwner, { descriptions ->
                                 val serviceAdapter = ArrayAdapter(
                                     context,
                                     R.layout.support_simple_spinner_dropdown_item,
@@ -135,7 +133,7 @@ class ListScheduleFragment : Fragment() {
                     },
                     returnQuery = { query ->
                         viewModel.findScheduleFilter(query)
-                            .observe(viewLifecycleOwner, Observer { scheduleList ->
+                            .observe(viewLifecycleOwner, { scheduleList ->
                                 ifEmptyPlayAnimation(scheduleList)
                                 initAdapter(scheduleList)
                             })

@@ -6,7 +6,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
-import com.br.workdate.extension.formatForBrazilianCoin
+import com.br.workdate.extension.formatCoin
 import com.br.workdate.extension.limit
 import com.br.workdate.model.Service
 import kotlinx.android.synthetic.main.list_item_service.view.*
@@ -87,7 +87,7 @@ class ServiceAdapter(
                 serviceFirstChar.text = service.description[0].toString()
             }
             serviceDescription.text = service.description.limit(limitForDescription)
-            serviceValue.text = service.value.formatForBrazilianCoin()
+            serviceValue.text = service.value.formatCoin(context)
         }
 
         init {

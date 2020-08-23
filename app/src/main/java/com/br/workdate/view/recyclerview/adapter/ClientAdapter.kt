@@ -89,6 +89,7 @@ class ClientAdapter(
         private val clientAddress by lazy { itemView.list_item_client_address }
         private val clientPhone by lazy { itemView.list_item_client_phone }
         private val clientFirstChar by lazy { itemView.list_item_client_first_char }
+        private val iconAddress by lazy { itemView.list_item_client_icon_address }
 
         fun bind(client: Client) {
             this.client = client

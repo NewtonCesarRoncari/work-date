@@ -2,7 +2,6 @@ package com.br.workdate.view.dialog
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.br.workdate.R
 import com.br.workdate.model.Service
@@ -22,7 +21,6 @@ class ServiceFormUpdateDialog(
 
     @SuppressLint("SetTextI18n")
     private fun loadFieldDataDialog(service: Service) {
-        fieldID.visibility = VISIBLE
         fieldDescription.isFocusable = false
         fieldID.text = service.id
         fieldDescription.setText(service.description)

@@ -43,6 +43,8 @@ class FilterDialog(
             alterComponentsByTag()
             show()
 
+            view.textView5.text = returnText()
+
             loadClientNames(view.autoCompleteTextView_client_edit)
             loadServiceDescriptions(view.autoCompleteTextView_service_edit)
 
@@ -74,6 +76,11 @@ class FilterDialog(
                 Log.i("query", query)
             }
         }
+    }
+
+    private fun returnText(): String {
+        val text = view.context.getString(R.string.to)
+        return text.replace("Jusquà", "Jusqu'à")
     }
 
     private fun returnParams(): HashMap<String, String> {

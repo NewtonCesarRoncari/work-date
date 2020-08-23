@@ -36,8 +36,7 @@
     <string name="observations">Observações</string>
     <string name="choose_service">Selecione o Serviço</string>
     <string name="canceled">Cancelado</string>
-    <string name="icon_money">Icone de Dinheiro</string>
-    <string name="finished">Finalizado</string>
+    <string name="finished">Concluído</string>
     <string name="remove_schedule">DELETAR AGENDAMENTO</string>
     <string name="search">Procurar</string>
     <string name="remove">DELETAR</string>
@@ -49,7 +48,7 @@
     <string name="zero_value">R$ 0,00</string>
     <string name="paid">Pago</string>
     <string name="open">Em Aberto</string>
-    <string name="filter">Filtro</string>
+    <string name="filter">Filtrar</string>
     <string name="choose_filters">Selecione os Filtros</string>
     <string name="test">teste</string>
     <string name="from">De</string>
@@ -62,4 +61,9 @@
     <string name="updated">atualizado</string>
     <string name="error">Erro</string>
     <string name="ok">OK</string>
+    <string name="pre_coin">R$ </string>
+    <string name="pos_coin" />
+    <string name="message_schedule_updated">Agendamento atualizado</string>
+    <string name="message_schedule_saved">Agendamento salvo</string>
+    <string name="message_empty_fields">Campos necessários em branco</string>
 </resources>

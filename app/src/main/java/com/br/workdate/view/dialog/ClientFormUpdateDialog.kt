@@ -1,7 +1,6 @@
 package com.br.workdate.view.dialog
 
 import android.content.Context
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.br.workdate.R
 import com.br.workdate.model.Client
@@ -20,7 +19,6 @@ class ClientFormUpdateDialog(
     }
 
     private fun loadFieldDataDialog(client: Client) {
-        fieldID.visibility = VISIBLE
         fieldName.isFocusable = false
         fieldID.text = client.id
         fieldName.setText(client.name)

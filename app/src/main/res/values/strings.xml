@@ -37,7 +37,6 @@
     <string name="observations">Observations</string>
     <string name="choose_service">Choose Service</string>
     <string name="canceled">Canceled</string>
-    <string name="icon_money">Icon Money</string>
     <string name="finished">Finished</string>
     <string name="date_format" translatable="false">00/00</string>
     <string name="hour_format" translatable="false">00:00</string>
@@ -66,4 +65,9 @@
     <string name="updated">updated</string>
     <string name="error">Error</string>
     <string name="ok">OK</string>
+    <string name="pre_coin">$ </string>
+    <string name="pos_coin" />
+    <string name="message_schedule_updated">Schedule updated</string>
+    <string name="message_schedule_saved">Schedule saved</string>
+    <string name="message_empty_fields">Empty fields</string>
 </resources>

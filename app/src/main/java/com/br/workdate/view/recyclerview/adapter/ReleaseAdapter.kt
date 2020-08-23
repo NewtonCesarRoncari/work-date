@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
-import com.br.workdate.extension.formatForBrazilianCoin
+import com.br.workdate.extension.formatCoin
 import com.br.workdate.extension.formatForBrazilianDate
 import com.br.workdate.extension.formatForBrazilianHour
 import com.br.workdate.extension.limit
@@ -44,7 +44,7 @@ class ReleaseAdapter(
         fun bind(release: Release) {
             client.text = release.clientName.limit(24)
             service.text = release.serviceDescription.limit(24)
-            value.text = release.value.formatForBrazilianCoin()
+            value.text = release.value.formatCoin(context)
             date.text = release.date.formatForBrazilianDate()
             hour.text = release.hour.formatForBrazilianHour()
         }

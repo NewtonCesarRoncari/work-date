@@ -75,14 +75,14 @@ class FormScheduleFragment : Fragment() {
             if (scheduleIsInitialized()) {
                 updateSchedule()
                 updateRelease()
-                showSnackBar("Schedule updated")
+                showSnackBar(getString(R.string.message_schedule_updated))
             } else {
                 if (allIsInitialized()) {
                     makeAndSaveReleaseBy(makeAndSaveSchedule())
                     navController.popBackStack(R.id.listScheduleFragment, false)
-                    showSnackBar("Schedule saved")
+                    showSnackBar(getString(R.string.message_schedule_saved))
                 } else {
-                    showSnackBar("Empty fields")
+                    showSnackBar(getString(R.string.message_empty_fields))
                 }
             }
         }
@@ -90,14 +90,12 @@ class FormScheduleFragment : Fragment() {
 
     private fun tryLoadScheduleFields(schedule: Schedule) {
         clientViewModel.returnForId(schedule.clientId).observe(
-            viewLifecycleOwner,
-            androidx.lifecycle.Observer { clientReturned ->
+            viewLifecycleOwner, { clientReturned ->
                 tryLoadClientFields(clientReturned)
             }
         )
         serviceViewModel.returnForId(schedule.serviceId).observe(
-            viewLifecycleOwner,
-            androidx.lifecycle.Observer { serviceReturned ->
+            viewLifecycleOwner, { serviceReturned ->
                 tryLoadServiceFields(serviceReturned)
             }
         )
@@ -123,7 +121,7 @@ class FormScheduleFragment : Fragment() {
         serviceDescription = service.description
         value = service.value
         form_schedule_service_description.text = service.description.limit(maxCharacters = 28)
-        form_schedule_service_value.text = service.value.formatForBrazilianCoin()
+        form_schedule_service_value.text = context?.let { service.value.formatCoin(it) }
     }
 
     private fun startAnimations() {
@@ -202,7 +200,7 @@ class FormScheduleFragment : Fragment() {
     private fun updateRelease() {
         schedule?.id?.let { scheduleId ->
             releaseViewModel.findReleaseIdByScheduleId(scheduleId)
-                .observe(viewLifecycleOwner, androidx.lifecycle.Observer { releaseId ->
+                .observe(viewLifecycleOwner, { releaseId ->
                     releaseViewModel.update(makeRelease(makeSchedule(scheduleId), releaseId))
                     navController.popBackStack(R.id.listScheduleFragment, false)
                 })

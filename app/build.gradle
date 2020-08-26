@@ -61,7 +61,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Lottie
-    def lottie_version = '3.4.1'
+    def lottie_version = '3.0.0'
     implementation "com.airbnb.android:lottie:$lottie_version"
 
     // ViewModel and LiveData

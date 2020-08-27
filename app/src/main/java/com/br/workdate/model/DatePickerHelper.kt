@@ -19,10 +19,10 @@ class DatePickerHelper(
 
         return context?.let { context ->
             DatePickerDialog(
-                context,
-                DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                context, { _, year, month, dayOfMonth ->
                     val calendarInstance = getInstance()
-                    calendarInstance.set(year, month, dayOfMonth, 0, 0, 0)
+                    calendarInstance.clear()
+                    calendarInstance.set(year, month, dayOfMonth)
                     onDataSet(calendarInstance.time)
                 },
                 year,

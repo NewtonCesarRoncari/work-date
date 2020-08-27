@@ -62,6 +62,7 @@ dependencies {
 
     // Lottie
     def lottie_version = '3.0.0'
+    //noinspection GradleDependency ------ wait a stable version
     implementation "com.airbnb.android:lottie:$lottie_version"
 
     // ViewModel and LiveData

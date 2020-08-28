@@ -1,16 +1,28 @@
 package com.br.workdate.view.recyclerview.adapter
 
+import android.Manifest.permission.CALL_PHONE
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.ACTION_CALL
+import android.content.Intent.ACTION_VIEW
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.PopupMenu
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
 import com.br.workdate.extension.limit
 import com.br.workdate.model.Client
 import kotlinx.android.synthetic.main.list_item_client.view.*
 import java.util.*
+
 
 class ClientAdapter(
     private val context: Context,
@@ -89,7 +101,7 @@ class ClientAdapter(
         private val clientAddress by lazy { itemView.list_item_client_address }
         private val clientPhone by lazy { itemView.list_item_client_phone }
         private val clientFirstChar by lazy { itemView.list_item_client_first_char }
-        private val iconAddress by lazy { itemView.list_item_client_icon_address }
+        private val btnViewOptions: AppCompatImageView by lazy { itemView.list_item_option }
 
         fun bind(client: Client) {
             this.client = client
@@ -105,6 +117,7 @@ class ClientAdapter(
             itemView.setOnClickListener {
                 if (::client.isInitialized) {
                     onItemClickListener(client)
+                    btnViewOptions.setOnClickListener { initOptionPopup() }
                 }
             }
             initContextMenu(itemView, onItemLongClickListener)
@@ -125,6 +138,52 @@ class ClientAdapter(
                         true
                     }
             }
+        }
+
+        private fun initOptionPopup() {
+            val popup = PopupMenu(context, btnViewOptions)
+            popup.inflate(R.menu.list_options_item_client)
+            popup.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.list_item_options_call -> {
+                        if (checkCallPhonePermission()) {
+                            requestCallPhonePermission()
+                        } else {
+                            initCall(client.phone)
+                        }
+                    }
+                    R.id.list_item_options_locate -> {
+                        initGoogleMaps(client.address, menuItem)
+                    }
+                }
+                false
+            }
+            popup.show()
+        }
+
+        private fun requestCallPhonePermission() =
+            ActivityCompat.requestPermissions(
+                (context as Activity?)!!,
+                arrayOf(CALL_PHONE),
+                123
+            )
+
+        private fun checkCallPhonePermission() =
+            ActivityCompat.checkSelfPermission(
+                Objects.requireNonNull(context),
+                CALL_PHONE
+            ) != PackageManager.PERMISSION_GRANTED
+
+        private fun initCall(phone: String) {
+            val intentCall = Intent(ACTION_CALL)
+            intentCall.data = Uri.parse("tel:$phone")
+            startActivity(context, intentCall, null)
+        }
+
+        private fun initGoogleMaps(address: String, menuItem: MenuItem) {
+            val intentLocal = Intent(ACTION_VIEW)
+            intentLocal.data = Uri.parse("geo:0,0?q=$address")
+            menuItem.intent = intentLocal
         }
 
     }

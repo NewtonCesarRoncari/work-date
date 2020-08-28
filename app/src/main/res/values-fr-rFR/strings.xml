@@ -69,4 +69,6 @@
     <string name="message_schedule_updated" />
     <string name="message_schedule_saved" />
     <string name="message_empty_fields" />
+    <string name="to_locate" />
+    <string name="call" />
 </resources>

@@ -66,4 +66,6 @@
     <string name="message_schedule_updated">Agendamento atualizado</string>
     <string name="message_schedule_saved">Agendamento salvo</string>
     <string name="message_empty_fields">Campos necessários em branco</string>
+    <string name="to_locate">Localizar</string>
+    <string name="call">Ligar</string>
 </resources>

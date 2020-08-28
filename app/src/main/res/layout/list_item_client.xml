@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/name"
             android:textAllCaps="true"
             android:textColor="@color/coloBlackAbsolute"
@@ -81,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/phone"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/list_item_client_address"
@@ -109,9 +110,21 @@
             android:text="@string/address"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/list_item_client_name"
+            app:layout_constraintEnd_toEndOf="@+id/list_item_client_phone"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/list_item_client_name" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/list_item_option"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:padding="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_more_item_card"
+            app:tint="@android:color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

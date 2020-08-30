@@ -64,7 +64,6 @@ class InsertModelsFlowTest : BaseFlowTest() {
         insertDataClientInFields("Dilma Rousseff", "Address Test", "99999999999")
         insertDataClientInFields("Carol Moreira", "Address Test", "99999999999")
         insertDataClientInFields("Louis Lane", "Address Test", "99999999999")
-
     }
 
     private fun insertDataClientInFields(name: String, address: String, tel: String) {

@@ -1,5 +1,6 @@
 package com.br.workdate.di
 
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.br.workdate.database.ConnectionDatabase
 import com.br.workdate.database.dao.ClientDAO
@@ -28,6 +29,11 @@ val daoModule = module {
     single<ServiceDAO> { get<ConnectionDatabase>().serviceDao() }
     single<ReleaseDAO> { get<ConnectionDatabase>().releaseDao() }
     single<ScheduleDAO> { get<ConnectionDatabase>().scheduleDao() }
+    single<SharedPreferences> {
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(
+            get()
+        )
+    }
 }
 
 val repositoryModule = module {
@@ -36,6 +42,7 @@ val repositoryModule = module {
     single<ReleaseRepository> { ReleaseRepository(dao = get()) }
     single<ScheduleRepository> { ScheduleRepository(dao = get()) }
     single<FilterRepository> { FilterRepository(clientDAO = get(), serviceDAO = get()) }
+    single<LoginRepository> { LoginRepository(preferences = get()) }
 }
 
 val viewModelModule = module {
@@ -45,4 +52,5 @@ val viewModelModule = module {
     viewModel<ReleaseViewModel> { ReleaseViewModel(repository = get()) }
     viewModel<StateAppComponentsViewModel> { StateAppComponentsViewModel() }
     viewModel<FilterViewModel> { FilterViewModel(repository = get()) }
+    viewModel<LoginViewModel> { LoginViewModel(repository = get()) }
 }

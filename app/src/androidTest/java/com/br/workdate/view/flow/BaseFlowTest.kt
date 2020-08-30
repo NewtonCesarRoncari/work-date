@@ -54,7 +54,8 @@ abstract class BaseFlowTest {
     protected fun clickSaveDialog() {
         Espresso.onView(
             Matchers.allOf(
-                withId(android.R.id.button1), withText("SAVE")
+                withId(android.R.id.button1),
+                withText("SAVE")
             )
         ).perform(click())
     }

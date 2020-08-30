@@ -1,11 +1,15 @@
 package com.br.workdate.view.fragment
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.airbnb.lottie.LottieAnimationView
 import com.br.workdate.R
 import com.br.workdate.extension.limit
 import com.br.workdate.model.Schedule
@@ -23,6 +27,7 @@ class ListScheduleFragment : Fragment() {
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
     private val filterViewModel: FilterViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by viewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private lateinit var adapter: ScheduleAdapter
 
@@ -36,8 +41,10 @@ class ListScheduleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        schedule_list_animation.setAnimation("anim/workdate_app.json")
+        schedule_list_animation.setAnimation("anim/list_empty.json")
+        logo_app_animation.setAnimation("anim/workdate_app.json")
 
+        checkStateLogin()
         new_schedule.setOnClickListener {
             goToSearchClientFragment()
         }
@@ -58,6 +65,35 @@ class ListScheduleFragment : Fragment() {
             initFilterDialog()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun checkStateLogin() {
+        if (!loginViewModel.isLogged()) {
+            schedule_list_animation.visibility = GONE
+            initAnimation(logo_app_animation)
+            new_schedule.visibility = GONE
+            logo_app_animation.addAnimatorListener(animatorListener())
+        } else {
+            logo_app_animation.visibility = GONE
+        }
+    }
+
+    private fun animatorListener(): Animator.AnimatorListener {
+        return object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                schedule_list_animation.visibility = GONE
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                initAnimation(schedule_list_animation)
+                new_schedule.visibility = VISIBLE
+                logo_app_animation.visibility = GONE
+                loginViewModel.login()
+            }
+
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+        }
     }
 
     private fun initAdapter(scheduleList: MutableList<Schedule>) {
@@ -144,18 +180,18 @@ class ListScheduleFragment : Fragment() {
     }
 
     private fun ifEmptyPlayAnimation(mutableList: MutableList<Schedule>) {
-        if (mutableList.isEmpty()) {
-            initAnimation()
+        if (mutableList.isEmpty() && loginViewModel.isLogged()) {
+            initAnimation(schedule_list_animation)
         } else {
-            schedule_list_animation.visibility = View.GONE
+            schedule_list_animation.visibility = GONE
         }
     }
 
-    private fun initAnimation() {
-        with(schedule_list_animation) {
+    private fun initAnimation(animation: LottieAnimationView) {
+        with(animation) {
             scaleX = 0.5f
             scaleY = 0.5f
-            visibility = View.VISIBLE
+            visibility = VISIBLE
             playAnimation()
         }
     }

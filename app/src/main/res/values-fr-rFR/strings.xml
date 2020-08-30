@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="date_format">00/00</string>
+    <string name="hour_format">00:00</string>
+    <string name="zero_value">$ 0,00</string>
+    <string name="c">c</string>
     <string name="app_name">workdate</string>
     <string name="icon_client">Icône du Client</string>
     <string name="name">nom</string>
@@ -29,7 +33,7 @@
     <string name="hour">Heure</string>
     <string name="client">client</string>
     <string name="service">service</string>
-    <string name="choose_client">Choisir le Client </string>
+    <string name="choose_client">Choisir le client</string>
     <string name="schedule_detail">Détail de la Planification</string>
     <string name="date">Date</string>
     <string name="icon_calendar">Icône de Calendrier</string>
@@ -37,8 +41,6 @@
     <string name="choose_service">Choisir le Service</string>
     <string name="canceled">Annulé</string>
     <string name="finished">Conclu</string>
-    <string name="date_format">00/00</string>
-    <string name="hour_format">00:00</string>
     <string name="remove_schedule">SUPPRRIMER LA PLANIFICATION</string>
     <string name="search">Rechercher</string>
     <string name="remove">SUPPRRIMER</string>
@@ -47,8 +49,6 @@
     <string name="revenue">Revenu</string>
     <string name="expense">Dépense</string>
     <string name="total">Total</string>
-    <string name="zero_value">$ 0,00</string>
-    <string name="c">c</string>
     <string name="paid">Payé</string>
     <string name="open">Ouvert</string>
     <string name="filter">Filtrer</string>
@@ -60,15 +60,15 @@
     <string name="message_linked_schedule">cet enregistrement est lié à une planification</string>
     <string name="removed">supprimé</string>
     <string name="message_client_name_already_exists">ce nom de client existe déjà</string>
-    <string name="message_service_description_already_exists">cette description de service existe déjà</string>
+    <string name="message_service_description_already_exists">tcette description de service existe déjà</string>
     <string name="updated">actualisé</string>
     <string name="error">Erreur</string>
     <string name="ok">OK</string>
     <string name="pre_coin" />
     <string name="pos_coin">" €"</string>
-    <string name="message_schedule_updated" />
-    <string name="message_schedule_saved" />
-    <string name="message_empty_fields" />
-    <string name="to_locate" />
-    <string name="call" />
+    <string name="message_schedule_updated">Planification actualisé</string>
+    <string name="message_schedule_saved">Planification enregistré</string>
+    <string name="message_empty_fields">Champs vides</string>
+    <string name="to_locate">Localiser</string>
+    <string name="call">Téléphoner </string>
 </resources>

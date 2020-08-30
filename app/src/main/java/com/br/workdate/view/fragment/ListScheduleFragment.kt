@@ -36,7 +36,7 @@ class ListScheduleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        schedule_list_animation.setAnimation("anim/list_empty.json")
+        schedule_list_animation.setAnimation("anim/workdate_app.json")
 
         new_schedule.setOnClickListener {
             goToSearchClientFragment()

@@ -1,6 +1,5 @@
 package com.br.workdate.view.dialog
 
-import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.widget.TextView
 import com.br.workdate.R
 import com.br.workdate.extension.returnUUID
 import com.br.workdate.model.Service
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.service_formulary.view.*
 import java.math.BigDecimal
@@ -26,7 +26,7 @@ abstract class ServiceFormDialog(
     protected fun inflateForm(
         dialogClickListener: (service: Service) -> Unit
     ) {
-        AlertDialog.Builder(context)
+        MaterialAlertDialogBuilder(context)
             .setTitle(titleDialog)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
                 val serviceDescription = fieldDescription.text.toString().trim()

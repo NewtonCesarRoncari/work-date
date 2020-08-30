@@ -1,6 +1,5 @@
 package com.br.workdate.view.dialog
 
-import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.widget.TextView
 import com.br.workdate.R
 import com.br.workdate.extension.returnUUID
 import com.br.workdate.model.Client
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.client_formulary.view.*
 
@@ -24,7 +24,7 @@ abstract class ClientFormDialog(
     protected abstract val titleDialog: String
 
     protected fun inflateForm(dialogClickListener: (client: Client) -> Unit) {
-        AlertDialog.Builder(context)
+        MaterialAlertDialogBuilder(context)
             .setTitle(titleDialog)
             .setView(viewCreated)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->

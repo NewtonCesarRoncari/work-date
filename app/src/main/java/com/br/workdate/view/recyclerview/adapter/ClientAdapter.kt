@@ -117,27 +117,10 @@ class ClientAdapter(
             itemView.setOnClickListener {
                 if (::client.isInitialized) {
                     onItemClickListener(client)
-                    btnViewOptions.setOnClickListener { initOptionPopup() }
                 }
             }
+            btnViewOptions.setOnClickListener { initOptionPopup() }
             initContextMenu(itemView, onItemLongClickListener)
-        }
-
-        private fun initContextMenu(
-            itemView: View,
-            onItemLongClickListener: (client: Client) -> Unit
-        ) {
-            itemView.setOnCreateContextMenuListener { menu: ContextMenu,
-                                                      _: View?,
-                                                      _: ContextMenuInfo? ->
-                MenuInflater(context).inflate(R.menu.base_context_menu, menu)
-                menu.findItem(R.id.remove)
-                    .setOnMenuItemClickListener {
-                        onItemLongClickListener(clients[adapterPosition])
-                        remove(adapterPosition)
-                        true
-                    }
-            }
         }
 
         private fun initOptionPopup() {
@@ -159,6 +142,23 @@ class ClientAdapter(
                 false
             }
             popup.show()
+        }
+
+        private fun initContextMenu(
+            itemView: View,
+            onItemLongClickListener: (client: Client) -> Unit
+        ) {
+            itemView.setOnCreateContextMenuListener { menu: ContextMenu,
+                                                      _: View?,
+                                                      _: ContextMenuInfo? ->
+                MenuInflater(context).inflate(R.menu.base_context_menu, menu)
+                menu.findItem(R.id.remove)
+                    .setOnMenuItemClickListener {
+                        onItemLongClickListener(clients[adapterPosition])
+                        remove(adapterPosition)
+                        true
+                    }
+            }
         }
 
         private fun requestCallPhonePermission() =
@@ -185,6 +185,5 @@ class ClientAdapter(
             intentLocal.data = Uri.parse("geo:0,0?q=$address")
             menuItem.intent = intentLocal
         }
-
     }
 }

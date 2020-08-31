@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
 import com.br.workdate.extension.formatCoin
@@ -20,7 +22,8 @@ class ScheduleAdapter(
     var onItemClickListener: (schedule: Schedule) -> Unit = {},
     var onItemLongClickListener: (schedule: Schedule) -> Unit = {},
     var loadFieldClientName: (clientId: String, TextView) -> Unit,
-    var loadFieldServiceDescription: (serviceId: String, TextView) -> Unit
+    var loadFieldServiceDescription: (serviceId: String, TextView) -> Unit,
+    var setScheduleFinished: (schedule: Schedule) -> Unit
 ) : RecyclerView.Adapter<ScheduleAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -47,6 +50,7 @@ class ScheduleAdapter(
         private val value by lazy { itemView.item_schedule_value }
         private val scheduleClient by lazy { itemView.item_schedule_client }
         private val scheduleService by lazy { itemView.item_schedule_service }
+        private val btnViewOptions: AppCompatImageView by lazy { itemView.list_item_option }
 
 
         fun bind(schedule: Schedule) {
@@ -64,7 +68,22 @@ class ScheduleAdapter(
                     onItemClickListener(schedule)
                 }
             }
+            btnViewOptions.setOnClickListener { initOptionPopup() }
             initContextMenu(itemView, onItemLongClickListener)
+        }
+
+        private fun initOptionPopup() {
+            val popup = PopupMenu(context, btnViewOptions)
+            popup.inflate(R.menu.list_options_item_schedule_menu)
+            popup.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.list_item_options_finish -> {
+                        setScheduleFinished(schedule)
+                    }
+                }
+                false
+            }
+            popup.show()
         }
 
         private fun initContextMenu(

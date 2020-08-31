@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.airbnb.lottie.LottieAnimationView
 import com.br.workdate.R
 import com.br.workdate.extension.limit
+import com.br.workdate.model.Release
 import com.br.workdate.model.Schedule
 import com.br.workdate.view.dialog.FilterDialog
 import com.br.workdate.view.recyclerview.adapter.ScheduleAdapter
@@ -28,6 +29,7 @@ class ListScheduleFragment : Fragment() {
     private val serviceViewModel: ServiceViewModel by viewModel()
     private val filterViewModel: FilterViewModel by viewModel()
     private val loginViewModel: LoginViewModel by viewModel()
+    private val releaseViewModel: ReleaseViewModel by viewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private lateinit var adapter: ScheduleAdapter
 
@@ -114,7 +116,28 @@ class ListScheduleFragment : Fragment() {
                         viewLifecycleOwner, { serviceDescription ->
                             fieldServiceDescription.text = serviceDescription.limit(17)
                         })
-                })
+                },
+                setScheduleFinished = { schedule ->
+                    val scheduleToSave = Schedule(
+                        schedule.id,
+                        schedule.clientName,
+                        schedule.serviceDescription,
+                        schedule.date,
+                        schedule.hour,
+                        schedule.value,
+                        schedule.canceled,
+                        finished = true,
+                        schedule.observation,
+                        schedule.serviceId,
+                        schedule.clientId
+                    )
+                    viewModel.update(scheduleToSave)
+                    releaseViewModel.findReleaseIdByScheduleId(scheduleToSave.id)
+                        .observe(viewLifecycleOwner, { releaseId ->
+                            releaseViewModel.update(makeRelease(scheduleToSave, releaseId))
+                        })
+                }
+            )
         }!!
         schedule_list_rv.adapter = adapter
         adapter.onItemClickListener = { schedule ->
@@ -123,6 +146,19 @@ class ListScheduleFragment : Fragment() {
         adapter.onItemLongClickListener = { schedule ->
             viewModel.remove(schedule)
         }
+    }
+
+    private fun makeRelease(schedule: Schedule, id: String): Release {
+        return Release(
+            id,
+            schedule.clientName,
+            schedule.serviceDescription,
+            schedule.value,
+            schedule.date,
+            schedule.hour,
+            viewModel.checkFinished(schedule.finished),
+            schedule.id
+        )
     }
 
     private fun goToFormScheduleFragment(schedule: Schedule) {

@@ -125,7 +125,7 @@ class ClientAdapter(
 
         private fun initOptionPopup() {
             val popup = PopupMenu(context, btnViewOptions)
-            popup.inflate(R.menu.list_options_item_client)
+            popup.inflate(R.menu.list_options_item_client_menu)
             popup.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.list_item_options_call -> {

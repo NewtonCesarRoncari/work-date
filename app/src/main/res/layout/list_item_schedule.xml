@@ -127,6 +127,18 @@
             app:layout_constraintTop_toBottomOf="@+id/item_schedule_client"
             app:layout_constraintVertical_bias="0.25" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/list_item_option"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:focusable="true"
+            android:padding="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_more_item_card"
+            app:tint="@android:color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

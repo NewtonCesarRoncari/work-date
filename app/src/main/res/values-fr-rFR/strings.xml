@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="date_format">00/00</string>
-    <string name="hour_format">00:00</string>
     <string name="zero_value">$ 0,00</string>
-    <string name="c">c</string>
     <string name="app_name">workdate</string>
     <string name="icon_client">Icône du Client</string>
     <string name="name">nom</string>
@@ -12,7 +9,6 @@
     <string name="services">Services</string>
     <string name="releases">Lancements</string>
     <string name="icon_service">Icône de Service</string>
-    <string name="service_description">description du service</string>
     <string name="value">valeur</string>
     <string name="phone">téléphone</string>
     <string name="title_form_new_client">Nouveau Client</string>
@@ -23,31 +19,23 @@
     <string name="saved">enregistré</string>
     <string name="title_form_update_client">Actualiser Client</string>
     <string name="title_form_update_service">Actualiser Service</string>
-    <string name="remove_client">SUPPRRIMER LE CLIENT</string>
-    <string name="remove_service">SUPPRIMER LE SERVICE</string>
     <string name="address">adresse</string>
     <string name="address_icon">Icône d\'Adresse</string>
     <string name="phone_icon">Icône de Téléphone</string>
-    <string name="icon_service_value">Icône de Valeur de Service</string>
     <string name="clock">montre</string>
     <string name="hour">Heure</string>
     <string name="client">client</string>
     <string name="service">service</string>
     <string name="choose_client">Choisir le client</string>
-    <string name="schedule_detail">Détail de la Planification</string>
     <string name="date">Date</string>
-    <string name="icon_calendar">Icône de Calendrier</string>
     <string name="observations">Observations</string>
     <string name="choose_service">Choisir le Service</string>
     <string name="canceled">Annulé</string>
     <string name="finished">Conclu</string>
-    <string name="remove_schedule">SUPPRRIMER LA PLANIFICATION</string>
     <string name="search">Rechercher</string>
     <string name="remove">SUPPRRIMER</string>
     <string name="save">Sauver</string>
     <string name="resume">Résumé</string>
-    <string name="revenue">Revenu</string>
-    <string name="expense">Dépense</string>
     <string name="total">Total</string>
     <string name="paid">Payé</string>
     <string name="open">Ouvert</string>

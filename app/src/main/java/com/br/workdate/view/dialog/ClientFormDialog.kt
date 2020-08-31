@@ -18,7 +18,7 @@ abstract class ClientFormDialog(
 ) {
     private val viewCreated = initView()
     protected val fieldID: TextView = viewCreated.client_formulary_id
-    protected val fieldName: TextInputEditText = viewCreated.client_formulary_name
+    protected val fieldName: TextInputEditText = viewCreated.client_form_name
     protected val fieldAddress: TextInputEditText = viewCreated.client_form_address
     protected val fieldPhone: TextInputEditText = viewCreated.client_formulary_phone
     protected abstract val titleDialog: String

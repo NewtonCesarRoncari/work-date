@@ -134,7 +134,13 @@ class ListScheduleFragment : Fragment() {
                     viewModel.update(scheduleToSave)
                     releaseViewModel.findReleaseIdByScheduleId(scheduleToSave.id)
                         .observe(viewLifecycleOwner, { releaseId ->
-                            releaseViewModel.update(makeRelease(scheduleToSave, releaseId))
+                            releaseViewModel.update(
+                                Release(
+                                    scheduleToSave,
+                                    releaseId,
+                                    viewModel.checkFinished(scheduleToSave.finished)
+                                )
+                            )
                         })
                 }
             )
@@ -146,19 +152,6 @@ class ListScheduleFragment : Fragment() {
         adapter.onItemLongClickListener = { schedule ->
             viewModel.remove(schedule)
         }
-    }
-
-    private fun makeRelease(schedule: Schedule, id: String): Release {
-        return Release(
-            id,
-            schedule.clientName,
-            schedule.serviceDescription,
-            schedule.value,
-            schedule.date,
-            schedule.hour,
-            viewModel.checkFinished(schedule.finished),
-            schedule.id
-        )
     }
 
     private fun goToFormScheduleFragment(schedule: Schedule) {

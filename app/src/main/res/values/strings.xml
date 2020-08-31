@@ -7,7 +7,6 @@
     <string name="services">Services</string>
     <string name="releases">Releases</string>
     <string name="icon_service">service</string>
-    <string name="service_description">service description</string>
     <string name="value">value</string>
     <string name="phone">phone</string>
     <string name="title_form_new_client">New Client</string>
@@ -18,35 +17,27 @@
     <string name="saved">saved</string>
     <string name="title_form_update_client">Update Client</string>
     <string name="title_form_update_service">Update Service</string>
-    <string name="remove_client">REMOVE CLIENT</string>
-    <string name="remove_service">REMOVE SERVICE</string>
     <string name="address">address</string>
     <string name="address_icon">Address Icon</string>
     <string name="phone_icon">Phone Icon</string>
     <string name="n" translatable="false">N</string>
-    <string name="icon_service_value">Icon Service Value</string>
     <string name="d" translatable="false">D</string>
     <string name="clock">clock</string>
     <string name="hour">Hour</string>
     <string name="client">client</string>
     <string name="service">service</string>
     <string name="choose_client">Choose client</string>
-    <string name="schedule_detail">Schedule detail</string>
     <string name="date">Date</string>
-    <string name="icon_calendar">Icon Calendar</string>
     <string name="observations">Observations</string>
     <string name="choose_service">Choose Service</string>
     <string name="canceled">Canceled</string>
     <string name="finished">Finished</string>
     <string name="date_format" translatable="false">00/00</string>
     <string name="hour_format" translatable="false">00:00</string>
-    <string name="remove_schedule">REMOVE SCHEDULE</string>
     <string name="search">Search</string>
     <string name="remove">REMOVE</string>
     <string name="save">Save</string>
     <string name="resume">Resume</string>
-    <string name="revenue">Revenue</string>
-    <string name="expense">Expense</string>
     <string name="total">Total</string>
     <string name="zero_value">$ 0,00</string>
     <string name="c" translatable="false">c</string>

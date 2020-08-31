@@ -69,7 +69,7 @@ class InsertModelsFlowTest : BaseFlowTest() {
     private fun insertDataClientInFields(name: String, address: String, tel: String) {
         clickFabNew(R.id.new_client)
         insertDataInFieldWithParent(
-            R.id.client_formulary_name,
+            R.id.client_form_name,
             R.id.clientNameTextInputLayout,
             name
         )
@@ -121,13 +121,13 @@ class InsertModelsFlowTest : BaseFlowTest() {
         clickFabNew(R.id.new_service)
 
         insertDataInFieldWithParent(
-            R.id.service_formulary_description,
+            R.id.service_form_description,
             R.id.serviceDescriptionTextInputLayout,
             description
         )
 
         insertDataInFieldWithParent(
-            R.id.service_formulary_value,
+            R.id.service_form_value,
             R.id.serviceValueTextInputLayout,
             value
         )

@@ -2,6 +2,7 @@ package com.br.workdate.model
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
+import com.br.workdate.extension.returnUUID
 import java.io.Serializable
 import java.math.BigDecimal
 import java.util.*
@@ -27,4 +28,15 @@ class Release(
     val situation: Situation,
     @ColumnInfo(name = "schedule_id")
     val scheduleId: String
-) : Serializable
+) : Serializable {
+    constructor(schedule: Schedule, id: String = "", situation: Situation) : this(
+        id.returnUUID(),
+        schedule.clientName,
+        schedule.serviceDescription,
+        schedule.value,
+        schedule.date,
+        schedule.hour,
+        situation,
+        schedule.id
+    )
+}

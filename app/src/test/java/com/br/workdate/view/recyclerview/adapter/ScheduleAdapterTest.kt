@@ -47,7 +47,8 @@ class ScheduleAdapterTest() {
             )
         ),
         loadFieldClientName = { _, _ -> },
-        loadFieldServiceDescription = { _, _ -> }
+        loadFieldServiceDescription = { _, _ -> },
+        setScheduleFinished = {}
     )
 
 

@@ -18,9 +18,9 @@ abstract class ServiceFormDialog(
     private val viewGroup: ViewGroup?
 ) {
     private val viewCreated = initView()
-    protected val fieldID: TextView = viewCreated.service_formulary_id
-    protected val fieldDescription: TextInputEditText = viewCreated.service_formulary_description
-    protected val fieldValue: TextInputEditText = viewCreated.service_formulary_value
+    protected val fieldID: TextView = viewCreated.service_form_id
+    protected val fieldDescription: TextInputEditText = viewCreated.service_form_description
+    protected val fieldValue: TextInputEditText = viewCreated.service_form_value
     protected abstract val titleDialog: String
 
     protected fun inflateForm(

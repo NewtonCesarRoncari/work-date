@@ -201,7 +201,13 @@ class FormScheduleFragment : Fragment() {
         schedule?.id?.let { scheduleId ->
             releaseViewModel.findReleaseIdByScheduleId(scheduleId)
                 .observe(viewLifecycleOwner, { releaseId ->
-                    releaseViewModel.update(makeRelease(makeSchedule(scheduleId), releaseId))
+                    val schedule = makeSchedule(scheduleId)
+                    releaseViewModel.update(
+                        Release(
+                            schedule, releaseId,
+                            viewModel.checkFinished(schedule.finished)
+                        )
+                    )
                     navController.popBackStack(R.id.listScheduleFragment, false)
                 })
         }
@@ -230,20 +236,9 @@ class FormScheduleFragment : Fragment() {
     }
 
     private fun makeAndSaveReleaseBy(schedule: Schedule) {
-        releaseViewModel.insert(makeRelease(schedule))
-    }
-
-    private fun makeRelease(schedule: Schedule, id: String = ""): Release {
-        return Release(
-            id.returnUUID(),
-            form_schedule_client_name.text.toString(),
-            form_schedule_service_description.text.toString(),
-            schedule.value,
-            schedule.date,
-            schedule.hour,
-            viewModel.checkFinished(schedule.finished),
-            schedule.id
-        )
+        val release =
+            Release(schedule = schedule, situation = viewModel.checkFinished(schedule.finished))
+        releaseViewModel.insert(release)
     }
 
     private fun showSnackBar(msg: String) {

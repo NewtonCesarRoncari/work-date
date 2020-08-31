@@ -67,7 +67,11 @@ class FormScheduleFragment : Fragment() {
 
         startAnimations()
 
-        serviceCard.setOnClickListener { goToSearchListServiceFragment() }
+        serviceCard.setOnClickListener {
+            if (!this.schedule?.id.isNullOrEmpty()) {
+                goToSearchListServiceFragment()
+            }
+        }
         form_schedule_date_btn.setOnClickListener { initDateDialog() }
         form_schedule_hour_btn.setOnClickListener { initTimeDialog() }
 

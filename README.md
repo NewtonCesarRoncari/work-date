@@ -25,6 +25,13 @@ Detalhes do agendamento     |  Lista de clientes |  Filtro financeiro
 :-------------------------:|:-------------------------:|:-------------------------:
 <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214445.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214302.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214413.jpg"/>
 
+## Linguagem
+O idioma alterna conforme a linguagem configurada no dispositivo do usuário.
+O aplicativo atualmente se encontra nos idiomas: 
+- Português
+- Inglês 
+- Francês
+
 ## Rodando a aplicação
 
 Clone ou realize o download do projeto em formato Zip, más antes certifique se que contem os pré requisitos para as comunicações com o

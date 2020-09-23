@@ -1,11 +1,11 @@
 package com.br.workdate.view.fragment
 
 import android.animation.Animator
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -34,18 +34,6 @@ class ListScheduleFragment : Fragment() {
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private lateinit var adapter: ScheduleAdapter
 
-    companion object DonutAnimation {
-        private const val PRIMARY_COLOR = "#311b92"
-        private const val SECOND_COLOR = "#9E5E2C"
-        private const val durationDonutAnimation = 1000L
-        private val donutSet = listOf(20f, 60f)
-        private val myDonutColors = intArrayOf(
-            Color.parseColor(PRIMARY_COLOR),
-            Color.parseColor(SECOND_COLOR),
-            Color.WHITE
-        )
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -58,12 +46,18 @@ class ListScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         schedule_list_animation.setAnimation("anim/list_empty.json")
         logo_app_animation.setAnimation("anim/workdate_app.json")
+
+        val ttb = AnimationUtils.loadAnimation(requireContext(), R.anim.ttb)
+        val cardView = schedule_resume_cardView
+        cardView.startAnimation(ttb)
+
         initDonutAnimation()
+        initResume()
         checkStateLogin()
         new_schedule.setOnClickListener {
             goToSearchClientFragment()
         }
-        viewModel.listAll().observe(viewLifecycleOwner, { scheduleList ->
+        viewModel.listAllNoFinished().observe(viewLifecycleOwner, { scheduleList ->
             ifEmptyPlayAnimation(scheduleList)
             initAdapter(scheduleList)
         })
@@ -95,9 +89,18 @@ class ListScheduleFragment : Fragment() {
 
 
     private fun initDonutAnimation() {
-        fragment_list_ui_chart.donutColors = myDonutColors
-        fragment_list_ui_chart.animation.duration = durationDonutAnimation
-        fragment_list_ui_chart.animate(donutSet)
+        fragment_list_ui_chart.donutColors = ResumeScheduleView.myDonutColors
+        fragment_list_ui_chart.animation.duration = ResumeScheduleView.durationDonutAnimation
+        fragment_list_ui_chart.animate(ResumeScheduleView.donutSet)
+    }
+
+    private fun initResume() {
+        lateinit var resumeSchedule: ResumeScheduleView
+        val view = activity?.window?.decorView
+        viewModel.listAll().observe(viewLifecycleOwner, { schedules ->
+            resumeSchedule = view?.let { view -> ResumeScheduleView(view, schedules) }!!
+            resumeSchedule.update()
+        })
     }
 
     private fun animatorListener(): Animator.AnimatorListener {

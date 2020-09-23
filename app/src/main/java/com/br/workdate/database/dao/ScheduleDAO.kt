@@ -19,6 +19,9 @@ interface ScheduleDAO {
     fun remove(schedule: Schedule)
 
     @Query("SELECT * FROM Schedule WHERE schedule.canceled = 0 and schedule.finished = 0 ORDER BY schedule.date, schedule.hour")
+    fun listAllNoFinished(): LiveData<MutableList<Schedule>>
+
+    @Query("SELECT * FROM Schedule")
     fun listAll(): LiveData<MutableList<Schedule>>
 
     @RawQuery(observedEntities = [Schedule::class])

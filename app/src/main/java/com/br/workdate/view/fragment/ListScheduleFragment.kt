@@ -1,6 +1,7 @@
 package com.br.workdate.view.fragment
 
 import android.animation.Animator
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -33,6 +34,18 @@ class ListScheduleFragment : Fragment() {
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private lateinit var adapter: ScheduleAdapter
 
+    companion object DonutAnimation {
+        private const val PRIMARY_COLOR = "#311b92"
+        private const val SECOND_COLOR = "#9E5E2C"
+        private const val durationDonutAnimation = 1000L
+        private val donutSet = listOf(20f, 60f)
+        private val myDonutColors = intArrayOf(
+            Color.parseColor(PRIMARY_COLOR),
+            Color.parseColor(SECOND_COLOR),
+            Color.WHITE
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -45,7 +58,7 @@ class ListScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         schedule_list_animation.setAnimation("anim/list_empty.json")
         logo_app_animation.setAnimation("anim/workdate_app.json")
-
+        initDonutAnimation()
         checkStateLogin()
         new_schedule.setOnClickListener {
             goToSearchClientFragment()
@@ -78,6 +91,13 @@ class ListScheduleFragment : Fragment() {
         } else {
             logo_app_animation.visibility = GONE
         }
+    }
+
+
+    private fun initDonutAnimation() {
+        fragment_list_ui_chart.donutColors = myDonutColors
+        fragment_list_ui_chart.animation.duration = durationDonutAnimation
+        fragment_list_ui_chart.animate(donutSet)
     }
 
     private fun animatorListener(): Animator.AnimatorListener {

@@ -6,29 +6,22 @@
     android:layout_height="match_parent"
     android:background="#1E7F81DD">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/logo_app_animation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.db.williamchart.view.DonutChartView
+        android:id="@+id/fragment_list_ui_chart"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/transparent"
+        app:chart_donutBackgroundColor="#CAD0F3"
+        app:chart_donutRoundCorners="true"
+        app:chart_donutThickness="8dp"
+        app:chart_donutTotal="100"
+        app:layout_constraintBottom_toTopOf="@id/schedule_list_rv"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="false" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/schedule_list_animation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/schedule_list_rv"
@@ -39,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_list_ui_chart"
         tools:listitem="@layout/list_item_schedule" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -54,5 +47,29 @@
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/schedule_list_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/logo_app_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

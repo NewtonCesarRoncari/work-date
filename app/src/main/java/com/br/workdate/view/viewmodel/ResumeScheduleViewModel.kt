@@ -12,4 +12,8 @@ class ResumeScheduleViewModel(schedules: MutableList<Schedule>) {
     val totalConcluded get() = repository.totalConcluded
 
     val total get() = repository.total
+
+    fun returnPercentage(total: Int, qtt: Int): Int {
+        return (qtt*100)/total
+    }
 }

@@ -3,6 +3,7 @@ package com.br.workdate.view.fragment
 import android.graphics.Color
 import android.view.View
 import com.br.workdate.extension.formatCoin
+import com.br.workdate.extension.percentage
 import com.br.workdate.model.Schedule
 import com.br.workdate.view.viewmodel.ResumeScheduleViewModel
 import kotlinx.android.synthetic.main.fragment_list_release.view.*
@@ -14,14 +15,15 @@ import kotlinx.android.synthetic.main.fragment_list_schedule.view.*
 
 class ResumeScheduleView(
     private val view: View,
-    schedules: MutableList<Schedule>
+    private val schedules: MutableList<Schedule>
 ) {
     private val resume = ResumeScheduleViewModel(schedules)
 
     companion object DonutAnimation {
+        private var percentage: Float = 0f
         private const val PRIMARY_COLOR = "#311b92"
         const val durationDonutAnimation = 1000L
-        val donutSet = listOf(70f)
+        var donutSet = listOf(percentage)
         val myDonutColors = intArrayOf(
             Color.parseColor(PRIMARY_COLOR),
             Color.WHITE
@@ -42,6 +44,9 @@ class ResumeScheduleView(
     private fun showResumePaid() {
         val total = resume.totalConcluded
         view.resume_paid.text = total.toString()
+        percentage = resume.returnPercentage(schedules.size, total).toFloat()
+        view.percentage.text = percentage.toInt().toString().percentage()
+        donutSet = listOf(percentage)
     }
 
     private fun showTotal() {

@@ -100,6 +100,7 @@ class ListScheduleFragment : Fragment() {
         viewModel.listAll().observe(viewLifecycleOwner, { schedules ->
             resumeSchedule = view?.let { view -> ResumeScheduleView(view, schedules) }!!
             resumeSchedule.update()
+            initDonutAnimation()
         })
     }
 

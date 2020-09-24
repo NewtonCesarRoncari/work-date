@@ -51,4 +51,24 @@ class StringExtensionTest() {
         val uuidReturned = uuid.returnUUID()
         assertEquals(uuid, uuidReturned)
     }
+
+    @Test
+    fun returnMessageWhitPercent(){
+        val messageReturned = message.percentage()
+        assertEquals("test test test%", messageReturned)
+    }
+
+    @Test
+    fun returnSizeMessageWhitPercentage() {
+        val messageLength = message.percentage().length
+        assertEquals((message.length + 1), messageLength)
+        assertEquals(15, messageLength)
+    }
+
+    @Test
+    fun returnPercentWhenStringIsEmpty(){
+        val string = ""
+        val messageReturned = string.percentage()
+        assertEquals("%", messageReturned)
+    }
 }

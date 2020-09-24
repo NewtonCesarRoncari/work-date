@@ -8,7 +8,7 @@ import org.junit.Test
 import java.math.BigDecimal
 import java.util.*
 
-class ResumeTest {
+class ResumeReleaseTest {
 
     private val releases = mutableListOf(
         Release(
@@ -88,7 +88,7 @@ class ResumeTest {
     @Test
     fun getTotalOpen() {
         assertThat(
-            Resume(releases).totalOpen,
+            ResumeRelease(releases).totalOpen,
             closeTo(BigDecimal("9.4"), BigDecimal.ZERO)
         )
     }
@@ -96,7 +96,7 @@ class ResumeTest {
     @Test
     fun getTotalPaid() {
         assertThat(
-            Resume(releases).totalPaid,
+            ResumeRelease(releases).totalPaid,
             closeTo(BigDecimal("15"), BigDecimal.ZERO)
         )
     }
@@ -104,24 +104,24 @@ class ResumeTest {
     @Test
     fun getTotal() {
         assertThat(
-            Resume(releases).total,
+            ResumeRelease(releases).total,
             closeTo(BigDecimal("24.4"), BigDecimal.ZERO)
         )
     }
 
     @Test(expected = NegativeValueException::class)
     fun returnExceptionWhenNegativeValueInTotal() {
-        Resume(releasesForException).total
+        ResumeRelease(releasesForException).total
     }
 
     @Test(expected = NegativeValueException::class)
     fun returnExceptionWhenNegativeValueInTotalOpen() {
-        Resume(releasesForException).totalOpen
+        ResumeRelease(releasesForException).totalOpen
     }
 
     @Test(expected = NegativeValueException::class)
     fun returnExceptionWhenNegativeValueInTotalPaid() {
-        Resume(releasesForException).totalPaid
+        ResumeRelease(releasesForException).totalPaid
     }
 
     @Test(expected = NegativeValueException::class)
@@ -138,7 +138,7 @@ class ResumeTest {
                 ""
             )
         )
-        Resume(releases).total
+        ResumeRelease(releases).total
     }
 
     @Test

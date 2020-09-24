@@ -20,6 +20,8 @@ class ScheduleRepository(private val dao: ScheduleDAO) {
 
     fun remove(schedule: Schedule) = scope.launch { dao.remove(schedule) }
 
+    fun listAllNoFinished() = dao.listAllNoFinished()
+
     fun listAll() = dao.listAll()
 
     fun findScheduleFilter(query: String): LiveData<MutableList<Schedule>> {

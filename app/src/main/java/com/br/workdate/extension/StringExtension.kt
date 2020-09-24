@@ -15,3 +15,7 @@ fun String.limit(maxCharacters: Int): String {
 fun String.returnUUID(): String {
     return if (this.isEmpty()) UUID.randomUUID().toString() else this
 }
+
+fun String.percentage() : String {
+    return "${this}%"
+}

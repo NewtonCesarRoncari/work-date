@@ -1,6 +1,7 @@
 package com.br.workdate.view.fragment
 
 import android.animation.Animator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -9,6 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.NavHostFragment
 import com.airbnb.lottie.LottieAnimationView
 import com.br.workdate.R
@@ -57,10 +59,11 @@ class ListScheduleFragment : Fragment() {
         new_schedule.setOnClickListener {
             goToSearchClientFragment()
         }
-        viewModel.listAllNoFinished().observe(viewLifecycleOwner, { scheduleList ->
-            ifEmptyPlayAnimation(scheduleList)
-            initAdapter(scheduleList)
-        })
+        viewModel.listAllNoFinished()
+            .observe<MutableList<Schedule>>(viewLifecycleOwner) { scheduleList ->
+                ifEmptyPlayAnimation(scheduleList)
+                initAdapter(scheduleList)
+            }
         setHasOptionsMenu(true)
     }
 
@@ -76,6 +79,7 @@ class ListScheduleFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("RestrictedApi")
     private fun checkStateLogin() {
         if (!loginViewModel.isLogged()) {
             schedule_list_animation.visibility = GONE
@@ -97,11 +101,11 @@ class ListScheduleFragment : Fragment() {
     private fun initResume() {
         lateinit var resumeSchedule: ResumeScheduleView
         val view = activity?.window?.decorView
-        viewModel.listAll().observe(viewLifecycleOwner, { schedules ->
+        viewModel.listAll().observe<MutableList<Schedule>>(viewLifecycleOwner) { schedules ->
             resumeSchedule = view?.let { view -> ResumeScheduleView(view, schedules) }!!
             resumeSchedule.update()
             initDonutAnimation()
-        })
+        }
     }
 
     private fun animatorListener(): Animator.AnimatorListener {
@@ -110,6 +114,7 @@ class ListScheduleFragment : Fragment() {
                 schedule_list_animation.visibility = GONE
             }
 
+            @SuppressLint("RestrictedApi")
             override fun onAnimationEnd(animation: Animator) {
                 initAnimation(schedule_list_animation)
                 new_schedule.visibility = VISIBLE
@@ -130,16 +135,17 @@ class ListScheduleFragment : Fragment() {
                 loadFieldClientName = { clientId: String,
                                         fieldClientName: TextView ->
                     clientViewModel.getNameForId(clientId)
-                        .observe(viewLifecycleOwner, { clientName ->
+                        .observe<String>(viewLifecycleOwner) { clientName ->
                             fieldClientName.text = clientName.limit(28)
-                        })
+                        }
                 },
                 loadFieldServiceDescription = { serviceId: String,
                                                 fieldServiceDescription: TextView ->
-                    serviceViewModel.returnDescriptionForId(serviceId).observe(
-                        viewLifecycleOwner, { serviceDescription ->
-                            fieldServiceDescription.text = serviceDescription.limit(17)
-                        })
+                    serviceViewModel.returnDescriptionForId(serviceId).observe<String>(
+                        viewLifecycleOwner
+                    ) { serviceDescription ->
+                        fieldServiceDescription.text = serviceDescription.limit(17)
+                    }
                 },
                 setScheduleFinished = { schedule ->
                     val scheduleToSave = Schedule(
@@ -150,14 +156,14 @@ class ListScheduleFragment : Fragment() {
                         schedule.hour,
                         schedule.value,
                         schedule.canceled,
-                        finished = true,
+                        true,
                         schedule.observation,
                         schedule.serviceId,
                         schedule.clientId
                     )
                     viewModel.update(scheduleToSave)
                     releaseViewModel.findReleaseIdByScheduleId(scheduleToSave.id)
-                        .observe(viewLifecycleOwner, { releaseId ->
+                        .observe<String>(viewLifecycleOwner) { releaseId ->
                             releaseViewModel.update(
                                 Release(
                                     scheduleToSave,
@@ -165,7 +171,7 @@ class ListScheduleFragment : Fragment() {
                                     viewModel.checkFinished(scheduleToSave.finished)
                                 )
                             )
-                        })
+                        }
                 }
             )
         }!!
@@ -200,32 +206,32 @@ class ListScheduleFragment : Fragment() {
                     FilterOfSchedule(),
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
-                            .observe(viewLifecycleOwner, { names ->
+                            .observe<List<String>>(viewLifecycleOwner) { names ->
                                 val clientAdapter = ArrayAdapter(
                                     context,
                                     R.layout.support_simple_spinner_dropdown_item,
                                     names
                                 )
                                 clientAutoComplete.setAdapter(clientAdapter)
-                            })
+                            }
                     },
                     loadServiceDescriptions = { serviceAutoComplete ->
                         filterViewModel.returnAllServicesDescriptions()
-                            .observe(viewLifecycleOwner, { descriptions ->
+                            .observe<List<String>>(viewLifecycleOwner) { descriptions ->
                                 val serviceAdapter = ArrayAdapter(
                                     context,
                                     R.layout.support_simple_spinner_dropdown_item,
                                     descriptions
                                 )
                                 serviceAutoComplete.setAdapter(serviceAdapter)
-                            })
+                            }
                     },
                     returnQuery = { query ->
                         viewModel.findScheduleFilter(query)
-                            .observe(viewLifecycleOwner, { scheduleList ->
+                            .observe<MutableList<Schedule>>(viewLifecycleOwner) { scheduleList ->
                                 ifEmptyPlayAnimation(scheduleList)
                                 initAdapter(scheduleList)
-                            })
+                            }
                     }
                 ).showFilterDialog()
             }

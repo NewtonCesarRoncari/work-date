@@ -5,6 +5,7 @@ import com.br.workdate.extension.BigDecimalExtensionTest
 import com.br.workdate.extension.StringExtensionTest
 import com.br.workdate.model.QueryCreatorFilterTest
 import com.br.workdate.model.ResumeReleaseTest
+import com.br.workdate.model.ResumeScheduleTest
 import com.br.workdate.view.recyclerview.adapter.ClientAdapterTest
 import com.br.workdate.view.recyclerview.adapter.ScheduleAdapterTest
 import com.br.workdate.view.recyclerview.adapter.ServiceAdapterTest
@@ -18,8 +19,10 @@ import org.junit.runners.Suite
     StringExtensionTest::class,
     QueryCreatorFilterTest::class,
     ResumeReleaseTest::class,
+    ResumeScheduleTest::class,
     ClientAdapterTest::class,
     ScheduleAdapterTest::class,
-    ServiceAdapterTest::class
+    ServiceAdapterTest::class,
+    ResumeReleaseTest::class
 )
 class UnitTestSuite

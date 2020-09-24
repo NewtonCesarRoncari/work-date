@@ -2,15 +2,12 @@ package com.br.workdate.view.fragment
 
 import android.graphics.Color
 import android.view.View
-import com.br.workdate.extension.formatCoin
 import com.br.workdate.extension.percentage
 import com.br.workdate.model.Schedule
 import com.br.workdate.view.viewmodel.ResumeScheduleViewModel
-import kotlinx.android.synthetic.main.fragment_list_release.view.*
 import kotlinx.android.synthetic.main.fragment_list_release.view.resume_open
 import kotlinx.android.synthetic.main.fragment_list_release.view.resume_paid
 import kotlinx.android.synthetic.main.fragment_list_release.view.resume_total
-import kotlinx.android.synthetic.main.fragment_list_schedule.*
 import kotlinx.android.synthetic.main.fragment_list_schedule.view.*
 
 class ResumeScheduleView(
@@ -42,15 +39,19 @@ class ResumeScheduleView(
     }
 
     private fun showResumePaid() {
-        val total = resume.totalConcluded
-        view.resume_paid.text = total.toString()
-        percentage = resume.returnPercentage(schedules.size, total).toFloat()
-        view.percentage.text = percentage.toInt().toString().percentage()
-        donutSet = listOf(percentage)
+        val totalConcluded = resume.totalConcluded
+        view.resume_paid.text = totalConcluded.toString()
+        updatePercentageGraphic(totalConcluded)
     }
 
     private fun showTotal() {
         val total = resume.total
         view.resume_total.text = total.toString()
+    }
+
+    private fun updatePercentageGraphic(total: Int) {
+        percentage = resume.returnPercentage(schedules.size, total).toFloat()
+        view.percentage.text = percentage.toInt().toString().percentage()
+        donutSet = listOf(percentage)
     }
 }

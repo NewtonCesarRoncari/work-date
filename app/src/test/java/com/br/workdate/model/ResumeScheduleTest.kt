@@ -30,4 +30,12 @@ class ResumeScheduleTest {
     fun returnSizeOfSchedules() {
         assertEquals(8, schedules.size)
     }
+
+    @Test
+    fun returnZeroWhenListScheduleIsEmpty() {
+        val resumeSchedule = ResumeSchedule(mutableListOf())
+        assertEquals(0, resumeSchedule.totalOpen)
+        assertEquals(0, resumeSchedule.totalConcluded)
+        assertEquals(0, resumeSchedule.total)
+    }
 }

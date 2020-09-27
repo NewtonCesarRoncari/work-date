@@ -8,7 +8,7 @@ import com.br.workdate.di.viewModelModule
 import com.br.workdate.extension.TypefaceUtil
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-
+// travis test
 class App : Application() {
 
     override fun onCreate() {

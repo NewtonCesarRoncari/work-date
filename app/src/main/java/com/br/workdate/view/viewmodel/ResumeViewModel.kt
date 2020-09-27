@@ -1,11 +1,11 @@
 package com.br.workdate.view.viewmodel
 
 import com.br.workdate.model.Release
-import com.br.workdate.repository.ResumeReleaseRepository
+import com.br.workdate.repository.ResumeRepository
 
-class ResumeReleaseViewModel(releases: MutableList<Release>) {
+class ResumeViewModel(releases: MutableList<Release>) {
 
-    private val repository = ResumeReleaseRepository(releases)
+    private val repository = ResumeRepository(releases)
 
     val totalOpen get() = repository.totalOpen
 

@@ -108,11 +108,4 @@ dependencies {
 
     //SharedPreferences
     implementation 'androidx.preference:preference:1.1.1'
-
-    // Charts
-    implementation 'com.diogobernardino:williamchart:3.7.1'
-
-    // Tooltips
-    implementation 'com.diogobernardino.williamchart:tooltip-slider:3.7.1'
-    implementation 'com.diogobernardino.williamchart:tooltip-points:3.7.1'
 }

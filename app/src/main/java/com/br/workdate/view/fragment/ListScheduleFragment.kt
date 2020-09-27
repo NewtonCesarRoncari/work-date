@@ -198,17 +198,16 @@ class ListScheduleFragment : Fragment() {
 
 
     private fun initFilterDialog() {
-        context?.let { context ->
             activity?.let { activity ->
                 FilterDialog(
-                    context,
+                    requireContext(),
                     activity,
                     FilterOfSchedule(),
                     loadClientNames = { clientAutoComplete ->
                         filterViewModel.returnAllClientNames()
                             .observe<List<String>>(viewLifecycleOwner) { names ->
                                 val clientAdapter = ArrayAdapter(
-                                    context,
+                                    requireContext(),
                                     R.layout.support_simple_spinner_dropdown_item,
                                     names
                                 )
@@ -219,7 +218,7 @@ class ListScheduleFragment : Fragment() {
                         filterViewModel.returnAllServicesDescriptions()
                             .observe<List<String>>(viewLifecycleOwner) { descriptions ->
                                 val serviceAdapter = ArrayAdapter(
-                                    context,
+                                    requireContext(),
                                     R.layout.support_simple_spinner_dropdown_item,
                                     descriptions
                                 )
@@ -235,7 +234,6 @@ class ListScheduleFragment : Fragment() {
                     }
                 ).showFilterDialog()
             }
-        }
     }
 
     private fun ifEmptyPlayAnimation(mutableList: MutableList<Schedule>) {

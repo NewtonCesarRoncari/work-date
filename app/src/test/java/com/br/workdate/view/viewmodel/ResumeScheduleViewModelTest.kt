@@ -51,7 +51,7 @@ class ResumeScheduleViewModelTest {
     }
 
     @Test(expected = NegativeValueException::class)
-    fun returnExceptionPercentageWhenNegativeQttl() {
+    fun returnExceptionPercentageWhenNegativeQtt() {
         ResumeScheduleViewModel(schedules).returnPercentage(9, -4)
     }
 

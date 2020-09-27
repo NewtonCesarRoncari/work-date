@@ -33,4 +33,4 @@ before_script:
   - chmod +x gradlew
 
 script:
-  - gradle check
+  - ./gradlew check

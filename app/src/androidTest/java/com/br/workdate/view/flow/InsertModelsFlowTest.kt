@@ -6,6 +6,7 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import com.br.workdate.R
 import com.br.workdate.view.NavigationActivity
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,6 +19,7 @@ class InsertModelsFlowTest : BaseFlowTest() {
     @JvmField
     var mActivityTestRule = ActivityTestRule(NavigationActivity::class.java)
 
+    @Ignore("Is Only Load Database")
     @Test
     fun insertClientFlow() {
         clickBottomNavigation(R.id.listClientFragment, CLIENTS)
@@ -86,6 +88,7 @@ class InsertModelsFlowTest : BaseFlowTest() {
         clickSaveDialog()
     }
 
+    @Ignore("Is Only Load Database")
     @Test
     fun insertServiceFlow() {
         clickBottomNavigation(R.id.listServiceFragment, SERVICES)

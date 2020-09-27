@@ -29,6 +29,9 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
+before_install:
+  - yes | sdkmanager "platforms;android-29"
+
 before_script:
   - chmod +x gradlew
 

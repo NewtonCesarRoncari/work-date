@@ -54,20 +54,20 @@ class ListReleaseFragment : Fragment() {
     }
 
     private fun initResume() {
-        lateinit var resume: ResumeView
+        lateinit var resumeRelease: ResumeReleaseView
         val view = activity?.window?.decorView
         viewModel.listAll().observe(viewLifecycleOwner, { releases ->
-            resume = view?.let { view -> ResumeView(view, releases) }!!
-            resume.update()
+            resumeRelease = view?.let { view -> ResumeReleaseView(view, releases) }!!
+            resumeRelease.update()
         })
     }
 
     private fun initResumeInFilter() {
-        lateinit var resume: ResumeView
+        lateinit var resumeRelease: ResumeReleaseView
         viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, { releases ->
             if (releases != null) {
-                resume = view?.let { view -> ResumeView(view, releases) }!!
-                resume.update()
+                resumeRelease = view?.let { view -> ResumeReleaseView(view, releases) }!!
+                resumeRelease.update()
             }
         })
     }

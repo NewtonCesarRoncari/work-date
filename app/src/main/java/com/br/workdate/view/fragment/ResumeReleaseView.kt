@@ -3,15 +3,15 @@ package com.br.workdate.view.fragment
 import android.view.View
 import com.br.workdate.extension.formatCoin
 import com.br.workdate.model.Release
-import com.br.workdate.view.viewmodel.ResumeViewModel
+import com.br.workdate.view.viewmodel.ResumeReleaseViewModel
 import kotlinx.android.synthetic.main.fragment_list_release.view.*
 
-class ResumeView(
+class ResumeReleaseView(
     private val view: View,
     releases: MutableList<Release>
 ) {
 
-    private val resume = ResumeViewModel(releases)
+    private val resume = ResumeReleaseViewModel(releases)
 
     fun update() {
         showResumeOpen()

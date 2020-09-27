@@ -4,7 +4,7 @@ import com.br.workdate.exception.NegativeValueException
 import com.br.workdate.extension.sumByBigDecimal
 import java.math.BigDecimal
 
-class Resume(private val releases: MutableList<Release>) {
+class ResumeRelease(private val releases: MutableList<Release>) {
 
     val totalOpen get() = sumBy(Situation.OPEN)
 

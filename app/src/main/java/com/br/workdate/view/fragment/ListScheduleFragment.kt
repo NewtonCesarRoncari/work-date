@@ -1,13 +1,16 @@
 package com.br.workdate.view.fragment
 
 import android.animation.Animator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.NavHostFragment
 import com.airbnb.lottie.LottieAnimationView
 import com.br.workdate.R
@@ -46,14 +49,21 @@ class ListScheduleFragment : Fragment() {
         schedule_list_animation.setAnimation("anim/list_empty.json")
         logo_app_animation.setAnimation("anim/workdate_app.json")
 
+        val ttb = AnimationUtils.loadAnimation(requireContext(), R.anim.ttb)
+        val cardView = schedule_resume_cardView
+        cardView.startAnimation(ttb)
+
+        initDonutAnimation()
+        initResume()
         checkStateLogin()
         new_schedule.setOnClickListener {
             goToSearchClientFragment()
         }
-        viewModel.listAll().observe(viewLifecycleOwner, { scheduleList ->
-            ifEmptyPlayAnimation(scheduleList)
-            initAdapter(scheduleList)
-        })
+        viewModel.listAllNoFinished()
+            .observe<MutableList<Schedule>>(viewLifecycleOwner) { scheduleList ->
+                ifEmptyPlayAnimation(scheduleList)
+                initAdapter(scheduleList)
+            }
         setHasOptionsMenu(true)
     }
 
@@ -69,6 +79,7 @@ class ListScheduleFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("RestrictedApi")
     private fun checkStateLogin() {
         if (!loginViewModel.isLogged()) {
             schedule_list_animation.visibility = GONE
@@ -80,12 +91,30 @@ class ListScheduleFragment : Fragment() {
         }
     }
 
+
+    private fun initDonutAnimation() {
+        fragment_list_ui_chart.donutColors = ResumeScheduleView.myDonutColors
+        fragment_list_ui_chart.animation.duration = ResumeScheduleView.durationDonutAnimation
+        fragment_list_ui_chart.animate(ResumeScheduleView.donutSet)
+    }
+
+    private fun initResume() {
+        lateinit var resumeSchedule: ResumeScheduleView
+        val view = activity?.window?.decorView
+        viewModel.listAll().observe<MutableList<Schedule>>(viewLifecycleOwner) { schedules ->
+            resumeSchedule = view?.let { view -> ResumeScheduleView(view, schedules) }!!
+            resumeSchedule.update()
+            initDonutAnimation()
+        }
+    }
+
     private fun animatorListener(): Animator.AnimatorListener {
         return object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
                 schedule_list_animation.visibility = GONE
             }
 
+            @SuppressLint("RestrictedApi")
             override fun onAnimationEnd(animation: Animator) {
                 initAnimation(schedule_list_animation)
                 new_schedule.visibility = VISIBLE
@@ -99,52 +128,51 @@ class ListScheduleFragment : Fragment() {
     }
 
     private fun initAdapter(scheduleList: MutableList<Schedule>) {
-        adapter = context?.let { context ->
-            ScheduleAdapter(
-                context,
-                scheduleList,
-                loadFieldClientName = { clientId: String,
-                                        fieldClientName: TextView ->
-                    clientViewModel.getNameForId(clientId)
-                        .observe(viewLifecycleOwner, { clientName ->
-                            fieldClientName.text = clientName.limit(28)
-                        })
-                },
-                loadFieldServiceDescription = { serviceId: String,
-                                                fieldServiceDescription: TextView ->
-                    serviceViewModel.returnDescriptionForId(serviceId).observe(
-                        viewLifecycleOwner, { serviceDescription ->
-                            fieldServiceDescription.text = serviceDescription.limit(17)
-                        })
-                },
-                setScheduleFinished = { schedule ->
-                    val scheduleToSave = Schedule(
-                        schedule.id,
-                        schedule.clientName,
-                        schedule.serviceDescription,
-                        schedule.date,
-                        schedule.hour,
-                        schedule.value,
-                        schedule.canceled,
-                        finished = true,
-                        schedule.observation,
-                        schedule.serviceId,
-                        schedule.clientId
-                    )
-                    viewModel.update(scheduleToSave)
-                    releaseViewModel.findReleaseIdByScheduleId(scheduleToSave.id)
-                        .observe(viewLifecycleOwner, { releaseId ->
-                            releaseViewModel.update(
-                                Release(
-                                    scheduleToSave,
-                                    releaseId,
-                                    viewModel.checkFinished(scheduleToSave.finished)
-                                )
-                            )
-                        })
+        adapter = ScheduleAdapter(
+            requireContext(),
+            scheduleList,
+            loadFieldClientName = { clientId: String,
+                                    fieldClientName: TextView ->
+                clientViewModel.getNameForId(clientId)
+                    .observe<String>(viewLifecycleOwner) { clientName ->
+                        fieldClientName.text = clientName.limit(28)
+                    }
+            },
+            loadFieldServiceDescription = { serviceId: String,
+                                            fieldServiceDescription: TextView ->
+                serviceViewModel.returnDescriptionForId(serviceId).observe<String>(
+                    viewLifecycleOwner
+                ) { serviceDescription ->
+                    fieldServiceDescription.text = serviceDescription.limit(17)
                 }
-            )
-        }!!
+            },
+            setScheduleFinished = { schedule ->
+                val scheduleToSave = Schedule(
+                    schedule.id,
+                    schedule.clientName,
+                    schedule.serviceDescription,
+                    schedule.date,
+                    schedule.hour,
+                    schedule.value,
+                    schedule.canceled,
+                    true,
+                    schedule.observation,
+                    schedule.serviceId,
+                    schedule.clientId
+                )
+                viewModel.update(scheduleToSave)
+                releaseViewModel.findReleaseIdByScheduleId(scheduleToSave.id)
+                    .observe<String>(viewLifecycleOwner) { releaseId ->
+                        releaseViewModel.update(
+                            Release(
+                                scheduleToSave,
+                                releaseId,
+                                viewModel.checkFinished(scheduleToSave.finished)
+                            )
+                        )
+                    }
+            }
+        )
         schedule_list_rv.adapter = adapter
         adapter.onItemClickListener = { schedule ->
             goToFormScheduleFragment(schedule)
@@ -168,43 +196,41 @@ class ListScheduleFragment : Fragment() {
 
 
     private fun initFilterDialog() {
-        context?.let { context ->
-            activity?.let { activity ->
-                FilterDialog(
-                    context,
-                    activity,
-                    FilterOfSchedule(),
-                    loadClientNames = { clientAutoComplete ->
-                        filterViewModel.returnAllClientNames()
-                            .observe(viewLifecycleOwner, { names ->
-                                val clientAdapter = ArrayAdapter(
-                                    context,
-                                    R.layout.support_simple_spinner_dropdown_item,
-                                    names
-                                )
-                                clientAutoComplete.setAdapter(clientAdapter)
-                            })
-                    },
-                    loadServiceDescriptions = { serviceAutoComplete ->
-                        filterViewModel.returnAllServicesDescriptions()
-                            .observe(viewLifecycleOwner, { descriptions ->
-                                val serviceAdapter = ArrayAdapter(
-                                    context,
-                                    R.layout.support_simple_spinner_dropdown_item,
-                                    descriptions
-                                )
-                                serviceAutoComplete.setAdapter(serviceAdapter)
-                            })
-                    },
-                    returnQuery = { query ->
-                        viewModel.findScheduleFilter(query)
-                            .observe(viewLifecycleOwner, { scheduleList ->
-                                ifEmptyPlayAnimation(scheduleList)
-                                initAdapter(scheduleList)
-                            })
-                    }
-                ).showFilterDialog()
-            }
+        activity?.let { activity ->
+            FilterDialog(
+                requireContext(),
+                activity,
+                FilterOfSchedule(),
+                loadClientNames = { clientAutoComplete ->
+                    filterViewModel.returnAllClientNames()
+                        .observe<List<String>>(viewLifecycleOwner) { names ->
+                            val clientAdapter = ArrayAdapter(
+                                requireContext(),
+                                R.layout.support_simple_spinner_dropdown_item,
+                                names
+                            )
+                            clientAutoComplete.setAdapter(clientAdapter)
+                        }
+                },
+                loadServiceDescriptions = { serviceAutoComplete ->
+                    filterViewModel.returnAllServicesDescriptions()
+                        .observe<List<String>>(viewLifecycleOwner) { descriptions ->
+                            val serviceAdapter = ArrayAdapter(
+                                requireContext(),
+                                R.layout.support_simple_spinner_dropdown_item,
+                                descriptions
+                            )
+                            serviceAutoComplete.setAdapter(serviceAdapter)
+                        }
+                },
+                returnQuery = { query ->
+                    viewModel.findScheduleFilter(query)
+                        .observe<MutableList<Schedule>>(viewLifecycleOwner) { scheduleList ->
+                            ifEmptyPlayAnimation(scheduleList)
+                            initAdapter(scheduleList)
+                        }
+                }
+            ).showFilterDialog()
         }
     }
 

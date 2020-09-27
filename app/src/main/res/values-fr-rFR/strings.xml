@@ -60,6 +60,4 @@
     <string name="to_locate">Localiser</string>
     <string name="call">Téléphoner </string>
     <string name="conclude">Conclure</string>
-    <string name="zero">0</string>
-    <string name="concluded">Conclu</string>
 </resources>

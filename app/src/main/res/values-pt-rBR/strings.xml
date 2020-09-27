@@ -60,6 +60,4 @@
     <string name="to_locate">Localizar</string>
     <string name="call">Ligar</string>
     <string name="conclude">Concluir</string>
-    <string name="zero">0</string>
-    <string name="concluded">Concluído</string>
 </resources>

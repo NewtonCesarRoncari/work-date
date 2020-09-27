@@ -67,7 +67,7 @@ abstract class BaseListClientFragment : Fragment() {
     }
 
     private fun initClientAdapter(clients: MutableList<Client>) {
-        adapter = context?.let { context -> ClientAdapter(context, clients) }!!
+        adapter = ClientAdapter(requireContext(), clients)
         client_list_rv.adapter = adapter
         adapter.onItemClickListener = { client ->
             doInItemClickListener(client)

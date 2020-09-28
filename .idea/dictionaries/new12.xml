@@ -2,6 +2,8 @@
   <dictionary name="new12">
     <words>
       <w>coroutines</w>
+      <w>semibold</w>
+      <w>stetho</w>
       <w>workdate</w>
     </words>
   </dictionary>

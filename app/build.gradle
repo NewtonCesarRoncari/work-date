@@ -115,4 +115,7 @@ dependencies {
     // Tooltips
     implementation 'com.diogobernardino.williamchart:tooltip-slider:3.7.1'
     implementation 'com.diogobernardino.williamchart:tooltip-points:3.7.1'
+
+    // Stetho
+    implementation 'com.facebook.stetho:stetho:1.3.1'
 }

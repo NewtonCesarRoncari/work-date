@@ -1,10 +1,12 @@
 <component name="ProjectDictionaryState">
-  <dictionary name="new12">
-    <words>
-      <w>coroutines</w>
-      <w>semibold</w>
-      <w>stetho</w>
-      <w>workdate</w>
-    </words>
-  </dictionary>
+    <dictionary name="new12">
+        <words>
+            <w>coroutines</w>
+            <w>semibold</w>
+            <w>stetho</w>
+            <w>crashlytics</w>
+            <w>koin</w>
+            <w>workdate</w>
+        </words>
+    </dictionary>
 </component>

@@ -15,7 +15,7 @@ import org.hamcrest.TypeSafeMatcher
 internal const val CLIENTS = "Clients"
 internal const val SERVICES = "Services"
 internal const val RELEASES = "Releases"
-internal const val SCHEDULE = "Schedule"
+internal const val SCHEDULE = "Schedules"
 
 abstract class BaseFlowTest {
 

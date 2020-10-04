@@ -18,7 +18,7 @@ class NavigationActivityTest {
 
     @Test
     fun showBarTitle() {
-        onView(withText("Schedule List"))
+        onView(withText("Schedules"))
             .check(matches(isDisplayed()))
     }
 

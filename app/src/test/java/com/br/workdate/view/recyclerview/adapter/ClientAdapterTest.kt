@@ -25,7 +25,6 @@ class ClientAdapterTest {
         )
     )
 
-    @Ignore("for Jenkins run")
     @Test
     fun returnSizeOfAdapterWhenHaveTwoClients() {
         assertEquals(2, adapter.itemCount)

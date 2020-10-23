@@ -60,7 +60,7 @@ class ListScheduleFragment : Fragment() {
             goToSearchClientFragment()
         }
         viewModel.listAllNoFinished()
-            .observe<MutableList<Schedule>>(viewLifecycleOwner) { scheduleList ->
+            .observe(viewLifecycleOwner) { scheduleList ->
                 ifEmptyPlayAnimation(scheduleList)
                 initAdapter(scheduleList)
             }
@@ -134,7 +134,7 @@ class ListScheduleFragment : Fragment() {
             loadFieldClientName = { clientId: String,
                                     fieldClientName: TextView ->
                 clientViewModel.getNameForId(clientId)
-                    .observe<String>(viewLifecycleOwner) { clientName ->
+                    .observe(viewLifecycleOwner) { clientName ->
                         fieldClientName.text = clientName.limit(28)
                     }
             },
@@ -162,7 +162,7 @@ class ListScheduleFragment : Fragment() {
                 )
                 viewModel.update(scheduleToSave)
                 releaseViewModel.findReleaseIdByScheduleId(scheduleToSave.id)
-                    .observe<String>(viewLifecycleOwner) { releaseId ->
+                    .observe(viewLifecycleOwner) { releaseId ->
                         releaseViewModel.update(
                             Release(
                                 scheduleToSave,
@@ -203,7 +203,7 @@ class ListScheduleFragment : Fragment() {
                 FilterOfSchedule(),
                 loadClientNames = { clientAutoComplete ->
                     filterViewModel.returnAllClientNames()
-                        .observe<List<String>>(viewLifecycleOwner) { names ->
+                        .observe(viewLifecycleOwner) { names ->
                             val clientAdapter = ArrayAdapter(
                                 requireContext(),
                                 R.layout.support_simple_spinner_dropdown_item,
@@ -214,7 +214,7 @@ class ListScheduleFragment : Fragment() {
                 },
                 loadServiceDescriptions = { serviceAutoComplete ->
                     filterViewModel.returnAllServicesDescriptions()
-                        .observe<List<String>>(viewLifecycleOwner) { descriptions ->
+                        .observe(viewLifecycleOwner) { descriptions ->
                             val serviceAdapter = ArrayAdapter(
                                 requireContext(),
                                 R.layout.support_simple_spinner_dropdown_item,
@@ -225,7 +225,7 @@ class ListScheduleFragment : Fragment() {
                 },
                 returnQuery = { query ->
                     viewModel.findScheduleFilter(query)
-                        .observe<MutableList<Schedule>>(viewLifecycleOwner) { scheduleList ->
+                        .observe(viewLifecycleOwner) { scheduleList ->
                             ifEmptyPlayAnimation(scheduleList)
                             initAdapter(scheduleList)
                         }

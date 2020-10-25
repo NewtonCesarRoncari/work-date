@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="client"
             type="com.br.workdate.model.Client" />
@@ -78,6 +80,7 @@
                 android:layout_height="16dp"
                 android:contentDescription="@string/phone_icon"
                 android:src="@drawable/ic_client_phone"
+                android:visibility="@{client.phone.isEmpty ? View.GONE : View.VISIBLE }"
                 app:layout_constraintBottom_toBottomOf="@+id/list_item_client_phone"
                 app:layout_constraintEnd_toStartOf="@+id/list_item_client_phone"
                 app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
@@ -103,6 +106,7 @@
                 android:layout_width="20dp"
                 android:layout_height="17dp"
                 android:contentDescription="@string/address_icon"
+                android:visibility="@{client.address.isEmpty ? View.GONE : View.VISIBLE}"
                 android:src="@drawable/ic_client_address"
                 app:layout_constraintBottom_toBottomOf="@+id/list_item_client_address"
                 app:layout_constraintEnd_toStartOf="@+id/list_item_client_address"

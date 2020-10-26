@@ -17,10 +17,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.br.workdate.BR
 import com.br.workdate.R
+import com.br.workdate.databinding.ListItemClientBinding
 import com.br.workdate.model.Client
 import kotlinx.android.synthetic.main.list_item_client.view.*
 import java.util.*
@@ -72,7 +71,7 @@ class ClientAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(context)
-        val viewDataBinding = DataBindingUtil.inflate<ViewDataBinding>(
+        val viewDataBinding = DataBindingUtil.inflate<ListItemClientBinding>(
             inflater,
             R.layout.list_item_client,
             parent,
@@ -97,7 +96,7 @@ class ClientAdapter(
         if (position < 0 || position > clients.size) throw IndexOutOfBoundsException()
     }
 
-    inner class MyViewHolder(private val viewDataBinding: ViewDataBinding) :
+    inner class MyViewHolder(private val viewDataBinding: ListItemClientBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
 
         private lateinit var client: Client
@@ -105,7 +104,7 @@ class ClientAdapter(
 
         fun bind(client: Client) {
             this.client = client
-            viewDataBinding.setVariable(BR.client, client.makeClientForLayout())
+            viewDataBinding.client = client.makeClientForLayout()
         }
 
         init {

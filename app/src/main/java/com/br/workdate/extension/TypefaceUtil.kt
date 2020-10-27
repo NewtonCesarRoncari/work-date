@@ -16,6 +16,7 @@ class TypefaceUtil {
             defaultTypefaceField.isAccessible = true
             defaultTypefaceField.set(null, customTypeface)
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

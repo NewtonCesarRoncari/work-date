@@ -9,7 +9,7 @@ import com.br.workdate.view.dialog.ClientFormUpdateDialog
 class ListClientFragment : BaseListClientFragment() {
 
     override fun doInItemClickListener(client: Client) = callUpdateDialog(client)
-    override fun doInOnCreateView() {}
+    override fun doInOnCreateView() {} //method implemented in delegate
 
     private fun callUpdateDialog(client: Client) {
         context?.let { context ->

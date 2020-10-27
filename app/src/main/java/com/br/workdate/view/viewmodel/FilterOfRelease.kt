@@ -48,11 +48,12 @@ class FilterOfRelease : FilterOf {
         if (toDate.trim() != "0") {
             params[@Params TO_DATE] = toDate.trim()
         }
-        if (view.chip_one.isChecked || view.chip_two.isChecked) {
-            if (releaseChip.trim().isNotEmpty()) {
-                params[@Params SITUATION] = releaseChip
-            }
+        if (releaseChip.trim().isNotEmpty() && someChipIsChecked(view)) {
+            params[@Params SITUATION] = releaseChip
         }
         return params
     }
+
+    private fun someChipIsChecked(view: Dialog) =
+        view.chip_one.isChecked || view.chip_two.isChecked
 }

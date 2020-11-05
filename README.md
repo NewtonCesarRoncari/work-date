@@ -60,3 +60,4 @@ Após clonar o projeto, importe no seu Android Studio, aceitando as susjestões 
 - <a href="https://developer.android.com/topic/libraries/architecture/room">Room Persistence Library<a/>
 - <a href="https://kotlinlang.org/docs/reference/coroutines-overview.html">Coroutines<a/>
 - <a href="https://developer.android.com/reference/android/content/SharedPreferences">Shared Preferences<a/>
+- <a href="https://developer.android.com/topic/libraries/data-binding">Data Biniding<a/>

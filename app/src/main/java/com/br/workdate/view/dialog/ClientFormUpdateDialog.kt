@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import com.br.workdate.R
 import com.br.workdate.model.Client
+import com.br.workdate.view.databinding.ClientData
 
 class ClientFormUpdateDialog(
     viewGroup: ViewGroup,
@@ -13,17 +14,9 @@ class ClientFormUpdateDialog(
     override val titleDialog: String
         get() = context.getString(R.string.title_form_update_client)
 
-    fun initClientFormDialog(client: Client, dialogClickListener: (client: Client) -> Unit) {
-        loadFieldDataDialog(client)
+    fun initClientFormDialog(client: ClientData, dialogClickListener: (client: Client) -> Unit) {
+        dataBinding.client = client
+        fieldName.isFocusable = false
         super.inflateForm(dialogClickListener)
     }
-
-    private fun loadFieldDataDialog(client: Client) {
-        fieldName.isFocusable = false
-        fieldID.text = client.id
-        fieldName.setText(client.name)
-        fieldAddress.setText(client.address)
-        fieldPhone.setText(client.phone)
-    }
-
 }

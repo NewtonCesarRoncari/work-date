@@ -8,7 +8,7 @@ import com.br.workdate.extension.limit
 import java.io.Serializable
 
 @Entity(indices = [Index(value = ["name"], unique = true)])
-class Client(
+data class Client(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val name: String,

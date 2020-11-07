@@ -1,88 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <data>
 
-    <TextView
-        android:id="@+id/client_formulary_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <import type="android.view.View" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/clientNameTextInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        <variable
+            name="client"
+            type="com.br.workdate.view.databinding.ClientData" />
+    </data>
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/client_formulary_id">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/client_form_name"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/client_form_id"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            android:hint="@string/name" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/clientEnderecoTextInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        app:layout_constraintEnd_toEndOf="@id/clientNameTextInputLayout"
-        app:layout_constraintStart_toStartOf="@id/clientNameTextInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/clientNameTextInputLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/client_form_address"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/clientNameTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/address" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/clientTelTextInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        app:counterEnabled="true"
-        app:counterMaxLength="11"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/clientEnderecoTextInputLayout"
-        app:layout_constraintStart_toStartOf="@id/clientEnderecoTextInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/clientEnderecoTextInputLayout"
-        app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/client_form_id">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/client_formulary_phone"
-            android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/client_form_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:inputType="textCapWords"
+                android:text="@={client.name}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/clientAddressTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/phone"
-            android:inputType="number"
-            android:maxLength="11" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="8dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:layout_constraintEnd_toEndOf="@id/clientNameTextInputLayout"
+            app:layout_constraintStart_toStartOf="@id/clientNameTextInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/clientNameTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/client_form_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/address"
+                android:text="@={client.address}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/clientTelTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:counterEnabled="true"
+            app:counterMaxLength="11"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/clientAddressTextInputLayout"
+            app:layout_constraintStart_toStartOf="@id/clientAddressTextInputLayout"
+            app:layout_constraintTop_toBottomOf="@id/clientAddressTextInputLayout"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/client_form_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
+                android:inputType="number"
+                android:maxLength="11"
+                android:text="@={client.phone}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

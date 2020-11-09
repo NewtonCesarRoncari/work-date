@@ -16,8 +16,8 @@ abstract class ClientFormDialog(
     private val context: Context,
     private val viewGroup: ViewGroup
 ) {
-    private val viewCreated = initView()
     protected lateinit var dataBinding: ClientFormularyBinding
+    private val viewCreated = initView()
     protected val fieldName: TextInputEditText = viewCreated.client_form_name
     protected abstract val titleDialog: String
 

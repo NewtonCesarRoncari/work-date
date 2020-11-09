@@ -11,7 +11,7 @@ import java.io.Serializable
 import java.math.BigDecimal
 
 @Entity(indices = [Index(value = ["description"], unique = true)])
-class Service(
+data class Service(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val description: String,

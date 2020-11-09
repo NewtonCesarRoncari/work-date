@@ -19,3 +19,11 @@ w
 Gapp/src/main/java/com/br/workdate/view/dialog/ClientFormUpdateDialog.kt,b\a\ba1cb3474b529899791b3ae311f9d1b873577af7
 q
 Aapp/src/main/java/com/br/workdate/view/dialog/ClientFormDialog.kt,9\2\92b703819b46205003242bc8a533001a142f2175
+{
+Kapp/src/main/java/com/br/workdate/view/fragment/SearchListClientFragment.kt,0\e\0ea0b4deb266f2e765dccb30fdf8dbafa5cd3e4f
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+z
+Japp/src/androidTest/java/com/br/workdate/view/flow/InsertModelsFlowTest.kt,4\6\46e421edbd8ff920a0c1ff907fef0905857a119f
+p
+@app/src/main/java/com/br/workdate/view/databinding/ClientData.kt,8\b\8bd00dd29451c55aec0256ad98f5c5fb6a29160c

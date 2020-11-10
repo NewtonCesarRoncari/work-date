@@ -23,7 +23,6 @@ data class Service(
     @Ignore
     var formatValue: String = ""
 
-    @Ignore
     constructor(
         id: String,
         description: String,

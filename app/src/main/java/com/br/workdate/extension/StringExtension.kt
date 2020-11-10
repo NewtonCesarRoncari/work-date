@@ -21,7 +21,7 @@ fun String.percentage(): String {
     return "${this}%"
 }
 
-fun String.tryParseBigDecimal(serviceStringValue: String): BigDecimal {
+fun tryParseBigDecimal(serviceStringValue: String): BigDecimal {
     return try {
         BigDecimal(serviceStringValue)
     } catch (e: NumberFormatException) {

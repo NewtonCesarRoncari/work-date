@@ -22,7 +22,7 @@ class ServiceData(
         return this.service.copy(
             id = serviceId!!,
             description = description.value?.trim() ?: emptyString,
-            value = value.value?.tryParseBigDecimal(value.value!!)!!
+            value = tryParseBigDecimal(value.value!!)
         )
     }
 }

@@ -1,132 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:clickable="true"
-    android:elevation="5dp"
-    android:focusable="true"
-    android:foreground="@drawable/custom_ripple"
-    app:cardCornerRadius="10dp">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_client_subcard_constraint"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="client"
+            type="com.br.workdate.model.Client" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:focusable="true"
+        android:foreground="@drawable/custom_ripple"
+        app:cardCornerRadius="10dp">
 
-        <View
-            android:id="@+id/list_item_client_icon"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/circle_item_client"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_client_subcard_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
 
-        <TextView
-            android:id="@+id/list_item_client_first_char"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:text="@string/n"
-            android:textAllCaps="true"
-            android:textColor="#ffffff"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="@+id/list_item_client_icon"
-            app:layout_constraintEnd_toEndOf="@+id/list_item_client_icon"
-            app:layout_constraintStart_toStartOf="@+id/list_item_client_icon"
-            app:layout_constraintTop_toTopOf="@+id/list_item_client_icon" />
+            <View
+                android:id="@+id/list_item_client_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/circle_item_client"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/list_item_client_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/name"
-            android:textAllCaps="true"
-            android:textColor="@color/coloBlackAbsolute"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/list_item_client_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/list_item_client_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/list_item_client_first_char"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@{client.firstChar, default = N}"
+                android:textAllCaps="true"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/list_item_client_icon"
+                app:layout_constraintEnd_toEndOf="@+id/list_item_client_icon"
+                app:layout_constraintStart_toStartOf="@+id/list_item_client_icon"
+                app:layout_constraintTop_toTopOf="@+id/list_item_client_icon" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="19dp"
-            android:layout_height="16dp"
-            android:contentDescription="@string/phone_icon"
-            android:src="@drawable/ic_client_phone"
-            app:layout_constraintBottom_toBottomOf="@+id/list_item_client_phone"
-            app:layout_constraintEnd_toStartOf="@+id/list_item_client_phone"
-            app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
-            app:layout_constraintTop_toTopOf="@+id/list_item_client_phone"
-            app:layout_constraintVertical_bias="1.0" />
+            <TextView
+                android:id="@+id/list_item_client_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:text="@{client.name, default = CLIENT_NAME}"
+                android:textAllCaps="true"
+                android:textColor="@color/coloBlackAbsolute"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/list_item_client_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/list_item_client_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/list_item_client_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="@string/phone"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/list_item_client_address"
-            app:layout_constraintEnd_toEndOf="@+id/list_item_client_name"
-            app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
-            app:layout_constraintTop_toBottomOf="@+id/list_item_client_name" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="19dp"
+                android:layout_height="16dp"
+                android:contentDescription="@string/phone_icon"
+                android:src="@drawable/ic_client_phone"
+                android:visibility="@{client.phone.isEmpty ? View.GONE : View.VISIBLE }"
+                app:layout_constraintBottom_toBottomOf="@+id/list_item_client_phone"
+                app:layout_constraintEnd_toStartOf="@+id/list_item_client_phone"
+                app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
+                app:layout_constraintTop_toTopOf="@+id/list_item_client_phone"
+                app:layout_constraintVertical_bias="1.0" />
 
-        <ImageView
-            android:id="@+id/list_item_client_icon_address"
-            android:layout_width="20dp"
-            android:layout_height="17dp"
-            android:contentDescription="@string/address_icon"
-            android:src="@drawable/ic_client_address"
-            app:layout_constraintBottom_toBottomOf="@+id/list_item_client_address"
-            app:layout_constraintEnd_toStartOf="@+id/list_item_client_address"
-            app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
-            app:layout_constraintTop_toTopOf="@+id/list_item_client_address"
-            app:layout_constraintVertical_bias="0.76" />
+            <TextView
+                android:id="@+id/list_item_client_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:text="@{client.phone, default = 99999999}"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/list_item_client_address"
+                app:layout_constraintEnd_toEndOf="@+id/list_item_client_name"
+                app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
+                app:layout_constraintTop_toBottomOf="@+id/list_item_client_name" />
 
-        <TextView
-            android:id="@+id/list_item_client_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/address"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/list_item_client_phone"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/list_item_client_name" />
+            <ImageView
+                android:id="@+id/list_item_client_icon_address"
+                android:layout_width="20dp"
+                android:layout_height="17dp"
+                android:contentDescription="@string/address_icon"
+                android:visibility="@{client.address.isEmpty ? View.GONE : View.VISIBLE}"
+                android:src="@drawable/ic_client_address"
+                app:layout_constraintBottom_toBottomOf="@+id/list_item_client_address"
+                app:layout_constraintEnd_toStartOf="@+id/list_item_client_address"
+                app:layout_constraintStart_toStartOf="@+id/list_item_client_name"
+                app:layout_constraintTop_toTopOf="@+id/list_item_client_address"
+                app:layout_constraintVertical_bias="0.76" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/list_item_option"
-            android:focusable="true"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_more_item_card"
-            app:tint="@android:color/black" />
+            <TextView
+                android:id="@+id/list_item_client_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{client.address, default = edereco}"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/list_item_client_phone"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/list_item_client_name" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/list_item_option"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:focusable="true"
+                android:padding="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_more_item_card"
+                app:tint="@android:color/black" />
 
-</androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

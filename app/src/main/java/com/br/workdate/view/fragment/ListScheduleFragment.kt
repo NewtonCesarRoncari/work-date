@@ -122,8 +122,8 @@ class ListScheduleFragment : Fragment() {
                 loginViewModel.login()
             }
 
-            override fun onAnimationCancel(animation: Animator) {}
-            override fun onAnimationRepeat(animation: Animator) {}
+            override fun onAnimationCancel(animation: Animator) {} //method implemented in delegate
+            override fun onAnimationRepeat(animation: Animator) {} //method implemented in delegate
         }
     }
 

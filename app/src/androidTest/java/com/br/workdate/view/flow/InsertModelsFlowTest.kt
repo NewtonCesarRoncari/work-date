@@ -77,11 +77,11 @@ class InsertModelsFlowTest : BaseFlowTest() {
         )
         insertDataInFieldWithParent(
             R.id.client_form_address,
-            R.id.clientEnderecoTextInputLayout,
+            R.id.clientAddressTextInputLayout,
             address
         )
         insertDataInFieldWithParent(
-            R.id.client_formulary_phone,
+            R.id.client_form_phone,
             R.id.clientTelTextInputLayout,
             tel
         )

@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.br.workdate.R
-import com.br.workdate.extension.returnUUID
+import com.br.workdate.databinding.ClientFormularyBinding
 import com.br.workdate.model.Client
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -16,11 +16,9 @@ abstract class ClientFormDialog(
     private val context: Context,
     private val viewGroup: ViewGroup
 ) {
+    protected lateinit var dataBinding: ClientFormularyBinding
     private val viewCreated = initView()
-    protected val fieldID: TextView = viewCreated.client_formulary_id
     protected val fieldName: TextInputEditText = viewCreated.client_form_name
-    protected val fieldAddress: TextInputEditText = viewCreated.client_form_address
-    protected val fieldPhone: TextInputEditText = viewCreated.client_formulary_phone
     protected abstract val titleDialog: String
 
     protected fun inflateForm(dialogClickListener: (client: Client) -> Unit) {
@@ -28,28 +26,23 @@ abstract class ClientFormDialog(
             .setTitle(titleDialog)
             .setView(viewCreated)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
-                val clientName = fieldName.text.toString().trim()
-                val clientAddress = fieldAddress.text.toString().trim()
-                val clientPhone = fieldPhone.text.toString().trim()
+                val clientData = dataBinding.client
 
-                val client = Client(
-                    id = fieldID.text.toString().returnUUID(),
-                    name = clientName,
-                    address = clientAddress,
-                    phone = clientPhone
-                )
-
-                dialogClickListener(client)
+                if (clientData != null)
+                    dialogClickListener(clientData.returnClient())
             }
             .setNegativeButton(R.string.negative_button_name, null)
             .show()
     }
 
     private fun initView(): View {
-        return LayoutInflater.from(context).inflate(
+        val inflater = LayoutInflater.from(context)
+        dataBinding = DataBindingUtil.inflate(
+            inflater,
             R.layout.client_formulary,
             viewGroup,
             false
         )
+        return dataBinding.root
     }
 }

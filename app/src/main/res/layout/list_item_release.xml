@@ -1,69 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="70dp">
+<layout>
 
-    <TextView
-        android:id="@+id/release_client"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="11dp"
-        android:text="@string/client"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/release_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/service"
-        app:layout_constraintStart_toStartOf="@+id/release_client"
-        app:layout_constraintTop_toBottomOf="@+id/release_client" />
+        <import type="android.view.View" />
 
-    <TextView
-        android:id="@+id/release_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="@string/zero_value"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/release_client" />
+        <variable
+            name="release"
+            type="com.br.workdate.model.Release" />
+    </data>
 
-    <TextView
-        android:id="@+id/release_hour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/hour_format"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/release_value"
-        app:layout_constraintTop_toBottomOf="@+id/release_value" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
 
-    <TextView
-        android:id="@+id/release_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/date_format"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/release_hour"
-        app:layout_constraintEnd_toStartOf="@+id/release_hour"
-        app:layout_constraintTop_toTopOf="@+id/release_hour" />
+        <TextView
+            android:id="@+id/release_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="11dp"
+            android:text="@{release.clientName, default = Client}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="#2A465561"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/release_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{release.serviceDescription, default = Service}"
+            app:layout_constraintStart_toStartOf="@+id/release_client"
+            app:layout_constraintTop_toBottomOf="@+id/release_client" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/release_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{release.formatValue, default = $_0_00}"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/release_client" />
+
+        <TextView
+            android:id="@+id/release_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{release.formatHour, default = 00_00}"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/release_value"
+            app:layout_constraintTop_toBottomOf="@+id/release_value" />
+
+        <TextView
+            android:id="@+id/release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@{release.formatDate, default = 00_00}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/release_hour"
+            app:layout_constraintEnd_toStartOf="@+id/release_hour"
+            app:layout_constraintTop_toTopOf="@+id/release_hour" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="#2A465561"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -2,16 +2,12 @@ package com.br.workdate.view.recyclerview.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
-import com.br.workdate.extension.formatCoin
-import com.br.workdate.extension.formatForBrazilianDate
-import com.br.workdate.extension.formatForBrazilianHour
-import com.br.workdate.extension.limit
+import com.br.workdate.databinding.ListItemReleaseBinding
 import com.br.workdate.model.Release
-import kotlinx.android.synthetic.main.list_item_release.view.*
 
 class ReleaseAdapter(
     private val context: Context,
@@ -19,12 +15,14 @@ class ReleaseAdapter(
 ) : RecyclerView.Adapter<ReleaseAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(
+        val inflater = LayoutInflater.from(context)
+        val viewDataBinding = DataBindingUtil.inflate<ListItemReleaseBinding>(
+            inflater,
             R.layout.list_item_release,
             parent,
             false
         )
-        return MyViewHolder(view)
+        return MyViewHolder(viewDataBinding)
     }
 
     override fun getItemCount() = releases.size
@@ -33,20 +31,11 @@ class ReleaseAdapter(
         holder.bind(releases[position])
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val client by lazy { itemView.release_client }
-        private val service by lazy { itemView.release_service }
-        private val value by lazy { itemView.release_value }
-        private val date by lazy { itemView.release_date }
-        private val hour by lazy { itemView.release_hour }
+    inner class MyViewHolder(private val viewDataBinding: ListItemReleaseBinding) :
+        RecyclerView.ViewHolder(viewDataBinding.root) {
 
         fun bind(release: Release) {
-            client.text = release.clientName.limit(24)
-            service.text = release.serviceDescription.limit(24)
-            value.text = release.value.formatCoin(context)
-            date.text = release.date.formatForBrazilianDate()
-            hour.text = release.hour.formatForBrazilianHour()
+            viewDataBinding.release = release.makeReleaseForLayout(context)
         }
     }
 }

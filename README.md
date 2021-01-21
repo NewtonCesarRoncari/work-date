@@ -1,4 +1,4 @@
-# work-date
+# work-date [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 Este projeto consiste na criação de uma ferramenta para agendar um serviço a ser prestado e consequentemente gerar lançamentos financeiros
 

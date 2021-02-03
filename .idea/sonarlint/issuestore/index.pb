@@ -234,3 +234,7 @@ A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 t
 Dapp/src/main/java/com/br/workdate/view/fragment/ResumeReleaseView.kt,f\5\f5c941ff87d31eff058804a115c44dc1e4e3bcd6
+m
+=app/src/main/java/com/br/workdate/extension/VectorToBitmap.kt,2\3\233d90adab129b78b3db94a7828533274bc1c2e2
+j
+:app/src/main/java/com/br/workdate/repository/NotifyWork.kt,2\f\2f561b0668d98b341315e336f2e6813aa724039a

@@ -65,16 +65,15 @@ class FormScheduleFragment : Fragment() {
         service?.let { tryLoadServiceFields(it) }
         schedule?.let { tryLoadScheduleFields(it) }
 
-        startAnimations()
-
-        serviceCard.setOnClickListener {
-            if (!this.schedule?.id.isNullOrEmpty()) {
-                goToSearchListServiceFragment()
-            }
-        }
         form_schedule_date_btn.setOnClickListener { initDateDialog() }
         form_schedule_hour_btn.setOnClickListener { initTimeDialog() }
 
+        startAnimations()
+        serviceCardListener()
+        saveBtnListener()
+    }
+
+    private fun saveBtnListener() {
         saveBtn.setOnClickListener {
             if (scheduleIsInitialized()) {
                 updateSchedule()
@@ -88,6 +87,14 @@ class FormScheduleFragment : Fragment() {
                 } else {
                     showSnackBar(getString(R.string.message_empty_fields))
                 }
+            }
+        }
+    }
+
+    private fun serviceCardListener() {
+        serviceCard.setOnClickListener {
+            if (!this.schedule?.id.isNullOrEmpty()) {
+                goToSearchListServiceFragment()
             }
         }
     }

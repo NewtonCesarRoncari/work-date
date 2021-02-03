@@ -1,6 +1,7 @@
 package com.br.workdate.others
 
 import org.junit.Test
+import java.util.*
 
 class Prime {
 
@@ -11,7 +12,7 @@ class Prime {
         return false
     }
 
-    @Test
+
     fun showPrime() {
         for (i in 1..100) {
             if (isPrime(i)) {
@@ -20,5 +21,12 @@ class Prime {
                 println("prime $i")
             }
         }
+    }
+
+    @Test
+    fun scan() {
+        val scanner = Scanner(System.`in`)
+        val myScan = scanner.nextLine().toInt()
+        print(myScan in 1..9)
     }
 }

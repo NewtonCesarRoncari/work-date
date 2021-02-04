@@ -2,7 +2,7 @@ package com.br.workdate.extension
 
 import org.junit.Test
 
-class BigDecimalExtensionTest() {
+class BigDecimalExtensionTest {
 
     @Test
     fun returnFormatForBrazilianCoin() {

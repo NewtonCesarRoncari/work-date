@@ -1,9 +1,11 @@
 package com.br.workdate.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.br.workdate.R
@@ -90,32 +92,44 @@ class ListReleaseFragment : Fragment() {
                     activity,
                     FilterOfRelease(),
                     loadClientNames = { clientAutoComplete ->
-                        filterViewModel.returnAllClientNames()
-                            .observe(viewLifecycleOwner, { names ->
-                                val clientAdapter = ArrayAdapter(
-                                    context,
-                                    R.layout.support_simple_spinner_dropdown_item,
-                                    names
-                                )
-                                clientAutoComplete.setAdapter(clientAdapter)
-                            })
+                        loadClientNames(context, clientAutoComplete)
                     },
                     loadServiceDescriptions = { serviceAutoComplete ->
-                        filterViewModel.returnAllServicesDescriptions()
-                            .observe(viewLifecycleOwner, { descriptions ->
-                                val serviceAdapter = ArrayAdapter(
-                                    context,
-                                    R.layout.support_simple_spinner_dropdown_item,
-                                    descriptions
-                                )
-                                serviceAutoComplete.setAdapter(serviceAdapter)
-                            })
+                        loadServiceDescriptions(context, serviceAutoComplete)
                     },
-                    returnQuery = { query ->
-                        viewModel.findReleaseFilter(query)
-                    }
+                    returnQuery = { query -> viewModel.findReleaseFilter(query) }
                 ).showFilterDialog()
             }
         }
+    }
+
+    private fun loadServiceDescriptions(
+        context: Context,
+        serviceAutoComplete: AutoCompleteTextView
+    ) {
+        filterViewModel.returnAllServicesDescriptions()
+            .observe(viewLifecycleOwner, { descriptions ->
+                val serviceAdapter = ArrayAdapter(
+                    context,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    descriptions
+                )
+                serviceAutoComplete.setAdapter(serviceAdapter)
+            })
+    }
+
+    private fun loadClientNames(
+        context: Context,
+        clientAutoComplete: AutoCompleteTextView
+    ) {
+        filterViewModel.returnAllClientNames()
+            .observe(viewLifecycleOwner, { names ->
+                val clientAdapter = ArrayAdapter(
+                    context,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    names
+                )
+                clientAutoComplete.setAdapter(clientAdapter)
+            })
     }
 }

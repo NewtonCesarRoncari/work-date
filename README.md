@@ -1,4 +1,4 @@
-# work-date [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Build Status](https://travis-ci.com/NewtonCesarRoncari/work-date.svg?branch=develop)](https://travis-ci.com/NewtonCesarRoncari/work-date)
+# work-date [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Build Status](https://travis-ci.com/NewtonCesarRoncari/work-date.svg?branch=develop)](https://travis-ci.com/NewtonCesarRoncari/work-date) [![codebeat badge](https://codebeat.co/badges/6616053d-28fb-45e4-8ae7-3fef895cebc2)](https://codebeat.co/projects/github-com-newtoncesarroncari-work-date-develop)
 
 Este projeto consiste na criação de uma ferramenta para agendar um serviço a ser prestado e consequentemente gerar lançamentos financeiros
 

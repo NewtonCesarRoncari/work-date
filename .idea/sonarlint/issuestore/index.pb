@@ -167,8 +167,6 @@ m
 =app/src/test/java/com/br/workdate/model/ResumeScheduleTest.kt,2\e\2e57093533c4e8fb89f754ffbb6493f3e3b742ef
 q
 Aapp/src/test/java/com/br/workdate/model/QueryCreatorFilterTest.kt,5\f\5fbbefffba409d0ae5517d47165a2cfdcf3e8fa6
-a
-1app/src/test/java/com/br/workdate/others/Prime.kt,2\1\2188fa1c786f2580323b14eed91474c6c40015b8
 e
 5app/src/test/java/com/br/workdate/others/Fibonacci.kt,d\f\df90d6ac722fcbd40e8d19471f4b49bf7b756a1e
 v
@@ -236,5 +234,3 @@ t
 Dapp/src/main/java/com/br/workdate/view/fragment/ResumeReleaseView.kt,f\5\f5c941ff87d31eff058804a115c44dc1e4e3bcd6
 m
 =app/src/main/java/com/br/workdate/extension/VectorToBitmap.kt,2\3\233d90adab129b78b3db94a7828533274bc1c2e2
-j
-:app/src/main/java/com/br/workdate/repository/NotifyWork.kt,2\f\2f561b0668d98b341315e336f2e6813aa724039a

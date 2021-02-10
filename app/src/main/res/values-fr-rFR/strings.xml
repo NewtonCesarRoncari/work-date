@@ -62,4 +62,5 @@
     <string name="conclude">Conclure</string>
     <string name="zero">0</string>
     <string name="concluded">Conclu</string>
+    <string name="message_empty_address">No address found</string>
 </resources>

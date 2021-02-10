@@ -8,8 +8,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
+import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Client
-import com.br.workdate.view.dialog.BaseDialog
 import com.br.workdate.view.dialog.ClientFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ClientAdapter
 import com.br.workdate.view.viewmodel.ClientViewModel
@@ -76,14 +76,24 @@ abstract class BaseListClientFragment : Fragment() {
             viewModel.remove(client,
                 inFailureCase = {
                     activity?.runOnUiThread {
-                        val baseDialog = BaseDialog(requireContext())
-                        baseDialog.showErrorRemoveDialog(getString(R.string.message_linked_schedule))
+                        showDialogMessage(
+                            getString(R.string.error),
+                            getString(R.string.message_linked_schedule),
+                            requireContext()
+                        )
                     }
                 }, inSuccessCase = {
                     activity?.runOnUiThread {
                         showSnackBar(client, getString(R.string.removed))
                     }
                 })
+        }
+        adapter.showMessageClientNoAddress = {
+            showDialogMessage(
+                getString(R.string.error),
+                getString(R.string.message_empty_address),
+                requireContext()
+            )
         }
     }
 
@@ -111,8 +121,11 @@ abstract class BaseListClientFragment : Fragment() {
                     viewModel.insert(clientReturned,
                         inFailureCase = {
                             activity?.runOnUiThread {
-                                val baseDialog = BaseDialog(requireContext())
-                                baseDialog.showErrorRemoveDialog(getString(R.string.message_client_name_already_exists))
+                                showDialogMessage(
+                                    getString(R.string.error),
+                                    getString(R.string.message_client_name_already_exists),
+                                    requireContext()
+                                )
                             }
                         }, inSuccessCase = {
                             activity?.runOnUiThread {

@@ -29,7 +29,8 @@ class ClientAdapter(
     private val context: Context,
     private var clients: MutableList<Client>,
     var onItemClickListener: (client: Client) -> Unit = {},
-    var onItemLongClickListener: (client: Client) -> Unit = {}
+    var onItemLongClickListener: (client: Client) -> Unit = {},
+    var showMessageClientNoAddress: () -> Unit = {}
 ) : RecyclerView.Adapter<ClientAdapter.MyViewHolder>(), Filterable {
 
     private val clientListFull = clients.toList()
@@ -130,7 +131,9 @@ class ClientAdapter(
                         }
                     }
                     R.id.list_item_options_locate -> {
-                        initGoogleMaps(client.address, menuItem)
+                        if (client.address == "")
+                            showMessageClientNoAddress() else
+                            initGoogleMaps(client.address, menuItem)
                     }
                 }
                 false

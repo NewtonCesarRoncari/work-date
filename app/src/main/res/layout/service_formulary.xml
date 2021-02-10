@@ -68,7 +68,6 @@
                 android:id="@+id/service_form_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="1234567890.,"
                 android:drawableStart="@drawable/ic_service_value"
                 android:hint="@string/value"
                 android:inputType="numberDecimal"

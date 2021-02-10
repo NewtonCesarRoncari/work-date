@@ -21,10 +21,12 @@ fun String.percentage(): String {
     return "${this}%"
 }
 
-fun tryParseBigDecimal(serviceStringValue: String): BigDecimal {
+fun tryParseBigDecimal(serviceStringValue: String?): BigDecimal {
     return try {
         BigDecimal(serviceStringValue)
     } catch (e: NumberFormatException) {
+        BigDecimal.ZERO
+    } catch (e: NullPointerException) {
         BigDecimal.ZERO
     }
 }

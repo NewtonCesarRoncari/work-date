@@ -2,6 +2,7 @@ package com.br.workdate.view.dialog
 
 import android.content.Context
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import com.br.workdate.R
 import com.br.workdate.model.Service
 import com.br.workdate.view.databinding.ServiceData
@@ -18,6 +19,9 @@ class ServiceFormInsertDialog(
 
     fun initServiceFormDialog(dialogClickListener: (service: Service) -> Unit) {
         dataBinding.service = ServiceData(returnEmptyService())
+        fieldValue.doOnTextChanged { text, _, _, _ ->
+            formatFieldForMoneyMask(text)
+        }
         super.inflateForm(dialogClickListener)
     }
 

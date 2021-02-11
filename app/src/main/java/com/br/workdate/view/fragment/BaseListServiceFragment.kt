@@ -8,8 +8,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
+import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Service
-import com.br.workdate.view.dialog.BaseDialog
 import com.br.workdate.view.dialog.ServiceFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ServiceAdapter
 import com.br.workdate.view.viewmodel.ServiceViewModel
@@ -121,8 +121,11 @@ abstract class BaseListServiceFragment : Fragment() {
 
     private fun inFailureCase(messageError: String) {
         activity?.runOnUiThread {
-            val baseDialog = BaseDialog(requireContext())
-            baseDialog.showErrorRemoveDialog(messageError)
+            showDialogMessage(
+                getString(R.string.error),
+                messageError,
+                requireContext()
+            )
         }
     }
 

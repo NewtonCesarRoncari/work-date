@@ -2,9 +2,9 @@ package com.br.workdate.view.fragment
 
 import android.view.ViewGroup
 import com.br.workdate.R
+import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Client
 import com.br.workdate.view.databinding.ClientData
-import com.br.workdate.view.dialog.BaseDialog
 import com.br.workdate.view.dialog.ClientFormUpdateDialog
 
 class ListClientFragment : BaseListClientFragment() {
@@ -23,8 +23,11 @@ class ListClientFragment : BaseListClientFragment() {
                     viewModel.update(clientReturned,
                         inFailureCase = {
                             activity?.runOnUiThread {
-                                val baseDialog = BaseDialog(requireContext())
-                                baseDialog.showErrorRemoveDialog(getString(R.string.message_client_name_already_exists))
+                                showDialogMessage(
+                                    getString(R.string.error),
+                                    getString(R.string.message_client_name_already_exists),
+                                    requireContext()
+                                )
                             }
                         }, inSuccessCase = {
                             activity?.runOnUiThread {

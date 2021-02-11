@@ -51,8 +51,6 @@ b
 2app/src/main/java/com/br/workdate/di/AppModules.kt,7\e\7e42d0fbaf70a465e28670774e8a7eea886f5306
 r
 Bapp/src/main/java/com/br/workdate/view/tabs/adapter/TabsAdapter.kt,f\1\f1e0f9f0957c831bdd93bde809a3494c68ef74f1
-k
-;app/src/main/java/com/br/workdate/view/dialog/BaseDialog.kt,7\4\74260e7cd9768fdac953c4de43ed63912accad65
 m
 =app/src/main/java/com/br/workdate/view/dialog/FilterDialog.kt,3\1\313f01c4f3af182d5deb208bd1c9233a1803c779
 u
@@ -167,8 +165,6 @@ m
 =app/src/test/java/com/br/workdate/model/ResumeScheduleTest.kt,2\e\2e57093533c4e8fb89f754ffbb6493f3e3b742ef
 q
 Aapp/src/test/java/com/br/workdate/model/QueryCreatorFilterTest.kt,5\f\5fbbefffba409d0ae5517d47165a2cfdcf3e8fa6
-a
-1app/src/test/java/com/br/workdate/others/Prime.kt,2\1\2188fa1c786f2580323b14eed91474c6c40015b8
 e
 5app/src/test/java/com/br/workdate/others/Fibonacci.kt,d\f\df90d6ac722fcbd40e8d19471f4b49bf7b756a1e
 v
@@ -236,5 +232,5 @@ t
 Dapp/src/main/java/com/br/workdate/view/fragment/ResumeReleaseView.kt,f\5\f5c941ff87d31eff058804a115c44dc1e4e3bcd6
 m
 =app/src/main/java/com/br/workdate/extension/VectorToBitmap.kt,2\3\233d90adab129b78b3db94a7828533274bc1c2e2
-j
-:app/src/main/java/com/br/workdate/repository/NotifyWork.kt,2\f\2f561b0668d98b341315e336f2e6813aa724039a
+p
+@app/src/main/java/com/br/workdate/extension/FragmentExtension.kt,2\e\2e6e8f84239dff34ab303a87150be4fc48a6f230

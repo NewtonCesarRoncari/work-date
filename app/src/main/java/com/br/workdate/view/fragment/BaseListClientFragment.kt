@@ -89,12 +89,19 @@ abstract class BaseListClientFragment : Fragment() {
                 })
         }
         adapter.showMessageClientNoAddress = {
-            showDialogMessage(
-                getString(R.string.error),
-                getString(R.string.message_empty_address),
-                requireContext()
-            )
+            showMessageErrorDialog(getString(R.string.message_empty_address))
         }
+        adapter.showMessageClientNoPhone = {
+            showMessageErrorDialog(getString(R.string.message_empty_phone))
+        }
+    }
+
+    private fun showMessageErrorDialog(message: String) {
+        showDialogMessage(
+            getString(R.string.error),
+            message,
+            requireContext()
+        )
     }
 
     private fun ifEmptyPlayAnimation(mutableList: MutableList<Client>) {

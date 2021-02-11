@@ -62,5 +62,6 @@
     <string name="conclude">Concluir</string>
     <string name="zero">0</string>
     <string name="concluded">Concluído</string>
-    <string name="message_empty_address">Sem endereço informado</string>
+    <string name="message_empty_address">Endereço não encontrado</string>
+    <string name="message_empty_phone">Telefone não encontrado</string>
 </resources>

@@ -30,7 +30,8 @@ class ClientAdapter(
     private var clients: MutableList<Client>,
     var onItemClickListener: (client: Client) -> Unit = {},
     var onItemLongClickListener: (client: Client) -> Unit = {},
-    var showMessageClientNoAddress: () -> Unit = {}
+    var showMessageClientNoAddress: () -> Unit = {},
+    var showMessageClientNoPhone: () -> Unit = {}
 ) : RecyclerView.Adapter<ClientAdapter.MyViewHolder>(), Filterable {
 
     private val clientListFull = clients.toList()
@@ -127,6 +128,8 @@ class ClientAdapter(
                         if (checkCallPhonePermission()) {
                             requestCallPhonePermission()
                         } else {
+                            if (client.phone == "")
+                                showMessageClientNoPhone() else
                             initCall(client.phone)
                         }
                     }

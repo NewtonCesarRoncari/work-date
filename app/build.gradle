@@ -115,14 +115,14 @@ dependencies {
     //SharedPreferences
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
-    // Charts
+    //Charts
     implementation 'com.diogobernardino:williamchart:3.7.1'
 
-    // Tooltips
+    //Tooltips
     implementation 'com.diogobernardino.williamchart:tooltip-slider:3.7.1'
     implementation 'com.diogobernardino.williamchart:tooltip-points:3.7.1'
 
-    // Stetho
+    //Stetho
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
     //Firebase Crashlytics
@@ -132,4 +132,7 @@ dependencies {
     //WorkManager
     def work_version = "2.1.0-alpha02"
     implementation "android.arch.work:work-runtime:$work_version"
+
+    //TapTargetView
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
 }

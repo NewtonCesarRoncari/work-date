@@ -8,19 +8,24 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
+import com.br.workdate.extension.getWindow
 import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Service
 import com.br.workdate.view.dialog.ServiceFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ServiceAdapter
+import com.br.workdate.view.viewmodel.LoginViewModel
 import com.br.workdate.view.viewmodel.ServiceViewModel
+import com.br.workdate.view.viewmodel.TutorialOfListService
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_service.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 abstract class BaseListServiceFragment : Fragment() {
 
     private lateinit var adapter: ServiceAdapter
     protected val viewModel: ServiceViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +37,7 @@ abstract class BaseListServiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         service_list_animation.setAnimation("anim/list_empty.json")
+        checkIsFirstTimeInApp(view)
 
         new_service.setOnClickListener {
             callInsertDialog()
@@ -129,10 +135,21 @@ abstract class BaseListServiceFragment : Fragment() {
         }
     }
 
+    private fun checkIsFirstTimeInApp(view: View) {
+        if (loginViewModel.firstTimeInScreen(Constant.TITLE)) {
+            val (width: Int, height: Int) = getWindow(activity)
+            loginViewModel.initTutorial(TutorialOfListService(), activity, view, width, height)
+        }
+    }
+
     protected fun showSnackBar(service: Service, msg: String) {
         view?.let { view ->
             Snackbar.make(view, "${service.description} " + msg, Snackbar.LENGTH_SHORT).show()
         }
+    }
+
+    private object Constant {
+        const val TITLE = "SERVICE_SCREEN"
     }
 
     abstract fun doInItemClickListener(service: Service)

@@ -1,26 +1,13 @@
 package com.br.workdate.view.viewmodel
 
-import android.graphics.Rect
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.br.workdate.R
+import com.br.workdate.extension.findIconInWindow
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 
-class TutorialOfListSchedule: TutorialOf {
-
-    private fun findIconFilterInWindow(width: Int, height: Int): Rect {
-        val x = width * 2
-        val horizontalDistance = x - (x * 0.0625)
-        val verticalDistance = height * 0.15325
-
-        return Rect(
-            0,
-            0,
-            horizontalDistance.toInt(),
-            verticalDistance.toInt()
-        )
-    }
+class TutorialOfListSchedule : TutorialOf {
 
     override fun initTutorial(activity: FragmentActivity?, view: View, width: Int, height: Int) {
         val sequence = TapTargetSequence(activity)
@@ -36,7 +23,7 @@ class TutorialOfListSchedule: TutorialOf {
                     "É mostrado a soma dos agendamentos concluídos e não concluídos"
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forBounds(
-                    findIconFilterInWindow(width, height),
+                    findIconInWindow(width, height),
                     "Filtro",
                     "Após agendar os trabalhos que pretende realizar, aqui você pode filtrá-los, uma ótima forma de encontrar seus trabalhos agendados"
                 )

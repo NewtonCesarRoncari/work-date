@@ -1,6 +1,5 @@
 package com.br.workdate.view.fragment
 
-import android.graphics.Point
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -9,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
+import com.br.workdate.extension.getWindow
 import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Client
 import com.br.workdate.view.dialog.ClientFormInsertDialog
@@ -52,7 +52,7 @@ abstract class BaseListClientFragment : Fragment() {
 
     private fun checkIsFirstTimeInApp(view: View) {
         if (loginViewModel.firstTimeInScreen(Constant.TITLE)) {
-            val (width: Int, height: Int) = getWindow()
+            val (width: Int, height: Int) = getWindow(activity)
             loginViewModel.initTutorial(TutorialOfListClient(), activity, view, width, height)
         }
     }
@@ -159,15 +159,6 @@ abstract class BaseListClientFragment : Fragment() {
         view?.let { view ->
             Snackbar.make(view, "${client.name} " + msg, Snackbar.LENGTH_SHORT).show()
         }
-    }
-
-    private fun getWindow(): Pair<Int, Int> {
-        val display: Display = activity?.windowManager?.defaultDisplay!!
-        val size = Point()
-        display.getSize(size)
-        val width: Int = size.x
-        val height: Int = size.y
-        return Pair(width, height)
     }
 
     private object Constant {

@@ -7,20 +7,20 @@ import com.br.workdate.extension.findIconInWindow
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 
-class TutorialOfListService : TutorialOf {
+class TutorialOfListRelease : TutorialOf {
 
     override fun initTutorial(activity: FragmentActivity?, view: View, width: Int, height: Int) {
         val sequence = TapTargetSequence(activity)
             .targets(
                 TapTarget.forView(
-                    view.findViewById(R.id.new_service),
-                    "Novo Serviço",
-                    "Aqui você pode iniciar o cadastro de novos serviços ou trabalhos os trabalhos que você pretende agendar para algum cliente"
+                    view.findViewById(R.id.resume_total),
+                    "Aqui você pode ver o total",
+                    "É mostrado a soma dos lançamentos financeiros gerados pelos agendamentos, nessa mesma tela é possível verificar os lançamentos em aberto e também os pagos"
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forBounds(
                     findIconInWindow(width, height),
-                    "Encontre seus Serviços",
-                    "Após cadastrar os serviços, clicando aqui é uma ótima forma de encontrá-los"
+                    "Filtro",
+                    "Após a geração dos lançamentos financeiros criados a partir dos agendamentos, você pode filtrá-los, uma ótima forma de encontrar seus lançamentos financeiros e saber o resumo dos valores"
                 )
                     .transparentTarget(true).cancelable(false)
             )

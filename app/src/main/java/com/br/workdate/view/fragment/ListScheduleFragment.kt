@@ -2,7 +2,6 @@ package com.br.workdate.view.fragment
 
 import android.animation.Animator
 import android.annotation.SuppressLint
-import android.graphics.Point
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -14,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.airbnb.lottie.LottieAnimationView
 import com.br.workdate.R
+import com.br.workdate.extension.getWindow
 import com.br.workdate.extension.limit
 import com.br.workdate.model.Release
 import com.br.workdate.model.Schedule
@@ -66,15 +66,6 @@ class ListScheduleFragment : Fragment() {
             })
 
         setHasOptionsMenu(true)
-    }
-
-    private fun getWindow(): Pair<Int, Int> {
-        val display: Display = activity?.windowManager?.defaultDisplay!!
-        val size = Point()
-        display.getSize(size)
-        val width: Int = size.x
-        val height: Int = size.y
-        return Pair(width, height)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -131,7 +122,7 @@ class ListScheduleFragment : Fragment() {
                 new_schedule.visibility = VISIBLE
                 logo_app_animation.visibility = GONE
 
-                val (width: Int, height: Int) = getWindow()
+                val (width: Int, height: Int) = getWindow(activity)
                 loginViewModel.initTutorial(TutorialOfListSchedule(), activity, view, width, height)
 
                 loginViewModel.login()

@@ -7,7 +7,7 @@ import com.br.workdate.R
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 
-class TutorialOfListSchedule: TutorialOf {
+class TutorialOfListService : TutorialOf {
 
     private fun findIconFilterInWindow(width: Int, height: Int): Rect {
         val x = width * 2
@@ -26,19 +26,14 @@ class TutorialOfListSchedule: TutorialOf {
         val sequence = TapTargetSequence(activity)
             .targets(
                 TapTarget.forView(
-                    view.findViewById(R.id.new_schedule),
-                    "Novo Agendamento",
-                    "Aqui você pode iniciar o cadastro de novos agendamentos, para agendar o trabalho que pretende realizar"
-                ).transparentTarget(true).cancelable(false),
-                TapTarget.forView(
-                    view.findViewById(R.id.resume_total),
-                    "Aqui você pode ver o total",
-                    "É mostrado a soma dos agendamentos concluídos e não concluídos"
+                    view.findViewById(R.id.new_service),
+                    "Novo Serviço",
+                    "Aqui você pode iniciar o cadastro de novos serviços ou trabalhos os trabalhos que você pretende agendar para algum cliente"
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forBounds(
                     findIconFilterInWindow(width, height),
-                    "Filtro",
-                    "Após agendar os trabalhos que pretende realizar, aqui você pode filtrá-los, uma ótima forma de encontrar seus trabalhos agendados"
+                    "Encontre seus Serviços",
+                    "Após cadastrar os serviços, clicando qui é uma ótima forma de encontrá-los"
                 )
                     .transparentTarget(true).cancelable(false)
             )

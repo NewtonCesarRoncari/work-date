@@ -11,6 +11,8 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
 
     fun isLogged(): Boolean = repository.isLogged()
 
+    fun firstTimeInScreen(screen: String): Boolean = repository.firstTimeInScreen(screen)
+
     fun initTutorial(
         tutorialOfScreen: TutorialOf,
         activity: FragmentActivity?,

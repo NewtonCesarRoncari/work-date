@@ -31,7 +31,7 @@ class ListScheduleFragment : Fragment() {
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
     private val filterViewModel: FilterViewModel by viewModel()
-    private val loginViewModel: LoginViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
     private val releaseViewModel: ReleaseViewModel by viewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private lateinit var adapter: ScheduleAdapter

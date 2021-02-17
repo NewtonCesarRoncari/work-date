@@ -14,4 +14,14 @@ class LoginRepository(private val preferences: SharedPreferences) {
     }
 
     fun isLogged(): Boolean = preferences.getBoolean(KEY_LOGIN, false)
+
+    fun firstTimeInScreen(screen: String): Boolean {
+        if (!preferences.getBoolean(screen, false)) {
+            preferences.edit() {
+                putBoolean(screen, true)
+            }
+            return true
+        }
+        return false
+    }
 }

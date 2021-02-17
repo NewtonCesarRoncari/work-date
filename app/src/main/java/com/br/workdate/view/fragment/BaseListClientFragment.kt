@@ -1,5 +1,6 @@
 package com.br.workdate.view.fragment
 
+import android.graphics.Point
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -13,7 +14,9 @@ import com.br.workdate.model.Client
 import com.br.workdate.view.dialog.ClientFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ClientAdapter
 import com.br.workdate.view.viewmodel.ClientViewModel
+import com.br.workdate.view.viewmodel.LoginViewModel
 import com.br.workdate.view.viewmodel.StateAppComponentsViewModel
+import com.br.workdate.view.viewmodel.TutorialOfListClient
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_client.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -22,6 +25,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 abstract class BaseListClientFragment : Fragment() {
 
     protected val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
     private lateinit var adapter: ClientAdapter
     protected val viewModel: ClientViewModel by viewModel()
 
@@ -33,6 +37,7 @@ abstract class BaseListClientFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         client_list_animation.setAnimation("anim/list_empty.json")
+        checkIsFirstTimeInApp(view)
         doInOnCreateView()
 
         new_client.setOnClickListener {
@@ -43,6 +48,13 @@ abstract class BaseListClientFragment : Fragment() {
             initClientAdapter(clientList)
         })
         setHasOptionsMenu(true)
+    }
+
+    private fun checkIsFirstTimeInApp(view: View) {
+        if (loginViewModel.firstTimeInScreen(Constant.TITLE)) {
+            val (width: Int, height: Int) = getWindow()
+            loginViewModel.initTutorial(TutorialOfListClient(), activity, view, width, height)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -147,6 +159,19 @@ abstract class BaseListClientFragment : Fragment() {
         view?.let { view ->
             Snackbar.make(view, "${client.name} " + msg, Snackbar.LENGTH_SHORT).show()
         }
+    }
+
+    private fun getWindow(): Pair<Int, Int> {
+        val display: Display = activity?.windowManager?.defaultDisplay!!
+        val size = Point()
+        display.getSize(size)
+        val width: Int = size.x
+        val height: Int = size.y
+        return Pair(width, height)
+    }
+
+    private object Constant {
+        const val TITLE = "CLIENT_SCREEN"
     }
 
     abstract fun doInItemClickListener(client: Client)

@@ -1,5 +1,6 @@
 package com.br.workdate.view.fragment
 
+import android.graphics.Point
 import android.os.Bundle
 import android.view.*
 import android.view.View.GONE
@@ -12,15 +13,19 @@ import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Service
 import com.br.workdate.view.dialog.ServiceFormInsertDialog
 import com.br.workdate.view.recyclerview.adapter.ServiceAdapter
+import com.br.workdate.view.viewmodel.LoginViewModel
 import com.br.workdate.view.viewmodel.ServiceViewModel
+import com.br.workdate.view.viewmodel.TutorialOfListService
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_list_service.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 abstract class BaseListServiceFragment : Fragment() {
 
     private lateinit var adapter: ServiceAdapter
     protected val viewModel: ServiceViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +37,7 @@ abstract class BaseListServiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         service_list_animation.setAnimation("anim/list_empty.json")
+        checkIsFirstTimeInApp(view)
 
         new_service.setOnClickListener {
             callInsertDialog()
@@ -129,10 +135,30 @@ abstract class BaseListServiceFragment : Fragment() {
         }
     }
 
+    private fun checkIsFirstTimeInApp(view: View) {
+        if (loginViewModel.firstTimeInScreen(Constant.TITLE)) {
+            val (width: Int, height: Int) = getWindow()
+            loginViewModel.initTutorial(TutorialOfListService(), activity, view, width, height)
+        }
+    }
+
+    private fun getWindow(): Pair<Int, Int> {
+        val display: Display = activity?.windowManager?.defaultDisplay!!
+        val size = Point()
+        display.getSize(size)
+        val width: Int = size.x
+        val height: Int = size.y
+        return Pair(width, height)
+    }
+
     protected fun showSnackBar(service: Service, msg: String) {
         view?.let { view ->
             Snackbar.make(view, "${service.description} " + msg, Snackbar.LENGTH_SHORT).show()
         }
+    }
+
+    private object Constant {
+        const val TITLE = "SERVICE_SCREEN"
     }
 
     abstract fun doInItemClickListener(service: Service)

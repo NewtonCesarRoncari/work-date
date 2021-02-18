@@ -20,21 +20,21 @@ class BottomNavigationFlowTest : BaseFlowTest() {
 
     @Test
     fun testGoToClientScreen() {
-        checkBarTitle("Schedule List")
+        checkBarTitle("Schedules")
         clickBottomNavigation(R.id.listClientFragment, CLIENTS)
-        checkBarTitle("Client List")
+        checkBarTitle("Clients")
     }
 
     @Test
     fun testGoToServiceScreen() {
-        checkBarTitle("Schedule List")
+        checkBarTitle("Schedules")
         clickBottomNavigation(R.id.listServiceFragment, SERVICES)
-        checkBarTitle("Service List")
+        checkBarTitle("Services")
     }
 
     @Test
     fun testGoToReleaseScreen() {
-        checkBarTitle("Schedule List")
+        checkBarTitle("Schedules")
         clickBottomNavigation(R.id.listReleaseFragment, RELEASES)
         checkBarTitle(RELEASES)
     }
@@ -42,12 +42,12 @@ class BottomNavigationFlowTest : BaseFlowTest() {
     @Test
     fun testGoToAllBottomNavigationScreenAndReturn() {
         clickBottomNavigation(R.id.listClientFragment, CLIENTS)
-        checkBarTitle("Client List")
+        checkBarTitle("Clients")
         clickBottomNavigation(R.id.listServiceFragment, SERVICES)
-        checkBarTitle("Service List")
+        checkBarTitle("Services")
         clickBottomNavigation(R.id.listReleaseFragment, RELEASES)
         checkBarTitle("Releases")
         clickBottomNavigation(R.id.listScheduleFragment, SCHEDULE)
-        checkBarTitle("Schedule List")
+        checkBarTitle("Schedules")
     }
 }

@@ -5,7 +5,7 @@ import org.junit.runners.Suite
 
 @RunWith(Suite::class)
 @Suite.SuiteClasses(
-    BottomNavigationFlowTest::class,
-    InsertModelsFlowTest::class
+//    BottomNavigationFlowTest::class,
+//    InsertModelsFlowTest::class
 )
 class FlowTestSuite

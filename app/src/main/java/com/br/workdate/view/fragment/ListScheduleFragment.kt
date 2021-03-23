@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.airbnb.lottie.LottieAnimationView
 import com.br.workdate.R
+import com.br.workdate.extension.formatForTextMonth
 import com.br.workdate.extension.getWindow
 import com.br.workdate.extension.limit
 import com.br.workdate.model.Release
@@ -23,6 +24,8 @@ import com.br.workdate.view.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_list_schedule.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
+import kotlin.properties.Delegates
 
 class ListScheduleFragment : Fragment() {
 
@@ -34,6 +37,9 @@ class ListScheduleFragment : Fragment() {
     private val loginViewModel: LoginViewModel by sharedViewModel()
     private val releaseViewModel: ReleaseViewModel by viewModel()
     private val navController by lazy { NavHostFragment.findNavController(this) }
+    private var firstOfMonth by Delegates.notNull<Long>()
+    private var lastOfMonth by Delegates.notNull<Long>()
+    private var month = 1
     private lateinit var adapter: ScheduleAdapter
 
     override fun onCreateView(
@@ -52,20 +58,65 @@ class ListScheduleFragment : Fragment() {
         val ttb = AnimationUtils.loadAnimation(requireContext(), R.anim.ttb)
         val cardView = schedule_resume_cardView
         cardView.startAnimation(ttb)
+        month = getActualMonth()
 
+        initViews()
         initDonutAnimation()
+        getMonthForFilter()
         initResume()
         checkStateLogin(view)
-        new_schedule.setOnClickListener {
-            goToSearchClientFragment()
-        }
-        viewModel.listAllNoFinished()
+        viewModel.listSchedulesInMonthNoFinished(firstOfMonth, lastOfMonth)
             .observe(viewLifecycleOwner, { scheduleList ->
                 ifEmptyPlayAnimation(scheduleList)
                 initAdapter(scheduleList)
             })
 
         setHasOptionsMenu(true)
+    }
+
+    private fun getMonthForFilter() {
+
+        val gc: Calendar = GregorianCalendar()
+        gc[Calendar.MONTH] = month
+        gc[Calendar.DAY_OF_MONTH] = 1
+        val monthStart = gc.time
+        gc.add(Calendar.MONTH, 1)
+        gc.add(Calendar.DAY_OF_MONTH, -1)
+        val monthEnd = gc.time
+
+        firstOfMonth = monthStart.time
+        lastOfMonth = monthEnd.time
+    }
+
+    private fun getActualMonth(): Int {
+        return Calendar.getInstance().get(Calendar.MONTH)
+    }
+
+    private fun initViews() {
+        fragment_list_text_month.text = Date().formatForTextMonth()
+        new_schedule.setOnClickListener {
+            goToSearchClientFragment()
+        }
+        fragment_list_right_arrow.setOnClickListener {
+            if (month in 0..10)
+                month += 1
+            updateAdapterWithMonthBusiness()
+        }
+        fragment_list_left_arrow.setOnClickListener {
+            if (month in 1..11)
+                month -= 1
+            updateAdapterWithMonthBusiness()
+        }
+    }
+
+    private fun updateAdapterWithMonthBusiness() {
+        getMonthForFilter()
+        viewModel.listSchedulesInMonthNoFinished(firstOfMonth, lastOfMonth)
+            .observe(viewLifecycleOwner, { schedules ->
+                ifEmptyPlayAnimation(schedules)
+                initAdapter(schedules)
+            })
+        fragment_list_text_month.text = Date(firstOfMonth).formatForTextMonth()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

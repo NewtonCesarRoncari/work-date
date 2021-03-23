@@ -15,3 +15,9 @@ fun Date.formatForBrazilianHour(): String {
     val formatHour = SimpleDateFormat("HH:mm")
     return formatHour.format(this)
 }
+
+@SuppressLint("SimpleDateFormat")
+fun Date.formatForTextMonth(): String {
+    val formatHour = SimpleDateFormat("MMM")
+    return formatHour.format(this)
+}

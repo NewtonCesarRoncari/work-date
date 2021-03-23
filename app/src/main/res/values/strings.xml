@@ -68,4 +68,7 @@
     <string name="concluded">Concluded</string>
     <string name="message_empty_address">No address found</string>
     <string name="message_empty_phone">No phone found</string>
+    <string name="arrow" translatable="false">arrow</string>
+    <string name="month" translatable="false">January</string>
+    <string name="addbutton" translatable="false">AddButton</string>
 </resources>

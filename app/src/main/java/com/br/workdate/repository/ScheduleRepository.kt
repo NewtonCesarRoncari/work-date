@@ -20,9 +20,15 @@ class ScheduleRepository(private val dao: ScheduleDAO) {
 
     fun remove(schedule: Schedule) = scope.launch { dao.remove(schedule) }
 
-    fun listAllNoFinished() = dao.listAllNoFinished()
-
     fun listAll() = dao.listAll()
+
+    fun listSchedulesInMonth(firstDayMonth: Long, lastDayMonth: Long) =
+        dao.listSchedulesInMonth(firstDayMonth, lastDayMonth)
+
+    fun listSchedulesInMonthNoFinished(
+        firstDayMonth: Long,
+        lastDayMonth: Long
+    ) = dao.listSchedulesInMonthNoFinished(firstDayMonth, lastDayMonth)
 
     fun findScheduleFilter(query: String): LiveData<MutableList<Schedule>> {
         val simpleSQLiteQuery = SimpleSQLiteQuery(query)

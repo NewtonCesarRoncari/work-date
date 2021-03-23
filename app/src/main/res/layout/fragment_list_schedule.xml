@@ -6,6 +6,39 @@
     android:layout_height="match_parent"
     android:background="#1E7F81DD">
 
+    <TextView
+        android:id="@+id/fragment_list_text_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/month"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_resume_cardView" />
+
+    <ImageView
+        android:id="@+id/fragment_list_right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_list_text_month"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragment_list_text_month"
+        app:layout_constraintTop_toTopOf="@+id/fragment_list_text_month"
+        android:contentDescription="@string/arrow" />
+
+    <ImageView
+        android:id="@+id/fragment_list_left_arrow"
+        android:rotation="180"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_list_text_month"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_list_text_month"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_list_text_month"
+        android:contentDescription="@string/arrow" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/schedule_resume_cardView"
         android:layout_width="0dp"
@@ -36,15 +69,15 @@
                 app:chart_donutTotal="100"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/percentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/zero"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="@string/zero"
+                    android:textColor="@color/colorPrimary" />
             </com.db.williamchart.view.DonutChartView>
 
             <TextView
@@ -133,13 +166,13 @@
         android:id="@+id/schedule_list_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="6dp"
         android:scrollbars="vertical"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/schedule_resume_cardView"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_text_month"
         tools:listitem="@layout/list_item_schedule" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -153,7 +186,8 @@
         android:backgroundTint="@color/colorAccent"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/addbutton" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/schedule_list_animation"

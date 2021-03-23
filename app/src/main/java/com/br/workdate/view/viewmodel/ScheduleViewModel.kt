@@ -13,9 +13,12 @@ class ScheduleViewModel(private val repository: ScheduleRepository) : ViewModel(
 
     fun remove(schedule: Schedule) = repository.remove(schedule)
 
-    fun listAllNoFinished() = repository.listAllNoFinished()
-
     fun listAll() = repository.listAll()
+
+    fun listSchedulesInMonthNoFinished(
+        firstDayMonth: Long,
+        lastDayMonth: Long
+    ) = repository.listSchedulesInMonthNoFinished(firstDayMonth, lastDayMonth)
 
     fun checkFinished(finished: Boolean) = if (finished) {
         Situation.PAID

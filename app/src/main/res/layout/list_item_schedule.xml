@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/clock"
                 android:paddingStart="8dp"
+                android:tint="@color/textColor"
                 android:paddingEnd="8dp"
                 android:src="@drawable/ic_schedule_clock"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -95,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/icon_client"
                 android:src="@drawable/ic_client"
+                android:tint="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="@+id/item_schedule_client"
                 app:layout_constraintEnd_toStartOf="@+id/item_schedule_client"
                 app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +120,7 @@
                 android:layout_height="20dp"
                 android:contentDescription="@string/icon_service"
                 android:src="@drawable/ic_work"
+                android:tint="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="@+id/item_schedule_service"
                 app:layout_constraintEnd_toStartOf="@+id/item_schedule_service"
                 app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +150,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_more_item_card"
-                app:tint="@android:color/black" />
+                app:tint="@color/textColor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

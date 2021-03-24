@@ -5,4 +5,10 @@
     <color name="colorAccent">#6746c3</color>
     <color name="colorGreyRipple">#5787899B</color>
     <color name="coloBlackAbsolute">#000000</color>
+
+    <color name="colorFragmentScheduleForm">#FFFFFF</color>
+    <color name="colorFragmentFilter">#8A8BBD</color>
+    <color name="colorEditTextFilter">#FFFF</color>
+    <color name="colorFragment">#1E7F81DD</color>
+    <color name="textColor">#000000</color>
 </resources>

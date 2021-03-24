@@ -42,6 +42,6 @@
         android:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/addbutton" />
+        android:contentDescription="@string/title_form_new_service" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

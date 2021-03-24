@@ -154,7 +154,7 @@
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/addbutton" />
+        android:contentDescription="@string/new_schedule" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/schedule_list_animation"

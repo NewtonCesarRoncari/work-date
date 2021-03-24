@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,15 +10,12 @@
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_margin="8dp"
         android:elevation="5dp"
         android:foreground="@drawable/custom_ripple"
-        app:cardCornerRadius="10dp"
-        tools:targetApi="lollipop">
+        app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_schedule_subcard_constraint"
@@ -43,13 +41,14 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/clock"
                 android:paddingStart="8dp"
-                android:tint="@color/textColor"
                 android:paddingEnd="8dp"
                 android:src="@drawable/ic_schedule_clock"
+                android:tint="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/item_schedule_id"
                 app:layout_constraintTop_toBottomOf="@+id/item_schedule_id"
-                app:layout_constraintVertical_bias="0.060000002" />
+                app:layout_constraintVertical_bias="0.060000002"
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:id="@+id/item_schedule_date"
@@ -101,7 +100,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/item_schedule_client"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/item_schedule_client"
-                app:layout_constraintVertical_bias="0.90999997" />
+                app:layout_constraintVertical_bias="0.90999997"
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:id="@+id/item_schedule_client"
@@ -125,7 +125,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/item_schedule_service"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/item_schedule_service"
-                app:layout_constraintVertical_bias="0.89" />
+                app:layout_constraintVertical_bias="0.89"
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:id="@+id/item_schedule_service"

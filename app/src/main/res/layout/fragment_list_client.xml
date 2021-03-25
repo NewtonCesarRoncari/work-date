@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E7F81DD">
+    android:background="@color/colorFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/client_list_animation"
@@ -41,6 +41,7 @@
         android:backgroundTint="@color/colorAccent"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/title_form_new_client" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

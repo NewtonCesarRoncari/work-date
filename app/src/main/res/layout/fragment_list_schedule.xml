@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E7F81DD">
+    android:background="@color/colorFragment">
 
     <TextView
         android:id="@+id/fragment_list_text_month"
@@ -46,7 +46,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:cardBackgroundColor="@android:color/white"
+        app:cardBackgroundColor="#1E7F81DD"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/open"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView6"
                 app:layout_constraintStart_toEndOf="@+id/fragment_list_ui_chart" />
@@ -108,7 +108,7 @@
                 android:layout_width="0dp"
                 android:layout_height="2dp"
                 android:layout_marginTop="4dp"
-                android:background="@android:color/black"
+                android:background="@color/textColor"
                 app:layout_constraintEnd_toEndOf="@+id/resume_paid"
                 app:layout_constraintStart_toStartOf="@+id/resume_paid"
                 app:layout_constraintTop_toBottomOf="@+id/resume_paid" />
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:text="@string/total"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView5" />
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="@string/zero"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView5"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zero"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintEnd_toEndOf="@+id/resume_open"
@@ -187,7 +187,7 @@
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/addbutton" />
+        android:contentDescription="@string/new_schedule" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/schedule_list_animation"

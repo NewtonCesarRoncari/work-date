@@ -13,23 +13,23 @@ class TutorialOfFormSchedule : TutorialOf {
             .targets(
                 TapTarget.forView(
                     view.findViewById(R.id.form_schedule_client_name),
-                    "Cliente selecionado",
-                    "Este é o seu cliente selecionado, sempre aparecerá aqui para verificação"
+                    activity?.getString(R.string.chosen_client),
+                    activity?.getString(R.string.chosen_client_message)
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forView(
                     view.findViewById(R.id.form_schedule_service_description),
-                    "Serviço selecionado",
-                    "Este é o seu serviço selecionado, sempre aparecerá aqui para verificação"
+                    activity?.getString(R.string.chosen_service),
+                    activity?.getString(R.string.chosen_service_message)
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forView(
                     view.findViewById(R.id.form_schedule_date_btn),
-                    "Informando uma data",
-                    "Aqui você pode informar a data que pretende realizar o trabalho"
+                    activity?.getString(R.string.choosing_date),
+                    activity?.getString(R.string.choosing_date_message)
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forView(
                     view.findViewById(R.id.form_schedule_hour_btn),
-                    "Informando a hora",
-                    "Aqui você pode informar a hora que pretende realizar o trabalho"
+                    activity?.getString(R.string.choosing_time),
+                    activity?.getString(R.string.choosing_time_message)
                 ).transparentTarget(true).cancelable(false)
             )
         sequence.start()

@@ -61,7 +61,31 @@
     <string name="call">Ligar</string>
     <string name="conclude">Concluir</string>
     <string name="zero">0</string>
+    <string name="new_schedule">Novo agendamento</string>
     <string name="concluded">Concluído</string>
     <string name="message_empty_address">Endereço não encontrado</string>
     <string name="message_empty_phone">Telefone não encontrado</string>
+
+    <!-- tutorial texts  -->
+    <string name="chosen_client">Cliente selecionado</string>
+    <string name="chosen_client_message">ste é o seu cliente selecionado, sempre aparecerá aqui para verificação</string>
+    <string name="chosen_service">Serviço selecionado</string>
+    <string name="chosen_service_message">Este é o seu serviço selecionado, sempre aparecerá aqui para verificação</string>
+    <string name="choosing_time">Informando a hora</string>
+    <string name="choosing_time_message">Aqui você pode informar a hora que pretende realizar o trabalho</string>
+    <string name="choosing_date">Informando uma data</string>
+    <string name="choosing_date_message">Aqui você pode informar a data que pretende realizar o trabalho</string>
+    <string name="new_client_message">Aqui você pode iniciar o cadastro de novos clientes, são os clientes para os trabalhos que você pretende agendar</string>
+    <string name="find_clients">Encontre seus Clientes</string>
+    <string name="find_clients_message">Após cadastrar os clientes, clicando aqui é uma ótima forma de encontrá-los</string>
+    <string name="new_service_message">Aqui você pode iniciar o cadastro de novos serviços ou trabalhos, os trabalhos que você pretende agendar para algum cliente</string>
+    <string name="find_services">Encontre seus Serviços</string>
+    <string name="find_services_message">Após cadastrar os serviços, clicando aqui é uma ótima forma de encontrá-los</string>
+    <string name="new_schedule_message">Aqui você pode iniciar o cadastro de novos agendamentos, para agendar o trabalho que pretende realizar</string>
+    <string name="show_total">Aqui você pode ver o total</string>
+    <string name="show_total_schedule_message">É mostrado a soma dos agendamentos concluídos e não concluídos</string>
+    <string name="tuto_filter">Filtro</string>
+    <string name="tuto_filter_schedule_message">Após agendar os trabalhos que pretende realizar, aqui você pode filtrá-los, uma ótima forma de encontrar seus trabalhos agendados</string>
+    <string name="show_total_release_message">É mostrado a soma dos lançamentos financeiros gerados pelos agendamentos, nessa mesma tela é possível verificar os lançamentos em aberto e também os pagos</string>
+    <string name="tuto_filter_release_message">Após a geração dos lançamentos financeiros criados a partir dos agendamentos, você pode filtrá-los, uma ótima forma de encontrar seus lançamentos financeiros e saber o resumo dos valores</string>
 </resources>

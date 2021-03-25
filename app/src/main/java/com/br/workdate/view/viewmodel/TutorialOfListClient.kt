@@ -14,13 +14,13 @@ class TutorialOfListClient : TutorialOf {
             .targets(
                 TapTarget.forView(
                     view.findViewById(R.id.new_client),
-                    "Novo Cliente",
-                    "Aqui você pode iniciar o cadastro de novos clientes, são os clientes para os trabalhos que você pretende agendar"
+                    activity?.getString(R.string.title_form_new_client),
+                    activity?.getString(R.string.new_client_message)
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forBounds(
                     findIconInWindow(width, height),
-                    "Encontre seus clientes",
-                    "Após cadastrar os clientes, clicando aqui é uma ótima forma de encontrá-los"
+                    activity?.getString(R.string.find_clients),
+                    activity?.getString(R.string.find_clients_message)
                 )
                     .transparentTarget(true).cancelable(false)
             )

@@ -5,6 +5,7 @@
     <color name="colorAccent">#BB86FC</color>
     <color name="colorGreyRipple">#5787899B</color>
     <color name="coloBlackAbsolute">#FFFFFF</color>
+    <color name="coloThemeSplash">#311b92</color>
 
     <color name="colorFragmentScheduleForm">#292929</color>
     <color name="colorFragmentFilter">#292929</color>

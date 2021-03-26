@@ -79,6 +79,10 @@ class ListScheduleFragment : Fragment() {
         val gc: Calendar = GregorianCalendar()
         gc[Calendar.MONTH] = month
         gc[Calendar.DAY_OF_MONTH] = 1
+        gc[Calendar.HOUR_OF_DAY] = 0
+        gc[Calendar.MINUTE] = 0
+        gc[Calendar.SECOND] = 0
+        gc[Calendar.MILLISECOND] = 0
         val monthStart = gc.time
         gc.add(Calendar.MONTH, 1)
         gc.add(Calendar.DAY_OF_MONTH, -1)
@@ -285,6 +289,7 @@ class ListScheduleFragment : Fragment() {
                         .observe(viewLifecycleOwner, { scheduleList ->
                             ifEmptyPlayAnimation(scheduleList)
                             initAdapter(scheduleList)
+                            fragment_list_text_month.text = "-"
                         })
                 }
             ).showFilterDialog()

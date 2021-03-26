@@ -22,9 +22,6 @@ class ScheduleRepository(private val dao: ScheduleDAO) {
 
     fun listAll() = dao.listAll()
 
-    fun listSchedulesInMonth(firstDayMonth: Long, lastDayMonth: Long) =
-        dao.listSchedulesInMonth(firstDayMonth, lastDayMonth)
-
     fun listSchedulesInMonthNoFinished(
         firstDayMonth: Long,
         lastDayMonth: Long

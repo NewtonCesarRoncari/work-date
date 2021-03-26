@@ -14,18 +14,18 @@ class TutorialOfListSchedule : TutorialOf {
             .targets(
                 TapTarget.forView(
                     view.findViewById(R.id.new_schedule),
-                    "Novo Agendamento",
-                    "Aqui você pode iniciar o cadastro de novos agendamentos, para agendar o trabalho que pretende realizar"
+                    activity?.getString(R.string.new_schedule),
+                    activity?.getString(R.string.new_schedule_message)
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forView(
                     view.findViewById(R.id.resume_total),
-                    "Aqui você pode ver o total",
-                    "É mostrado a soma dos agendamentos concluídos e não concluídos"
+                    activity?.getString(R.string.show_total),
+                    activity?.getString(R.string.show_total_schedule_message),
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forBounds(
                     findIconInWindow(width, height),
-                    "Filtro",
-                    "Após agendar os trabalhos que pretende realizar, aqui você pode filtrá-los, uma ótima forma de encontrar seus trabalhos agendados"
+                    activity?.getString(R.string.tuto_filter),
+                    activity?.getString(R.string.tuto_filter_schedule_message)
                 )
                     .transparentTarget(true).cancelable(false)
             )

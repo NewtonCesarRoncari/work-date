@@ -14,13 +14,13 @@ class TutorialOfListService : TutorialOf {
             .targets(
                 TapTarget.forView(
                     view.findViewById(R.id.new_service),
-                    "Novo Serviço",
-                    "Aqui você pode iniciar o cadastro de novos serviços ou trabalhos os trabalhos que você pretende agendar para algum cliente"
+                    activity?.getString(R.string.title_form_new_service),
+                    activity?.getString(R.string.new_service_message)
                 ).transparentTarget(true).cancelable(false),
                 TapTarget.forBounds(
                     findIconInWindow(width, height),
-                    "Encontre seus Serviços",
-                    "Após cadastrar os serviços, clicando aqui é uma ótima forma de encontrá-los"
+                    activity?.getString(R.string.find_services),
+                    activity?.getString(R.string.find_services_message)
                 )
                     .transparentTarget(true).cancelable(false)
             )

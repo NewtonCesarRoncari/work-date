@@ -11,7 +11,7 @@ agendado e receba pelo serviço realizado, como trabalhos free lancers ou agenda
 ### Layouts
 Splash             |  Agendamentos    | Lançamentos 
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200823_200505.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214236.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214347.jpg"/>
+<img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200823_200505.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/develop/img/Screenshot_20200908_214236.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214347.jpg"/>
 
 ### Ações
 

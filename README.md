@@ -11,7 +11,7 @@ agendado e receba pelo serviço realizado, como trabalhos free lancers ou agenda
 ### Layouts
 Splash             |  Agendamentos    | Lançamentos 
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200823_200505.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214236.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214347.jpg"/>
+<img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200823_200505.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/develop/img/Screenshot_20091231_212007_temp.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214347.jpg"/>
 
 ### Ações
 
@@ -24,6 +24,8 @@ financeiro gerado será marcado como 'Pago', ao final do mês auxiliando o usuá
 Detalhes do agendamento     |  Lista de clientes |  Filtro financeiro
 :-------------------------:|:-------------------------:|:-------------------------:
 <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214445.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214302.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214413.jpg"/>
+
+- Caso queira, é possível realizar o <a href="https://github.com/NewtonCesarRoncari/work-date/raw/develop/apk/work-date.apk">download da apk<a/> 
 
 ## Linguagem
 O idioma alterna conforme a linguagem configurada no dispositivo do usuário.

@@ -3,19 +3,15 @@ package com.br.workdate.view.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.br.workdate.R
 import com.br.workdate.model.Release
 import com.br.workdate.model.Situation
-import com.br.workdate.view.recyclerview.adapter.ReleaseAdapter
 import com.br.workdate.view.viewmodel.ReleaseViewModel
 import kotlinx.android.synthetic.main.fragment_revenue.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class OpenReleaseFragment : Fragment() {
+class OpenReleaseFragment : BaseReleaseFragment() {
 
     private val viewModel: ReleaseViewModel by viewModel()
 
@@ -30,40 +26,18 @@ class OpenReleaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         revenue_list_animation.setAnimation("anim/list_empty.json")
 
-        viewModel.listAll(Situation.OPEN).observe(viewLifecycleOwner, Observer { releases ->
-            ifEmptyPlayAnimation(releases)
-            initAdapter(releases)
+        viewModel.listAll(Situation.OPEN).observe(viewLifecycleOwner, { releases ->
+            super.ifEmptyPlayAnimation(releases, revenue_list_animation)
+            super.initAdapter(releases, revenue_rv)
         })
 
-        viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, Observer { releases ->
+        viewModel.checkReleasesReturned()?.observe(viewLifecycleOwner, { releases ->
             if (releases != null) {
-                ifEmptyPlayAnimation(releases)
-                initAdapter(releases.filter { release ->
+                super.ifEmptyPlayAnimation(releases, revenue_list_animation)
+                super.initAdapter(releases.filter { release ->
                     release.situation == Situation.OPEN
-                } as MutableList<Release>)
+                } as MutableList<Release>, revenue_rv)
             }
         })
-    }
-
-    private fun initAdapter(releases: MutableList<Release>) {
-        val adapter = context?.let { ReleaseAdapter(it, releases) }
-        revenue_rv.adapter = adapter
-    }
-
-    private fun ifEmptyPlayAnimation(mutableList: MutableList<Release>) {
-        if (mutableList.isEmpty()) {
-            initAnimation()
-        } else {
-            revenue_list_animation.visibility = View.GONE
-        }
-    }
-
-    private fun initAnimation() {
-        with(revenue_list_animation) {
-            scaleX = 0.5f
-            scaleY = 0.5f
-            visibility = VISIBLE
-            playAnimation()
-        }
     }
 }

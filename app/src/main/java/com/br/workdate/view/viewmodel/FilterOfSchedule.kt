@@ -45,7 +45,7 @@ class FilterOfSchedule : FilterOf {
         if (toDate.trim() != "0") {
             params[@Params TO_DATE] = toDate.trim()
         }
-        if (chipOne != "0" && chipOne != "0") {
+        if (chipOne != "0") {
             if (chipOne.trim().isNotEmpty()) {
                 params[@Params CANCELED] = chipOne
             }

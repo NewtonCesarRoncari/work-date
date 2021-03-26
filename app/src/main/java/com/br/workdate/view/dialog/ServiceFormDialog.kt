@@ -4,61 +4,73 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.widget.doOnTextChanged
+import androidx.databinding.DataBindingUtil
 import com.br.workdate.R
-import com.br.workdate.extension.returnUUID
+import com.br.workdate.databinding.ServiceFormularyBinding
 import com.br.workdate.model.Service
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.service_formulary.view.*
-import java.math.BigDecimal
 
 abstract class ServiceFormDialog(
     private val context: Context,
     private val viewGroup: ViewGroup?
 ) {
+    protected lateinit var dataBinding: ServiceFormularyBinding
     private val viewCreated = initView()
-    protected val fieldID: TextView = viewCreated.service_form_id
     protected val fieldDescription: TextInputEditText = viewCreated.service_form_description
     protected val fieldValue: TextInputEditText = viewCreated.service_form_value
     protected abstract val titleDialog: String
 
-    protected fun inflateForm(
-        dialogClickListener: (service: Service) -> Unit
-    ) {
+    protected fun inflateForm(dialogClickListener: (service: Service) -> Unit) {
         MaterialAlertDialogBuilder(context)
             .setTitle(titleDialog)
+            .setView(viewCreated)
             .setPositiveButton(R.string.positive_button_name) { _, _ ->
-                val serviceDescription = fieldDescription.text.toString().trim()
-                val serviceStringValue = fieldValue.text.toString().trim()
-                val serviceValue = tryParseBigDecimal(serviceStringValue)
+                val serviceData = dataBinding.service
 
-                val service = Service(
-                    id = fieldID.text.toString().returnUUID(),
-                    description = serviceDescription,
-                    value = serviceValue
-                )
-
-                dialogClickListener(service)
+                if (serviceData != null)
+                    dialogClickListener(serviceData.returnService())
             }
             .setNegativeButton(R.string.negative_button_name, null)
             .setView(viewCreated)
             .show()
     }
 
-    private fun tryParseBigDecimal(serviceStringValue: String): BigDecimal {
-        return try {
-            BigDecimal(serviceStringValue)
-        } catch (e: NumberFormatException) {
-            BigDecimal.ZERO
-        }
-    }
-
     private fun initView(): View {
-        return LayoutInflater.from(context).inflate(
+        val inflater = LayoutInflater.from(context)
+        dataBinding = DataBindingUtil.inflate(
+            inflater,
             R.layout.service_formulary,
             viewGroup,
             false
         )
+        return dataBinding.root
+    }
+
+    protected fun formatFieldForMoneyMask(text: CharSequence?) {
+        if (!text.toString().matches("^\\$(\\d{1,3}(,\\d{3})*|(\\d+))(\\.\\d{2})?$".toRegex())) {
+            val originalCursorPosition: Int = fieldValue.selectionStart
+            var cursorOffset = 0
+            val cursorAtEnd = originalCursorPosition == text.toString().length
+            val userInput = "" + text.toString().replace("[^\\d]".toRegex(), "")
+            val cashAmountBuilder = StringBuilder(userInput)
+            while (cashAmountBuilder.length > 3 && cashAmountBuilder[0] == '0') {
+                cashAmountBuilder.deleteCharAt(0)
+                cursorOffset--
+            }
+            while (cashAmountBuilder.length < 3) {
+                cashAmountBuilder.insert(0, '0')
+                cursorOffset++
+            }
+            cashAmountBuilder.insert(cashAmountBuilder.length - 2, '.')
+            cashAmountBuilder.insert(0, '$')
+            fieldValue.setText(cashAmountBuilder.toString())
+            fieldValue.setSelection(
+                if (cursorAtEnd) fieldValue.text.toString()
+                    .length else originalCursorPosition + cursorOffset
+            )
+        }
     }
 }

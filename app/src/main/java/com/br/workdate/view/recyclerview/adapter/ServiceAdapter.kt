@@ -4,12 +4,11 @@ import android.content.Context
 import android.view.*
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
-import com.br.workdate.extension.formatCoin
-import com.br.workdate.extension.limit
+import com.br.workdate.databinding.ListItemServiceBinding
 import com.br.workdate.model.Service
-import kotlinx.android.synthetic.main.list_item_service.view.*
 import java.util.*
 
 class ServiceAdapter(
@@ -32,7 +31,9 @@ class ServiceAdapter(
                 val filterPattern = constraint.toString().toLowerCase(Locale.getDefault()).trim()
 
                 for (service in serviceFullList) {
-                    if (service.description.toLowerCase(Locale.getDefault()).contains(filterPattern)) {
+                    if (service.description.toLowerCase(Locale.getDefault())
+                            .contains(filterPattern)
+                    ) {
                         filteredList.add(service)
                     }
                 }
@@ -58,8 +59,14 @@ class ServiceAdapter(
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.list_item_service, parent, false)
-        return MyViewHolder(view)
+        val inflater = LayoutInflater.from(context)
+        val viewDataBinding = DataBindingUtil.inflate<ListItemServiceBinding>(
+            inflater,
+            R.layout.list_item_service,
+            parent,
+            false
+        )
+        return MyViewHolder(viewDataBinding)
     }
 
     override fun getItemCount() = services.size
@@ -73,21 +80,14 @@ class ServiceAdapter(
         notifyItemRemoved(position)
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(private val viewDataBinding: ListItemServiceBinding) :
+        RecyclerView.ViewHolder(viewDataBinding.root) {
 
         private lateinit var service: Service
-        private val limitForDescription = 26
-        private val serviceDescription by lazy { itemView.list_item_service_description }
-        private val serviceValue by lazy { itemView.list_item_service_value }
-        private val serviceFirstChar by lazy { itemView.list_item_service_first_char }
 
         fun bind(service: Service) {
             this.service = service
-            if (service.description.isNotEmpty()) {
-                serviceFirstChar.text = service.description[0].toString()
-            }
-            serviceDescription.text = service.description.limit(limitForDescription)
-            serviceValue.text = service.value.formatCoin(context)
+            viewDataBinding.service = service.makeServiceForLayout(context)
         }
 
         init {

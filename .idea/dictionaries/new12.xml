@@ -2,6 +2,10 @@
   <dictionary name="new12">
     <words>
       <w>coroutines</w>
+      <w>crashlytics</w>
+      <w>koin</w>
+      <w>semibold</w>
+      <w>stetho</w>
       <w>workdate</w>
     </words>
   </dictionary>

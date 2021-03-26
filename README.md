@@ -1,4 +1,4 @@
-# work-date
+# work-date [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Build Status](https://travis-ci.com/NewtonCesarRoncari/work-date.svg?branch=develop)](https://travis-ci.com/NewtonCesarRoncari/work-date) [![codebeat badge](https://codebeat.co/badges/6616053d-28fb-45e4-8ae7-3fef895cebc2)](https://codebeat.co/projects/github-com-newtoncesarroncari-work-date-develop)
 
 Este projeto consiste na criação de uma ferramenta para agendar um serviço a ser prestado e consequentemente gerar lançamentos financeiros
 
@@ -10,8 +10,8 @@ agendado e receba pelo serviço realizado, como trabalhos free lancers ou agenda
 
 ### Layouts
 Splash             |  Agendamentos    | Lançamentos 
-:-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200823_200505.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214236.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214347.jpg"/>
+:----------------------------:|:----------------------------:|:----------------------------:
+<img src="https://github.com/NewtonCesarRoncari/work-date/blob/develop/img/Screenshot_2021-03-25-21-53-16-221_com.newton.workdate.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/develop/img/Screenshot_20200908_214236.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/develop/img/Screenshot_2021-03-25-21-57-46-875_com.newton.workdate.jpg"/>
 
 ### Ações
 
@@ -24,6 +24,7 @@ financeiro gerado será marcado como 'Pago', ao final do mês auxiliando o usuá
 Detalhes do agendamento     |  Lista de clientes |  Filtro financeiro
 :-------------------------:|:-------------------------:|:-------------------------:
 <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214445.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214302.jpg"/> | <img src="https://github.com/NewtonCesarRoncari/work-date/blob/master/img/Screenshot_20200908_214413.jpg"/>
+- Caso se interesse é porssível fazer o <a href="https://github.com/NewtonCesarRoncari/work-date/raw/develop/apk/work-date.apk">download da apk<a/>
 
 ## Linguagem
 O idioma alterna conforme a linguagem configurada no dispositivo do usuário.
@@ -60,3 +61,4 @@ Após clonar o projeto, importe no seu Android Studio, aceitando as susjestões 
 - <a href="https://developer.android.com/topic/libraries/architecture/room">Room Persistence Library<a/>
 - <a href="https://kotlinlang.org/docs/reference/coroutines-overview.html">Coroutines<a/>
 - <a href="https://developer.android.com/reference/android/content/SharedPreferences">Shared Preferences<a/>
+- <a href="https://developer.android.com/topic/libraries/data-binding">Data Biniding<a/>

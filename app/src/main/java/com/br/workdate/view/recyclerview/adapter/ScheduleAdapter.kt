@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
-import com.br.workdate.extension.formatCoin
-import com.br.workdate.extension.formatForBrazilianDate
-import com.br.workdate.extension.formatForBrazilianHour
+import com.br.workdate.databinding.ListItemScheduleBinding
 import com.br.workdate.model.Schedule
 import kotlinx.android.synthetic.main.list_item_schedule.view.*
 
@@ -27,8 +26,14 @@ class ScheduleAdapter(
 ) : RecyclerView.Adapter<ScheduleAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.list_item_schedule, parent, false)
-        return MyViewHolder(view)
+        val inflater = LayoutInflater.from(context)
+        val viewDataBinding = DataBindingUtil.inflate<ListItemScheduleBinding>(
+            inflater,
+            R.layout.list_item_schedule,
+            parent,
+            false
+        )
+        return MyViewHolder(viewDataBinding)
     }
 
     override fun getItemCount() = schedules.size
@@ -42,11 +47,10 @@ class ScheduleAdapter(
         notifyItemRemoved(position)
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(private val viewBindingUtil: ListItemScheduleBinding) :
+        RecyclerView.ViewHolder(viewBindingUtil.root) {
 
         private lateinit var schedule: Schedule
-        private val hour by lazy { itemView.item_schedule_hour }
-        private val date by lazy { itemView.item_schedule_date }
         private val value by lazy { itemView.item_schedule_value }
         private val scheduleClient by lazy { itemView.item_schedule_client }
         private val scheduleService by lazy { itemView.item_schedule_service }
@@ -55,9 +59,7 @@ class ScheduleAdapter(
 
         fun bind(schedule: Schedule) {
             this.schedule = schedule
-            date.text = schedule.date.formatForBrazilianDate()
-            hour.text = schedule.hour.formatForBrazilianHour()
-            value.text = schedule.value.formatCoin(context)
+            viewBindingUtil.schedule = schedule.makeScheduleForLayoutAdapter(context)
             loadFieldClientName(schedule.clientId, scheduleClient)
             loadFieldServiceDescription(schedule.serviceId, scheduleService)
         }

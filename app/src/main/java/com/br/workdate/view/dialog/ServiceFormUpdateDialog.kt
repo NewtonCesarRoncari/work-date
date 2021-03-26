@@ -1,10 +1,11 @@
 package com.br.workdate.view.dialog
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import com.br.workdate.R
 import com.br.workdate.model.Service
+import com.br.workdate.view.databinding.ServiceData
 
 class ServiceFormUpdateDialog(
     viewGroup: ViewGroup,
@@ -14,17 +15,15 @@ class ServiceFormUpdateDialog(
     override val titleDialog: String
         get() = context.getString(R.string.title_form_update_service)
 
-    fun initServiceFormDialog(service: Service, dialogClickListener: (service: Service) -> Unit) {
-        loadFieldDataDialog(service)
+    fun initServiceFormDialog(
+        service: ServiceData,
+        dialogClickListener: (service: Service) -> Unit
+    ) {
+        dataBinding.service = service
+        fieldDescription.isFocusable = false
+        fieldValue.doOnTextChanged { text, _, _, _ ->
+            formatFieldForMoneyMask(text)
+        }
         super.inflateForm(dialogClickListener)
     }
-
-    @SuppressLint("SetTextI18n")
-    private fun loadFieldDataDialog(service: Service) {
-        fieldDescription.isFocusable = false
-        fieldID.text = service.id
-        fieldDescription.setText(service.description)
-        fieldValue.setText(service.value.toString())
-    }
-
 }

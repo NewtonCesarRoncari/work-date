@@ -1,24 +1,27 @@
 package com.br.workdate.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.br.workdate.R
+import com.br.workdate.extension.getWindow
 import com.br.workdate.view.dialog.FilterDialog
 import com.br.workdate.view.tabs.adapter.TabsAdapter
-import com.br.workdate.view.viewmodel.FilterOfRelease
-import com.br.workdate.view.viewmodel.FilterViewModel
-import com.br.workdate.view.viewmodel.ReleaseViewModel
+import com.br.workdate.view.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_list_release.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListReleaseFragment : Fragment() {
 
     private val viewModel: ReleaseViewModel by viewModel()
     private val filterViewModel: FilterViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +33,7 @@ class ListReleaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkIsFirstTimeInApp(view)
 
         val ttb = AnimationUtils.loadAnimation(context, R.anim.ttb)
         val cardView = resume_cardView
@@ -90,32 +94,55 @@ class ListReleaseFragment : Fragment() {
                     activity,
                     FilterOfRelease(),
                     loadClientNames = { clientAutoComplete ->
-                        filterViewModel.returnAllClientNames()
-                            .observe(viewLifecycleOwner, { names ->
-                                val clientAdapter = ArrayAdapter(
-                                    context,
-                                    R.layout.support_simple_spinner_dropdown_item,
-                                    names
-                                )
-                                clientAutoComplete.setAdapter(clientAdapter)
-                            })
+                        loadClientNames(context, clientAutoComplete)
                     },
                     loadServiceDescriptions = { serviceAutoComplete ->
-                        filterViewModel.returnAllServicesDescriptions()
-                            .observe(viewLifecycleOwner, { descriptions ->
-                                val serviceAdapter = ArrayAdapter(
-                                    context,
-                                    R.layout.support_simple_spinner_dropdown_item,
-                                    descriptions
-                                )
-                                serviceAutoComplete.setAdapter(serviceAdapter)
-                            })
+                        loadServiceDescriptions(context, serviceAutoComplete)
                     },
-                    returnQuery = { query ->
-                        viewModel.findReleaseFilter(query)
-                    }
+                    returnQuery = { query -> viewModel.findReleaseFilter(query) }
                 ).showFilterDialog()
             }
         }
+    }
+
+    private fun loadServiceDescriptions(
+        context: Context,
+        serviceAutoComplete: AutoCompleteTextView
+    ) {
+        filterViewModel.returnAllServicesDescriptions()
+            .observe(viewLifecycleOwner, { descriptions ->
+                val serviceAdapter = ArrayAdapter(
+                    context,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    descriptions
+                )
+                serviceAutoComplete.setAdapter(serviceAdapter)
+            })
+    }
+
+    private fun loadClientNames(
+        context: Context,
+        clientAutoComplete: AutoCompleteTextView
+    ) {
+        filterViewModel.returnAllClientNames()
+            .observe(viewLifecycleOwner, { names ->
+                val clientAdapter = ArrayAdapter(
+                    context,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    names
+                )
+                clientAutoComplete.setAdapter(clientAdapter)
+            })
+    }
+
+    private fun checkIsFirstTimeInApp(view: View) {
+        if (loginViewModel.firstTimeInScreen(Constant.TITLE)) {
+            val (width: Int, height: Int) = getWindow(activity)
+            loginViewModel.initTutorial(TutorialOfListRelease(), activity, view, width, height)
+        }
+    }
+
+    private object Constant {
+        const val TITLE = "RELEASE_SCREEN"
     }
 }

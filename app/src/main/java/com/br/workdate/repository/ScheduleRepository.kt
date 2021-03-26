@@ -22,6 +22,11 @@ class ScheduleRepository(private val dao: ScheduleDAO) {
 
     fun listAll() = dao.listAll()
 
+    fun listSchedulesInMonthNoFinished(
+        firstDayMonth: Long,
+        lastDayMonth: Long
+    ) = dao.listSchedulesInMonthNoFinished(firstDayMonth, lastDayMonth)
+
     fun findScheduleFilter(query: String): LiveData<MutableList<Schedule>> {
         val simpleSQLiteQuery = SimpleSQLiteQuery(query)
         return dao.findScheduleFilter(simpleSQLiteQuery)

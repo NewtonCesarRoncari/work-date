@@ -16,9 +16,10 @@ import android.widget.PopupMenu
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.br.workdate.R
-import com.br.workdate.extension.limit
+import com.br.workdate.databinding.ListItemClientBinding
 import com.br.workdate.model.Client
 import kotlinx.android.synthetic.main.list_item_client.view.*
 import java.util.*
@@ -28,7 +29,9 @@ class ClientAdapter(
     private val context: Context,
     private var clients: MutableList<Client>,
     var onItemClickListener: (client: Client) -> Unit = {},
-    var onItemLongClickListener: (client: Client) -> Unit = {}
+    var onItemLongClickListener: (client: Client) -> Unit = {},
+    var showMessageClientNoAddress: () -> Unit = {},
+    var showMessageClientNoPhone: () -> Unit = {}
 ) : RecyclerView.Adapter<ClientAdapter.MyViewHolder>(), Filterable {
 
     private val clientListFull = clients.toList()
@@ -69,12 +72,14 @@ class ClientAdapter(
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(
+        val inflater = LayoutInflater.from(context)
+        val viewDataBinding = DataBindingUtil.inflate<ListItemClientBinding>(
+            inflater,
             R.layout.list_item_client,
             parent,
             false
         )
-        return MyViewHolder(view)
+        return MyViewHolder(viewDataBinding)
     }
 
     override fun getItemCount() = clients.size
@@ -93,24 +98,15 @@ class ClientAdapter(
         if (position < 0 || position > clients.size) throw IndexOutOfBoundsException()
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(private val viewDataBinding: ListItemClientBinding) :
+        RecyclerView.ViewHolder(viewDataBinding.root) {
 
         private lateinit var client: Client
-        private val limitForChar = 26
-        private val clientName by lazy { itemView.list_item_client_name }
-        private val clientAddress by lazy { itemView.list_item_client_address }
-        private val clientPhone by lazy { itemView.list_item_client_phone }
-        private val clientFirstChar by lazy { itemView.list_item_client_first_char }
         private val btnViewOptions: AppCompatImageView by lazy { itemView.list_item_option }
 
         fun bind(client: Client) {
             this.client = client
-            if (client.name.isNotEmpty()) {
-                clientFirstChar.text = client.name[0].toString()
-            }
-            clientName.text = client.name.limit(limitForChar)
-            clientAddress.text = client.address.limit(limitForChar)
-            clientPhone.text = client.phone
+            viewDataBinding.client = client.makeClientForLayout()
         }
 
         init {
@@ -132,11 +128,15 @@ class ClientAdapter(
                         if (checkCallPhonePermission()) {
                             requestCallPhonePermission()
                         } else {
+                            if (client.phone == "")
+                                showMessageClientNoPhone() else
                             initCall(client.phone)
                         }
                     }
                     R.id.list_item_options_locate -> {
-                        initGoogleMaps(client.address, menuItem)
+                        if (client.address == "")
+                            showMessageClientNoAddress() else
+                            initGoogleMaps(client.address, menuItem)
                     }
                 }
                 false

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "51909900117",
+    "firebase_url": "https://workdate-f57ba.firebaseio.com",
+    "project_id": "workdate-f57ba",
+    "storage_bucket": "workdate-f57ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51909900117:android:1130889fcb4de65e33a1dc",
+        "android_client_info": {
+          "package_name": "com.newton.workdate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51909900117-qgumtbl51jnnc50bf3srhto5gcthi1nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBzJFt03Y8JETLu3rhjYI3h4KHKN0s21M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51909900117-qgumtbl51jnnc50bf3srhto5gcthi1nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

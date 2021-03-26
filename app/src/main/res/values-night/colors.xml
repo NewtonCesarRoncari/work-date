@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#BB86FC</color>
+    <color name="colorPrimaryDark">#BB86FC</color>
+    <color name="colorAccent">#BB86FC</color>
+    <color name="colorGreyRipple">#5787899B</color>
+    <color name="coloBlackAbsolute">#FFFFFF</color>
+    <color name="coloThemeSplash">#311b92</color>
+
+    <color name="colorFragmentScheduleForm">#292929</color>
+    <color name="colorFragmentFilter">#292929</color>
+    <color name="colorEditTextFilter">#292929</color>
+    <color name="colorFragment">#292929</color>
+    <color name="textColor">#FFFFFF</color>
+</resources>

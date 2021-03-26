@@ -46,33 +46,43 @@ class FilterDialog(
             loadClientNames(view.autoCompleteTextView_client_edit)
             loadServiceDescriptions(view.autoCompleteTextView_service_edit)
 
-            chip_one.setOnClickListener {
-                releaseChip = filterOf.chipOneSetOnClickListener(view)
-                chipOne = filterOf.chipOneSetOnClickListener(view)
-            }
+            chipListeners()
+            dialogListeners()
+            saveBtnListeners()
+        }
+    }
 
-            chip_two.setOnClickListener {
-                releaseChip = filterOf.chipTwoSetOnClickListener(view)
-                chipTwo = filterOf.chipTwoSetOnClickListener(view)
-            }
+    private fun Dialog.saveBtnListeners() {
+        dialog_filter_save_btn.setOnClickListener {
+            val queryCreatorFilter = QueryCreatorFilter()
+            val params = returnParams()
+            val query = queryCreatorFilter.returnByParams(params, filterOf.tag)
+            clearVariables()
+            returnQuery(query)
+            view.dismiss()
+            Log.i("query", query)
+        }
+    }
 
-            dialog_filter_from_date_btn.setOnClickListener {
-                initDateDialogDate(view.dialog_filter_from_date_btn, "from")
-            }
+    private fun Dialog.dialogListeners() {
+        dialog_filter_from_date_btn.setOnClickListener {
+            initDateDialogDate(view.dialog_filter_from_date_btn, "from")
+        }
 
-            dialog_filter_to_date_btn.setOnClickListener {
-                initDateDialogDate(view.dialog_filter_to_date_btn, "to")
-            }
+        dialog_filter_to_date_btn.setOnClickListener {
+            initDateDialogDate(view.dialog_filter_to_date_btn, "to")
+        }
+    }
 
-            dialog_filter_save_btn.setOnClickListener {
-                val queryCreatorFilter = QueryCreatorFilter()
-                val params = returnParams()
-                val query = queryCreatorFilter.returnByParams(params, filterOf.tag)
-                clearVariables()
-                returnQuery(query)
-                view.dismiss()
-                Log.i("query", query)
-            }
+    private fun Dialog.chipListeners() {
+        chip_one.setOnClickListener {
+            releaseChip = filterOf.chipOneSetOnClickListener(view)
+            chipOne = filterOf.chipOneSetOnClickListener(view)
+        }
+
+        chip_two.setOnClickListener {
+            releaseChip = filterOf.chipTwoSetOnClickListener(view)
+            chipTwo = filterOf.chipTwoSetOnClickListener(view)
         }
     }
 

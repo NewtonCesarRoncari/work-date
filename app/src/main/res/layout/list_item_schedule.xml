@@ -1,145 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="105dp"
-    android:layout_margin="8dp"
-    android:elevation="5dp"
-    android:foreground="@drawable/custom_ripple"
-    app:cardCornerRadius="10dp"
-    tools:targetApi="lollipop">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_schedule_subcard_constraint"
+    <data>
+
+        <variable
+            name="schedule"
+            type="com.br.workdate.model.Schedule" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="105dp"
+        android:layout_margin="8dp"
+        android:elevation="5dp"
+        android:foreground="@drawable/custom_ripple"
+        app:cardCornerRadius="10dp">
 
-        <TextView
-            android:id="@+id/item_schedule_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_schedule_subcard_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/item_schedule_clock"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/clock"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:src="@drawable/ic_schedule_clock"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/item_schedule_id"
-            app:layout_constraintTop_toBottomOf="@+id/item_schedule_id"
-            app:layout_constraintVertical_bias="0.060000002" />
+            <TextView
+                android:id="@+id/item_schedule_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/item_schedule_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:text="@string/date"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/item_schedule_clock"
-            app:layout_constraintStart_toEndOf="@+id/item_schedule_clock"
-            app:layout_constraintTop_toTopOf="@+id/item_schedule_clock" />
+            <ImageView
+                android:id="@+id/item_schedule_clock"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/clock"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:src="@drawable/ic_schedule_clock"
+                android:tint="@color/textColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/item_schedule_id"
+                app:layout_constraintTop_toBottomOf="@+id/item_schedule_id"
+                app:layout_constraintVertical_bias="0.060000002"
+                tools:ignore="UseAppTint" />
 
-        <TextView
-            android:id="@+id/item_schedule_hour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:text="@string/hour"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/item_schedule_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toEndOf="@+id/item_schedule_date"
-            app:layout_constraintTop_toTopOf="@+id/item_schedule_date"
-            app:layout_constraintVertical_bias="0.555" />
+            <TextView
+                android:id="@+id/item_schedule_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="@{schedule.dateFormat, default = Date}"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/item_schedule_clock"
+                app:layout_constraintStart_toEndOf="@+id/item_schedule_clock"
+                app:layout_constraintTop_toTopOf="@+id/item_schedule_clock" />
 
-        <TextView
-            android:id="@+id/item_schedule_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/value"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/item_schedule_hour"
-            app:layout_constraintStart_toStartOf="@+id/item_schedule_hour"
-            app:layout_constraintTop_toBottomOf="@+id/item_schedule_client" />
+            <TextView
+                android:id="@+id/item_schedule_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="@{schedule.hourFormat, default = Hour}"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/item_schedule_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.75"
+                app:layout_constraintStart_toEndOf="@+id/item_schedule_date"
+                app:layout_constraintTop_toTopOf="@+id/item_schedule_date"
+                app:layout_constraintVertical_bias="0.555" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/icon_client"
-            android:src="@drawable/ic_client"
-            app:layout_constraintBottom_toBottomOf="@+id/item_schedule_client"
-            app:layout_constraintEnd_toStartOf="@+id/item_schedule_client"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_schedule_client"
-            app:layout_constraintVertical_bias="0.90999997" />
+            <TextView
+                android:id="@+id/item_schedule_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{schedule.valueFormat, default = Value}"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/item_schedule_hour"
+                app:layout_constraintStart_toStartOf="@+id/item_schedule_hour"
+                app:layout_constraintTop_toBottomOf="@+id/item_schedule_client" />
 
-        <TextView
-            android:id="@+id/item_schedule_client"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="@string/client"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_schedule_clock"
-            app:layout_constraintVertical_bias="0.22" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/icon_client"
+                android:src="@drawable/ic_client"
+                android:tint="@color/textColor"
+                app:layout_constraintBottom_toBottomOf="@+id/item_schedule_client"
+                app:layout_constraintEnd_toStartOf="@+id/item_schedule_client"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/item_schedule_client"
+                app:layout_constraintVertical_bias="0.90999997"
+                tools:ignore="UseAppTint" />
 
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="20dp"
-            android:contentDescription="@string/icon_service"
-            android:src="@drawable/ic_work"
-            app:layout_constraintBottom_toBottomOf="@+id/item_schedule_service"
-            app:layout_constraintEnd_toStartOf="@+id/item_schedule_service"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_schedule_service"
-            app:layout_constraintVertical_bias="0.89" />
+            <TextView
+                android:id="@+id/item_schedule_client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/client"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_schedule_clock"
+                app:layout_constraintVertical_bias="0.22" />
 
-        <TextView
-            android:id="@+id/item_schedule_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:text="@string/service"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/item_schedule_client"
-            app:layout_constraintTop_toBottomOf="@+id/item_schedule_client"
-            app:layout_constraintVertical_bias="0.25" />
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/icon_service"
+                android:src="@drawable/ic_work"
+                android:tint="@color/textColor"
+                app:layout_constraintBottom_toBottomOf="@+id/item_schedule_service"
+                app:layout_constraintEnd_toStartOf="@+id/item_schedule_service"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/item_schedule_service"
+                app:layout_constraintVertical_bias="0.89"
+                tools:ignore="UseAppTint" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/list_item_option"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:focusable="true"
-            android:padding="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_more_item_card"
-            app:tint="@android:color/black" />
+            <TextView
+                android:id="@+id/item_schedule_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="@string/service"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/item_schedule_client"
+                app:layout_constraintTop_toBottomOf="@+id/item_schedule_client"
+                app:layout_constraintVertical_bias="0.25" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/list_item_option"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:focusable="true"
+                android:padding="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_more_item_card"
+                app:tint="@color/textColor" />
 
-</androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

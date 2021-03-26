@@ -60,4 +60,32 @@
     <string name="to_locate">Localiser</string>
     <string name="call">Téléphoner </string>
     <string name="conclude">Conclure</string>
+    <string name="zero">0</string>
+    <string name="new_schedule">Nouveau planification</string>
+    <string name="concluded">Conclu</string>
+    <string name="message_empty_address">aucune adresse trouvée</string>
+    <string name="message_empty_phone">aucun téléphone trouvée</string>
+
+    <!-- tutorial texts  -->
+    <string name="chosen_client">Client sélectionné</string>
+    <string name="chosen_client_message">C’est votre client sélectionné, il apparaîtra toujours ici pour vérification</string>
+    <string name="chosen_service">Service sélectionné</string>
+    <string name="chosen_service_message">C’est votre service sélectionné, il apparaîtra toujours ici pour vérification</string>
+    <string name="choosing_time">En indiquant l’heure</string>
+    <string name="choosing_time_message">Ici vous pouvez indiquer l’heure que vous souhaitez effectuer le travail</string>
+    <string name="choosing_date">En indiquant l’date</string>
+    <string name="choosing_date_message">Vous pouvez indiquer ici la date à laquelle vous souhaitez effectuer le travail</string>
+    <string name="new_client_message">Ici vous pouvez commencer l’inscription de nouveaux clients, ils sont les clients pour les travaux que vous envisagez de planifier</string>
+    <string name="find_clients">Trouvez vos Clients</string>
+    <string name="find_clients_message">Après avoir inscrit les clients en cliquant ici est un excellent moyen de les trouver</string>
+    <string name="new_service_message">Ici vous pouvez commencer l’enregistrement de nouveaux services ou travaux que vous envisagez de planifier pour un client</string>
+    <string name="find_services">Trouvez vos Services</string>
+    <string name="find_services_message">Après avoir inscrit les services, cliquez ici est un excellent moyen de les trouver</string>
+    <string name="new_schedule_message">Ici vous pouvez commencer l’enregistrement de nouveaux agendas, pour planifier le travail que vous souhaitez effectuer</string>
+    <string name="show_total">Ici vous pouvez voir le total</string>
+    <string name="show_total_schedule_message">La somme des agendas terminés et non terminés est affichées</string>
+    <string name="tuto_filter">Filtre</string>
+    <string name="tuto_filter_schedule_message">Après avoir planifié les travaux que vous prévoyez d’effectuer, ici vous pouvez les filtrer, un excellent moyen de trouver vos travaux planifiés</string>
+    <string name="show_total_release_message">La somme des sorties financières générées par les agendas est montrée, sur ce même écran il est possible de vérifier les lancements ouverts et aussi ceux payés</string>
+    <string name="tuto_filter_release_message">Après la génération des sorties financières créées à partir des agendas, vous pouvez les filtrer, un excellent moyen de trouver vos sorties financières et connaître le résumé des valeurs</string>
 </resources>

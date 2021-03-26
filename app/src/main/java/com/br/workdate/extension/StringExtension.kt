@@ -1,6 +1,7 @@
 package com.br.workdate.extension
 
 import com.br.workdate.exception.NegativeLimitInStringException
+import java.math.BigDecimal
 import java.util.*
 
 fun String.limit(maxCharacters: Int): String {
@@ -14,4 +15,18 @@ fun String.limit(maxCharacters: Int): String {
 
 fun String.returnUUID(): String {
     return if (this.isEmpty()) UUID.randomUUID().toString() else this
+}
+
+fun String.percentage(): String {
+    return "${this}%"
+}
+
+fun tryParseBigDecimal(serviceStringValue: String?): BigDecimal {
+    return try {
+        BigDecimal(serviceStringValue)
+    } catch (e: NumberFormatException) {
+        BigDecimal.ZERO
+    } catch (e: NullPointerException) {
+        BigDecimal.ZERO
+    }
 }

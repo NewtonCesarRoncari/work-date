@@ -26,6 +26,7 @@ class FormScheduleFragment : Fragment() {
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
     private val releaseViewModel: ReleaseViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by sharedViewModel()
     private val textCanceled by lazy { form_schedule_text_canceled_switch }
     private val canceled by lazy { form_schedule_canceled_switch }
     private val textFinished by lazy { form_schedule_text_finished_switch }
@@ -64,17 +65,17 @@ class FormScheduleFragment : Fragment() {
         client?.let { tryLoadClientFields(it) }
         service?.let { tryLoadServiceFields(it) }
         schedule?.let { tryLoadScheduleFields(it) }
+        checkIsFirstTimeInApp(view)
 
-        startAnimations()
-
-        serviceCard.setOnClickListener {
-            if (!this.schedule?.id.isNullOrEmpty()) {
-                goToSearchListServiceFragment()
-            }
-        }
         form_schedule_date_btn.setOnClickListener { initDateDialog() }
         form_schedule_hour_btn.setOnClickListener { initTimeDialog() }
 
+        startAnimations()
+        serviceCardListener()
+        saveBtnListener()
+    }
+
+    private fun saveBtnListener() {
         saveBtn.setOnClickListener {
             if (scheduleIsInitialized()) {
                 updateSchedule()
@@ -88,6 +89,14 @@ class FormScheduleFragment : Fragment() {
                 } else {
                     showSnackBar(getString(R.string.message_empty_fields))
                 }
+            }
+        }
+    }
+
+    private fun serviceCardListener() {
+        serviceCard.setOnClickListener {
+            if (!this.schedule?.id.isNullOrEmpty()) {
+                goToSearchListServiceFragment()
             }
         }
     }
@@ -249,6 +258,17 @@ class FormScheduleFragment : Fragment() {
         view?.let { view ->
             Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
         }
+    }
+
+    private fun checkIsFirstTimeInApp(view: View) {
+        if (loginViewModel.firstTimeInScreen(Constant.TITLE)) {
+            val (width: Int, height: Int) = getWindow(activity)
+            loginViewModel.initTutorial(TutorialOfFormSchedule(), activity, view, width, height)
+        }
+    }
+
+    private object Constant {
+        const val TITLE = "SCHEDULE_FORM_SCREEN"
     }
 
     private fun allIsInitialized() =

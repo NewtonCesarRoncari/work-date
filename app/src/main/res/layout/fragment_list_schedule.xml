@@ -4,42 +4,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E7F81DD">
+    android:background="@color/colorFragment">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/logo_app_animation"
+    <TextView
+        android:id="@+id/fragment_list_text_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:text="@string/month"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="false" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_resume_cardView" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/schedule_list_animation"
+    <ImageView
+        android:id="@+id/fragment_list_right_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_list_text_month"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragment_list_text_month"
+        app:layout_constraintTop_toTopOf="@+id/fragment_list_text_month"
+        android:contentDescription="@string/arrow" />
+
+    <ImageView
+        android:id="@+id/fragment_list_left_arrow"
+        android:rotation="180"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_list_text_month"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_list_text_month"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_list_text_month"
+        android:contentDescription="@string/arrow" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/schedule_resume_cardView"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="#1E7F81DD"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.db.williamchart.view.DonutChartView
+                android:id="@+id/fragment_list_ui_chart"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                app:chart_donutBackgroundColor="#CAD0F3"
+                app:chart_donutRoundCorners="true"
+                app:chart_donutThickness="6dp"
+                app:chart_donutTotal="100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/zero"
+                    android:textColor="@color/colorPrimary" />
+            </com.db.williamchart.view.DonutChartView>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/open"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintStart_toEndOf="@+id/fragment_list_ui_chart" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/concluded"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="@+id/textView5" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/textColor"
+                app:layout_constraintEnd_toEndOf="@+id/resume_paid"
+                app:layout_constraintStart_toStartOf="@+id/resume_paid"
+                app:layout_constraintTop_toBottomOf="@+id/resume_paid" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/total"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/resume_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/zero"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/resume_paid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="@+id/resume_open"
+                app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/resume_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="@+id/resume_open"
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/schedule_list_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="vertical"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_text_month"
         tools:listitem="@layout/list_item_schedule" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,6 +186,31 @@
         android:backgroundTint="@color/colorAccent"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/new_schedule" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/schedule_list_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/schedule_list_rv"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/logo_app_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/schedule_list_rv"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

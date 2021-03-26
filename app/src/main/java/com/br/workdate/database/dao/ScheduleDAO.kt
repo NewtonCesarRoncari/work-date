@@ -21,12 +21,6 @@ interface ScheduleDAO {
     @Query("SELECT * FROM Schedule")
     fun listAll(): LiveData<MutableList<Schedule>>
 
-    @Query("SELECT * FROM Schedule WHERE schedule.date >= :firstDayMonth AND schedule.date <= :lastDayMonth ORDER BY schedule.date, schedule.hour")
-    fun listSchedulesInMonth(
-        firstDayMonth: Long,
-        lastDayMonth: Long
-    ): LiveData<MutableList<Schedule>>
-
     @Query("SELECT * FROM Schedule WHERE schedule.date >= :firstDayMonth AND schedule.date <= :lastDayMonth and schedule.canceled = 0 and schedule.finished = 0 ORDER BY schedule.date, schedule.hour")
     fun listSchedulesInMonthNoFinished(
         firstDayMonth: Long,

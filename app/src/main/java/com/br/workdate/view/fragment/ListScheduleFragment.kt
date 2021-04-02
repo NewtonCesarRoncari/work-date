@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.airbnb.lottie.LottieAnimationView
 import com.br.workdate.R
+import com.br.workdate.databinding.FragmentListScheduleBinding
 import com.br.workdate.extension.formatForTextMonth
 import com.br.workdate.extension.getWindow
 import com.br.workdate.extension.limit
@@ -21,6 +22,7 @@ import com.br.workdate.model.Schedule
 import com.br.workdate.view.dialog.FilterDialog
 import com.br.workdate.view.recyclerview.adapter.ScheduleAdapter
 import com.br.workdate.view.viewmodel.*
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import kotlinx.android.synthetic.main.fragment_list_schedule.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -29,6 +31,7 @@ import kotlin.properties.Delegates
 
 class ListScheduleFragment : Fragment() {
 
+    private val binding by viewBinding(FragmentListScheduleBinding::bind)
     private val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private val viewModel: ScheduleViewModel by viewModel()
     private val clientViewModel: ClientViewModel by viewModel()
@@ -44,19 +47,19 @@ class ListScheduleFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_list_schedule, container, false)
+    ): View {
+        val view = FragmentListScheduleBinding.inflate(inflater).root
 
         appComponentsViewModel.havComponent = VisualComponents(true)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        schedule_list_animation.setAnimation("anim/list_empty.json")
-        logo_app_animation.setAnimation("anim/workdate_app.json")
+        binding.scheduleListAnimation.setAnimation("anim/list_empty.json")
+        binding.logoAppAnimation.setAnimation("anim/workdate_app.json")
 
         val ttb = AnimationUtils.loadAnimation(requireContext(), R.anim.ttb)
-        val cardView = schedule_resume_cardView
+        val cardView = binding.scheduleResumeCardView
         cardView.startAnimation(ttb)
         month = getActualMonth()
 
@@ -93,16 +96,16 @@ class ListScheduleFragment : Fragment() {
     }
 
     private fun initViews() {
-        fragment_list_text_month.text = Date().formatForTextMonth()
+        binding.fragmentListTextMonth.text = Date().formatForTextMonth()
         new_schedule.setOnClickListener {
             goToSearchClientFragment()
         }
-        fragment_list_right_arrow.setOnClickListener {
+        binding.fragmentListRightArrow.setOnClickListener {
             if (month in 0..10)
                 month += 1
             updateAdapterWithMonthBusiness()
         }
-        fragment_list_left_arrow.setOnClickListener {
+        binding.fragmentListLeftArrow.setOnClickListener {
             if (month in 1..11)
                 month -= 1
             updateAdapterWithMonthBusiness()
@@ -116,7 +119,7 @@ class ListScheduleFragment : Fragment() {
                 ifEmptyPlayAnimation(schedules)
                 initAdapter(schedules)
             })
-        fragment_list_text_month.text = Date(firstOfMonth).formatForTextMonth()
+        binding.fragmentListTextMonth.text = Date(firstOfMonth).formatForTextMonth()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -134,20 +137,22 @@ class ListScheduleFragment : Fragment() {
     @SuppressLint("RestrictedApi")
     private fun checkStateLogin(view: View) {
         if (!loginViewModel.isLogged()) {
-            schedule_list_animation.visibility = GONE
-            initAnimation(logo_app_animation)
-            new_schedule.visibility = GONE
-            logo_app_animation.addAnimatorListener(animatorListener(view))
+            binding.scheduleListAnimation.visibility = GONE
+            initAnimation(binding.logoAppAnimation)
+            binding.newSchedule.visibility = GONE
+            binding.logoAppAnimation.addAnimatorListener(animatorListener(view))
         } else {
-            logo_app_animation.visibility = GONE
+            binding.logoAppAnimation.visibility = GONE
         }
     }
 
 
     private fun initDonutAnimation() {
-        fragment_list_ui_chart.donutColors = ResumeScheduleView.myDonutColors
-        fragment_list_ui_chart.animation.duration = ResumeScheduleView.durationDonutAnimation
-        fragment_list_ui_chart.animate(ResumeScheduleView.donutSet)
+        with(binding.fragmentListUiChart) {
+            donutColors = ResumeScheduleView.myDonutColors
+            animation.duration = ResumeScheduleView.durationDonutAnimation
+            animate(ResumeScheduleView.donutSet)
+        }
     }
 
     private fun initResume() {
@@ -164,14 +169,14 @@ class ListScheduleFragment : Fragment() {
     private fun animatorListener(view: View): Animator.AnimatorListener {
         return object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
-                schedule_list_animation.visibility = GONE
+                binding.scheduleListAnimation.visibility = GONE
             }
 
             @SuppressLint("RestrictedApi")
             override fun onAnimationEnd(animation: Animator) {
-                initAnimation(schedule_list_animation)
-                new_schedule.visibility = VISIBLE
-                logo_app_animation.visibility = GONE
+                initAnimation(binding.scheduleListAnimation)
+                binding.newSchedule.visibility = VISIBLE
+                binding.logoAppAnimation.visibility = GONE
 
                 val (width: Int, height: Int) = getWindow(activity)
                 loginViewModel.initTutorial(TutorialOfListSchedule(), activity, view, width, height)
@@ -230,7 +235,7 @@ class ListScheduleFragment : Fragment() {
                     })
             }
         )
-        schedule_list_rv.adapter = adapter
+        binding.scheduleListRv.adapter = adapter
         adapter.onItemClickListener = { schedule ->
             goToFormScheduleFragment(schedule)
         }
@@ -293,9 +298,9 @@ class ListScheduleFragment : Fragment() {
 
     private fun ifEmptyPlayAnimation(mutableList: MutableList<Schedule>) {
         if (mutableList.isEmpty() && loginViewModel.isLogged()) {
-            initAnimation(schedule_list_animation)
+            initAnimation(binding.scheduleListAnimation)
         } else {
-            schedule_list_animation.visibility = GONE
+            binding.scheduleListAnimation.visibility = GONE
         }
     }
 

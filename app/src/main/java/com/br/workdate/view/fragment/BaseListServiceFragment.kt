@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
+import com.br.workdate.databinding.FragmentListServiceBinding
 import com.br.workdate.extension.getWindow
 import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Service
@@ -17,12 +18,13 @@ import com.br.workdate.view.viewmodel.LoginViewModel
 import com.br.workdate.view.viewmodel.ServiceViewModel
 import com.br.workdate.view.viewmodel.TutorialOfListService
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_list_service.*
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 abstract class BaseListServiceFragment : Fragment() {
 
+    private val binding by viewBinding(FragmentListServiceBinding::bind)
     private lateinit var adapter: ServiceAdapter
     protected val viewModel: ServiceViewModel by viewModel()
     private val loginViewModel: LoginViewModel by sharedViewModel()
@@ -31,15 +33,15 @@ abstract class BaseListServiceFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_list_service, container, false)
+    ): View {
+        return FragmentListServiceBinding.inflate(inflater).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        service_list_animation.setAnimation("anim/list_empty.json")
+        binding.serviceListAnimation.setAnimation("anim/list_empty.json")
         checkIsFirstTimeInApp(view)
 
-        new_service.setOnClickListener {
+        binding.newService.setOnClickListener {
             callInsertDialog()
         }
         viewModel.listAll().observe(viewLifecycleOwner, { serviceList ->
@@ -72,7 +74,7 @@ abstract class BaseListServiceFragment : Fragment() {
 
     private fun initServiceAdapter(services: MutableList<Service>) {
         adapter = context?.let { context -> ServiceAdapter(context, services) }!!
-        service_list_rv.adapter = adapter
+        binding.serviceListRv.adapter = adapter
         adapter.onItemClickListener = { service -> doInItemClickListener(service) }
         adapter.onItemLongClickListener = { service -> removeInDataBase(service) }
     }
@@ -89,12 +91,12 @@ abstract class BaseListServiceFragment : Fragment() {
         if (mutableList.isEmpty()) {
             initAnimation()
         } else {
-            service_list_animation.visibility = GONE
+            binding.serviceListAnimation.visibility = GONE
         }
     }
 
     private fun initAnimation() {
-        with(service_list_animation) {
+        with(binding.serviceListAnimation) {
             scaleX = 0.5f
             scaleY = 0.5f
             visibility = VISIBLE

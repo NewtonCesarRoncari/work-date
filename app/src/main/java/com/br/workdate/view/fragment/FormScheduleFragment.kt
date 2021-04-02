@@ -9,11 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.br.workdate.R
+import com.br.workdate.databinding.FragmentFormScheduleBinding
 import com.br.workdate.extension.*
 import com.br.workdate.model.*
 import com.br.workdate.view.viewmodel.*
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_form_schedule.*
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.math.BigDecimal
@@ -21,23 +22,24 @@ import java.util.*
 
 class FormScheduleFragment : Fragment() {
 
+    private val binding by viewBinding(FragmentFormScheduleBinding::bind)
     private val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private val viewModel: ScheduleViewModel by viewModel()
     private val clientViewModel: ClientViewModel by viewModel()
     private val serviceViewModel: ServiceViewModel by viewModel()
     private val releaseViewModel: ReleaseViewModel by viewModel()
     private val loginViewModel: LoginViewModel by sharedViewModel()
-    private val textCanceled by lazy { form_schedule_text_canceled_switch }
-    private val canceled by lazy { form_schedule_canceled_switch }
-    private val textFinished by lazy { form_schedule_text_finished_switch }
-    private val finished by lazy { form_schedule_finished_switch }
-    private val saveBtn by lazy { form_schedule_save_btn }
-    private val serviceCard by lazy { form_schedule_service_cardView }
-    private val scheduleCard by lazy { form_schedule_cardView }
-    private val icon by lazy { form_schedule_client_icon }
-    private val char by lazy { form_schedule_client_first_char }
-    private val clientName by lazy { form_schedule_client_name }
-    private val clientPhone by lazy { form_schedule_client_phone }
+    private val textCanceled by lazy { binding.formScheduleTextCanceledSwitch }
+    private val canceled by lazy { binding.formScheduleCanceledSwitch }
+    private val textFinished by lazy { binding.formScheduleTextFinishedSwitch }
+    private val finished by lazy { binding.formScheduleFinishedSwitch }
+    private val saveBtn by lazy { binding.formScheduleSaveBtn }
+    private val serviceCard by lazy { binding.formScheduleServiceCardView }
+    private val scheduleCard by lazy { binding.formScheduleServiceCardView }
+    private val icon by lazy { binding.formScheduleClientIcon }
+    private val char by lazy { binding.formScheduleClientFirstChar }
+    private val clientName by lazy { binding.formScheduleClientName }
+    private val clientPhone by lazy { binding.formScheduleClientPhone }
     private val navController by lazy { NavHostFragment.findNavController(this) }
     private val arguments by navArgs<FormScheduleFragmentArgs>()
     private var value = BigDecimal.ZERO
@@ -55,8 +57,8 @@ class FormScheduleFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_form_schedule, container, false)
+    ): View {
+        val view = FragmentFormScheduleBinding.inflate(inflater).root
         appComponentsViewModel.havComponent = VisualComponents(false)
         return view
     }
@@ -67,8 +69,8 @@ class FormScheduleFragment : Fragment() {
         schedule?.let { tryLoadScheduleFields(it) }
         checkIsFirstTimeInApp(view)
 
-        form_schedule_date_btn.setOnClickListener { initDateDialog() }
-        form_schedule_hour_btn.setOnClickListener { initTimeDialog() }
+        binding.formScheduleDateBtn.setOnClickListener { initDateDialog() }
+        binding.formScheduleHourBtn.setOnClickListener { initTimeDialog() }
 
         startAnimations()
         serviceCardListener()
@@ -114,9 +116,9 @@ class FormScheduleFragment : Fragment() {
         )
         date = schedule.date
         hour = schedule.hour
-        form_schedule_date_btn.text = schedule.date.formatForBrazilianDate()
-        form_schedule_hour_btn.text = schedule.hour.formatForBrazilianHour()
-        form_schedule_obs.setText(schedule.observation)
+        binding.formScheduleDateBtn.text = schedule.date.formatForBrazilianDate()
+        binding.formScheduleHourBtn.text = schedule.hour.formatForBrazilianHour()
+        binding.formScheduleObs.setText(schedule.observation)
         canceled.isChecked = schedule.canceled
         finished.isChecked = schedule.finished
     }
@@ -133,8 +135,8 @@ class FormScheduleFragment : Fragment() {
         serviceId = service.id
         serviceDescription = service.description
         value = service.value
-        form_schedule_service_description.text = service.description.limit(maxCharacters = 28)
-        form_schedule_service_value.text = context?.let { service.value.formatCoin(it) }
+        binding.formScheduleServiceDescription.text = service.description.limit(maxCharacters = 28)
+        binding.formScheduleServiceValue.text = context?.let { service.value.formatCoin(it) }
     }
 
     private fun startAnimations() {
@@ -147,7 +149,7 @@ class FormScheduleFragment : Fragment() {
         val timePicker = TimePickerHelper(
             onTimeSet = { currentHour ->
                 hour = currentHour
-                form_schedule_hour_btn.text = currentHour.formatForBrazilianHour()
+                binding.formScheduleHourBtn.text = currentHour.formatForBrazilianHour()
             }
         )
         activity?.supportFragmentManager?.let { fragmentManager ->
@@ -168,7 +170,7 @@ class FormScheduleFragment : Fragment() {
         val datePicker = DatePickerHelper(
             onDataSet = { currentDate ->
                 date = currentDate
-                form_schedule_date_btn.text = currentDate.formatForBrazilianDate()
+                binding.formScheduleDateBtn.text = currentDate.formatForBrazilianDate()
             }
         )
         activity?.supportFragmentManager?.let { fragmentManager ->
@@ -242,7 +244,7 @@ class FormScheduleFragment : Fragment() {
             value,
             canceled.isChecked,
             finished.isChecked,
-            form_schedule_obs.text.toString().trim(),
+            binding.formScheduleObs.text.toString().trim(),
             serviceId,
             clientId
         )

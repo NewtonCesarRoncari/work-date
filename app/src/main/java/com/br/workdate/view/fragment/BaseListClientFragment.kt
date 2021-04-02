@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import com.br.workdate.R
+import com.br.workdate.databinding.FragmentListClientBinding
 import com.br.workdate.extension.getWindow
 import com.br.workdate.extension.showDialogMessage
 import com.br.workdate.model.Client
@@ -18,12 +19,14 @@ import com.br.workdate.view.viewmodel.LoginViewModel
 import com.br.workdate.view.viewmodel.StateAppComponentsViewModel
 import com.br.workdate.view.viewmodel.TutorialOfListClient
 import com.google.android.material.snackbar.Snackbar
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import kotlinx.android.synthetic.main.fragment_list_client.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 abstract class BaseListClientFragment : Fragment() {
 
+    private val binding by viewBinding(FragmentListClientBinding::bind)
     protected val appComponentsViewModel: StateAppComponentsViewModel by sharedViewModel()
     private val loginViewModel: LoginViewModel by sharedViewModel()
     private lateinit var adapter: ClientAdapter
@@ -32,7 +35,7 @@ abstract class BaseListClientFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_list_client, container, false)
+        return FragmentListClientBinding.inflate(inflater).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +43,7 @@ abstract class BaseListClientFragment : Fragment() {
         checkIsFirstTimeInApp(view)
         doInOnCreateView()
 
-        new_client.setOnClickListener {
+        binding.newClient.setOnClickListener {
             callInsertDialog()
         }
         viewModel.listAll().observe(viewLifecycleOwner, { clientList ->
@@ -80,7 +83,7 @@ abstract class BaseListClientFragment : Fragment() {
 
     private fun initClientAdapter(clients: MutableList<Client>) {
         adapter = ClientAdapter(requireContext(), clients)
-        client_list_rv.adapter = adapter
+        binding.clientListRv.adapter = adapter
         adapter.onItemClickListener = { client ->
             doInItemClickListener(client)
         }
@@ -120,12 +123,12 @@ abstract class BaseListClientFragment : Fragment() {
         if (mutableList.isEmpty()) {
             initAnimation()
         } else {
-            client_list_animation.visibility = GONE
+            binding.clientListAnimation.visibility = GONE
         }
     }
 
     private fun initAnimation() {
-        with(client_list_animation) {
+        with(binding.clientListAnimation) {
             scaleX = 0.5f
             scaleY = 0.5f
             visibility = VISIBLE

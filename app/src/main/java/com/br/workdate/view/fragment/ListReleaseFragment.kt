@@ -9,16 +9,19 @@ import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.br.workdate.R
+import com.br.workdate.databinding.FragmentListReleaseBinding
 import com.br.workdate.extension.getWindow
 import com.br.workdate.view.dialog.FilterDialog
 import com.br.workdate.view.tabs.adapter.TabsAdapter
 import com.br.workdate.view.viewmodel.*
+import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
 import kotlinx.android.synthetic.main.fragment_list_release.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListReleaseFragment : Fragment() {
 
+    private val binding by viewBinding(FragmentListReleaseBinding::bind)
     private val viewModel: ReleaseViewModel by viewModel()
     private val filterViewModel: FilterViewModel by viewModel()
     private val loginViewModel: LoginViewModel by sharedViewModel()
@@ -27,8 +30,8 @@ class ListReleaseFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_list_release, container, false)
+    ): View {
+        return FragmentListReleaseBinding.inflate(inflater).root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +39,7 @@ class ListReleaseFragment : Fragment() {
         checkIsFirstTimeInApp(view)
 
         val ttb = AnimationUtils.loadAnimation(context, R.anim.ttb)
-        val cardView = resume_cardView
+        val cardView = binding.resumeCardView
         cardView.startAnimation(ttb)
 
         initResume()

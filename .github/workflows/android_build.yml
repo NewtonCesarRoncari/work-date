@@ -1,13 +1,7 @@
 # name: Android Pull Request & Develop CI
- name: DemoNewCD
+name: DemoNewCD
 
 on:
-#  pull_request:
-#    branches:
-#      - 'develop'
-#  push:
-#    branches:
-#      - 'develop'
   workflow_dispatch:
 
 jobs:
@@ -47,7 +41,7 @@ jobs:
     environment:
       name: dev
       url: 'newton.com'
-    needs: [ test, apk ]
+    needs: [test, apk]
     steps:
       - name: Run a one-line script
         run: echo Deploy Dev

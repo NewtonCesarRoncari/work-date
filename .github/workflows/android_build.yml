@@ -1,12 +1,14 @@
-name: Android Pull Request & Develop CI
+# name: Android Pull Request & Develop CI
+ name: DemoNewCD
 
 on:
-  pull_request:
-    branches:
-      - 'develop'
-  push:
-    branches:
-      - 'develop'
+#  pull_request:
+#    branches:
+#      - 'develop'
+#  push:
+#    branches:
+#      - 'develop'
+  workflow_dispatch:
 
 jobs:
   test:
@@ -39,3 +41,33 @@ jobs:
         with:
           name: app
           path: app/build/outputs/apk/debug/app-debug.apk
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: 'newton.com'
+    needs: [ test, apk ]
+    steps:
+      - name: Run a one-line script
+        run: echo Deploy Dev
+
+  deploy-hmg:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: 'newton.com'
+    needs: deploy-dev
+    steps:
+      - name: Run a one-line script
+        run: echo Deploy HMG
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: 'newton.com'
+    needs: deploy-hmg
+    steps:
+      - name: Run a one-line script
+        run: echo Deploy PRD

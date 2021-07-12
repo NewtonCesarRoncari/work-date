@@ -1,5 +1,4 @@
-# name: Android Pull Request & Develop CI
- name: DemoNewCD
+name: DemoNewCD
 
 on:
   pull_request:

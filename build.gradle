@@ -6,10 +6,10 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:4.1.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath 'com.google.gms:google-services:4.3.4'
@@ -19,16 +19,28 @@ buildscript {
     }
 }
 
+Properties properties = new Properties()
+properties.load(rootProject.file('local.properties').newDataInputStream())
+def githubUser = properties.getProperty('githubUser')
+def githubToken = properties.getProperty('githubToken')
+
 allprojects {
     repositories {
         google()
         jcenter()
         maven {
-            url 'https://jitpack.io'
+            url 'https://maven.pkg.github.com/NewtonCesarRoncari/tech-math-library'
+            credentials {
+                username = githubUser
+                password = githubToken
+            }
         }
+        maven { url 'https://jitpack.io' }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply from: '.githooks/apply-git-hooks.gradle'

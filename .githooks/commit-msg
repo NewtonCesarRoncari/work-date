@@ -1,0 +1,44 @@
+#!/bin/sh
+
+commit_regex='(^\[(IMPROVEMENT|BUGFIX|FEATURE|HOTFIX)\]\s?\[[A-Z]{2,10}\-[0-9]{1,6}\]\s?\-\s?[a-zA-Z]+)|(Merge\s\w+)|(Version\s\w+)'
+result=$(grep -E $commit_regex "$1")
+
+error='
+/***************************************************\
+| (҂◡_◡)  Mensagem de commit fora do padrão   (╥_╥) |
+|***************************************************|
+|  Favor seguir o padrão: [TIPO][ISSUE] - Mensagem  |
+| Tipo = IMPROVEMENT ou BUGFIX ou FEATURE ou HOTFIX |
+| ISSUE = JIRA Issue ref ex.: ABC-1234              |
+| Mensagem = Explicação compreensível e coerente    |
+\***************************************************/'
+error_type=' |            Falha ao encontrar o TYPE            |'
+error_issue=' |            Falha ao encontrar o ISSUE           |'
+error_msg=' |            Falha ao encontrar o MSG             |'
+error_end=' \*************************************************/'
+
+if [ -z "${result}" ]; then
+  echo "$error" >&2
+
+  commit_regex='\[(IMPROVEMENT|BUGFIX|FEATURE|HOTFIX)\]'
+  result=$(grep -E $commit_regex "$1")
+  if [ -z "${result}" ]; then
+    echo "$error_type" >&2
+  fi
+
+  commit_regex='\[[A-Z]{2,10}\-[0-9]{1,6}\]'
+  result=$(grep -E $commit_regex "$1")
+  if [ -z "${result}" ]; then
+    echo "$error_issue" >&2
+  fi
+
+  commit_regex='\s?\-\s?[a-zA-Z]+'
+  result=$(grep -E $commit_regex "$1")
+  if [ -z "${result}" ]; then
+    echo "$error_msg" >&2
+  fi
+
+  echo "$error_end"
+
+  exit 1
+fi

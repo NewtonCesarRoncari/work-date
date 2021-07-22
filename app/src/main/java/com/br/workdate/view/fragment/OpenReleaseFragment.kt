@@ -23,7 +23,6 @@ class OpenReleaseFragment : BaseReleaseFragment() {
     ): View {
         return FragmentRevenueBinding.inflate(inflater).root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.revenueListAnimation.setAnimation("anim/list_empty.json")
 
